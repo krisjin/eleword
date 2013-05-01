@@ -7,13 +7,15 @@
 		<form action="" method="post" id="formdel">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
-					<td>IP</td>
-					<td>URL</td>
+					<td>来访IP</td>
+					<td>来访地址</td>
+					<td>访问地址</td>
 					<td>访问日期</td>
 				</tr>
 				<#list wss as ws>
 				<tr>
 					<td>${ws.ip}</td>
+					<td>${ws.address}</td>
 					<td><a href="${ws.url}" target="_blank">${ws.url}</a></td>
 					<td>
 						${ws.date}

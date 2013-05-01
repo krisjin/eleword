@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * TODO 此处填写 class 信息
@@ -24,6 +25,18 @@ public class WebStatistics extends IdEntity {
 	private String url;
 
 	private Date date;
+	
+	private String address;
+	
+	
+	@Transient
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public WebStatistics() {
 	}
@@ -61,5 +74,6 @@ public class WebStatistics extends IdEntity {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
+	
+	
 }
