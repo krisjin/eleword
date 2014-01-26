@@ -69,7 +69,7 @@ public class Article extends IdEntity implements Serializable {
 	public Date getModifyDate() {
 		return modifyDate;
 	}
-	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name="categoryId")
 	public Category getCategoryId() {
 		return categoryId;

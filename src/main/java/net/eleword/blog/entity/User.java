@@ -2,8 +2,12 @@ package net.eleword.blog.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,8 +27,13 @@ public class User extends IdEntity implements Serializable {
 	private String password;
 
 	private String nickName;
+	
+	private String avatar;
 
 	private String email;
+	
+	private Blog blog;
+	
 	@Column(name="userName",nullable=false)
 	public String getUserName() {
 		return userName;
@@ -58,5 +67,24 @@ public class User extends IdEntity implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Column(name="avatar")
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="blogId")
+	public Blog getBlog() {
+		return blog;
+	}
+
+	public void setBlog(Blog blog) {
+		this.blog = blog;
+	}
+	
+	
 
 }

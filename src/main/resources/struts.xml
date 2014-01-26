@@ -11,6 +11,7 @@
 
 	<package name="default" extends="struts-default">
 		<default-action-ref name="index" />
+		
 		<action name="user" class="net.eleword.blog.action.UserAction">
 			<result type="freemarker" name="prelogin">/WEB-INF/view/login.htm</result>
 		</action>
