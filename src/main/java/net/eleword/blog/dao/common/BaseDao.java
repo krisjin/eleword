@@ -9,7 +9,7 @@ package net.eleword.blog.dao.common;
 
 public interface BaseDao<T> {
 	
-	int add(T entity);
+	Long add(T entity);
 
 	void update(T entity);
 

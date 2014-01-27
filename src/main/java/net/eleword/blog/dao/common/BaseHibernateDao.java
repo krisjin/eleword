@@ -37,26 +37,14 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	protected Class<T> entityClass;
 
 	/**
-	 * <p>
-	 * Title:
-	 * </p>
-	 * <p>
-	 * Description:用于Dao层子类使用的构造函数.通过子类的泛型定义取得对象类型Class.
-	 * </p>
+	 * 用于Dao层子类使用的构造函数.通过子类的泛型定义取得对象类型Class
 	 */
 	public BaseHibernateDao() {
 		this.entityClass = ReflectionUtils.getSuperClassGenricType(getClass());
 	}
 
 	/**
-	 * 
-	 * <p>
-	 * Title:
-	 * </p>
-	 * <p>
-	 * Description: 用于省略Dao层,
-	 * 在Service层直接使用通用SimpleHibernateDao的构造函数.在构造函数中定义对象类型Class.
-	 * </p>
+	 * 用于省略Dao层, 在Service层直接使用通用SimpleHibernateDao的构造函数.在构造函数中定义对象类型Class.
 	 * 
 	 * @param sessionFactory
 	 * @param entityClass
@@ -66,21 +54,13 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		this.entityClass = entityClass;
 	}
 
-	/**
-	 * 
-	 * @Title: getSessionFactory
-	 * @Description: 取得sessionFactory.
-	 * @return
-	 */
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
 	/**
+	 * 采用@Autowired按类型注入SessionFactory, 当有多个SesionFactory的时候在子类重载本函数
 	 * 
-	 * @Title: setSessionFactory
-	 * @Description: 采用@Autowired按类型注入SessionFactory,
-	 *               当有多个SesionFactory的时候在子类重载本函数.
 	 * @param sessionFactory
 	 */
 	@Autowired
@@ -88,63 +68,46 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		this.sessionFactory = sessionFactory;
 	}
 
-	/**
-	 * 
-	 * @Title: getSession
-	 * @Description: 取得当前Session.
-	 * @return
-	 */
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 
 	/**
+	 * 保存新增的对象
 	 * 
-	 * @Title: save
-	 * @Description: 保存新增的对象.
 	 * @param entity
+	 * @return
 	 */
 	public Serializable save(final T entity) {
 		return getSession().save(entity);
 	}
 
 	/**
+	 * 保存新增的对象
 	 * 
-	 * @Title: persist
-	 * @Description: 保存新增的对象
 	 * @param entity
-	 * @throws
 	 */
 	public void persist(final T entity) {
 		getSession().persist(entity);
 	}
 
-	/**
-	 * 
-	 * @Title: save
-	 * @Description: 保存新增或修改的对象.
-	 * @param entity
-	 */
 	public void saveOrUpdate(final T entity) {
 		getSession().saveOrUpdate(entity);
 		logger.debug("save entity: {}", entity);
 	}
 
 	/**
+	 * 更新一个对象
 	 * 
-	 * @Title: merge
-	 * @Description: 更新一个对象
 	 * @param entity
-	 * @throws
 	 */
 	public void merge(final T entity) {
 		getSession().merge(entity);
 	}
 
 	/**
+	 * 删除对象
 	 * 
-	 * @Title: delete
-	 * @Description: 删除对象.
 	 * @param entity
 	 *            对象必须是session中的对象或含id属性的transient对象
 	 */
@@ -154,9 +117,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按id删除对象
 	 * 
-	 * @Title: delete
-	 * @Description: 按id删除对象.
 	 * @param id
 	 */
 	public void delete(final PK id) {
@@ -164,21 +126,13 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		logger.debug("delete entity {},id is {}", entityClass.getSimpleName(), id);
 	}
 
-	/**
-	 * 
-	 * @Title: get
-	 * @Description: 按id获取对象.
-	 * @param id
-	 * @return
-	 */
 	public T get(final PK id) {
 		return (T) getSession().get(entityClass, id);
 	}
 
 	/**
+	 * 按id列表获取对象列表
 	 * 
-	 * @Title: get
-	 * @Description: 按id列表获取对象列表.
 	 * @param ids
 	 * @return
 	 */
@@ -187,9 +141,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 获取全部对象.
 	 * 
-	 * @Title: getAll
-	 * @Description: 获取全部对象.
 	 * @return
 	 */
 	public List<T> getAll() {
@@ -197,9 +150,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 获取全部对象, 支持按属性行序
 	 * 
-	 * @Title: getAll
-	 * @Description: 获取全部对象, 支持按属性行序.
 	 * @param orderByProperty
 	 * @param isAsc
 	 * @return
@@ -215,9 +167,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按属性查找对象列表, 匹配方式为相等
 	 * 
-	 * @Title: findBy
-	 * @Description: 按属性查找对象列表, 匹配方式为相等.
 	 * @param propertyName
 	 * @param value
 	 * @return
@@ -228,9 +179,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按属性查找唯一对象, 匹配方式为相等.
 	 * 
-	 * @Title: findUniqueBy
-	 * @Description: 按属性查找唯一对象, 匹配方式为相等.
 	 * @param propertyName
 	 * @param value
 	 * @return
@@ -240,14 +190,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		return (T) createCriteria(criterion).uniqueResult();
 	}
 
-	/**
-	 * 
-	 * @Title: find
-	 * @Description: 按HQL查询对象列表.
-	 * @param <X>
+	/**按HQL查询对象列表.
 	 * @param hql
-	 * @param values
-	 *            数量可变的参数,按顺序绑定.
+	 * @param values 数量可变的参数,按顺序绑定.
 	 * @return
 	 */
 	public <X> List<X> find(final String hql, final Object... values) {
@@ -255,10 +200,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * @Description 按HQL查询对象列表从第多少条到第多少条记录.
-	 * @author zhangwei
-	 * @date 2012-10-22 下午02:21:57
-	 * @param <X>
+	 * 按HQL查询对象列表从第多少条到第多少条记录.
+	 * 
 	 * @param hql
 	 * @param first
 	 *            起始条数
@@ -276,10 +219,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按HQL查询对象列表
 	 * 
-	 * @Title: find
-	 * @Description: 按HQL查询对象列表.
-	 * @param <X>
 	 * @param hql
 	 * @param values
 	 *            命名参数,按名称绑定.
@@ -290,10 +231,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按HQL查询唯一对象.
 	 * 
-	 * @Title: findUnique
-	 * @Description: 按HQL查询唯一对象.
-	 * @param <X>
 	 * @param hql
 	 * @param values
 	 *            数量可变的参数,按顺序绑定.
@@ -304,10 +243,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按HQL查询唯一对象.
 	 * 
-	 * @Title: findUnique
-	 * @Description: 按HQL查询唯一对象.
-	 * @param <X>
 	 * @param hql
 	 * @param values
 	 *            命名参数,按名称绑定.
@@ -318,22 +255,20 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 执行HQL进行批量修改/删除操作
 	 * 
-	 * @Title: batchExecute
-	 * @Description: 执行HQL进行批量修改/删除操作.
 	 * @param hql
 	 * @param values
 	 *            数量可变的参数,按顺序绑定.
-	 * @return 更新记录数.
+	 * @return 更新记录数
 	 */
 	public int batchExecute(final String hql, final Object... values) {
 		return createQuery(hql, values).executeUpdate();
 	}
 
 	/**
+	 * 执行HQL进行批量修改/删除操作.
 	 * 
-	 * @Title: batchExecute
-	 * @Description: 执行HQL进行批量修改/删除操作.
 	 * @param hql
 	 * @param values
 	 *            命名参数,按名称绑定.
@@ -384,11 +319,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		return query;
 	}
 
-	/**
-	 * 
-	 * @Title: createQuery
-	 * @Description: 根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
+	/**根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
 	 * @param queryString
+	 * @param arg
 	 * @param values
 	 * @return
 	 */
@@ -413,11 +346,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 按Criteria查询唯一对象
 	 * 
-	 * @Title: findUnique
-	 * @Description: 按Criteria查询唯一对象.
 	 * @param criterions
-	 *            数量可变的Criterion.
+	 *            数量可变的Criterion
 	 * @return
 	 */
 	public T findUnique(final Criterion... criterions) {
@@ -425,9 +357,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 根据Criterion条件创建Criteria.与find()函数可进行更加灵活的操作
 	 * 
-	 * @Title: createCriteria
-	 * @Description: 根据Criterion条件创建Criteria.与find()函数可进行更加灵活的操作.
 	 * @param criterions
 	 * @return
 	 */
@@ -441,9 +372,15 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * <p>
+	 * 初始化对象.
+	 * </p>
+	 * 使用load()方法得到的仅是对象Proxy, 在传到View层前需要进行初始化. 如果传入entity,
+	 * 则只初始化entity的直接属性,但不会初始化延迟加载的关联集合和属性. 如需初始化关联属性,需执行:
+	 * Hibernate.initialize(user.getRoles())，初始化User的直接属性和关联集合.
+	 * Hibernate.initialize
+	 * (user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
 	 * 
-	 * @Title: initProxyObject
-	 * @Description: 初始化对象.
 	 * @param proxy
 	 */
 	public void initProxyObject(Object proxy) {
@@ -451,19 +388,15 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 
-	 * @Title: flush
-	 * @Description: Flush当前Session.
+	 * Flush当前Session
 	 */
 	public void flush() {
 		getSession().flush();
 	}
 
 	/**
+	 * 为Query添加distinct transformer. 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理.
 	 * 
-	 * @Title: distinct
-	 * @Description: 为Query添加distinct transformer. 预加载关联对象的HQL会引起主对象重复,
-	 *               需要进行distinct处理.
 	 * @param query
 	 * @return
 	 */
@@ -473,10 +406,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 为Criteria添加distinct transformer. 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理
 	 * 
-	 * @Title: distinct
-	 * @Description: 为Criteria添加distinct transformer. 预加载关联对象的HQL会引起主对象重复,
-	 *               需要进行distinct处理.
 	 * @param criteria
 	 * @return
 	 */
@@ -486,9 +417,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 取得对象的主键名
 	 * 
-	 * @Title: getIdName
-	 * @Description: 取得对象的主键名.
 	 * @return
 	 */
 	public String getIdName() {
@@ -497,10 +427,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
+	 * 判断对象的属性值在数据库内是否唯一. 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
 	 * 
-	 * @Title: isPropertyUnique
-	 * @Description: 判断对象的属性值在数据库内是否唯一.
-	 *               在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
 	 * @param propertyName
 	 * @param newValue
 	 * @param oldValue

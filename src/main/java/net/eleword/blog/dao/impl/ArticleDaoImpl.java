@@ -12,9 +12,9 @@ import net.eleword.blog.entity.Article;
  */
 public class ArticleDaoImpl extends HibernateDao<Article,Long> implements ArticleDao  {
 
-	public int add(Article entity) {
+	public Long add(Article entity) {
 
-		return 0;
+		return 0L;
 	}
 
 	public void update(Article entity) {

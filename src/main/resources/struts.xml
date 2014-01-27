@@ -8,6 +8,7 @@
 	<constant name="struts.ui.theme" value="simple" />
 	<constant name="struts.objectFactory" value="spring"/>
 	<constant name="struts.action.extension" value="," />
+	
 
 	<package name="default" extends="struts-default">
 		<default-action-ref name="index" />
@@ -18,6 +19,11 @@
 		
 		<action name="index" class="indexAction">
 			<result type="freemarker" name="index">/WEB-INF/page/index.htm</result>
+		</action>
+		
+		<action name="category" class="categoryAction" >
+			<result name="add" type="freemarker">/WEB-INF/page/admin/addCategory.htm</result>
+			<result name="list" type="freemarker">/WEB-INF/page/admin/listCategory.htm</result>
 		</action>
 	</package>
 </struts>
