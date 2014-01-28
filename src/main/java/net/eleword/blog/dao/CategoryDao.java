@@ -1,6 +1,8 @@
 
 package net.eleword.blog.dao;
 
+import java.util.List;
+
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Category;
 
@@ -10,6 +12,6 @@ import net.eleword.blog.entity.Category;
  * @date 2014-1-27上午6:09:31
  */
 public interface CategoryDao extends BaseDao<Category> {
-
+	 List<Category> selectAll();
 }
 

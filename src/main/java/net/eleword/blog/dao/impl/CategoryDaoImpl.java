@@ -1,6 +1,8 @@
 
 package net.eleword.blog.dao.impl;
 
+import java.util.List;
+
 import net.eleword.blog.dao.CategoryDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Category;
@@ -23,13 +25,19 @@ public class CategoryDaoImpl extends HibernateDao<Category,Long> implements Cate
 		
 	}
 
-	public void delete(long id) {
+	public void deleteByCategoryId(long id) {
+		delete(id);
+	}
+
+	public Category select(long id) {
+	
+		return get(id);
+	}
+
+	public List<Category> selectAll(){
 		
+		return getAll();
 	}
-
-	public int select(long id) {
-		return 0;
-	}
-
+	
 }
 

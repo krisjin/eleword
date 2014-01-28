@@ -1,9 +1,13 @@
 package net.eleword.blog.action;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import net.eleword.blog.entity.Category;
 import net.eleword.blog.service.CategoryService;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -20,15 +24,14 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class CategoryAction extends ActionSupport {
 
-	private String name;
+	private String categoryName;
 	private String priority;
-	private String parentId;
 
 	@Autowired
 	private CategoryService categoryService;
 
 	public String execute() {
-		return "";
+		return "list";
 	}
 
 	public String add() {
@@ -36,24 +39,47 @@ public class CategoryAction extends ActionSupport {
 	}
 
 	public String save() {
-
-		Category category = new Category();
-		category.setName(name);
-		category.setPriority(Integer.valueOf(priority));
-	
-		if(StringUtils.isNotBlank(parentId)&& StringUtils.isNotEmpty(parentId)){
-			category.setParentId(Long.valueOf(parentId));
-		}
-		categoryService.add(category);
-		return "list";
 		
+		Category category = new Category();
+		category.setName(categoryName);
+		category.setPriority(Integer.valueOf(priority));
+		categoryService.add(category);
+		return "queryRedirect";
+
 	}
 
+	public String update(){
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String categoryId=request.getParameter("categoryId");
+		Category category=categoryService.selectCategoryById(Long.valueOf(categoryId));
+		request.setAttribute("updCategory", category);
+		request.setAttribute("flag", "update");
+		return "queryRedirect";
+	}
+	
+	public String saveUpdate(){
+		
+		return "queryRedirect";
+	}
+	
 	public String list() {
-		
-		
-		
+
+		List<Category> categories = categoryService.selectAll();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("flag", "query");
+		request.setAttribute("categories", categories);
 		return "list";
+
+	}
+
+	public String delete() {
+
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String categoryId = request.getParameter("categoryId");
+
+		categoryService.deleteByCategoryId(Long.valueOf(categoryId));
+		return "queryRedirect";
 	}
 
 	public CategoryService getCategoryService() {
@@ -64,12 +90,12 @@ public class CategoryAction extends ActionSupport {
 		this.categoryService = categoryService;
 	}
 
-	public String getName() {
-		return name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getPriority() {
@@ -78,14 +104,6 @@ public class CategoryAction extends ActionSupport {
 
 	public void setPriority(String priority) {
 		this.priority = priority;
-	}
-
-	public String getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
 	}
 
 }

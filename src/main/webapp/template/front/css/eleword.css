@@ -13,9 +13,31 @@ body {
 	margin: 30px 0;
 }
 
-#blog-container {margin:0 auto; width:970px;}
-#blog-sidebar { float:right; width:280px; height:500px; background:#6cf;}
-#blog-content { float:left; width:620px; height:500px; background:#cff;}
+#blog-container {
+	margin: 0 auto;
+	width: 970px;
+}
+
+#blog-sidebar {
+	float: right;
+	width: 280px;
+	min-height: 500px;
+	height: auto;
+}
+
+#blog-content {
+	float: left;
+	width: 620px;
+	min-height: 600px;
+	height: auto;
+}
+
+.blog-category {
+	float: left;
+	width: 820px;
+	min-height: 600px;
+	height: auto;
+}
 
 
 /* Main marketing message and sign up button */
@@ -42,3 +64,4 @@ body {
 .marketing p+h4 {
 	margin-top: 28px;
 }
+

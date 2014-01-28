@@ -22,17 +22,6 @@ public class Category extends IdEntity implements Serializable {
 
 	private int priority;
 
-	private long parentId;
-
-	@Column(name = "parentId")
-	public long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(long parentId) {
-		this.parentId = parentId;
-	}
-
 	@Column(name = "name", nullable = false)
 	public String getName() {
 		return name;

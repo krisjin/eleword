@@ -21,13 +21,13 @@ public class ArticleDaoImpl extends HibernateDao<Article,Long> implements Articl
 
 	}
 
-	public void delete(long id) {
+	public void deleteByCategoryId(long id) {
 
 	}
 
-	public int select(long id) {
+	public Article select(long id) {
 
-		return 0;
+		return null;
 	}
 
 }

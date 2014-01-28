@@ -1,5 +1,7 @@
 package net.eleword.blog.service;
 
+import java.util.List;
+
 import net.eleword.blog.dao.CategoryDao;
 import net.eleword.blog.entity.Category;
 
@@ -21,5 +23,19 @@ public class CategoryService {
 		return categoryDao.add(category);
 	}
 	
+	
+	public List<Category> selectAll(){
+		
+		return categoryDao.selectAll();
+	}
+	
+	public void deleteByCategoryId(Long id){
+		
+		categoryDao.deleteByCategoryId(id);
+	}
+	
+	public Category selectCategoryById(Long id){
+		return categoryDao.select(id);
+	}
 }
 
