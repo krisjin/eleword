@@ -26,6 +26,7 @@ public class CategoryAction extends ActionSupport {
 
 	private String categoryName;
 	private String priority;
+	private String id;
 
 	@Autowired
 	private CategoryService categoryService;
@@ -53,13 +54,20 @@ public class CategoryAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String categoryId=request.getParameter("categoryId");
 		Category category=categoryService.selectCategoryById(Long.valueOf(categoryId));
+		List<Category> categories = categoryService.selectAll();
+		request.setAttribute("categories", categories);
 		request.setAttribute("updCategory", category);
 		request.setAttribute("flag", "update");
-		return "queryRedirect";
+		return "list";
 	}
 	
-	public String saveUpdate(){
+	public String updateSave(){
 		
+		Category category =new Category();
+		category.setName(categoryName);
+		category.setPriority(Integer.valueOf(priority));
+		category.setId(Long.valueOf(id));
+		categoryService.update(category);
 		return "queryRedirect";
 	}
 	
@@ -106,4 +114,13 @@ public class CategoryAction extends ActionSupport {
 		this.priority = priority;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 }

@@ -22,10 +22,10 @@ public class CategoryDaoImpl extends HibernateDao<Category,Long> implements Cate
 	}
 
 	public void update(Category entity) {
-		
+		saveOrUpdate(entity);
 	}
 
-	public void deleteByCategoryId(long id) {
+	public void deleteById(long id) {
 		delete(id);
 	}
 
@@ -38,6 +38,7 @@ public class CategoryDaoImpl extends HibernateDao<Category,Long> implements Cate
 		
 		return getAll();
 	}
+	
 	
 }
 

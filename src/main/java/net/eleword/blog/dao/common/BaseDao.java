@@ -13,7 +13,7 @@ public interface BaseDao<T> {
 
 	void update(T entity);
 
-	void deleteByCategoryId(long id);
+	void deleteById(long id);
 
 	T select(long id);
 	

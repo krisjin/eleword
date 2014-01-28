@@ -10,24 +10,24 @@ import net.eleword.blog.entity.Article;
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-27上午6:25:10
  */
-public class ArticleDaoImpl extends HibernateDao<Article,Long> implements ArticleDao  {
+public class ArticleDaoImpl extends HibernateDao<Article, Long> implements ArticleDao {
 
 	public Long add(Article entity) {
 
-		return 0L;
+		return (Long) save(entity);
 	}
 
 	public void update(Article entity) {
-
+		saveOrUpdate(entity);
 	}
 
-	public void deleteByCategoryId(long id) {
-
+	public void deleteById(long id) {
+		delete(id);
 	}
 
 	public Article select(long id) {
 
-		return null;
+		return get(id);
 	}
 
 }

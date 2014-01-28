@@ -37,7 +37,7 @@ public class Article extends IdEntity implements Serializable {
 
 	private Category categoryId;
 
-	private long userId;
+	private String author;
 
 	private int status;
 
@@ -74,28 +74,29 @@ public class Article extends IdEntity implements Serializable {
 	public Category getCategoryId() {
 		return categoryId;
 	}
-
-	@Column(nullable = false)
-	public long getUserId() {
-		return userId;
-	}
-
+	
 	@Column(nullable = false)
 	public int getStatus() {
 		return status;
 	}
+	@Column
+	public String getAuthor() {
+		return author;
+	}
 
-	public void setModifyDate(Timestamp modifyDate) {
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+
 
 	public void setCategoryId(Category categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -117,7 +118,8 @@ public class Article extends IdEntity implements Serializable {
 		this.keywords = keywords;
 	}
 
-	public void setPostDate(Timestamp postDate) {
+
+	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
 

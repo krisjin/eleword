@@ -1,16 +1,15 @@
 <#include "header_admin.htm">
 <div id="blog-container">
 	<div id="blog-category">
-	${flag}
+	
 		<#if flag=="update">
 			<div class="well well-large">
-				<form class="form-inline" action="category!save" method="post">
-					分类名称：<input type="text" class="input-small" name="categoryName">&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority">
-					</label>&nbsp;&nbsp;
+				<form class="form-inline" action="category!updateSave" method="post">
+					<input type="hidden" name="id" value="${updCategory.id}">
+					分类名称：<input type="text" class="input-small" name="categoryName" value="${updCategory.name}">&nbsp;&nbsp;&nbsp;
+					排序值：<input type="text" class="input-small" name="priority" value="${updCategory.priority}">
+					&nbsp;&nbsp;
 					<button type="submit" class="btn btn-primary">修 改</button>
-					
-					${updCategory.name}
 				</form>
 			</div>
 		<#else>
