@@ -1,5 +1,7 @@
 package net.eleword.blog.dao;
 
+import java.util.List;
+
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Article;
 
@@ -10,6 +12,6 @@ import net.eleword.blog.entity.Article;
  */
 
 public interface ArticleDao extends BaseDao<Article>{
-		
+	List<Article> selectAll();
 }
 

@@ -1,10 +1,12 @@
 package net.eleword.blog.dao.impl;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Article;
+
+import org.springframework.stereotype.Repository;
 
 /**
  * TODO 此处填写 class 信息
@@ -31,6 +33,11 @@ public class ArticleDaoImpl extends HibernateDao<Article, Long> implements Artic
 	public Article select(long id) {
 
 		return get(id);
+	}
+	
+	public List<Article> selectAll(){
+		
+		return getAll();
 	}
 
 }

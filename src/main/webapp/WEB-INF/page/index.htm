@@ -1,10 +1,12 @@
 <#include "header.htm">
 <div id="blog-container">
 	<div id="blog-sidebar" style="border: solid 1px;">
-		啊啊啊
+		
 	</div>
-	<div id="blog-content" style="border: solid 1px;">
-		啊啊啊
+	<div id="blog-content" style="">
+		<#list articles as art>
+			${art.content}
+		</#list>
 	</div>
 </div>
 <div class="pagination pagination-large" style="padding-top: 30px; clear: both;">

@@ -35,53 +35,57 @@ public class Article extends IdEntity implements Serializable {
 
 	private Date modifyDate;
 
-	private long categoryId;
-
 	private String author;
 
 	private int status;
 
 	private int views;
-
-	@Column(nullable = false)
+	
+	private long categoryId;
+	
+	@Column(name="title",nullable = false)
 	public String getTitle() {
 		return title;
 	}
 
-	@Column(nullable = false)
+	@Column(name="content",nullable = false)
 	public String getContent() {
 		return content;
 	}
 
-	@Column
+	@Column(name="keywords")
 	public String getKeywords() {
 		return keywords;
 	}
 
-	@Column
+	@Column(name="post_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getPostDate() {
 		return postDate;
 	}
 
-	@Column
+	@Column(name="modify_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getModifyDate() {
 		return modifyDate;
 	}
 
-	@Column(name="categoryId")
-	public long getCategoryId() {
-		return categoryId;
-	}
-	
-	@Column
+	@Column(name="status")
 	public int getStatus() {
 		return status;
 	}
-	@Column(nullable = false)
+	@Column(name="author",nullable = false)
 	public String getAuthor() {
 		return author;
+	}
+	
+	@Column(name="category_id")
+	public long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public void setAuthor(String author) {
@@ -92,10 +96,6 @@ public class Article extends IdEntity implements Serializable {
 		this.modifyDate = modifyDate;
 	}
 
-
-	public void setCategoryId(long categoryId) {
-		this.categoryId = categoryId;
-	}
 
 
 	public void setTitle(String title) {

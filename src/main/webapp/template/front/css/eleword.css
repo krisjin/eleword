@@ -20,14 +20,14 @@ body {
 
 #blog-sidebar {
 	float: right;
-	width: 280px;
+	width: 200px;
 	min-height: 500px;
 	height: auto;
 }
 
 #blog-content {
 	float: left;
-	width: 620px;
+	width: 710px;
 	min-height: 600px;
 	height: auto;
 }

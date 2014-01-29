@@ -1,5 +1,7 @@
 package net.eleword.blog.service;
 
+import java.util.List;
+
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.entity.Article;
 
@@ -41,5 +43,8 @@ public class ArticleService {
 	public void setArticleDao(ArticleDao articleDao) {
 		this.articleDao = articleDao;
 	}
-
+	
+	public List<Article> selectAll(){
+		return articleDao.selectAll();
+	}
 }
