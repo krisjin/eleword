@@ -1,10 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加文章</title>
-</head>
-<body>
+<#include "header_admin.htm">
+<script>
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			allowFileManager : true,
+			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
+					'justifyright', 'insertorderedlist', 'insertunorderedlist',
+					'clearhtml', 'quickformat', 'formatblock', 'fontname',
+					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'lineheight', 'removeformat', '|',
+					'image', 'multiimage', 'insertfile', 'table', 'hr',
+					'emoticons', 'baidumap', 'link', 'unlink', 'fullscreen' ]
+		});
 
-</body>
-</html>
+	});
+</script>
+
+<div id="blog-container">
+	<div id="blog-addarticle">
+		<form class="form-inline" action="article!addSave" method="post">
+			<div class="">
+				<label class="control-label">文章标题</label> 
+				<input type="text" id="inputEmail" name="title" class="input-xxlarge"> <label
+					class="control-label">选择分类</label> <select name="categoryId">
+					<#list categories as category>
+						<option value="${category.id}">${category.name}</option> 
+					</#list>
+				</select>
+			</div>
+			<br>
+			<div class="control-group">
+				<label class="control-label">文章内容</label>
+				<div class="controls">
+					<textarea name="content" style="width: 970px; height: 400px; visibility: false;"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn btn-success">发表文章</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<#include "footer_admin.htm">

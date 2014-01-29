@@ -1,29 +1,32 @@
 <#include "header_admin.htm">
 <div id="blog-container">
 	<div id="blog-category">
-	
 		<#if flag=="update">
+			修改分类
 			<div class="well well-large">
-				<form class="form-inline" action="category!updateSave" method="post">
+				<form class="form-inline" action="" method="post" id="updSave">
 					<input type="hidden" name="id" value="${updCategory.id}">
 					分类名称：<input type="text" class="input-small" name="categoryName" value="${updCategory.name}">&nbsp;&nbsp;&nbsp;
 					排序值：<input type="text" class="input-small" name="priority" value="${updCategory.priority}">
 					&nbsp;&nbsp;
-					<button type="submit" class="btn btn-primary">修 改</button>
+					<button type="button" class="btn btn-info" onclick="updateSave();">修 改</button>
+					&nbsp;&nbsp;
+					<button type="button" class="btn btn-inverse" onclick="updateCancle();">取 消</button>
 				</form>
 			</div>
 		<#else>
+			添加分类
 			<div class="well well-large">
 				<form class="form-inline" action="category!save" method="post">
 					分类名称：<input type="text" class="input-small" name="categoryName">&nbsp;&nbsp;&nbsp;
 					排序值：<input type="text" class="input-small" name="priority">
 					</label>&nbsp;&nbsp;
-					<button type="submit" class="btn btn-primary">添 加</button>
+					<button type="submit" class="btn btn-info">添 加</button>
 				</form>
 			</div>
 		</#if>
 
-
+		分类列表：
 		<form action="" method="post" id="formcate">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
@@ -44,8 +47,6 @@
 				</#list>
 			</table>
 		</form>
-
-
 	</div>
 </div>
 
@@ -53,7 +54,7 @@
 <script type="text/javascript">
 <!--
 function deleteCategory(categoryId){
-	var frm=document.getElementById("formcate")
+	var frm=document.getElementById("formcate");
 	var url="category!delete?categoryId="+categoryId;
 	
 	frm.action=url;
@@ -62,5 +63,20 @@ function deleteCategory(categoryId){
 	}
 	return false;
 }
+
+function updateSave(){
+	var frm=document.getElementById("updSave");
+	var url="category!updateSave";
+	frm.action=url;
+	frm.submit();
+}
+
+function updateCancle(){
+	var frm=document.getElementById("updSave");
+	var url="category!list";
+	frm.action=url;
+	frm.submit();
+}
+
 //-->
 </script>

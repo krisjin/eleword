@@ -30,5 +30,10 @@
 			<result name="list" type="freemarker">/WEB-INF/page/admin/listCategory.htm</result>
 			<result name="update" type="freemarker">/WEB-INF/page/admin/listCategory.htm</result>
 		</action>
+		<action name="article" class="articleAction">
+			<result name="add" type="freemarker">/WEB-INF/page/admin/addArticle.htm</result>
+			<result name="list" type="freemarker"></result>
+			<result name="update" type="freemarker"></result>
+		</action>
 	</package>
 </struts>

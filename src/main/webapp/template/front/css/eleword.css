@@ -39,6 +39,12 @@ body {
 	height: auto;
 }
 
+.blog-addarticle {
+	float: left;
+	width: 820px;
+	min-height: 600px;
+	height: auto;
+}
 
 /* Main marketing message and sign up button */
 .jumbotron {

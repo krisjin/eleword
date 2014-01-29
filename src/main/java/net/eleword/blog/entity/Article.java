@@ -35,7 +35,7 @@ public class Article extends IdEntity implements Serializable {
 
 	private Date modifyDate;
 
-	private Category categoryId;
+	private long categoryId;
 
 	private String author;
 
@@ -48,7 +48,7 @@ public class Article extends IdEntity implements Serializable {
 		return title;
 	}
 
-	@Column
+	@Column(nullable = false)
 	public String getContent() {
 		return content;
 	}
@@ -69,17 +69,17 @@ public class Article extends IdEntity implements Serializable {
 	public Date getModifyDate() {
 		return modifyDate;
 	}
-	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinColumn(name="categoryId")
-	public Category getCategoryId() {
+
+	@Column(name="categoryId")
+	public long getCategoryId() {
 		return categoryId;
 	}
 	
-	@Column(nullable = false)
+	@Column
 	public int getStatus() {
 		return status;
 	}
-	@Column
+	@Column(nullable = false)
 	public String getAuthor() {
 		return author;
 	}
@@ -93,7 +93,7 @@ public class Article extends IdEntity implements Serializable {
 	}
 
 
-	public void setCategoryId(Category categoryId) {
+	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -105,7 +105,8 @@ public class Article extends IdEntity implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
+	
+	@Column
 	public int getViews() {
 		return views;
 	}

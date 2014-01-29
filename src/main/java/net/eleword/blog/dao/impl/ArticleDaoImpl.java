@@ -1,5 +1,7 @@
 package net.eleword.blog.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Article;
@@ -10,6 +12,7 @@ import net.eleword.blog.entity.Article;
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-27上午6:25:10
  */
+@Repository("articleDao")
 public class ArticleDaoImpl extends HibernateDao<Article, Long> implements ArticleDao {
 
 	public Long add(Article entity) {

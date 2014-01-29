@@ -39,6 +39,5 @@ public class CategoryDaoImpl extends HibernateDao<Category,Long> implements Cate
 		return getAll();
 	}
 	
-	
 }
 
