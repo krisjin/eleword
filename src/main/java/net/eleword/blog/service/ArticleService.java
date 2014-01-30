@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.entity.Article;
+import net.eleword.blog.util.Pagination;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,4 +48,10 @@ public class ArticleService {
 	public List<Article> selectAll(){
 		return articleDao.selectAll();
 	}
+	
+	public Pagination<Article> selectArticleWithPage(Pagination page){
+		
+		return articleDao.selectArticleWithPage(page);
+	}
+	
 }

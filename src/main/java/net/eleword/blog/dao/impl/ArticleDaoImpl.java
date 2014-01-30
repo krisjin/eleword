@@ -5,6 +5,7 @@ import java.util.List;
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Article;
+import net.eleword.blog.util.Pagination;
 
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +39,12 @@ public class ArticleDaoImpl extends HibernateDao<Article, Long> implements Artic
 	public List<Article> selectAll(){
 		
 		return getAll();
+	}
+
+	public Pagination<Article> selectArticleWithPage(Pagination<Article> page) {
+		String hql="from Article art order by art.postDate desc";
+		
+		return findPage(page ,hql);
 	}
 
 }

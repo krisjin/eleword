@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Article;
 import net.eleword.blog.service.ArticleService;
+import net.eleword.blog.util.Pagination;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,14 @@ public class IndexAction extends ActionSupport {
 	private ArticleService articleService;
 
 	public String execute() {
-		List<Article> articles=articleService.selectAll();
+		
+		Pagination<Article> page =new Pagination<Article>();
+		
+		
+		page=articleService.selectArticleWithPage(page);
 		HttpServletRequest request=ServletActionContext.getRequest();
-		request.setAttribute("articles", articles);
+		
+		request.setAttribute("pa", page);
 		return "index";
 	}
 

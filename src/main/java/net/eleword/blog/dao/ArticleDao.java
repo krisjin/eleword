@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Article;
+import net.eleword.blog.util.Pagination;
 
 /**
  * TODO 此处填写 class 信息
@@ -13,5 +14,7 @@ import net.eleword.blog.entity.Article;
 
 public interface ArticleDao extends BaseDao<Article>{
 	List<Article> selectAll();
+	
+	Pagination<Article> selectArticleWithPage(Pagination<Article> page);
 }
 
