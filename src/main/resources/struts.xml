@@ -32,6 +32,7 @@
 		</action>
 		<action name="article" class="articleAction">
 			<result name="add" type="freemarker">/WEB-INF/page/admin/addArticle.htm</result>
+			<result name="addAction" type="redirectAction">article!add</result>
 			<result name="list" type="freemarker"></result>
 			<result name="update" type="freemarker"></result>
 		</action>

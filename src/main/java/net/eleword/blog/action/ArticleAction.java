@@ -59,7 +59,7 @@ public class ArticleAction extends ActionSupport {
 		
 		articleService.addArticle(article);
 		
-		return "add";
+		return "addAction";
 	}
 
 	public String update() {

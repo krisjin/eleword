@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.mysql.jdbc.StringUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("indexAction")
@@ -27,8 +28,17 @@ public class IndexAction extends ActionSupport {
 		Pagination<Article> page =new Pagination<Article>();
 		
 		
-		page=articleService.selectArticleWithPage(page);
+		
 		HttpServletRequest request=ServletActionContext.getRequest();
+		String pageCount=request.getParameter("page");
+		
+		if(StringUtils.isNullOrEmpty(pageCount)){
+			page.setCurrentPage(1);
+		}else{
+			page.setCurrentPage(Integer.valueOf(pageCount));
+		}
+		page.getStartPage();
+		page=articleService.selectArticleWithPage(page);
 		
 		request.setAttribute("pa", page);
 		return "index";

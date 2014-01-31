@@ -153,7 +153,7 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 		Assert.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
 
 		q.setFirstResult(page.getStartPage() - 1);
-		q.setMaxResults(page.getPageSize());
+		q.setMaxResults(page.getPageSize()+page.getStartPage());
 		return q;
 	}
 	

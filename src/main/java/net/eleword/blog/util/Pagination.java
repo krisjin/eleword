@@ -53,7 +53,7 @@ public class Pagination<T> {
 	 * @return
 	 */
 	public int getStartPage() {
-		return ((currentPage-1)*pageSize)+1;
+		return ((currentPage-1)*pageSize);
 	}
 
 	public void setStartPage(int startPage) {

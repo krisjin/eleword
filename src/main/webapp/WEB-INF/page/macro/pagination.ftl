@@ -6,21 +6,24 @@
 
 <#macro doPagination action >
         <#if (totalRecords > recordsPerPage)>
-                <div class="pagination">
+                <div class="pagination pagination-large" style="padding-top: 30px; clear: both;">
                 <#assign link = ""/>
 
                 <#-- ------------- -->
                 <#-- Previous page -->
                 <#-- ------------- -->
+                <ul>
                 <#if (thisPage > 1)>
                         <#assign start = (thisPage - 2) * recordsPerPage/>
-                        <a href="${contextPath}/${moduleName}/${action}<#if (start > 0)>/${start}</#if>${extension}">&#9668;</a>
+                        <li><a href="index?page=${thisPage - 1}">&#9668;</a></li>
                 </#if>
-
+						
+						
                 <#if (totalPages > 10)>
                         <#-- ------------------------------ -->
                         <#-- Always write the first 3 links -->
                         <#-- ------------------------------ -->
+                        
                         <#list 1 .. 3 as page>
                                 <@pageLink page/>
                         </#list>
@@ -29,7 +32,7 @@
                         <#-- Intermediate links -->
                         <#-- ------------------ -->
                         <#if (thisPage > 1 && thisPage < totalPages)>
-                                <#if (thisPage > 5)><span class="gensmall">...</span></#if>
+                                <#if (thisPage > 5)><li><a>...</a></li></#if>
 
                                 <#if (thisPage > 4)>
                                         <#assign min = thisPage - 1/>
@@ -49,9 +52,9 @@
                                         </#list>
                                 </#if>
 
-                                <#if (thisPage < totalPages - 4)><span class="gensmall">...</span></#if>
+                                <#if (thisPage < totalPages - 4)><li><a>...</a></li></#if>
                         <#else>
-                                <span class="gensmall">...</span>
+                                <li><a>...</a></li>
                         </#if>
 
                         <#-- ---------------------- -->
@@ -71,9 +74,11 @@
                 <#-- ------------- -->
                 <#if (thisPage < totalPages)>
                         <#assign start = thisPage * recordsPerPage/>
-                        <a href="<#if (start > 0)>/${start}</#if>">&#9658;</a>
+                        <li>
+                        	<a href="index?page=${thisPage+1}">&#9658;</a>
+                        </li>
                 </#if>
-
+				</ul>
                 </div>
         </#if>
 </#macro>
@@ -81,10 +86,11 @@
 <#macro pageLink page >
         <#assign start = recordsPerPage * (page - 1)/>
         <#if page != thisPage>
-                <#assign link><a href="index?<#if (start > 0)>/${start}</#if>">${page}</a></#assign>
+        	
+                <#assign link><a href="index?page=${page}">${page}</a></#assign></li>
         <#else>
                 <#assign link><span class="current">${page}</span></#assign>
         </#if>
 
-        ${link}
+        <li>${link}<li>
 </#macro>

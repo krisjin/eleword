@@ -1,35 +1,37 @@
-<#include "header.htm">
-<#assign articles=pa.resultSet> 
+<#include "header.htm"> <#assign articles=pa.resultSet>
 <div id="blog-container">
-	<div id="blog-sidebar" style="border: solid 1px;">
-		
-	</div>
+	<div id="blog-sidebar" style="border: solid 1px;"></div>
 	<div id="blog-content" style="">
 		<#list articles as art>
-			${art.content}
+			<div class="media">
+				<a class="pull-left" href="#">
+					<img class="media-object" src="template/front/img/avatar.png" style="height: 120px;width: 140px;">
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading">${art.title}--${art.postDate}</h4>
+					${art.content}
+	
+				</div>
+			</div>
 		</#list>
 	</div>
 </div>
-<div class="pagination pagination-large" style="padding-top: 30px; clear: both;">
-	<ul>
-		<li><a href="#">Prev</a></li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">Next</a></li>
-	</ul>
-</div>
+<!-- <div class="pagination pagination-large" style="padding-top: 30px; clear: both;"> -->
+<!-- 	<ul> -->
+<!-- 		<li><a href="#">Prev</a></li> -->
+<!-- 		<li><a href="#">1</a></li> -->
+<!-- 		<li><a href="#">2</a></li> -->
+<!-- 		<li><a href="#">3</a></li> -->
+<!-- 		<li><a href="#">4</a></li> -->
+<!-- 		<li><a href="#">5</a></li> -->
+<!-- 		<li><a href="#">Next</a></li> -->
+<!-- 	</ul> -->
+<!-- </div> -->
 
 
 
-<#assign paginationData>
-	<@pagination.doPagination "dddd"/>
-</#assign>
+<#assign paginationData> <@pagination.doPagination "dddd"/> </#assign> ${paginationData}
 
-${paginationData}
-		
 
 <div style="padding-top: 30px; clear: both;">
 	<hr>
