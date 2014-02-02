@@ -1,4 +1,4 @@
-<#import "macro/pagination.ftl" as pagination>
+<#import "macro/pagination-category.ftl" as pagination>
 <#include "header.htm"> 
 <#assign articles=pa.resultSet>
 	<div id="blog-container">
@@ -12,8 +12,7 @@
 			</#list>
 		</div>
 	</div>
-
-	<#assign paginationData> <@pagination.doPagination "index"/> </#assign> ${paginationData}
+	<#assign paginationData> <@pagination.doPagination "cate!category"/> </#assign> ${paginationData}
 	<div style="padding-top: 30px; clear: both;">
 		<hr>
 	</div>

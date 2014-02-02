@@ -9,12 +9,14 @@ import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Category;
 import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.CategoryService;
+import net.eleword.blog.util.Pagination;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.mysql.jdbc.StringUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -37,7 +39,19 @@ public class ArticleAction extends ActionSupport {
 	private ArticleService articleService;
 
 	public String execute() {
-
+		Pagination<Article> page =new Pagination<Article>();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		String pageCount=request.getParameter("page");
+		
+		if(StringUtils.isNullOrEmpty(pageCount)){
+			page.setCurrentPage(1);
+		}else{
+			page.setCurrentPage(Integer.valueOf(pageCount));
+		}
+		page.getStartPage();
+		page=articleService.selectArticleWithPage(page);
+		
+		request.setAttribute("pa", page);
 		return "list";
 	}
 
@@ -45,6 +59,7 @@ public class ArticleAction extends ActionSupport {
 		List<Category> categories = categoryService.selectAll();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("categories", categories);
+		request.setAttribute("actionName", "add");
 		return "add";
 	}
 
@@ -63,18 +78,36 @@ public class ArticleAction extends ActionSupport {
 	}
 
 	public String update() {
-
-		return "update";
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String id=request.getParameter("id");
+		Article article=articleService.queryById(Long.valueOf(id));
+		List<Category> categories = categoryService.selectAll();
+		request.setAttribute("categories", categories);
+		request.setAttribute("article", article);	
+		request.setAttribute("actionName", "update");
+		return "add";
 	}
 
-	public String udpateSave() {
+	public String updateSave() {
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Article article = new Article();
+		article.setAuthor("zhagnsan");
+		article.setContent(content);
+		article.setCategoryId(Long.valueOf(categoryId));
+		article.setModifyDate(new Date());
+		article.setTitle(title);
+		article.setId(Long.valueOf(request.getParameter("id")));
+		articleService.updateById(article);
 
-		return "list";
+		return "retList";
 	}
 
 	public String delete() {
-
-		return "list";
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String id=request.getParameter("id");
+		articleService.deleteById(Long.valueOf(id));
+		return "retList";
 	}
 
 	public ArticleService getArticleService() {

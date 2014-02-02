@@ -43,8 +43,16 @@ public class ArticleDaoImpl extends HibernateDao<Article, Long> implements Artic
 
 	public Pagination<Article> selectArticleWithPage(Pagination<Article> page) {
 		String hql="from Article art order by art.postDate desc";
-		
+		//String hql="FROM Article art,Category cate WHERE art.categoryId=cate.id ORDER BY art.postDate DESC";
 		return findPage(page ,hql);
 	}
+
+	public Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page, long categoryId) {
+		
+		String hql="from Article art where art.categoryId=? order by art.postDate desc";
+		return findPage(page,hql,categoryId);
+	}
+	
+	
 
 }

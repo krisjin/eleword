@@ -13,8 +13,23 @@ import net.eleword.blog.util.Pagination;
  */
 
 public interface ArticleDao extends BaseDao<Article>{
+	
+	/**
+	 * @return
+	 */
 	List<Article> selectAll();
 	
+	/**
+	 * @param page
+	 * @return
+	 */
 	Pagination<Article> selectArticleWithPage(Pagination<Article> page);
+	
+	/**
+	 * @param page
+	 * @param categoryId
+	 * @return
+	 */
+	Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page,long categoryId);
 }
 

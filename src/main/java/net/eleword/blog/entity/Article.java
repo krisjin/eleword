@@ -1,18 +1,14 @@
 package net.eleword.blog.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * TODO 此处填写 class 信息
@@ -43,6 +39,10 @@ public class Article extends IdEntity implements Serializable {
 	
 	private long categoryId;
 	
+	private String categoryName;
+	
+	
+	
 	@Column(name="title",nullable = false)
 	public String getTitle() {
 		return title;
@@ -58,7 +58,7 @@ public class Article extends IdEntity implements Serializable {
 		return keywords;
 	}
 
-	@Column(name="post_date")
+	@Column(name="post_date",updatable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getPostDate() {
 		return postDate;
@@ -82,6 +82,16 @@ public class Article extends IdEntity implements Serializable {
 	@Column(name="category_id")
 	public long getCategoryId() {
 		return categoryId;
+	}
+	
+	
+	@Transient
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public void setCategoryId(long categoryId) {

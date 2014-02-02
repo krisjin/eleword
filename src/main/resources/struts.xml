@@ -18,6 +18,10 @@
 
 		<action name="index" class="indexAction">
 			<result type="freemarker" name="index">/WEB-INF/page/index.htm</result>
+			<result type="freemarker" name="view">/WEB-INF/page/view.htm</result>
+		</action>
+		<action name="cate" class="viewCategoryAction">
+			<result name="cateView" type="freemarker">/WEB-INF/page/viewCategory.htm</result>
 		</action>
 	</package>
 
@@ -33,8 +37,8 @@
 		<action name="article" class="articleAction">
 			<result name="add" type="freemarker">/WEB-INF/page/admin/addArticle.htm</result>
 			<result name="addAction" type="redirectAction">article!add</result>
-			<result name="list" type="freemarker"></result>
-			<result name="update" type="freemarker"></result>
+			<result name="list" type="freemarker">/WEB-INF/page/admin/listArticle.htm</result>
+			<result name="retList" type="redirectAction">article</result>
 		</action>
 	</package>
 </struts>

@@ -17,6 +17,8 @@
 </script>
 
 <div id="blog-container">
+
+ <#if actionName=="add">
 	<div id="blog-addarticle">
 		<form class="form-inline" action="article!addSave" method="post">
 			<div class="">
@@ -42,6 +44,40 @@
 			</div>
 		</form>
 	</div>
+	
+	<#else>
+	<div id="blog-addarticle">
+		<form class="form-inline" action="article!updateSave" method="post">
+		<input type="hidden" value="${article.id}" name="id">
+			<div class="">
+				<label class="control-label">文章标题</label> 
+				<input type="text" id="inputEmail" name="title" class="input-xxlarge"  value="${article.title}"> 
+				<label class="control-label">选择分类</label> 
+				<select name="categoryId">
+					<#list categories as category>
+						<#if article.categoryId==category.id>
+						<option value="${category.id}" selected="selected">${category.name}</option> 
+						<#else>
+						<option value="${category.id}">${category.name}</option> 
+						</#if>
+					</#list>
+				</select>
+			</div>
+			<br>
+			<div class="control-group">
+				<label class="control-label">文章内容</label>
+				<div class="controls">
+					<textarea name="content" style="width: 970px; height: 400px; visibility: false;">${article.content}</textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn btn-success">修改文章</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	</#if>
 </div>
 
 <#include "footer_admin.htm">

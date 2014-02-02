@@ -14,76 +14,63 @@ import net.eleword.blog.util.Pagination;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.mysql.jdbc.StringUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
-@Controller("indexAction")
-@Scope("prototype")
-public class IndexAction extends ActionSupport {
+/**
+ * TODO 此处填写 class 信息
+ * 
+ * @author krisjin (mailto:krisjin86@163.com)
+ * @date 2014-2-2上午11:17:57
+ */
+@Controller("viewCategoryAction")
+public class CategoryViewAction extends ActionSupport {
 
 	@Autowired
 	private ArticleService articleService;
-
 	@Autowired
 	private CategoryService categoryService;
 
-	public String execute() {
+	public String execute() throws Exception {
+		return "";
+	}
+
+	public String category() {
+
 		Pagination<Article> page = new Pagination<Article>();
 		HttpServletRequest request = ServletActionContext.getRequest();
+		String categoryId = request.getParameter("id");
 		String pageCount = request.getParameter("page");
+		String tmpCategoryName="";
 
 		if (StringUtils.isNullOrEmpty(pageCount)) {
 			page.setCurrentPage(1);
 		} else {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
-		page.getStartPage();
-		page = articleService.selectArticleWithPage(page);
+		
+		page = articleService.selectArticleWithPageByCategoryId(page, Long.valueOf(categoryId));
+		
 		List<Category> categories = categoryService.selectAll();
 
 		List<Article> arts = page.getResultSet();
-
 		for (Article art : arts) {
 			art.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()), 400));
 			for (Category category : categories) {
 				if (art.getCategoryId() == category.getId()) {
 					art.setCategoryName(category.getName());
+					tmpCategoryName = category.getName();
 				}
 			}
 		}
+		request.setAttribute("categoryId", categoryId);
 		page.setResultSet(arts);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
-		request.setAttribute(ConstantEnum.pageTitle.toString(),"Eleword博客" );
-		return "index";
-	}
-
-	public String view() {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String id = request.getParameter("id");
-		Article article = articleService.queryById(Long.valueOf(id));
-		List<Category> categories = categoryService.selectAll();
-
-		for (Category cate : categories) {
-			if (article.getCategoryId() == cate.getId()) {
-				article.setCategoryName(cate.getName());
-			}
-		}
-		request.setAttribute("categories", categories);
-		request.setAttribute("article", article);
-		request.setAttribute(ConstantEnum.pageTitle.toString(), article.getTitle());
-		return "view";
-	}
-
-	public ArticleService getArticleService() {
-		return articleService;
-	}
-
-	public void setArticleService(ArticleService articleService) {
-		this.articleService = articleService;
+		request.setAttribute(ConstantEnum.pageTitle.toString(), tmpCategoryName+"分类的文章");
+		return "cateView";
 	}
 
 }

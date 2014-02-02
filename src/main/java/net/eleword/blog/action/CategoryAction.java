@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Category;
 import net.eleword.blog.service.CategoryService;
+import net.eleword.blog.util.ConstantEnum;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,14 @@ public class CategoryAction extends ActionSupport {
 	private CategoryService categoryService;
 
 	public String execute() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute(ConstantEnum.pageTitle.toString(), "分类管理");
 		return "list";
 	}
 
 	public String add() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute(ConstantEnum.pageTitle.toString(), "新增分类");
 		return "add";
 	}
 

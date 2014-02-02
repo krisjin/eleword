@@ -1,62 +1,46 @@
+<#import "../macro/pagination.ftl" as pagination>
 <#include "header_admin.htm">
+<#assign articles=pa.resultSet>
 <div id="blog-container">
 	<div id="blog-category">
-		<#if flag=="update">
-			修改分类
-			<div class="well well-large">
-				<form class="form-inline" action="category!updateSave" method="post">
-					<input type="hidden" name="id" value="${updCategory.id}">
-					分类名称：<input type="text" class="input-small" name="categoryName" value="${updCategory.name}">&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority" value="${updCategory.priority}">
-					&nbsp;&nbsp;
-					<button type="submit" class="btn btn-primary">修 改</button>
-				</form>
-			</div>
-		<#else>
-			添加分类
-			<div class="well well-large">
-				<form class="form-inline" action="category!save" method="post">
-					分类名称：<input type="text" class="input-small" name="categoryName">&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority">
-					</label>&nbsp;&nbsp;
-					<button type="submit" class="btn btn-primary">添 加</button>
-				</form>
-			</div>
-		</#if>
-
-		分类列表：
-		<form action="" method="post" id="formcate">
+		文章列表：
+		<form action="" method="post" id="formdel">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
 					<td>序号</td>
-					<td>分类名称</td>
+					<td>标题</td>
 					<td>操作</td>
-					<td>排序</td>
 				</tr>
 
-				<#list categories as category>
+				<#list articles as art>
 				<tr>
-					<td>${category_index+1}</td>
-					<td>${category.name}</td>
-					<td><a href="category!update?categoryId=${category.id}">修改</a> <a href="#"
-						onclick=" return deleteCategory(${category.id});">删除</a></td>
-					<td><a href="#">上移</a></td>
+					<td>${art_index+1}</td>
+					<td>${art.title}</td>
+					<td>
+						<a href="article!update?id=${art.id}">修改</a> 
+						<a href="#" onclick=" return deleteArticle(${art.id});">删除</a></td>
 				</tr>
 				</#list>
 			</table>
 		</form>
 	</div>
 </div>
+<#assign paginationData> 
+	<@pagination.doPagination "article"/> 
+</#assign>
+${paginationData}
+
+
 
 <#include "footer_admin.htm">
 <script type="text/javascript">
 <!--
-function deleteCategory(categoryId){
-	var frm=document.getElementById("formcate")
-	var url="category!delete?categoryId="+categoryId;
+function deleteArticle(id){
+	var frm=document.getElementById("formdel")
+	var url="article!delete?id="+id;
 	
 	frm.action=url;
-	if(confirm('确实要删除此分类吗？')){
+	if(confirm('确实要删除此文章吗？')){
 		frm.submit();
 	}
 	return false;

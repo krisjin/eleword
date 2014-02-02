@@ -9,10 +9,9 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.lang.StringUtils;
 
-
 /**
  * TODO 此处填写 class 信息
- *
+ * 
  * @author krisjin (mailto:krisjin86@163.com)
  */
 public class ConvertUtils {
@@ -34,7 +33,6 @@ public class ConvertUtils {
 	@SuppressWarnings("unchecked")
 	public static List convertElementPropertyToList(final Collection collection, final String propertyName) {
 		List list = new ArrayList();
-
 		try {
 			for (Object obj : collection) {
 				list.add(PropertyUtils.getProperty(obj, propertyName));
@@ -42,7 +40,6 @@ public class ConvertUtils {
 		} catch (Exception e) {
 			throw ReflectionUtils.convertReflectionExceptionToUnchecked(e);
 		}
-
 		return list;
 	}
 

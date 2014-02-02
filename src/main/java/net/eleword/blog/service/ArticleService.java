@@ -54,4 +54,9 @@ public class ArticleService {
 		return articleDao.selectArticleWithPage(page);
 	}
 	
+	public Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page,long categoryId){
+		
+		return articleDao.selectArticleWithPageByCategoryId(page,categoryId);
+	}
+	
 }
