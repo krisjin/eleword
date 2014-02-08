@@ -26,6 +26,20 @@
 	</package>
 
 	<package name="adminDefault" extends="struts-default" namespace="/admin">
+		<global-results>
+		<result name="sessionOut" type="freemarker"></result>
+		</global-results>
+		
+		<interceptors>
+			<interceptor name="adminLoginInter" class="loginInter"/>
+			<interceptor-stack name="loginInter">
+				<interceptor-ref name="adminLoginInter"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="loginInter"/>
+		
 		<action name="index" class="adminIndexAction">
 			<result name="adminIndex" type="freemarker">/WEB-INF/page/admin/main.htm</result>
 		</action>
