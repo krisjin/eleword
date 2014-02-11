@@ -17,9 +17,10 @@ public class AuthorizationInterceptor extends AbstractInterceptor  {
 	public String intercept(ActionInvocation invocation) throws Exception {
 		
 		if(invocation.getInvocationContext().getSession().get("userId")==null){
-			return "";
+			System.out.println("session out");
+			return "loginPage";
 		}
-		
+		System.out.println("-------------------------next");
 		return invocation.invoke();
 	}
 
