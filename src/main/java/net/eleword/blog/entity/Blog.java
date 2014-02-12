@@ -17,20 +17,20 @@ import javax.persistence.Table;
 public class Blog extends IdEntity implements Serializable {
 
 	private static final long serialVersionUID = 6723701217836461499L;
-	
+
 	private String title;
-	
+
 	private String description;
 
 	private String background;
 
-	private int articleNum;
+	private int article_num;
 
-	private boolean mailNotice;
+	private boolean mail_notice;
 
-	private boolean phoneNotice;
-	
-	@Column(name="title",nullable=false)
+	private boolean phone_notice;
+
+	@Column
 	public String getTitle() {
 		return title;
 	}
@@ -38,7 +38,8 @@ public class Blog extends IdEntity implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@Column(name="description")
+
+	@Column
 	public String getDescription() {
 		return description;
 	}
@@ -46,8 +47,8 @@ public class Blog extends IdEntity implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	@Column(name="background")
+
+	@Column
 	public String getBackground() {
 		return background;
 	}
@@ -55,32 +56,32 @@ public class Blog extends IdEntity implements Serializable {
 	public void setBackground(String background) {
 		this.background = background;
 	}
-	
-	@Column(name="articleNum",nullable=false)
-	public int getArticleNum() {
-		return articleNum;
+
+	@Column
+	public int getArticle_num() {
+		return article_num;
 	}
 
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
-	}
-	
-	@Column(name="mailNotice", nullable=false)
-	public boolean isMailNotice() {
-		return mailNotice;
+	public void setArticle_num(int article_num) {
+		this.article_num = article_num;
 	}
 
-	public void setMailNotice(boolean mailNotice) {
-		this.mailNotice = mailNotice;
-	}
-	
-	@Column(name="phoneNotice",nullable=false)
-	public boolean isPhoneNotice() {
-		return phoneNotice;
+	@Column
+	public boolean isMail_notice() {
+		return mail_notice;
 	}
 
-	public void setPhoneNotice(boolean phoneNotice) {
-		this.phoneNotice = phoneNotice;
+	public void setMail_notice(boolean mail_notice) {
+		this.mail_notice = mail_notice;
+	}
+
+	@Column
+	public boolean isPhone_notice() {
+		return phone_notice;
+	}
+
+	public void setPhone_notice(boolean phone_notice) {
+		this.phone_notice = phone_notice;
 	}
 
 }

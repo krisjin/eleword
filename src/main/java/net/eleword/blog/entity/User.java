@@ -22,61 +22,20 @@ public class User extends IdEntity implements Serializable {
 
 	private static final long serialVersionUID = 3626179412539989500L;
 
-	private String userName;
+	private String username;
 
 	private String password;
 
-	private String nickName;
-	
+	private String nickname;
+
 	private String avatar;
 
 	private String email;
-	
+
 	private Blog blog;
-	
-	@Column(name="userName",nullable=false)
-	public String getUserName() {
-		return userName;
-	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	@Column(name="password",nullable=false)
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	@Column(name="nickname",nullable=false)
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-	@Column(name="eamil")
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	@Column(name="avatar")
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name="blogId")
+	@JoinColumn(name = "blog_id")
 	public Blog getBlog() {
 		return blog;
 	}
@@ -84,7 +43,50 @@ public class User extends IdEntity implements Serializable {
 	public void setBlog(Blog blog) {
 		this.blog = blog;
 	}
-	
-	
+
+	@Column
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Column
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Column
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	@Column
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	@Column
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }

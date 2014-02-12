@@ -23,16 +23,32 @@
 </head>
 
 <body>
+	
+			
+	
 	<div class="container-narrow">
 		<div class="masthead">
 			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
+			<#if Session.USER_SESSION?exists>
+			
+			<#assign user=Session.USER_SESSION>
+				<div class="btn-group">
+					<a class="btn btn-primary" href="#"><i class="icon-user"></i>${user.username} </a> <a
+						class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="login!logout"><i class="icon-pencil"></i> 注销</a></li>
+						
+					</ul>
+				</div>
+				</#if>
 			</ul>
+
+
+
 			<h3 class="muted">
-				<img src="../template/front/img/avatar.png" class="img-polaroid" style="height: 100px; width: 100px;"> Project
-				name
+				<img src="../template/front/img/avatar.png" class="img-polaroid"
+					style="height: 100px; width: 100px;"> Project name
 			</h3>
 		</div>
 		<div class="navbar">
@@ -45,14 +61,14 @@
 						<li><a href="category!list">分类管理</a></li>
 						<li><a href="#">评论管理</a></li>
 						<li><a href="#">博客设置</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">个人信息管理 <b class="caret"></b></a>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">个人信息管理
+								<b class="caret"></b>
+						</a>
 							<ul class="dropdown-menu">
 								<li><a href="#">修改个人信息</a></li>
 								<li><a href="#">修改登录密码</a></li>
 								<li><a href="#">修改个人头像</a></li>
-							</ul>
-						</li>
+							</ul></li>
 						<li><a href="http://localhost:8080/eleword">博客首页</a></li>
 					</ul>
 				</div>

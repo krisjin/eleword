@@ -41,7 +41,9 @@
 		
 		<action name="login" class="loginAction">
 			<result name="failure" type="freemarker">/WEB-INF/page/admin/login.htm</result>
-			<result name="sucess" type="redirectAction">/admin/index</result>
+			<result name="success" type="redirectAction">index</result>
+			<result name="login" type="freemarker">/WEB-INF/page/admin/login.htm</result>
+			<result name="logout" type="freemarker">/WEB-INF/page/admin/login.htm</result>
 		</action>
 		
 		<action name="index" class="adminIndexAction">
