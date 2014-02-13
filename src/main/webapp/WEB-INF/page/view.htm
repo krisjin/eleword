@@ -1,5 +1,5 @@
+<#import "macro/pagination-comment.ftl" as pagination>
 <#include "header.htm"> 
-
 	<div id="blog-container">
 		<#include "silder.htm">
 		<div id="blog-content" >
@@ -7,13 +7,72 @@
 			  <h3>${article.title}</h3>
 			  <span class="text-error">${article.postDate?string('yyyy-MM-dd')}&nbsp;by ${article.author} 分类:${article.categoryName}</span>
 			</div>
-			<div>
-			${article.content}
+			<div style="word-wrap:break-word;">
+				${article.content}
 			</div>
+			
+			<#if (article.comments?size>0)>
+			<div class="progress" style="height: 2px;">
+				<div class="bar bar-success" style="width: 35%;"></div>
+				<div class="bar bar-warning" style="width: 32%;"></div>
+				<div class="bar bar-danger" style="width: 33%;"></div>
+			</div>
+			<h5>评论列表</h5>
+			<div id="comments">
+			<#assign comments=pa.resultSet>
+			<#list comments as comment>
+			<div class="media" style="padding-bottom: 10px;">
+              <a class="pull-left" href="#">
+                <img class="media-object" data-src="holder.js"  style="width: 64px; height: 64px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABN0lEQVR4Xu2YQQ6EIAxFdeXFODZnYu9qJk5C0sGiUiAx8FyKVPr76VPWEMJnmfhaEQAHsAXoARP3wIUmCAWgABSAAlBgYgXAIBgEg2AQDE4MAX6GwCAYBINgEAyCwYkVAIO1GPTe//nHOXfyU3xGG9PM1yNmzuRVDpCJ5ZKUyTwRoEfMqx3eTIBcJbdtW/Z9/w2XCtAqZncB5Atkkkc1NQFileVYFCi1fypcLqa1jzd1QM6+2va4EycKWRLTIkI3AY7FPKmmVmF5LxXvLmapCF0FiItp5QCZXClZulBAq/IVBtN9rvUAa8zSysfnqxxgfemb5iFA7Zfgm6ppWQsOwAEciXEkxpGYpXuOMgcKQAEoAAWgwCgd3ZIHFIACUAAKQAFL9xxlDhSAAlAACkCBUTq6JY/pKfAFwO6XkLwNdToAAAAASUVORK5CYII=">
+              </a>
+              <div class="media-body" style="font-size: 10pt;">
+                <div class="media-heading">
+                <span style="font-size: 14px;font-weight: bold;color: #666666;">${comment.commentNickname}</span><span style="font-size: 9pt;color: #666666;">&nbsp;发表于&nbsp;${comment.commentDate}</span>
+                </div>
+                	${comment.commentContent}
+              </div>
+            </div>
+            </#list>
+            <br>
+            </#if>
+            </div>
+            
+            <#assign paginationData> <@pagination.doPagination "index!view"/> </#assign> ${paginationData}
+            <div class="progress" style="height: 2px;">
+				<div class="bar bar-success" style="width: 35%;"></div>
+				<div class="bar bar-warning" style="width: 32%;"></div>
+				<div class="bar bar-danger" style="width: 33%;"></div>
+			</div>
+            	<h5>发表评论</h5>
+			<form action="comment!post" method="post">
+				
+				<input type="hidden" name="articleId" value="${article.id}">
+				  <div class="control-group" >
+				    <label class="control-label" for="inputEmail" >昵称</label>
+				    <div class="controls">
+				      <input type="text" id="inputEmail" name="nickname">
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <label class="control-label" for="inputPassword">Email</label>
+				    <div class="controls">
+				      <input type="text" id="inputPassword" name="password">
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <label class="control-label" for="inputPassword">内容</label>
+				    <div class="controls">
+				      <textarea  id="inputPassword" style="height: 80px;width: 380px;" name="content"></textarea>
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <button type="submit" class="btn">发表评论</button>
+				    </div>
+				  </div>
+			</form>
 		</div>
 	</div>
-
-	
 	<div style="padding-top: 30px; clear: both;">
 		<hr>
 	</div>

@@ -19,10 +19,11 @@
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 
-		<mapping class="net.eleword.blog.entity.User"/>
-<!-- 		<mapping class="net.eleword.blog.entity.Article"/> -->
+<!-- 		<mapping class="net.eleword.blog.entity.User"/> -->
+		<mapping class="net.eleword.blog.entity.Article"/>
+		<mapping class="net.eleword.blog.entity.Comment"/>
 <!-- 		<mapping class="net.eleword.blog.entity.Category"/> -->
-		<mapping class="net.eleword.blog.entity.Blog"/>
+<!-- 		<mapping class="net.eleword.blog.entity.Blog"/> -->
 
 	</session-factory>
 

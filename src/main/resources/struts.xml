@@ -23,6 +23,10 @@
 		<action name="cate" class="viewCategoryAction">
 			<result name="cateView" type="freemarker">/WEB-INF/page/viewCategory.htm</result>
 		</action>
+		<action name="comment" class="commentAction">
+			<result name="viewcomment" type="redirectAction">index!view?id=${articleId}#comments</result>
+		</action>
+		
 	</package>
 
 	<package name="adminDefault" extends="struts-default" namespace="/admin">

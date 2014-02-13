@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Category;
+import net.eleword.blog.entity.Comment;
 import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.CategoryService;
+import net.eleword.blog.service.CommentService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
@@ -29,6 +31,9 @@ public class IndexAction extends ActionSupport {
 
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	public String execute() {
 		Pagination<Article> page = new Pagination<Article>();
@@ -57,25 +62,42 @@ public class IndexAction extends ActionSupport {
 		page.setResultSet(arts);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
-		request.setAttribute(ConstantEnum.pageTitle.toString(),"Eleword博客" );
+		request.setAttribute(ConstantEnum.pageTitle.toString(), "Eleword博客");
 		return "index";
 	}
 
 	public String view() {
+
 		HttpServletRequest request = ServletActionContext.getRequest();
+
+		Pagination<Comment> commentPage = new Pagination<Comment>();
+		commentPage.setPageSize(15);
+		String pageCount = request.getParameter("page");
 		String id = request.getParameter("id");
+
+		if (StringUtils.isNullOrEmpty(pageCount)) {
+			commentPage.setCurrentPage(1);
+		} else {
+			commentPage.setCurrentPage(Integer.valueOf(pageCount));
+		}
+		commentPage.getStartPage();
+		commentPage =commentService.selectCommentWithPage(commentPage, Long.valueOf(id));
+		
 		Article article = articleService.queryById(Long.valueOf(id));
 		List<Category> categories = categoryService.selectAll();
-
 		for (Category cate : categories) {
 			if (article.getCategoryId() == cate.getId()) {
 				article.setCategoryName(cate.getName());
 			}
 		}
+		
+		request.setAttribute("id", id);
+		request.setAttribute("pa", commentPage);
 		request.setAttribute("categories", categories);
 		request.setAttribute("article", article);
 		request.setAttribute(ConstantEnum.pageTitle.toString(), article.getTitle());
 		return "view";
+
 	}
 
 	public ArticleService getArticleService() {
@@ -85,5 +107,7 @@ public class IndexAction extends ActionSupport {
 	public void setArticleService(ArticleService articleService) {
 		this.articleService = articleService;
 	}
+	
+	
 
 }

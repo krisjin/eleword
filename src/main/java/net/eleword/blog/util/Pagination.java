@@ -2,6 +2,8 @@ package net.eleword.blog.util;
 
 import java.util.List;
 
+import net.eleword.blog.entity.Article;
+
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -53,7 +55,7 @@ public class Pagination<T> {
 	 * @return
 	 */
 	public int getStartPage() {
-		return ((currentPage-1)*pageSize);
+		return ((currentPage-1)*pageSize)+1;
 	}
 
 	public void setStartPage(int startPage) {
@@ -155,4 +157,5 @@ public class Pagination<T> {
 	}
 	
 	
+
 }
