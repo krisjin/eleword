@@ -6,8 +6,8 @@
 			<div class="well well-large">
 				<form class="form-inline" action="" method="post" id="updSave">
 					<input type="hidden" name="id" value="${updCategory.id}">
-					分类名称：<input type="text" class="input-small" name="categoryName" value="${updCategory.name}">&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority" value="${updCategory.priority}">
+					分类名称：<input type="text" class="input-small" name="categoryName" id="categoryName" value="${updCategory.name}" required>&nbsp;&nbsp;&nbsp;
+					排序值：<input type="text" class="input-small" id="priority"  name="priority" value="${updCategory.priority}" required>
 					&nbsp;&nbsp;
 					<button type="button" class="btn btn-info" onclick="updateSave();">修 改</button>
 					&nbsp;&nbsp;
@@ -18,8 +18,8 @@
 			添加分类
 			<div class="well well-large">
 				<form class="form-inline" action="category!save" method="post">
-					分类名称：<input type="text" class="input-small" name="categoryName">&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority">
+					分类名称：<input type="text" class="input-small" id="categoryName" name="categoryName" required>&nbsp;&nbsp;&nbsp;
+					排序值：<input type="text" class="input-small" name="priority" id="priority" required>
 					</label>&nbsp;&nbsp;
 					<button type="submit" class="btn btn-info">添 加</button>
 				</form>
@@ -65,8 +65,16 @@ function deleteCategory(categoryId){
 }
 
 function updateSave(){
+	var cv=document.getElementById("categoryName");
 	var frm=document.getElementById("updSave");
 	var url="category!updateSave";
+	
+	
+	if(cv.value=""{
+		alert("请填写分类名称!");		
+		return false;
+	}
+	
 	frm.action=url;
 	frm.submit();
 }

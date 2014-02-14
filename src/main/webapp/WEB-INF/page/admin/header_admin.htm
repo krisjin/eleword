@@ -10,7 +10,7 @@
 <link href="../template/front/css/bootstrap.css" rel="stylesheet">
 <link href="../template/front/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="../template/front/css/eleword.css" rel="stylesheet">
-
+<link href="../template/front/css/docs.css" rel="stylesheet">
 
 <link href="../template/editor/themes/default/default.css" rel="stylesheet">
 <script charset="utf-8" src="../template/editor/kindeditor-min.js"></script>
@@ -21,7 +21,9 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-
+<script>
+  $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
 <body>
 	
 			
@@ -55,11 +57,11 @@
 			<div class="navbar-inner">
 				<div class="container">
 					<ul class="nav">
-						<li class="active"><a href="index">管理首页</a></li>
-						<li><a href="article!add">发表文章</a></li>
+						<li ><a href="index">管理首页</a></li>
+						<li id="postArticleId" onclick="showActive('postArticleId',this)"><a href="article!add">发表文章</a></li>
 						<li><a href="article">文章管理</a></li>
 						<li><a href="category!list">分类管理</a></li>
-						<li><a href="#">评论管理</a></li>
+						<li><a href="commt">评论管理</a></li>
 						<li><a href="#">博客设置</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">个人信息管理
 								<b class="caret"></b>

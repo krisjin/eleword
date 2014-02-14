@@ -44,26 +44,26 @@
 				<div class="bar bar-warning" style="width: 32%;"></div>
 				<div class="bar bar-danger" style="width: 33%;"></div>
 			</div>
-            	<h5>发表评论</h5>
+            <h5>发表评论</h5>
 			<form action="comment!post" method="post">
 				
 				<input type="hidden" name="articleId" value="${article.id}">
 				  <div class="control-group" >
-				    <label class="control-label" for="inputEmail" >昵称</label>
+				    <label class="control-label">昵称</label>
 				    <div class="controls">
-				      <input type="text" id="inputEmail" name="nickname">
+				      <input type="text" id="nickname" name="nickname" required>
 				    </div>
 				  </div>
 				  <div class="control-group">
-				    <label class="control-label" for="inputPassword">Email</label>
+				    <label class="control-label" >Email</label>
 				    <div class="controls">
-				      <input type="text" id="inputPassword" name="password">
+				      <input type="email" id="email" name="email" required>
 				    </div>
 				  </div>
 				  <div class="control-group">
-				    <label class="control-label" for="inputPassword">内容</label>
+				    <label class="control-label">内容</label>
 				    <div class="controls">
-				      <textarea  id="inputPassword" style="height: 80px;width: 380px;" name="content"></textarea>
+				      <textarea  id="content" style="height: 80px;width: 380px;" name="content" required></textarea>
 				    </div>
 				  </div>
 				  <div class="control-group">

@@ -64,5 +64,11 @@
 			<result name="list" type="freemarker">/WEB-INF/page/admin/listArticle.htm</result>
 			<result name="retList" type="redirectAction">article</result>
 		</action>
+		
+		<action name="commt" class="manageCommentAction">
+			<result name="listComment" type="freemarker">/WEB-INF/page/admin/listComment.htm</result>
+			<result name="listaction" type="redirectAction">commt</result>
+		</action>
+		
 	</package>
 </struts>

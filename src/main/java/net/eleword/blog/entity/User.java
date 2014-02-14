@@ -34,7 +34,7 @@ public class User extends IdEntity implements Serializable {
 
 	private Blog blog;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinColumn(name = "blog_id")
 	public Blog getBlog() {
 		return blog;

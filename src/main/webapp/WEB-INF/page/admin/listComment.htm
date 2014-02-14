@@ -1,64 +1,60 @@
+<#import "../macro/pagination-comment-admin.ftl" as pagination>
 <#include "header_admin.htm">
 <div id="blog-container">
 	<div id="blog-category">
-		<#if flag=="update">
-			修改分类
-			<div class="well well-large">
-				<form class="form-inline" action="" method="post" id="updSave">
-					<input type="hidden" name="id" value="${updCategory.id}">
-					分类名称：<input type="text" class="input-small" name="categoryName" value="${updCategory.name}">&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority" value="${updCategory.priority}">
-					&nbsp;&nbsp;
-					<button type="button" class="btn btn-info" onclick="updateSave();">修 改</button>
-					&nbsp;&nbsp;
-					<button type="button" class="btn btn-inverse" onclick="updateCancle();">取 消</button>
-				</form>
-			</div>
-		<#else>
-			添加分类
-			<div class="well well-large">
-				<form class="form-inline" action="category!save" method="post">
-					分类名称：<input type="text" class="input-small" name="categoryName">&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority">
-					</label>&nbsp;&nbsp;
-					<button type="submit" class="btn btn-info">添 加</button>
-				</form>
-			</div>
-		</#if>
+
 
 		分类列表：
 		<form action="" method="post" id="formcate">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
-					<td>序号</td>
-					<td>分类名称</td>
+					<td>文章</td>
+					<td>评论人</td>
+					<td>评论内容</td>
+					<td>时间</td>
 					<td>操作</td>
-					<td>排序</td>
 				</tr>
-
-				<#list categories as category>
-				<tr>
-					<td>${category_index+1}</td>
-					<td>${category.name}</td>
-					<td><a href="category!update?categoryId=${category.id}">修改</a> <a href="#"
-						onclick=" return deleteCategory(${category.id});">删除</a></td>
-					<td><a href="#">上移</a></td>
-				</tr>
-				</#list>
+				
+				<#if (pa.resultSet?size>0)>
+					<#assign comments=pa.resultSet>
+					<#list comments as comment>
+					<tr>
+						<td><a href="${request.contextPath}/index!view?id=${comment.articleId}">${comment.articleTitle}</a></td>
+						<td>${comment.commentNickname}</td>
+						<td>
+							<#if ((comment.commentContent?length)>20)>
+								${comment.commentContent[0..20]}...
+							<#else>
+							 	${comment.commentContent}
+							</#if>
+						</td>
+						<td>${comment.commentDate}</td>
+						<td> 
+						<a href="#"	onclick=" return deleteComment(${comment.id});">删除</a></td>
+						
+					</tr>
+					</#list>
+				</#if>
+				
+				
 			</table>
 		</form>
 	</div>
+	<#assign paginationData> 
+	<@pagination.doPagination "commt"/> 
+</#assign>
+${paginationData}
 </div>
 
 <#include "footer_admin.htm">
 <script type="text/javascript">
 <!--
-function deleteCategory(categoryId){
+function deleteComment(commentId){
 	var frm=document.getElementById("formcate");
-	var url="category!delete?categoryId="+categoryId;
+	var url="commt!delete?id="+commentId;
 	
 	frm.action=url;
-	if(confirm('确实要删除此分类吗？')){
+	if(confirm('确实要删除此评论吗!')){
 		frm.submit();
 	}
 	return false;

@@ -37,6 +37,7 @@ public class CommentAction extends ActionSupport {
 		comment.setCommentDate(new Date());
 		comment.setCommentNickname(nickname);
 		comment.setArticleId(Long.valueOf(articleId));
+		comment.setEmail(email);
 		commentService.saveComment(comment);
 		return "viewcomment";
 	}

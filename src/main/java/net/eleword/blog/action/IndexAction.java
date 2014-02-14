@@ -81,7 +81,7 @@ public class IndexAction extends ActionSupport {
 			commentPage.setCurrentPage(Integer.valueOf(pageCount));
 		}
 		commentPage.getStartPage();
-		commentPage =commentService.selectCommentWithPage(commentPage, Long.valueOf(id));
+		commentPage =commentService.selectCommentWithPageByArticleId(commentPage, Long.valueOf(id));
 		
 		Article article = articleService.queryById(Long.valueOf(id));
 		List<Category> categories = categoryService.selectAll();

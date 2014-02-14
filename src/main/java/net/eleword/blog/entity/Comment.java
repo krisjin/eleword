@@ -3,11 +3,16 @@ package net.eleword.blog.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * TODO 此处填写 class 信息
@@ -32,6 +37,9 @@ public class Comment extends IdEntity implements Serializable {
 	private String email;
 	
 	private long articleId;
+	
+	private String articleTitle;
+	
 	
 	@Column(name="comment_user")
 	public String getCommentUser() {
@@ -83,6 +91,16 @@ public class Comment extends IdEntity implements Serializable {
 	public void setArticleId(long articleId) {
 		this.articleId = articleId;
 	}
+
+	@Transient
+	public String getArticleTitle() {
+		return articleTitle;
+	}
+
+	public void setArticleTitle(String articleTitle) {
+		this.articleTitle = articleTitle;
+	}
+	
 	
 	
 }

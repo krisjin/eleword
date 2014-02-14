@@ -14,17 +14,28 @@
 		});
 
 	});
-</script>
+	
+	
 
+</script>
+<script type="text/javascript">
+function validateArticle(){
+	if(editor.isEmpty()){
+		alert("请填写文章内容!");
+		return false;
+	}
+	
+}
+</script>
 <div id="blog-container">
 
  <#if actionName=="add">
 	<div id="blog-addarticle">
-		<form class="form-inline" action="article!addSave" method="post">
+		<form class="form-inline" action="article!addSave" method="post" onsubmit="return validateArticle()">
 			<div class="">
 				<label class="control-label">文章标题</label> 
-				<input type="text" id="inputEmail" name="title" class="input-xxlarge"> <label
-					class="control-label">选择分类</label> <select name="categoryId">
+				<input type="text" id="title" name="title" class="input-xxlarge" required> 
+				<label class="control-label">选择分类</label> <select name="categoryId">
 					<#list categories as category>
 						<option value="${category.id}">${category.name}</option> 
 					</#list>
@@ -34,7 +45,7 @@
 			<div class="control-group">
 				<label class="control-label">文章内容</label>
 				<div class="controls">
-					<textarea name="content" style="width: 970px; height: 400px; visibility: false;"></textarea>
+					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" ></textarea>
 				</div>
 			</div>
 			<div class="control-group">
@@ -51,7 +62,7 @@
 		<input type="hidden" value="${article.id}" name="id">
 			<div class="">
 				<label class="control-label">文章标题</label> 
-				<input type="text" id="inputEmail" name="title" class="input-xxlarge"  value="${article.title}"> 
+				<input type="text" id="title" name="title" class="input-xxlarge"  value="${article.title}" required> 
 				<label class="control-label">选择分类</label> 
 				<select name="categoryId">
 					<#list categories as category>
@@ -67,7 +78,7 @@
 			<div class="control-group">
 				<label class="control-label">文章内容</label>
 				<div class="controls">
-					<textarea name="content" style="width: 970px; height: 400px; visibility: false;">${article.content}</textarea>
+					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" required>${article.content}</textarea>
 				</div>
 			</div>
 			<div class="control-group">
