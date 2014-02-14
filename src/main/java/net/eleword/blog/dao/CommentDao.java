@@ -14,5 +14,6 @@ public interface CommentDao extends BaseDao<Comment>{
 	
 	Pagination<Comment> selectCommentWithPageById(Pagination<Comment> page,long articleId);
 	
+	Pagination<Comment> selectCommentWithPage(Pagination<Comment> page);
 }
 

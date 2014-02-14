@@ -29,7 +29,12 @@ public class CommentService {
 		return commentDao.selectCommentWithPageById(page, articleId);
 
 	}
-
+	
+	public void deleteById(long id){
+		
+		commentDao.deleteById(id);
+		
+	}
 	public CommentDao getCommentDao() {
 		return commentDao;
 	}
