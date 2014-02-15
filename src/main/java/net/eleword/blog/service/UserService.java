@@ -21,7 +21,11 @@ public class UserService {
 	public User selectUserByName(String name) {
 		return userDao.selectUserByName(name);
 	}
-
+	
+	public void updatePassword(User user){
+		userDao.update(user);
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}

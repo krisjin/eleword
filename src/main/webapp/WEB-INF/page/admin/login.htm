@@ -22,7 +22,7 @@
     
    <style type="text/css">
       body {
-        padding-top: 240px;
+        padding-top: 120px;
         padding-bottom: 40px;
         background-color: #f5f5f5;
       }
@@ -53,6 +53,10 @@
       }
 
     </style>
+    
+<script>
+  $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
 </head>
 
 <body>
@@ -60,9 +64,13 @@
 		<form class="form-signin" action="login!login" method="post">
 			<h2 class="form-signin-heading" style="text-align: center;margin-top: 30px;margin-bottom: 10px;">登录</h2>
 			<label>用户名</label>
-			<input type="text" class="input-block-level" name="username" >
+			<input type="text" class="input-block-level" name="username" id="username" required>
 			<label>密码</label>
-			<input type="password" class="input-block-level" name="password" > 
+			<input type="password" class="input-block-level" name="password" id="password" required> 
+			<#if msg?exists>
+			<div><span style="color: red;">${msg}</span></div>
+			
+			</#if>
 			<button class="btn btn-large btn-primary" type="submit">Sign in</button>
 		</form>
 	</div>
@@ -76,6 +84,6 @@
 	</div>
 	<script src="../template/front/js/jquery.js"></script>
 	<script src="../template/front/js/bootstrap.min.js"></script>
-	<script src="../template/front/js/oschina.js"></script>
+	<script src="template/front/js/jqBootstrapValidation.js"></script>
 </body>
 </html>

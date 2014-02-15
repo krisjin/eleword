@@ -6,7 +6,7 @@
 
 <#macro doPagination action >
         <#if (totalRecords > recordsPerPage)>
-                <div class="pagination pagination-large" style="padding-top: 30px; clear: both;">
+                <div class="pagination" style="padding-top: 30px; clear: both;">
                 <#assign link = ""/>
 
                 <#-- ------------- -->

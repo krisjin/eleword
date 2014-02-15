@@ -21,23 +21,26 @@ body {
 
 #blog-sidebar {
 	float: right;
-	width: 200px;
+	width: 192px;
 	min-height: 500px;
 	height: auto;
+	margin-right: 8px;
 }
 
 #blog-content {
 	float: left;
-	width: 710px;
-	min-height: 600px;
+	width: 702px;
+	min-height: 500px;
 	height: auto;
+	margin-left:8px;
 }
 
 .blog-category {
 	float: left;
-	width: 820px;
-	min-height: 600px;
+	width: 812px;
+	min-height: 500px;
 	height: auto;
+	margin-right:8px; 
 }
 
 .blog-addarticle {

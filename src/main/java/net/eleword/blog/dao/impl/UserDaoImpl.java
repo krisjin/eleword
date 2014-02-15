@@ -22,7 +22,7 @@ public class UserDaoImpl extends HibernateDao<User, Long> implements UserDao {
 	}
 
 	public void update(User entity) {
-
+		saveOrUpdate(entity);
 	}
 
 	public void deleteById(long id) {
@@ -36,6 +36,10 @@ public class UserDaoImpl extends HibernateDao<User, Long> implements UserDao {
 
 	public User selectUserByName(String name) {
 		List<User> userList = findBy("username", name);
+		
+		if(userList.size()==0){
+			return null;
+		}
 		return userList.get(0);
 	}
 

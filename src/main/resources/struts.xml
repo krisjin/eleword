@@ -70,5 +70,10 @@
 			<result name="listaction" type="redirectAction">commt</result>
 		</action>
 		
+		<action name="user" class="userAction">
+			<result name="modifyPassword" type="freemarker">/WEB-INF/page/admin/modifyPassword.htm</result>
+			<result name="error" type="freemarker">/WEB-INF/page/admin/modifyPassword.htm</result>
+			<result name="success" type="freemarker">/WEB-INF/page/admin/modifyPassword.htm</result>
+		</action>
 	</package>
 </struts>

@@ -40,10 +40,13 @@ public class LoginAction extends ActionSupport {
 		User user = userService.selectUserByName(username);
 
 		if (user == null) {
+			request.setAttribute("msg", "用户名不存在!");
+			request.setAttribute("username",username);
 			return "failure";
 		}
 		if (!StringUtils.equals(user.getPassword(), MD5Util.encrypt(password))) {
-			request.setAttribute("msg", "用户密码不正确");
+			request.setAttribute("msg", "用户密码不正确!");
+			request.setAttribute("username",username);
 			return "failure";
 		}
 		
