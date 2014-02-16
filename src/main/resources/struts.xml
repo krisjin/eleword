@@ -26,30 +26,30 @@
 		<action name="comment" class="commentAction">
 			<result name="viewcomment" type="redirectAction">index!view?id=${articleId}#comments</result>
 		</action>
-		
+
 	</package>
 
 	<package name="adminDefault" extends="struts-default" namespace="/admin">
 		<interceptors>
-			<interceptor name="adminLoginInter" class="loginInter"/>
+			<interceptor name="adminLoginInter" class="loginInter" />
 			<interceptor-stack name="loginInter">
-				<interceptor-ref name="adminLoginInter"/>
-				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="adminLoginInter" />
+				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-		
-		<default-interceptor-ref name="loginInter"/>
+
+		<default-interceptor-ref name="loginInter" />
 		<global-results>
 			<result name="loginPage" type="freemarker">/WEB-INF/page/admin/login.htm</result>
 		</global-results>
-		
+
 		<action name="login" class="loginAction">
 			<result name="failure" type="freemarker">/WEB-INF/page/admin/login.htm</result>
 			<result name="success" type="redirectAction">index</result>
 			<result name="login" type="freemarker">/WEB-INF/page/admin/login.htm</result>
 			<result name="logout" type="freemarker">/WEB-INF/page/admin/login.htm</result>
 		</action>
-		
+
 		<action name="index" class="adminIndexAction">
 			<result name="adminIndex" type="freemarker">/WEB-INF/page/admin/main.htm</result>
 		</action>
@@ -64,16 +64,30 @@
 			<result name="list" type="freemarker">/WEB-INF/page/admin/listArticle.htm</result>
 			<result name="retList" type="redirectAction">article</result>
 		</action>
-		
+
 		<action name="commt" class="manageCommentAction">
 			<result name="listComment" type="freemarker">/WEB-INF/page/admin/listComment.htm</result>
 			<result name="listaction" type="redirectAction">commt</result>
 		</action>
-		
+
 		<action name="user" class="userAction">
 			<result name="modifyPassword" type="freemarker">/WEB-INF/page/admin/modifyPassword.htm</result>
 			<result name="error" type="freemarker">/WEB-INF/page/admin/modifyPassword.htm</result>
 			<result name="success" type="freemarker">/WEB-INF/page/admin/modifyPassword.htm</result>
+		</action>
+
+		<action name="upload" class="uploadAction">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/x-ms-bmp,image/jpeg,image/gif,image/png,image/x-png</param>
+				<param name="maximumSize">2048000</param>
+			</interceptor-ref>
+			<interceptor-ref name="loginInter"/>
+			
+			<param name="relativelyPath">/user/avatar</param>
+			<param name="absolutePath"></param>
+
+			<result name="uploadAvatar" type="freemarker">/WEB-INF/page/admin/uploadAvatar.htm</result>
+			<result name="success" type="freemarker">/WEB-INF/page/admin/uploadAvatar.htm</result>
 		</action>
 	</package>
 </struts>

@@ -1,5 +1,9 @@
       <div class="footer" style="margin-left: 8px;margin-bottom: 5px;">
         <p>&copy; Eleword Blog 2014</p>
+        
+        <#if Session.USER_SESSION?exists>
+        	<span><a href="admin/index">后台管理</a></span>
+        </#if>
       </div>
 </div>
 <!-- Placed at the end of the document so the pages load faster -->
