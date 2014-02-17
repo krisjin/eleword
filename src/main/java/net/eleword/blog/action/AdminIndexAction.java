@@ -4,8 +4,6 @@ package net.eleword.blog.action;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 /**
  * TODO 此处填写 class 信息
  * @author krisjin (mailto:krisjin86@163.com)
@@ -13,7 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Controller("adminIndexAction")
 @Scope("prototype")
-public class AdminIndexAction extends ActionSupport{
+public class AdminIndexAction extends BaseAction{
 
 	public String execute() throws Exception {
 		return "adminIndex";

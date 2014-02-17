@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.mysql.jdbc.StringUtils;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * TODO 此处填写 class 信息
@@ -27,7 +26,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Controller("articleAction")
 @Scope("prototype")
-public class ArticleAction extends ActionSupport {
+public class ArticleAction extends BaseAction {
 	private String content;
 	private String title;
 	private String categoryId;

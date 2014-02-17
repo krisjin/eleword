@@ -26,6 +26,11 @@ public class UserService {
 		userDao.update(user);
 	}
 	
+	public void saveOrUpateUserAvatar(User user){
+		
+		userDao.update(user);
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}

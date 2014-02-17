@@ -12,8 +12,6 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 /**
  * TODO 此处填写 class 信息
  * 
@@ -21,7 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @date 2014-1-28上午6:04:50
  */
 @Controller("loginAction")
-public class LoginAction extends ActionSupport {
+public class LoginAction extends BaseAction {
 
 	private String username;
 	private String password;

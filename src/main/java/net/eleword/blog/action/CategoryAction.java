@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 /**
  * TODO 此处填写 class 信息
  * 
@@ -23,7 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Controller("categoryAction")
 @Scope("prototype")
-public class CategoryAction extends ActionSupport {
+public class CategoryAction extends BaseAction {
 
 	private String categoryName;
 	private String priority;

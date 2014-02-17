@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.mysql.jdbc.StringUtils;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * TODO 此处填写 class 信息
@@ -25,7 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @date 2014-2-14上午7:18:22
  */
 @Controller("manageCommentAction")
-public class ManageCommentAction extends ActionSupport {
+public class ManageCommentAction extends BaseAction {
 
 	@Autowired
 	private CommentService commentService;

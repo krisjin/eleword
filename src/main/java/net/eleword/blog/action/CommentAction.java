@@ -11,8 +11,6 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 /**
  * TODO 此处填写 class 信息
  * 
@@ -20,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @date 2014-2-13下午12:34:10
  */
 @Controller("commentAction")
-public class CommentAction extends ActionSupport {
+public class CommentAction extends BaseAction {
 
 	private String nickname;
 	private String email;

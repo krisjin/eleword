@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.mysql.jdbc.StringUtils;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * TODO 此处填写 class 信息
@@ -26,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @date 2014-2-2上午11:17:57
  */
 @Controller("viewCategoryAction")
-public class CategoryViewAction extends ActionSupport {
+public class CategoryViewAction extends BaseAction {
 
 	@Autowired
 	private ArticleService articleService;

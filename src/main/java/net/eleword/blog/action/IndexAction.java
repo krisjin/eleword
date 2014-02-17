@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Category;
 import net.eleword.blog.entity.Comment;
+import net.eleword.blog.entity.User;
 import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.service.CommentService;
+import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
@@ -20,11 +22,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.mysql.jdbc.StringUtils;
-import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("indexAction")
 @Scope("prototype")
-public class IndexAction extends ActionSupport {
+public class IndexAction extends BaseAction {
 
 	@Autowired
 	private ArticleService articleService;
@@ -34,6 +35,9 @@ public class IndexAction extends ActionSupport {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UserService userService;
 
 	public String execute() {
 		Pagination<Article> page = new Pagination<Article>();
@@ -59,9 +63,13 @@ public class IndexAction extends ActionSupport {
 				}
 			}
 		}
+		
+		User user = userService.selectUserByName("admin");
+		
 		page.setResultSet(arts);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
+		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute(ConstantEnum.pageTitle.toString(), "Eleword博客");
 		return "index";
 	}

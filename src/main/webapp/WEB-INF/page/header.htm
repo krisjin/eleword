@@ -20,7 +20,7 @@
   $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
 </script>
 <style type="text/css">
-body {background:#ccecff}
+/* body {background:#ccecff} */
 
 </style>
 </head>
@@ -31,7 +31,7 @@ body {background:#ccecff}
       	<div style="padding: 5px 0px 0px 5px;">
         <h3 class="muted">
         <a href="http://localhost:8080/eleword/">
-        <img src="template/front/img/avatar.png" class="img-polaroid" style="height: 100px;width: 100px;"></a>
+        <img src="${request.contextPath}/user/avatar/${avatar}" class="img-polaroid" ></a>
       	  关注生活，关爱健康
         </h3>
         </div>
