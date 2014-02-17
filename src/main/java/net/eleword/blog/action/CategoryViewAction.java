@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Category;
+import net.eleword.blog.entity.User;
 import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.CategoryService;
+import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
@@ -31,10 +33,8 @@ public class CategoryViewAction extends BaseAction {
 	private ArticleService articleService;
 	@Autowired
 	private CategoryService categoryService;
-
-	public String execute() throws Exception {
-		return "";
-	}
+	@Autowired
+	private UserService userService;
 
 	public String category() {
 
@@ -42,16 +42,16 @@ public class CategoryViewAction extends BaseAction {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String categoryId = request.getParameter("id");
 		String pageCount = request.getParameter("page");
-		String tmpCategoryName="";
+		String tmpCategoryName = "";
 
 		if (StringUtils.isNullOrEmpty(pageCount)) {
 			page.setCurrentPage(1);
 		} else {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
-		
+
 		page = articleService.selectArticleWithPageByCategoryId(page, Long.valueOf(categoryId));
-		
+
 		List<Category> categories = categoryService.selectAll();
 
 		List<Article> arts = page.getResultSet();
@@ -64,11 +64,13 @@ public class CategoryViewAction extends BaseAction {
 				}
 			}
 		}
+		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute("categoryId", categoryId);
 		page.setResultSet(arts);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
-		request.setAttribute(ConstantEnum.pageTitle.toString(), tmpCategoryName+"分类的文章");
+		request.setAttribute(ConstantEnum.pageTitle.toString(), tmpCategoryName + "分类的文章");
 		return "cateView";
 	}
 

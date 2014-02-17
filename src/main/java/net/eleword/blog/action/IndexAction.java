@@ -64,7 +64,7 @@ public class IndexAction extends BaseAction {
 			}
 		}
 		
-		User user = userService.selectUserByName("admin");
+		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		
 		page.setResultSet(arts);
 		request.setAttribute("categories", categories);
@@ -98,7 +98,9 @@ public class IndexAction extends BaseAction {
 				article.setCategoryName(cate.getName());
 			}
 		}
+		User user =userService.selectUserByName(ConstantEnum.admin.toString());
 		
+		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute("id", id);
 		request.setAttribute("pa", commentPage);
 		request.setAttribute("categories", categories);

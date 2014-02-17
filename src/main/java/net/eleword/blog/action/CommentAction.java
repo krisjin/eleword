@@ -5,7 +5,10 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Comment;
+import net.eleword.blog.entity.User;
 import net.eleword.blog.service.CommentService;
+import net.eleword.blog.service.UserService;
+import net.eleword.blog.util.ConstantEnum;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class CommentAction extends BaseAction {
 
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UserService userService;
 
 	public String post() {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -37,6 +43,8 @@ public class CommentAction extends BaseAction {
 		comment.setArticleId(Long.valueOf(articleId));
 		comment.setEmail(email);
 		commentService.saveComment(comment);
+		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		request.setAttribute("avatar", user.getAvatar());
 		return "viewcomment";
 	}
 
