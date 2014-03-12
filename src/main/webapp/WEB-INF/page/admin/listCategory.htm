@@ -4,24 +4,54 @@
 		<#if flag=="update">
 			修改分类
 			<div class="well well-large">
-				<form class="form-inline" action="" method="post" id="updSave">
-					<input type="hidden" name="id" value="${updCategory.id}">
-					分类名称：<input type="text" class="input-small" name="categoryName" id="categoryName" value="${updCategory.name}" required>&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" id="priority"  name="priority" value="${updCategory.priority}" required>
-					&nbsp;&nbsp;
-					<button type="button" class="btn btn-info" onclick="updateSave();">修 改</button>
-					&nbsp;&nbsp;
-					<button type="button" class="btn btn-inverse" onclick="updateCancle();">取 消</button>
+				<form class="form-horizontal" action="category!save" method="post">
+				 	<div class="control-group">
+					    <label class="control-label">分类名称</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" id="categoryName"  value="${updCategory.name}" name="categoryName" data-rule="分类名称：required;categoryName">
+					    </div>
+					</div>
+					<div class="control-group">
+					    <label class="control-label">排序值</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" name="priority" id="priority"  value="${updCategory.priority}" data-rule="required;priority">
+					    </div>
+					</div>
+					<div class="control-group">
+					    <div class="controls">
+						   <button type="button" class="btn btn-info" onclick="updateSave();">修 改</button>
+						   &nbsp;&nbsp;
+						   <button type="button" class="btn btn-inverse" onclick="updateCancle();">取 消</button>
+					    </div>
+					  </div>
 				</form>
+				
+				
 			</div>
 		<#else>
 			添加分类
 			<div class="well well-large">
-				<form class="form-inline" action="category!save" method="post">
-					分类名称：<input type="text" class="input-small" id="categoryName" name="categoryName" required>&nbsp;&nbsp;&nbsp;
-					排序值：<input type="text" class="input-small" name="priority" id="priority" required>
-					</label>&nbsp;&nbsp;
-					<button type="submit" class="btn btn-info">添 加</button>
+				<form class="form-horizontal" action="category!save" method="post">
+				
+				 	<div class="control-group">
+					    <label class="control-label">分类名称</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" id="categoryName" name="categoryName" data-rule="required;categoryName">
+					    </div>
+					</div>
+				
+					<div class="control-group">
+					    <label class="control-label">排序值</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" name="priority" id="priority" data-rule="required;priority">
+					    </div>
+					</div>
+					<div class="control-group">
+					    <div class="controls">
+					     
+					    <button type="submit" class="btn btn-info">添 加</button>
+					    </div>
+					  </div>
 				</form>
 			</div>
 		</#if>
@@ -80,6 +110,8 @@ function updateSave(){
 }
 
 function updateCancle(){
+	
+	alert(111);
 	var frm=document.getElementById("updSave");
 	var url="category!list";
 	frm.action=url;

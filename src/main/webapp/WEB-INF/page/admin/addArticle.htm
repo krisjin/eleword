@@ -14,9 +14,6 @@
 		});
 
 	});
-	
-	
-
 </script>
 <script type="text/javascript">
 function validateArticle(){
@@ -34,12 +31,20 @@ function validateArticle(){
 		<form class="form-inline" action="article!addSave" method="post" onsubmit="return validateArticle()">
 			<div class="">
 				<label class="control-label">文章标题</label> 
-				<input type="text" id="title" name="title" class="input-xxlarge" required> 
-				<label class="control-label">选择分类</label> <select name="categoryId">
+				<input type="text" id="title" name="title" class="input-xxlarge" data-rule="required;title"> 
+				
+			</div>
+			<br>
+			<div class="">
+				
+				<div class="controls">
+				<label class="control-label">选择分类</label>
+					<select name="categoryId" class="input-xxlarge" data-rule="required;categoryId">
 					<#list categories as category>
-						<option value="${category.id}">${category.name}</option> 
+						<option  value="${category.id}">${category.name}</option> 
 					</#list>
 				</select>
+				</div>
 			</div>
 			<br>
 			<div class="control-group">
@@ -78,7 +83,7 @@ function validateArticle(){
 			<div class="control-group">
 				<label class="control-label">文章内容</label>
 				<div class="controls">
-					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" required>${article.content}</textarea>
+					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" data-rule="required;content">${article.content}</textarea>
 				</div>
 			</div>
 			<div class="control-group">
