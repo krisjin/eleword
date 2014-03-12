@@ -25,24 +25,19 @@ public class CategoryService {
 	}
 
 	public List<Category> selectAll() {
-
 		return categoryDao.selectAll();
 	}
 
 	public void deleteByCategoryId(Long id) {
-
 		categoryDao.deleteById(id);
 	}
 
 	public Category selectCategoryById(Long id) {
-
 		return categoryDao.select(id);
 
 	}
 
 	public void update(Category category) {
-
 		categoryDao.update(category);
-
 	}
 }

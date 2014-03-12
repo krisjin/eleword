@@ -36,8 +36,6 @@
             <br>
              </div>
             </#if>
-           
-            
             <#assign paginationData> <@pagination.doPagination "index!view"/> </#assign> ${paginationData}
             <div class="progress" style="height: 2px;">
 				<div class="bar bar-success" style="width: 35%;"></div>
@@ -46,24 +44,23 @@
 			</div>
             <h5>发表评论</h5>
 			<form action="comment!post" method="post">
-				
 				<input type="hidden" name="articleId" value="${article.id}">
 				  <div class="control-group" >
 				    <label class="control-label">昵称</label>
 				    <div class="controls">
-				      <input type="text" id="nickname" name="nickname" required>
+				      <input type="text" id="nickname" name="nickname" data-rule="昵称:required,nickname">
 				    </div>
 				  </div>
 				  <div class="control-group">
 				    <label class="control-label" >Email</label>
 				    <div class="controls">
-				      <input type="email" id="email" name="email" required>
+				      <input type="email" id="email" name="email" data-rule="Email:required,email">
 				    </div>
 				  </div>
 				  <div class="control-group">
 				    <label class="control-label">内容</label>
 				    <div class="controls">
-				      <textarea  id="content" style="height: 80px;width: 380px;" name="content" required></textarea>
+				      <textarea  id="content" style="height: 80px;width: 380px;" name="content" data-rule="内容:required,content"></textarea>
 				    </div>
 				  </div>
 				  <div class="control-group">

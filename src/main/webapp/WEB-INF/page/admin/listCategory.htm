@@ -1,49 +1,48 @@
 <#include "header_admin.htm">
+
 <div id="blog-container">
 	<div id="blog-category">
 		<#if flag=="update">
 			修改分类
 			<div class="well well-large">
-				<form class="form-horizontal" action="category!save" method="post">
+				<form class="form-horizontal" action="category!updateSave" method="post" id="updSave">
+					<input type="hidden" name="id" value="${updCategory.id}">
 				 	<div class="control-group">
 					    <label class="control-label">分类名称</label>
 					    <div class="controls">
-					      <input type="text" class="input-xlarge" id="categoryName"  value="${updCategory.name}" name="categoryName" data-rule="分类名称：required;categoryName">
+					      <input type="text" class="input-xlarge" id="categoryName"  value="${updCategory.name}" name="categoryName" data-rule="分类名称:required,categoryName">
 					    </div>
 					</div>
 					<div class="control-group">
 					    <label class="control-label">排序值</label>
 					    <div class="controls">
-					      <input type="text" class="input-xlarge" name="priority" id="priority"  value="${updCategory.priority}" data-rule="required;priority">
+					      <input type="text" class="input-xlarge" name="priority" id="priority"  value="${updCategory.priority}" data-rule="排序值:required,priority">
 					    </div>
 					</div>
 					<div class="control-group">
 					    <div class="controls">
-						   <button type="button" class="btn btn-info" onclick="updateSave();">修 改</button>
+						   <button type="submit" class="btn btn-info" >修 改</button>
 						   &nbsp;&nbsp;
 						   <button type="button" class="btn btn-inverse" onclick="updateCancle();">取 消</button>
 					    </div>
 					  </div>
 				</form>
-				
-				
 			</div>
 		<#else>
 			添加分类
 			<div class="well well-large">
 				<form class="form-horizontal" action="category!save" method="post">
-				
 				 	<div class="control-group">
 					    <label class="control-label">分类名称</label>
 					    <div class="controls">
-					      <input type="text" class="input-xlarge" id="categoryName" name="categoryName" data-rule="required;categoryName">
+					      <input type="text" class="input-xlarge" id="categoryName" name="categoryName" data-rule="分类名称:required;categoryName">
 					    </div>
 					</div>
 				
 					<div class="control-group">
 					    <label class="control-label">排序值</label>
 					    <div class="controls">
-					      <input type="text" class="input-xlarge" name="priority" id="priority" data-rule="required;priority">
+					      <input type="text" class="input-xlarge" name="priority" id="priority" data-rule="排序值:required;priority">
 					    </div>
 					</div>
 					<div class="control-group">
@@ -70,8 +69,8 @@
 				<tr>
 					<td>${category_index+1}</td>
 					<td>${category.name}</td>
-					<td><a href="category!update?categoryId=${category.id}">修改</a> <a href="#"
-						onclick=" return deleteCategory(${category.id});">删除</a></td>
+					<td><a href="category!update?categoryId=${category.id}">修改</a>
+					 <a href="#" onclick="return deleteCategory(${category.id});">删除</a></td>
 					<td><a href="#">上移</a></td>
 				</tr>
 				</#list>
@@ -82,7 +81,15 @@
 
 <#include "footer_admin.htm">
 <script type="text/javascript">
-<!--
+
+
+function updateCancle(){
+	var frm=document.getElementById("updSave");
+	var url="category!list";
+	frm.action=url;
+	frm.submit();
+}
+
 function deleteCategory(categoryId){
 	var frm=document.getElementById("formcate");
 	var url="category!delete?categoryId="+categoryId;
@@ -94,29 +101,4 @@ function deleteCategory(categoryId){
 	return false;
 }
 
-function updateSave(){
-	var cv=document.getElementById("categoryName");
-	var frm=document.getElementById("updSave");
-	var url="category!updateSave";
-	
-	
-	if(cv.value=""{
-		alert("请填写分类名称!");		
-		return false;
-	}
-	
-	frm.action=url;
-	frm.submit();
-}
-
-function updateCancle(){
-	
-	alert(111);
-	var frm=document.getElementById("updSave");
-	var url="category!list";
-	frm.action=url;
-	frm.submit();
-}
-
-//-->
 </script>

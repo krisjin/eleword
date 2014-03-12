@@ -21,7 +21,6 @@ function validateArticle(){
 		alert("请填写文章内容!");
 		return false;
 	}
-	
 }
 </script>
 <div id="blog-container">
@@ -31,7 +30,7 @@ function validateArticle(){
 		<form class="form-inline" action="article!addSave" method="post" onsubmit="return validateArticle()">
 			<div class="">
 				<label class="control-label">文章标题</label> 
-				<input type="text" id="title" name="title" class="input-xxlarge" data-rule="required;title"> 
+				<input type="text" id="title" name="title" class="input-xxlarge" data-rule="文章标题:required;title"> 
 				
 			</div>
 			<br>
@@ -39,7 +38,7 @@ function validateArticle(){
 				
 				<div class="controls">
 				<label class="control-label">选择分类</label>
-					<select name="categoryId" class="input-xxlarge" data-rule="required;categoryId">
+					<select name="categoryId" class="input-xxlarge" data-rule="分类:required;categoryId">
 					<#list categories as category>
 						<option  value="${category.id}">${category.name}</option> 
 					</#list>
