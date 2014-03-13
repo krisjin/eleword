@@ -9,7 +9,6 @@ body {
 	max-width: 970px;
 }
 
-
 .container-narrow>hr {
 	margin: 30px 0;
 }
@@ -32,7 +31,7 @@ body {
 	width: 702px;
 	min-height: 500px;
 	height: auto;
-	margin-left:8px;
+	margin-left: 8px;
 }
 
 .blog-category {
@@ -40,7 +39,7 @@ body {
 	width: 812px;
 	min-height: 500px;
 	height: auto;
-	margin-right:8px; 
+	margin-right: 8px;
 }
 
 .blog-addarticle {
@@ -75,3 +74,10 @@ body {
 	margin-top: 28px;
 }
 
+.position-title {
+	padding-bottom: 6px;
+	font-size: 18px;
+	color: #373c64;
+	font-weight: normal;
+	border-bottom: 2px solid #403c68;
+}

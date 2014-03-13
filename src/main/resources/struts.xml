@@ -85,9 +85,14 @@
 			
 			<param name="relativelyPath">/user/avatar</param>
 			<param name="absolutePath"></param>
-
 			<result name="uploadAvatar" type="freemarker">/WEB-INF/page/admin/uploadAvatar.htm</result>
 			<result name="success" type="freemarker">/WEB-INF/page/admin/uploadAvatar.htm</result>
+		</action>
+		
+		<action name="color" class="colorAction">
+			<result name="list" type="freemarker">/WEB-INF/page/admin/listColor.htm</result>
+			<result name="add" type="freemarker">/WEB-INF/page/admin/addColor.htm</result>
+			<result name="returnSaveList" type="redirectAction">color!list</result>
 		</action>
 	</package>
 </struts>

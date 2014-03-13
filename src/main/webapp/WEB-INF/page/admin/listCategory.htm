@@ -80,25 +80,3 @@
 </div>
 
 <#include "footer_admin.htm">
-<script type="text/javascript">
-
-
-function updateCancle(){
-	var frm=document.getElementById("updSave");
-	var url="category!list";
-	frm.action=url;
-	frm.submit();
-}
-
-function deleteCategory(categoryId){
-	var frm=document.getElementById("formcate");
-	var url="category!delete?categoryId="+categoryId;
-	
-	frm.action=url;
-	if(confirm('确实要删除此分类吗？')){
-		frm.submit();
-	}
-	return false;
-}
-
-</script>
