@@ -1,0 +1,61 @@
+<#include "header_admin.htm">
+
+<div id="blog-container">
+	<div style="float: right;">
+		<a href="color!add">添加背景色</a>
+	</div>
+	<div id="blog-category">
+		<h3 class="position-title">背景色列表</h3>
+
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">博客标题</label>
+				<div class="controls">
+					<input type="text" id="title" name="title">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputPassword">选择背景色</label>
+				<div class="controls">
+					<input type="text" id="code" name="code">
+					<a href="#myModal" role="button" class="btn" data-toggle="modal">查看演示案例</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">邮箱</label>
+				<div class="controls">
+					<input type="text" id="mail_notice" name="mail_notice" >
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">电话</label>
+				<div class="controls">
+					<input type="text" id="phone_notice"  name="phone_notice">
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn">Sign in</button>
+				</div>
+			</div>
+			
+			
+			
+			
+			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+		</form>
+	</div>
+</div>
+<#include "footer_admin.htm">

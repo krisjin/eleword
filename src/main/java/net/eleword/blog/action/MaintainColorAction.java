@@ -44,6 +44,7 @@ public class MaintainColorAction extends ActionSupport {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
 		page.getStartPage();
+		page.setPageSize(800);
 		page = colorService.queryColorWithPage(page);
 		request.setAttribute("pa", page);
 		return "list";

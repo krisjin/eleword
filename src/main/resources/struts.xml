@@ -94,5 +94,9 @@
 			<result name="add" type="freemarker">/WEB-INF/page/admin/addColor.htm</result>
 			<result name="returnSaveList" type="redirectAction">color!list</result>
 		</action>
+		<action name="blog" class="blogAction">
+			<result name="config" type="freemarker">/WEB-INF/page/admin/blogConfig.htm</result>
+			<result name="success" type="redirectAction">blog!config</result>
+		</action>
 	</package>
 </struts>
