@@ -7,16 +7,16 @@
 <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
 <title>Eleword管理博客</title>
 
-<link href="../template/front/css/bootstrap.css" rel="stylesheet">
-<link href="../template/front/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="../template/front/css/eleword.css" rel="stylesheet">
-<link href="../template/front/css/docs.css" rel="stylesheet">
-<link href="../template/front/css/jquery.validator.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/bootstrap.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/eleword.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/docs.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/jquery.validator.css" rel="stylesheet">
 
 
-<link href="../template/editor/themes/default/default.css" rel="stylesheet">
-<script charset="utf-8" src="../template/editor/kindeditor-min.js"></script>
-<script charset="utf-8" src="../template/editor/lang/zh_CN.js"></script>
+<link href="${request.contextPath}/template/editor/themes/default/default.css" rel="stylesheet">
+<script charset="utf-8" src="${request.contextPath}/template/editor/kindeditor-min.js"></script>
+<script charset="utf-8" src="${request.contextPath}/template/editor/lang/zh_CN.js"></script>
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -36,7 +36,7 @@
 						class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="login!logout"><i class="icon-pencil"></i> 注销</a></li>
+						<li><a href="${request.contextPath}/admin/logout"><i class="icon-pencil"></i> 注销</a></li>
 					</ul>
 				</div>
 				</#if>
@@ -50,21 +50,21 @@
 			<div class="navbar-inner">
 				<div class="container">
 					<ul class="nav">
-						<li ><a href="index">管理首页</a></li>
-						<li id="postArticleId" onclick="showActive('postArticleId',this)"><a href="article!add">发表文章</a></li>
-						<li><a href="article">文章管理</a></li>
-						<li><a href="category!list">分类管理</a></li>
-						<li><a href="commt">评论管理</a></li>
-						<li><a href="blog!config">博客设置</a></li>
-						<li><a href="color!list">背景色管理</a></li>
+						<li ><a href="${request.contextPath}/admin/index">管理首页</a></li>
+						<li id="postArticleId" onclick="showActive('postArticleId',this)"><a href="${request.contextPath}/admin/article/add">发表文章</a></li>
+						<li><a href="${request.contextPath}/admin/articles">文章管理</a></li>
+						<li><a href="${request.contextPath}/admin/categories">分类管理</a></li>
+						<li><a href="${request.contextPath}/admin/comments">评论管理</a></li>
+						<li><a href="${request.contextPath}/admin/blog/config">博客设置</a></li>
+						<li><a href="${request.contextPath}/admin/colors">背景色管理</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">个人信息管理
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">修改个人信息</a></li>
-								<li><a href="user">修改登录密码</a></li>
-								<li><a href="upload">修改个人头像</a></li>
+								<li><a href="${request.contextPath}/admin/password">修改个人信息</a></li>
+								<li><a href="${request.contextPath}/admin/password">修改登录密码</a></li>
+								<li><a href="${request.contextPath}/admin/avatar">修改个人头像</a></li>
 							</ul>
 						</li>
 						<li><a href="${request.contextPath}">博客首页</a></li>

@@ -11,35 +11,32 @@ import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.util.Pagination;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysql.jdbc.StringUtils;
 
 /**
- * TODO 此处填写 class 信息
- * 
+ * 文章维护
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-29上午6:28:53
  */
-@Controller("articleAction")
-@Scope("prototype")
-public class ArticleAction extends BaseAction {
-	private String content;
-	private String title;
-	private String categoryId;
+@Controller
+public class ArticleAction {
 
 	@Autowired
 	private CategoryService categoryService;
 
 	@Autowired
 	private ArticleService articleService;
-
-	public String execute() {
+	
+	@RequestMapping(value="/admin/articles",method=RequestMethod.GET)
+	public String listArticles(HttpServletRequest request) {
 		Pagination<Article> page =new Pagination<Article>();
-		HttpServletRequest request=ServletActionContext.getRequest();
 		String pageCount=request.getParameter("page");
 		
 		if(StringUtils.isNullOrEmpty(pageCount)){
@@ -51,19 +48,23 @@ public class ArticleAction extends BaseAction {
 		page=articleService.selectArticleWithPage(page);
 		
 		request.setAttribute("pa", page);
-		return "list";
+		return "admin/listArticle.htm";
 	}
-
-	public String add() {
+	
+	@RequestMapping(value="/admin/article/add",method=RequestMethod.GET)
+	public String add(HttpServletRequest request) {
 		List<Category> categories = categoryService.selectAll();
-		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("categories", categories);
 		request.setAttribute("actionName", "add");
-		return "add";
+		return "admin/addArticle.htm";
 	}
-
-	public String addSave() {
-		HttpServletRequest request = ServletActionContext.getRequest();
+	@RequestMapping(value="/admin/article/save",method=RequestMethod.POST)
+	public String addSave(
+			@RequestParam(value="content") String content,
+			@RequestParam(value="title") String title,
+			@RequestParam(value="categoryId") Long categoryId,
+			HttpServletRequest request
+			) {
 		Article article = new Article();
 		article.setAuthor("zhagnsan");
 		article.setContent(content);
@@ -73,40 +74,46 @@ public class ArticleAction extends BaseAction {
 		
 		articleService.addArticle(article);
 		
-		return "addAction";
+		return "redirect:/admin/article/add";
 	}
-
-	public String update() {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String id=request.getParameter("id");
+	@RequestMapping(value="/admin/article/{id}")
+	public String update(
+			@PathVariable("id") Long id,
+			//@RequestParam(value="id") Long id,
+			HttpServletRequest request) {
 		Article article=articleService.queryById(Long.valueOf(id));
 		List<Category> categories = categoryService.selectAll();
 		request.setAttribute("categories", categories);
 		request.setAttribute("article", article);	
 		request.setAttribute("actionName", "update");
-		return "add";
+		return "admin/addArticle.htm";
 	}
 
-	public String updateSave() {
-		
-		HttpServletRequest request = ServletActionContext.getRequest();
+	@RequestMapping(value="/admin/article/usave",method=RequestMethod.POST)
+	public String updateSave(
+			@RequestParam(value="id") Long id,
+//			@PathVariable("id") Long id,
+			@RequestParam(value="content") String content,
+			@RequestParam(value="title") String title,
+			@RequestParam(value="categoryId") Long categoryId,
+			HttpServletRequest request
+			) {
 		Article article = new Article();
 		article.setAuthor("zhagnsan");
 		article.setContent(content);
 		article.setCategoryId(Long.valueOf(categoryId));
 		article.setModifyDate(new Date());
 		article.setTitle(title);
-		article.setId(Long.valueOf(request.getParameter("id")));
+		article.setId(id);
 		articleService.updateById(article);
 
-		return "retList";
+		return "redirect:/admin/articles";
 	}
 
-	public String delete() {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String id=request.getParameter("id");
+	@RequestMapping(value="/admin/article/delete/{id}",method=RequestMethod.POST)
+	public String delete(@PathVariable("id") Long id) {
 		articleService.deleteById(Long.valueOf(id));
-		return "retList";
+		return "redirect:/admin/articles";
 	}
 
 	public ArticleService getArticleService() {
@@ -125,28 +132,5 @@ public class ArticleAction extends BaseAction {
 		this.categoryService = categoryService;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
 
 }

@@ -1,5 +1,7 @@
 package net.eleword.blog.service;
 
+import java.util.List;
+
 import net.eleword.blog.dao.BlogDao;
 import net.eleword.blog.entity.Blog;
 
@@ -18,6 +20,14 @@ public class BlogService {
 	
 	public void  saveOrUpdate(Blog blog){
 		blogDao.update(blog);
+	}
+	
+	public Blog queryBlogById(Long id){
+		return blogDao.select(id);
+	}
+	
+	public List<Blog> queryAllBlogConfig(){
+		return blogDao.getAllBlogConfig();
 	}
 }
 

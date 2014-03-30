@@ -1,5 +1,7 @@
 package net.eleword.blog.dao;
 
+import java.util.List;
+
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Color;
 import net.eleword.blog.util.Pagination;
@@ -15,6 +17,8 @@ public interface ColorDao extends BaseDao<Color>{
 	public Pagination<Color> selectColorWithPage(Pagination<Color> page);
 	
 	public Color selectColorByCode(String code);
+	
+	public List<Color> getAllColors();
 
 }
 

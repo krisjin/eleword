@@ -3,12 +3,15 @@ package net.eleword.blog.action;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.eleword.blog.entity.Article;
+import net.eleword.blog.entity.Blog;
 import net.eleword.blog.entity.Category;
 import net.eleword.blog.entity.Comment;
 import net.eleword.blog.entity.User;
 import net.eleword.blog.service.ArticleService;
+import net.eleword.blog.service.BlogService;
 import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.service.CommentService;
 import net.eleword.blog.service.UserService;
@@ -16,16 +19,16 @@ import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysql.jdbc.StringUtils;
 
-@Controller("indexAction")
-@Scope("prototype")
-public class IndexAction extends BaseAction {
+@Controller
+public class IndexAction {
 
 	@Autowired
 	private ArticleService articleService;
@@ -38,10 +41,17 @@ public class IndexAction extends BaseAction {
 	
 	@Autowired
 	private UserService userService;
-
-	public String execute() {
+	
+	@Autowired
+	private BlogService blogService;
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String listArticles(HttpServletRequest request, HttpServletResponse response) {
 		Pagination<Article> page = new Pagination<Article>();
-		HttpServletRequest request = ServletActionContext.getRequest();
+		
+		List<Blog> blog = blogService.queryAllBlogConfig();
+		
+		
 		String pageCount = request.getParameter("page");
 
 		if (StringUtils.isNullOrEmpty(pageCount)) {
@@ -64,24 +74,28 @@ public class IndexAction extends BaseAction {
 			}
 		}
 		
+		if(blog.size()>0){
+			request.setAttribute("blog", blog.get(0));
+		}
+		
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		
+		
 		
 		page.setResultSet(arts);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
 		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute(ConstantEnum.pageTitle.toString(), "Eleword博客");
-		return "index";
+		return "index.htm";
 	}
 
-	public String view() {
-
-		HttpServletRequest request = ServletActionContext.getRequest();
-
+	@RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
+	public String view(@PathVariable("id") Long id,HttpServletRequest request) {
 		Pagination<Comment> commentPage = new Pagination<Comment>();
 		commentPage.setPageSize(15);
 		String pageCount = request.getParameter("page");
-		String id = request.getParameter("id");
+		//String id = request.getParameter("id");
 
 		if (StringUtils.isNullOrEmpty(pageCount)) {
 			commentPage.setCurrentPage(1);
@@ -99,14 +113,15 @@ public class IndexAction extends BaseAction {
 			}
 		}
 		User user =userService.selectUserByName(ConstantEnum.admin.toString());
-		
+		List<Blog> blog = blogService.queryAllBlogConfig();
+		request.setAttribute("blog", blog.get(0));
 		request.setAttribute("avatar", user.getAvatar());
-		request.setAttribute("id", id);
+//		request.setAttribute("id", id);
 		request.setAttribute("pa", commentPage);
 		request.setAttribute("categories", categories);
 		request.setAttribute("article", article);
 		request.setAttribute(ConstantEnum.pageTitle.toString(), article.getTitle());
-		return "view";
+		return "view.htm";
 
 	}
 

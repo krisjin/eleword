@@ -1,5 +1,7 @@
 package net.eleword.blog.service;
 
+import java.util.List;
+
 import net.eleword.blog.dao.ColorDao;
 import net.eleword.blog.entity.Color;
 import net.eleword.blog.util.Pagination;
@@ -35,4 +37,7 @@ public class ColorService {
 		return colorDao.selectColorByCode(code);
 	}
 	
+	public List<Color> queryAllColors(){
+		return colorDao.getAllColors();
+	}
 }

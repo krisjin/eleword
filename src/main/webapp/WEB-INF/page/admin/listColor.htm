@@ -2,16 +2,12 @@
 <#include "header_admin.htm">
 <#assign colors=pa.resultSet>
 <div id="blog-container">
-	<div style="float: right;"><a href="color!add"  >添加背景色</a></div>
+	<div style="float: right;"><a href="${request.contextPath}/admin/colors/add">添加背景色</a></div>
 	<div id="blog-category">
 		<h3 class="position-title">背景色列表</h3>
-		
-		
-		
 		<div class="row">
 			<#list colors as color >
-		  		<div class="span2" title="名称 : ${color.name} | RGB:(${color.code}) | 描述：${color.description}" style="background-color:rgb(${color.code});width:90px;height:80px;margin-bottom:5px;"></div>
-		  		
+		  		<div class="span2" title="名称 : ${color.name} | RGB:(${color.code}) | 描述：${color.description}" style="background-color:rgb(${color.code});width:90px;height:80px;margin-bottom:5px;">${color.code}</div>
 		     </#list>
 		</div>
 	</div>
@@ -20,7 +16,4 @@
 	<@pagination.doPagination "color"/> 
 </#assign>
 ${paginationData}
-
-
-
 <#include "footer_admin.htm">

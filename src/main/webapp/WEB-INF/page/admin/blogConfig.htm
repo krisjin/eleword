@@ -1,60 +1,38 @@
 <#include "header_admin.htm">
-
 <div id="blog-container">
-	<div style="float: right;">
-		<a href="color!add">添加背景色</a>
-	</div>
 	<div id="blog-category">
-		<h3 class="position-title">背景色列表</h3>
-
-		<form class="form-horizontal">
+		<h3 class="position-title">博客配置</h3>
+		<form class="form-horizontal" style="margin-top: 35px;" action="${request.contextPath}/admin/blog/config/save" method="post">
+			<input name="id" value="${blog.id}" type="hidden">
 			<div class="control-group">
-				<label class="control-label" for="inputEmail">博客标题</label>
+				<label class="control-label" >博客标题</label>
 				<div class="controls">
-					<input type="text" id="title" name="title">
+					<input type="text" id="title" name="title" value="${blog.title}">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" >博客描述</label>
+				<div class="controls">
+					<textarea style="height: 70px;width:205px;" name="description">${blog.description}</textarea>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label" for="inputPassword">选择背景色</label>
 				<div class="controls">
-					<input type="text" id="code" name="code">
-					<a href="#myModal" role="button" class="btn" data-toggle="modal">查看演示案例</a>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">邮箱</label>
-				<div class="controls">
-					<input type="text" id="mail_notice" name="mail_notice" >
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">电话</label>
-				<div class="controls">
-					<input type="text" id="phone_notice"  name="phone_notice">
+					<select name="code">
+						<#list colors as color>
+							<option style="background-color: rgb(${color.code});border:solid 6px;" <#if (blog.background)==(color.code)>selected="selected"</#if>>
+							${color.code}
+							</option>
+						</#list>
+					</select>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" class="btn">Sign in</button>
+					<button type="submit" class="btn">提 &nbsp;交</button>
 				</div>
 			</div>
-			
-			
-			
-			
-			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div>
-</div>
 		</form>
 	</div>
 </div>

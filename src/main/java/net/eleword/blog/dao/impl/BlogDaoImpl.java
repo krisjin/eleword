@@ -1,5 +1,7 @@
 package net.eleword.blog.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import net.eleword.blog.dao.BlogDao;
@@ -27,8 +29,11 @@ public class BlogDaoImpl  extends HibernateDao<Blog, Long> implements BlogDao{
 	}
 
 	public Blog select(long id) {
-		
-		return null;
+		return select(id);
+	}
+
+	public List<Blog> getAllBlogConfig() {
+		return getAll();
 	}
 
 }

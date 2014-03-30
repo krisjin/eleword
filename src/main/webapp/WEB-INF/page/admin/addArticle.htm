@@ -27,7 +27,7 @@ function validateArticle(){
 
  <#if actionName=="add">
 	<div id="blog-addarticle">
-		<form class="form-inline" action="article!addSave" method="post" onsubmit="return validateArticle()">
+		<form class="form-inline" action="save" method="post" onsubmit="return validateArticle()">
 			<div class="">
 				<label class="control-label">文章标题</label> 
 				<input type="text" id="title" name="title" class="input-xxlarge" data-rule="文章标题:required;title"> 
@@ -59,10 +59,9 @@ function validateArticle(){
 			</div>
 		</form>
 	</div>
-	
 	<#else>
 	<div id="blog-addarticle">
-		<form class="form-inline" action="article!updateSave" method="post">
+		<form class="form-inline" action="usave" method="post">
 		<input type="hidden" value="${article.id}" name="id">
 			<div class="">
 				<label class="control-label">文章标题</label> 

@@ -43,7 +43,7 @@
 				<div class="bar bar-danger" style="width: 33%;"></div>
 			</div>
             <h5>发表评论</h5>
-			<form action="comment!post" method="post">
+			<form action="${request.contextPath}/comments/${article.id}" method="post">
 				<input type="hidden" name="articleId" value="${article.id}">
 				  <div class="control-group" >
 				    <label class="control-label">昵称</label>

@@ -5,7 +5,7 @@
 		<#include "silder.htm">
 		<div id="blog-content" >
 			<#list articles as art>
-				<h4><a href="index!view?id=${art.id}">${art.title}</a></h4>
+				<h4><a href="article/${art.id}">${art.title}</a></h4>
 				<span class="text-error"><em>${art.postDate?string('yyyy-MM-dd')}</em> &nbsp; 分类:${art.categoryName}&nbsp;by &nbsp;${art.author}</span>
 				<div class="muted" style="padding-top:5px;">${art.content}</div>
 				<hr>

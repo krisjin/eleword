@@ -2,15 +2,14 @@
 <div id="blog-container">
 	<div id="blog-sidebar"></div>
 	<div id="blog-content" style="margin-top:20px; ">
-
-		<form class="form-horizontal" method="post" action="upload!avatar" enctype="multipart/form-data">
+		<form class="form-horizontal" method="post" action="${request.contextPath}/admin/avatar/save" enctype="multipart/form-data">
 			<div class="control-group">
 				<label class="control-label" >选择头像</label>
 				<div class="controls">
 					<input type="file" id="file" name="file">
 				</div>
 			</div>
-			<input type="submit" value="上传">
+			<input class="btn" type="submit" value="上传">
 		</form>
 	</div>
 </div>

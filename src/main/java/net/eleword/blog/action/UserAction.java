@@ -7,33 +7,31 @@ import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.MD5Util;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysql.jdbc.StringUtils;
 
-@Controller("userAction")
-@Scope("prototype")
-public class UserAction extends BaseAction {
-
-	private String oldPassword;
-	private String newPassword;
-	private String repeatNewPassword;
+@Controller
+public class UserAction{
 
 	@Autowired
 	private UserService userService;
-
+	
+	@RequestMapping(value="/admin/password",method=RequestMethod.GET)
 	public String execute() throws Exception {
-
-		return "modifyPassword";
+		return "admin/modifyPassword.htm";
 	}
-
-	public String modifyPassword() {
-
-		HttpServletRequest request = ServletActionContext.getRequest();
-
+	@RequestMapping(value="/admin/password/modify",method=RequestMethod.POST)
+	public String modifyPassword(
+			@RequestParam(value="oldPassword") String oldPassword,
+			@RequestParam(value="newPassword") String newPassword,
+			@RequestParam(value="repeatNewPassword") String repeatNewPassword,
+			
+			HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("USER_SESSION");
 
 		if (StringUtils.isNullOrEmpty(oldPassword)) {
@@ -52,37 +50,11 @@ public class UserAction extends BaseAction {
 			request.setAttribute(ConstantEnum.msg.toString(), "新密码或重复密码不能为空!");
 			return ConstantEnum.error.toString();
 		}
-		
 		user.setPassword(MD5Util.encrypt(newPassword));
-		
 		userService.updatePassword(user);
 		request.setAttribute(ConstantEnum.msg.toString(), "密码修改成功!");
-		
-		return ConstantEnum.success.toString();
+		return "admin/modifyPassword.htm";
 	}
 
-	public String getOldPassword() {
-		return oldPassword;
-	}
-
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
-
-	public String getNewPassword() {
-		return newPassword;
-	}
-
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-
-	public String getRepeatNewPassword() {
-		return repeatNewPassword;
-	}
-
-	public void setRepeatNewPassword(String repeatNewPassword) {
-		this.repeatNewPassword = repeatNewPassword;
-	}
 
 }

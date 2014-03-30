@@ -1,5 +1,7 @@
 package net.eleword.blog.dao;
 
+import java.util.List;
+
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Blog;
 
@@ -8,6 +10,8 @@ import net.eleword.blog.entity.Blog;
  * @author krisjin (mailto:krisjin86@163.com)
  */
 public interface BlogDao extends BaseDao<Blog>{
+	
+	public List<Blog> getAllBlogConfig();
 
 }
 
