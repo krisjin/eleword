@@ -30,6 +30,8 @@ public class Blog extends IdEntity implements Serializable {
 
 	private boolean phone_notice;
 
+	private String banner_color;
+	
 	@Column
 	public String getTitle() {
 		return title;
@@ -83,5 +85,17 @@ public class Blog extends IdEntity implements Serializable {
 	public void setPhone_notice(boolean phone_notice) {
 		this.phone_notice = phone_notice;
 	}
+	
+	@Column
+	public String getBanner_color() {
+		return banner_color;
+	}
+
+	public void setBanner_color(String banner_color) {
+		this.banner_color = banner_color;
+	}
+	
+
+	
 
 }

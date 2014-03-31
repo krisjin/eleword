@@ -46,8 +46,8 @@ public class BlogConfigAction{
 			@RequestParam(value="code") String code,
 			@RequestParam(value="title") String title,
 			@RequestParam(value="description") String description,
-			@RequestParam(value="id") Long id
-			
+			@RequestParam(value="id") Long id,
+			@RequestParam(value="banner_color") String banner_color
 			) {
 		Blog blog =new Blog();
 		if(!(id ==null)){
@@ -56,6 +56,7 @@ public class BlogConfigAction{
 		blog.setBackground(code);
 		blog.setTitle(title);
 		blog.setDescription(description);
+		blog.setBanner_color(banner_color);
 		blogService.saveOrUpdate(blog);
 		
 		return "redirect:/admin/blog/config";

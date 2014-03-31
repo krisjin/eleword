@@ -28,10 +28,10 @@ body {
 
 #blog-content {
 	float: left;
-	width: 702px;
+	width: 700px;
 	min-height: 500px;
 	height: auto;
-	margin-left: 8px;
+	margin-left: 20px;
 }
 
 .blog-category {

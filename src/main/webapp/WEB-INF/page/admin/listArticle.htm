@@ -11,11 +11,10 @@
 					<td>标题</td>
 					<td>操作</td>
 				</tr>
-
 				<#list articles as art>
 				<tr>
 					<td>${art_index+1}</td>
-					<td>${art.title}</td>
+					<td><a href="${request.contextPath}/article/${art.id}">${art.title}</a></td>
 					<td>
 						<a href="article/${art.id}">修改</a> 
 						<a href="#" onclick=" return deleteArticle(${art.id});">删除</a></td>
@@ -29,9 +28,6 @@
 	<@pagination.doPagination "article"/> 
 </#assign>
 ${paginationData}
-
-
-
 <#include "footer_admin.htm">
 <script type="text/javascript">
 <!--

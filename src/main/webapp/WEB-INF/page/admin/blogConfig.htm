@@ -29,6 +29,18 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label" for="inputPassword">选择Banner背景色</label>
+				<div class="controls">
+					<select name="banner_color">
+						<#list colors as color>
+							<option style="background-color: rgb(${color.code});border:solid 6px;" <#if (blog.banner_color)==(color.code)>selected="selected"</#if>>
+							${color.code}
+							</option>
+						</#list>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
 				<div class="controls">
 					<button type="submit" class="btn">提 &nbsp;交</button>
 				</div>
