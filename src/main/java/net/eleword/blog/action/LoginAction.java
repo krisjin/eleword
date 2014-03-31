@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import net.eleword.blog.entity.User;
 import net.eleword.blog.service.UserService;
+import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.MD5Util;
 
 import org.apache.commons.lang.StringUtils;
@@ -47,21 +48,18 @@ public class LoginAction {
 			
 			) {
 		HttpSession session = request.getSession();
-
 		User user = userService.selectUserByName(username);
-
 		if (user == null) {
 			request.setAttribute("msg", "用户名不存在!");
 			request.setAttribute("username",username);
-			return "failure";
+			return "admin/login.htm";
 		}
 		if (!StringUtils.equals(user.getPassword(), MD5Util.encrypt(password))) {
 			request.setAttribute("msg", "用户密码不正确!");
 			request.setAttribute("username",username);
 			return "admin/login.htm";
 		}
-		
-		session.setAttribute("USER_SESSION", user);
+		session.setAttribute(ConstantEnum.USER_SESSION.toString(), user);
 		return "redirect:/admin/index";
 	}
 	

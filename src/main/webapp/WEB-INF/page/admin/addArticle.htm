@@ -24,11 +24,12 @@ function validateArticle(){
 }
 </script>
 <div id="blog-container">
-<h3 class="position-title">文章维护</h3>
+
  <#if actionName=="add">
 	<div id="blog-addarticle">
-		<form class="form-inline" action="save" method="post" onsubmit="return validateArticle()">
-			<div class="">
+		<form class="form-inline" action="save" method="post" onsubmit="return validateArticle()" >
+		<div class="position-title">添加文章</div>
+			<div class="" >
 				<label class="control-label">文章标题</label> 
 				<input type="text" id="title" name="title" class="input-xxlarge" data-rule="文章标题:required;title"> 
 				
@@ -62,6 +63,7 @@ function validateArticle(){
 	<#else>
 	<div id="blog-addarticle">
 		<form class="form-inline" action="usave" method="post">
+		<div class="position-title">修改文章</div>
 		<input type="hidden" value="${article.id}" name="id">
 			<div class="">
 				<label class="control-label">文章标题</label> 

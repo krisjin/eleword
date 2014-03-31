@@ -53,8 +53,8 @@ public class CommentAction {
 		comment.setCommentContent(content);
 		comment.setCommentDate(new Date());
 		comment.setCommentNickname(nickname);
-		comment.setArticleId(Long.valueOf(articleId));
 		comment.setEmail(email);
+		comment.setArticleId(Long.valueOf(articleId));
 		commentService.saveComment(comment);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		request.setAttribute("avatar", user.getAvatar());

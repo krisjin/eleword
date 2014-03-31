@@ -75,9 +75,9 @@ body {
 }
 
 .position-title {
-	padding-bottom: 6px;
-	font-size: 18px;
+	font-size: 14px;
 	color: #373c64;
 	font-weight: normal;
 	border-bottom: 2px solid #403c68;
+	margin-bottom: 25px;
 }

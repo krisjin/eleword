@@ -19,7 +19,7 @@ function deleteCategory(categoryId){
 <div id="blog-container">
 	<div id="blog-category">
 		<#if flag=="update">
-			修改分类
+			<div class="position-title">修改分类</div>
 			<div class="well well-large">
 				<form class="form-horizontal" action="category!updateSave" method="post" id="updSave">
 					<input type="hidden" name="id" value="${updCategory.id}">
@@ -45,7 +45,7 @@ function deleteCategory(categoryId){
 				</form>
 			</div>
 		<#else>
-			添加分类
+			<div class="position-title">添加分类</div>
 			<div class="well well-large">
 				<form class="form-horizontal" action="category/save" method="post">
 				 	<div class="control-group">
@@ -58,7 +58,7 @@ function deleteCategory(categoryId){
 					<div class="control-group">
 					    <label class="control-label">排序值</label>
 					    <div class="controls">
-					      <input type="text" class="input-xlarge" name="priority" id="priority" data-rule="排序值dddddddddddddd:required;priority">
+					      <input type="text" class="input-xlarge" name="priority" id="priority" data-rule="排序值:required;priority">
 					    </div>
 					</div>
 					<div class="control-group">
@@ -71,7 +71,7 @@ function deleteCategory(categoryId){
 			</div>
 		</#if>
 
-		分类列表：
+		<div class="position-title">分类列表</div>
 		<form action="" method="post" id="formcate">
 			<table class="table table-bordered table-hover">
 				<tr class="info">

@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
   <display-name>eleword</display-name>
-<!--   <context-param> -->
-<!-- 		<param-name>contextConfigLocation</param-name> -->
-<!-- 		<param-value>classpath*:/applicationContext.xml</param-value> -->
-<!--   </context-param> -->
-
-
+  
+  	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>ApplicationPath</param-value>
+	</context-param>
+	
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -22,7 +22,6 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>*.json</url-pattern>
@@ -46,11 +45,15 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-<context-param>
-		<param-name>webAppRootKey</param-name>
-		<param-value>ApplicationPath</param-value>
-	</context-param>
-	
+
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>net.eleword.blog.interceptor.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>	
 
 	<!-- Hibernate Open Session In View filter-->
 <!-- 	<filter> -->
@@ -82,48 +85,6 @@
 <!--        <dispatcher>FORWARD</dispatcher>   -->
 <!--     </filter-mapping> -->
 	
-	
-	
-<!-- 	<filter> -->
-<!--         <filter-name>struts-prepare</filter-name> -->
-<!--         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class> -->
-<!--     </filter> -->
-<!-- 	<filter-mapping> -->
-<!--         <filter-name>struts-prepare</filter-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </filter-mapping> -->
-    
-    
-<!--     <filter> -->
-<!--         <filter-name>struts-execute</filter-name> -->
-<!--         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter</filter-class> -->
-<!--     </filter> -->
-<!-- 	 <filter-mapping> -->
-<!--         <filter-name>struts-execute</filter-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </filter-mapping> -->
-       
-<!--     <filter>   -->
-<!-- 		<filter-name>requestContextFilter</filter-name>   -->
-<!-- 		<filter-class>org.springframework.web.filter.RequestContextFilter</filter-class> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping>   -->
-<!-- 		<filter-name>requestContextFilter</filter-name>   -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
-	
-	
-	
-	
-
-<!-- 	<listener> -->
-<!-- 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
-<!-- 	</listener> -->
-	
-	
-	
-
-
 	<!-- Spring 刷新Introspector防止内存泄露 -->
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>

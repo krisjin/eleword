@@ -3,7 +3,7 @@
 <#assign articles=pa.resultSet>
 <div id="blog-container">
 	<div id="blog-category">
-		文章列表：
+		<div class="position-title">文章列表</div>
 		<form action="" method="post" id="formdel">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
@@ -16,8 +16,8 @@
 					<td>${art_index+1}</td>
 					<td><a href="${request.contextPath}/article/${art.id}">${art.title}</a></td>
 					<td>
-						<a href="article/${art.id}">修改</a> 
-						<a href="#" onclick=" return deleteArticle(${art.id});">删除</a></td>
+						<a href="article/${art.id}">编辑</a> |
+						<a href="#" onclick="return deleteArticle(${art.id});">删除</a></td>
 				</tr>
 				</#list>
 			</table>
