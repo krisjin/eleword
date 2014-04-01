@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.eleword.blog.entity.Comment;
 import net.eleword.blog.entity.User;
+import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.CommentService;
 import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
@@ -29,9 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CommentAction {
 
-	private String nickname;
-	private String email;
-	private String content;
 
 	@Autowired
 	private CommentService commentService;
@@ -39,13 +37,15 @@ public class CommentAction {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ArticleService articleService;
+	
 	@RequestMapping(value="/comments/{id}",method = RequestMethod.POST)
 	public String post(
 			@PathVariable("id") Long articleId,
 			@RequestParam(value="content") String content,
 			@RequestParam(value="nickname") String nickname,
 			@RequestParam(value="email") String email,
-//			@RequestParam(value="articleId") String articleId,
 			HttpServletRequest request,HttpServletResponse response
 			) {
 		
@@ -54,7 +54,7 @@ public class CommentAction {
 		comment.setCommentDate(new Date());
 		comment.setCommentNickname(nickname);
 		comment.setEmail(email);
-		comment.setArticleId(Long.valueOf(articleId));
+		comment.setArticleId(articleId);
 		commentService.saveComment(comment);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		request.setAttribute("avatar", user.getAvatar());
@@ -67,36 +67,5 @@ public class CommentAction {
 		return null;
 	}
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public CommentService getCommentService() {
-		return commentService;
-	}
-
-	public void setCommentService(CommentService commentService) {
-		this.commentService = commentService;
-	}
 
 }

@@ -36,7 +36,7 @@ public class CategoryDaoImpl extends HibernateDao<Category,Long> implements Cate
 
 	public List<Category> selectAll(){
 		
-		return getAll("priority",true);
+		return getAll("orderValue",true);
 	}
 	
 }

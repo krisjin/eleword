@@ -27,13 +27,6 @@ public class CategoryAction{
 	@Autowired
 	private CategoryService categoryService;
 	
-	
-	
-//	public String listCategory(HttpServletRequest request) {
-//		request.setAttribute(ConstantEnum.pageTitle.toString(), "分类管理");
-//		return "admin/listCategory.htm";
-//	}
-	
 	@RequestMapping(value="/admin/categories/add" ,method=RequestMethod.GET)
 	public String add(HttpServletRequest request) {
 		request.setAttribute(ConstantEnum.pageTitle.toString(), "新增分类");
@@ -43,11 +36,11 @@ public class CategoryAction{
 	@RequestMapping(value="/admin/category/save" ,method=RequestMethod.POST)
 	public String save(
 			@RequestParam(value="categoryName") String categoryName,
-			@RequestParam(value="priority") int priority
+			@RequestParam(value="orderValue") int orderValue
 			) {
 		Category category = new Category();
 		category.setName(categoryName);
-		category.setPriority(Integer.valueOf(priority));
+		category.setOrderValue(orderValue);
 		categoryService.add(category);
 		return "redirect:/admin/categories";
 
@@ -65,12 +58,12 @@ public class CategoryAction{
 	@RequestMapping(value="/admin/categories/usave" ,method=RequestMethod.POST)
 	public String updateSave(
 			@RequestParam(value="categoryName") String categoryName,
-			@RequestParam(value="priority") int priority,
+			@RequestParam(value="orderValue") int orderValue,
 			@RequestParam(value="categoryId") Long categoryId
 			){
 		Category category =new Category();
 		category.setName(categoryName);
-		category.setPriority(Integer.valueOf(priority));
+		category.setOrderValue(orderValue);
 		category.setId(Long.valueOf(categoryId));
 		categoryService.update(category);
 		return "queryRedirect";

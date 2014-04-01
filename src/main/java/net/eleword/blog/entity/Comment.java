@@ -37,6 +37,7 @@ public class Comment extends IdEntity implements Serializable {
 	private String articleTitle;
 	
 	
+	
 	@Column(name="comment_user")
 	public String getCommentUser() {
 		return commentUser;
@@ -96,4 +97,5 @@ public class Comment extends IdEntity implements Serializable {
 	public void setArticleTitle(String articleTitle) {
 		this.articleTitle = articleTitle;
 	}
+	
 }

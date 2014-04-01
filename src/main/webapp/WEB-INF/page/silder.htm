@@ -6,7 +6,13 @@
 		<div class="bar bar-danger" style="width: 33%;"></div>
 	</div>
 	<div>
-		<#list categories as category> <a href="${request.contextPath}/category/${category.id}">${category.name}</a><br> </#list>
+		<ul class="unstyled">
+		<#list categories as category>
+			<li>
+			<a href="${request.contextPath}/category/${category.id}">${category.name}(${category.articleNumber})</a>
+		 	</li>
+	    </#list>
+	    </ul>
 	</div>
 
 	<h4>最近文章</h4>
@@ -16,6 +22,6 @@
 		<div class="bar bar-danger" style="width: 33%;"></div>
 	</div>
 	<div>
-		<a href="#">ddddddddddddddddddddddddd</a>
+		<a href="#">ddddddddddddddddd</a>
 	</div>
 </div>

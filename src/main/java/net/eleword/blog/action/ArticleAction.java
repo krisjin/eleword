@@ -71,10 +71,13 @@ public class ArticleAction {
 		article.setCategoryId(Long.valueOf(categoryId));
 		article.setTitle(title);
 		article.setPostDate(new Date());
+		article.setComments(null);
 		
+		Category category = categoryService.selectCategoryById(categoryId);
 		articleService.addArticle(article);
-		
-		return "redirect:/admin/article/add";
+		category.setArticleNumber(category.getArticleNumber()+1);
+		categoryService.update(category);
+		return "redirect:/admin/articles";
 	}
 	@RequestMapping(value="/admin/article/{id}")
 	public String update(
@@ -92,7 +95,6 @@ public class ArticleAction {
 	@RequestMapping(value="/admin/article/usave",method=RequestMethod.POST)
 	public String updateSave(
 			@RequestParam(value="id") Long id,
-//			@PathVariable("id") Long id,
 			@RequestParam(value="content") String content,
 			@RequestParam(value="title") String title,
 			@RequestParam(value="categoryId") Long categoryId,

@@ -20,7 +20,9 @@ public class Category extends IdEntity implements Serializable {
 
 	private String name;
 
-	private int priority;
+	private int orderValue;
+	
+	private int articleNumber;
 
 	@Column(name = "name", nullable = false)
 	public String getName() {
@@ -31,13 +33,21 @@ public class Category extends IdEntity implements Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "priority")
-	public int getPriority() {
-		return priority;
+	@Column(name = "order_value" ,nullable=true)
+	public int getOrderValue() {
+		return orderValue;
 	}
 
-	public void setPriority(int priority) {
-		this.priority = priority;
+	public void setOrderValue(int orderValue) {
+		this.orderValue = orderValue;
+	}
+	
+	@Column(name = "article_number",nullable=true)
+	public int getArticleNumber() {
+		return articleNumber;
+	}
+	public void setArticleNumber(int articleNumber) {
+		this.articleNumber = articleNumber;
 	}
 
 }
