@@ -37,11 +37,11 @@
 			
 			<#assign user=Session.USER_SESSION>
 				<div class="btn-group">
-					<a class="btn btn-primary" href="#"><i class="icon-user"></i>${user.username} </a> <a
+					<a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i>${user.username} </a> <a
 						class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="${request.contextPath}/admin/logout"><i class="icon-pencil"></i> 注销</a></li>
+						<li><a href="${request.contextPath}/admin/logout"><i class="icon-off"></i> 注销</a></li>
 					</ul>
 				</div>
 				</#if>

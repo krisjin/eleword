@@ -40,4 +40,8 @@ public class CategoryService {
 	public void update(Category category) {
 		categoryDao.update(category);
 	}
+	
+	public void updateArticleNumber(Category category){
+		categoryDao.updateArticleNumber(category);
+	}
 }

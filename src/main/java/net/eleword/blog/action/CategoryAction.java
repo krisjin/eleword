@@ -8,7 +8,6 @@ import net.eleword.blog.entity.Category;
 import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.util.ConstantEnum;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -26,25 +26,24 @@
 				<div class="bar bar-danger" style="width: 33%;"></div>
 			</div>
 			<div id="comments">
-			
 			<#list comments as comment>
-			<div class="media" style="padding-bottom: 10px;">
+			<div class="media">
               <a class="pull-left">
                 <img class="img-rounded" src="${request.contextPath}/template/front/img/defaultface.png">
               </a>
-              <div class="media-body" style="font-size: 10pt;margin-bottom: 8px;">
+              <div class="media-body" style="font-size: 10pt;">
                 <div class="media-heading">
                 <span style="font-size: 14px;font-weight: bold;color: #666666;">${comment.commentNickname}</span><span style="font-size: 9pt;color: #666666;">&nbsp;发表于&nbsp;${comment.commentDate}</span>
                 </div>
                 	${comment.commentContent}
               </div>
-              <hr>
             </div>
+             <hr>
             </#list>
-            <br>
+            	<#assign paginationData> <@pagination.doPagination "article"/> </#assign> ${paginationData}
              </div>
             </#if>
-            <#assign paginationData> <@pagination.doPagination "article"/> </#assign> ${paginationData}
+            
             
             <h5>发表评论</h5>
             <div class="progress" style="height: 2px;">

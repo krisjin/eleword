@@ -76,7 +76,7 @@ public class ArticleAction {
 		Category category = categoryService.selectCategoryById(categoryId);
 		articleService.addArticle(article);
 		category.setArticleNumber(category.getArticleNumber()+1);
-		categoryService.update(category);
+		categoryService.updateArticleNumber(category);
 		return "redirect:/admin/articles";
 	}
 	@RequestMapping(value="/admin/article/{id}")
@@ -116,10 +116,10 @@ public class ArticleAction {
 			Category newCategory = categoryService.selectCategoryById(categoryId);
 			if(rawCategory.getArticleNumber()>0){
 				rawCategory.setArticleNumber(rawCategory.getArticleNumber()-1);
-				categoryService.update(rawCategory);
+				categoryService.updateArticleNumber(rawCategory);
 			}
 			newCategory.setArticleNumber(newCategory.getArticleNumber()+1);
-			categoryService.update(newCategory);
+			categoryService.updateArticleNumber(newCategory);
 		}
 		return "redirect:/admin/articles";
 	}

@@ -13,5 +13,6 @@ import net.eleword.blog.entity.Category;
  */
 public interface CategoryDao extends BaseDao<Category> {
 	 List<Category> selectAll();
+	 void updateArticleNumber(Category entity);
 }
 
