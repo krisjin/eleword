@@ -15,7 +15,7 @@
                 <ul>
                 <#if (thisPage > 1)>
                         <#assign start = (thisPage - 2) * recordsPerPage/>
-                        <li><a href="${action}?page=${thisPage - 1}&id=${id}#comments">&#9668;</a></li>
+                        <li><a href="${request.contextPath}/${action}/${id}?page=${thisPage - 1}#comments">&#9668;</a></li>
                 </#if>
 						
 						
@@ -75,7 +75,7 @@
                 <#if (thisPage < totalPages)>
                         <#assign start = thisPage * recordsPerPage/>
                         <li>
-                        	<a href="${action}?page=${thisPage+1}&id=${id}#comments">&#9658;</a>
+                        	<a href="${request.contextPath}/${action}/${id}?page=${thisPage+1}#comments">&#9658;</a>
                         </li>
                 </#if>
 				</ul>
@@ -86,7 +86,7 @@
 <#macro pageLink page action>
         <#assign start = recordsPerPage * (page - 1)/>
         <#if page != thisPage>
-                <#assign link><a href="${action}?page=${page}&id=${id}#comments">${page}</a></#assign></li>
+                <#assign link><a href="${request.contextPath}/${action}/${id}?page=${page}#comments">${page}</a></#assign></li>
         <#else>
                 <#assign link><span class="current">${page}</span></#assign>
         </#if>

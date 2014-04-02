@@ -15,20 +15,22 @@
 			<div style="word-wrap:break-word;">
 				${article.content}
 			</div>
+			<div style="border-bottom: 1px solid white;margin-top: 25px;"></div>
+			
 			<#assign comments=pa.resultSet>
 			<#if (comments?size>0)>
+			<h5>评论列表</h5>
 			<div class="progress" style="height: 2px;">
 				<div class="bar bar-success" style="width: 35%;"></div>
 				<div class="bar bar-warning" style="width: 32%;"></div>
 				<div class="bar bar-danger" style="width: 33%;"></div>
 			</div>
-			<h5>评论列表</h5>
 			<div id="comments">
 			
 			<#list comments as comment>
 			<div class="media" style="padding-bottom: 10px;">
-              <a class="pull-left" href="#">
-                <img class="media-object" data-src="holder.js"  style="width: 64px; height: 64px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABN0lEQVR4Xu2YQQ6EIAxFdeXFODZnYu9qJk5C0sGiUiAx8FyKVPr76VPWEMJnmfhaEQAHsAXoARP3wIUmCAWgABSAAlBgYgXAIBgEg2AQDE4MAX6GwCAYBINgEAyCwYkVAIO1GPTe//nHOXfyU3xGG9PM1yNmzuRVDpCJ5ZKUyTwRoEfMqx3eTIBcJbdtW/Z9/w2XCtAqZncB5Atkkkc1NQFileVYFCi1fypcLqa1jzd1QM6+2va4EycKWRLTIkI3AY7FPKmmVmF5LxXvLmapCF0FiItp5QCZXClZulBAq/IVBtN9rvUAa8zSysfnqxxgfemb5iFA7Zfgm6ppWQsOwAEciXEkxpGYpXuOMgcKQAEoAAWgwCgd3ZIHFIACUAAKQAFL9xxlDhSAAlAACkCBUTq6JY/pKfAFwO6XkLwNdToAAAAASUVORK5CYII=">
+              <a class="pull-left">
+                <img class="img-rounded" src="${request.contextPath}/template/front/img/defaultface.png">
               </a>
               <div class="media-body" style="font-size: 10pt;margin-bottom: 8px;">
                 <div class="media-heading">
@@ -36,18 +38,20 @@
                 </div>
                 	${comment.commentContent}
               </div>
+              <hr>
             </div>
             </#list>
             <br>
              </div>
             </#if>
-            <#assign paginationData> <@pagination.doPagination "index!view"/> </#assign> ${paginationData}
+            <#assign paginationData> <@pagination.doPagination "article"/> </#assign> ${paginationData}
+            
+            <h5>发表评论</h5>
             <div class="progress" style="height: 2px;">
 				<div class="bar bar-success" style="width: 35%;"></div>
 				<div class="bar bar-warning" style="width: 32%;"></div>
 				<div class="bar bar-danger" style="width: 33%;"></div>
 			</div>
-            <h5>发表评论</h5>
 			<form action="${request.contextPath}/comments/${article.id}" method="post">
 				<input type="hidden" name="articleId" value="${article.id}">
 				  <div class="control-group" >
