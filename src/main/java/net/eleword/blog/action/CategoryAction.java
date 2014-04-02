@@ -55,7 +55,7 @@ public class CategoryAction{
 		request.setAttribute("flag", "update");
 		return "admin/listCategory.htm";
 	}
-	@RequestMapping(value="/admin/categories/usave" ,method=RequestMethod.POST)
+	@RequestMapping(value="/admin/category/usave" ,method=RequestMethod.POST)
 	public String updateSave(
 			@RequestParam(value="categoryName") String categoryName,
 			@RequestParam(value="orderValue") int orderValue,
@@ -66,7 +66,7 @@ public class CategoryAction{
 		category.setOrderValue(orderValue);
 		category.setId(Long.valueOf(categoryId));
 		categoryService.update(category);
-		return "queryRedirect";
+		return "redirect:/admin/categories";
 	}
 	
 	@RequestMapping(value="/admin/categories" ,method=RequestMethod.GET)

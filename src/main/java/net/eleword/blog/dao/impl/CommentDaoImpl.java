@@ -1,5 +1,7 @@
 package net.eleword.blog.dao.impl;
 
+import java.util.List;
+
 import net.eleword.blog.dao.CommentDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Comment;
@@ -44,6 +46,11 @@ public class CommentDaoImpl extends HibernateDao<Comment, Long> implements Comme
 	public Pagination<Comment> selectCommentWithPage(Pagination<Comment> page) {
 		String hql = "from Comment comt order by comt.commentDate asc";
 		return findPage(page, hql);
+	}
+
+	public List<Comment> selectCommentByArticleId(Long id) {
+		String hql="from Comment where articleId=?";
+		return find(hql,id);
 	}
 
 }

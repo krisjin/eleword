@@ -1,5 +1,7 @@
 package net.eleword.blog.service;
 
+import java.util.List;
+
 import net.eleword.blog.dao.CommentDao;
 import net.eleword.blog.entity.Comment;
 import net.eleword.blog.util.Pagination;
@@ -20,34 +22,22 @@ public class CommentService {
 	private CommentDao commentDao;
 
 	public long saveComment(Comment entity) {
-
 		return commentDao.add(entity);
 	}
 
 	public Pagination<Comment> selectCommentWithPageByArticleId(Pagination<Comment> page, long articleId) {
-
 		return commentDao.selectCommentWithPageById(page, articleId);
-
 	}
 
 	public Pagination<Comment> selectCommentWithPage(Pagination<Comment> page) {
-
 		return commentDao.selectCommentWithPage(page);
-
 	}
 
 	public void deleteById(long id) {
-
 		commentDao.deleteById(id);
-
 	}
-
-	public CommentDao getCommentDao() {
-		return commentDao;
-	}
-
-	public void setCommentDao(CommentDao commentDao) {
-		this.commentDao = commentDao;
+	public List<Comment> selectCommentByArticleId(Long id){
+		return commentDao.selectCommentByArticleId(id);
 	}
 
 }

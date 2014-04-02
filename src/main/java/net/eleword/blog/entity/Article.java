@@ -11,7 +11,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-
 /**
  * TODO 此处填写 class 信息
  * 
@@ -38,12 +37,14 @@ public class Article extends IdEntity implements Serializable {
 	private int status;
 
 	private int views;
-	
+
 	private long categoryId;
-	
+
 	private String categoryName;
-	
+
 	private List<Comment> comments;
+
+	private int commentCount;
 
 	@Transient
 	public List<Comment> getComments() {
@@ -54,47 +55,48 @@ public class Article extends IdEntity implements Serializable {
 		this.comments = comments;
 	}
 
-	@Column(name="title",nullable = false)
+	@Column(name = "title", nullable = false)
 	public String getTitle() {
 		return title;
 	}
 
-	@Column(name="content",nullable = false)
+	@Column(name = "content", nullable = false)
 	public String getContent() {
 		return content;
 	}
 
-	@Column(name="keywords")
+	@Column(name = "keywords")
 	public String getKeywords() {
 		return keywords;
 	}
 
-	@Column(name="post_date",updatable=false)
+	@Column(name = "post_date", updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getPostDate() {
 		return postDate;
 	}
 
-	@Column(name="modify_date")
+	@Column(name = "modify_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getModifyDate() {
 		return modifyDate;
 	}
 
-	@Column(name="status")
+	@Column(name = "status")
 	public int getStatus() {
 		return status;
 	}
-	@Column(name="author",nullable = false)
+
+	@Column(name = "author", nullable = false)
 	public String getAuthor() {
 		return author;
 	}
-	
-	@Column(name="category_id")
+
+	@Column(name = "category_id")
 	public long getCategoryId() {
 		return categoryId;
 	}
-	
+
 	@Transient
 	public String getCategoryName() {
 		return categoryName;
@@ -116,8 +118,6 @@ public class Article extends IdEntity implements Serializable {
 		this.modifyDate = modifyDate;
 	}
 
-
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -125,7 +125,7 @@ public class Article extends IdEntity implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+
 	@Column
 	public int getViews() {
 		return views;
@@ -139,7 +139,6 @@ public class Article extends IdEntity implements Serializable {
 		this.keywords = keywords;
 	}
 
-
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
@@ -148,6 +147,13 @@ public class Article extends IdEntity implements Serializable {
 		this.content = content;
 	}
 	
-	
+	@Transient
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 
 }

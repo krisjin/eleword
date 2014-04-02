@@ -81,3 +81,13 @@ body {
 	border-bottom: 2px solid #403c68;
 	margin-bottom: 25px;
 }
+.title-info{
+	font-family: "Microsoft YaHei" ! important;
+	font-size: 12px;
+	color: #660000;
+}
+
+.title-info a,visited{
+	color: #660000;
+}
+

@@ -7,11 +7,11 @@
 			<#list articles as art>
 				<div style="margin-bottom: 36px;">
 				<h4><a href="article/${art.id}">${art.title}</a></h4>
-				<div style="background-color:; padding: 2px 2px">
+				<div class="title-info" style="padding: 2px 2px">
 					<i class="icon-calendar"></i>${art.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp; 
 					<i class="icon-user"></i>${art.author}&nbsp;|&nbsp;
 					<i class="icon-tags"></i><a href="${request.contextPath}/category/${art.categoryId}">${art.categoryName}</a>&nbsp;|&nbsp;
-					<i class="icon-comment"></i>
+					<i class="icon-comment"></i><a href="${request.contextPath}/article/${art.id}#comments">评论(${art.commentCount})</a>
 				</div>
 				<div class="muted" style="padding-top:5px;margin-bottom: 5px;">${art.content}</div>
 				<div style="border-bottom: 1px solid rgb(233,231,239);" ></div>

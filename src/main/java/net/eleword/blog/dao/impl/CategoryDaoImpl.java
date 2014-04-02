@@ -7,6 +7,7 @@ import net.eleword.blog.dao.CategoryDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Category;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -22,7 +23,8 @@ public class CategoryDaoImpl extends HibernateDao<Category,Long> implements Cate
 	}
 
 	public void update(Category entity) {
-		saveOrUpdate(entity);
+		Query query =createQuery("update Category set name=? ,orderValue=?  where id=?", entity.getName(),entity.getOrderValue(),entity.getId());
+		query.executeUpdate();
 	}
 
 	public void deleteById(long id) {

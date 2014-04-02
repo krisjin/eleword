@@ -65,6 +65,7 @@ function validateArticle(){
 		<form class="form-inline" action="usave" method="post">
 		<div class="position-title">修改文章</div>
 		<input type="hidden" value="${article.id}" name="id">
+		<input type="hidden" value="${article.categoryId}" name="rawCategoryId">
 			<div class="">
 				<label class="control-label">文章标题</label> 
 				<input type="text" id="title" name="title" class="input-xxlarge"  value="${article.title}" required> 

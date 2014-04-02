@@ -5,15 +5,12 @@
 		<div id="blog-content" >
 			<div class="page-header" style="text-align: left;">
 			  <h3>${article.title}</h3>
-<!-- 			  <span class="">${article.postDate?string('yyyy-MM-dd')}&nbsp;by ${article.author} 分类:${article.categoryName}</span> -->
-			  
-			  <div style="background-color:; padding: 2px 2px">
+			  <div class="title-info" style="padding: 2px 2px">
 					<i class="icon-calendar"></i>${article.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp; 
 					<i class="icon-user"></i>${article.author}&nbsp;|&nbsp;
 					<i class="icon-tags"></i><a href="${request.contextPath}/category/${article.categoryId}">${article.categoryName}</a>&nbsp;|&nbsp;
-					<i class="icon-comment"></i>
+					<i class="icon-comment"></i><a href="${request.contextPath}/article/${article.id}#comments">评论(${commentCount})</a>
 				</div>
-			  
 			</div>
 			<div style="word-wrap:break-word;">
 				${article.content}

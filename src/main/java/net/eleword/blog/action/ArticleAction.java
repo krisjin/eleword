@@ -98,8 +98,10 @@ public class ArticleAction {
 			@RequestParam(value="content") String content,
 			@RequestParam(value="title") String title,
 			@RequestParam(value="categoryId") Long categoryId,
+			@RequestParam(value="rawCategoryId") Long rawCategoryId,
 			HttpServletRequest request
 			) {
+		
 		Article article = new Article();
 		article.setAuthor("zhagnsan");
 		article.setContent(content);
@@ -108,7 +110,17 @@ public class ArticleAction {
 		article.setTitle(title);
 		article.setId(id);
 		articleService.updateById(article);
-
+		
+		if(rawCategoryId!=categoryId){
+			Category rawCategory = categoryService.selectCategoryById(rawCategoryId);
+			Category newCategory = categoryService.selectCategoryById(categoryId);
+			if(rawCategory.getArticleNumber()>0){
+				rawCategory.setArticleNumber(rawCategory.getArticleNumber()-1);
+				categoryService.update(rawCategory);
+			}
+			newCategory.setArticleNumber(newCategory.getArticleNumber()+1);
+			categoryService.update(newCategory);
+		}
 		return "redirect:/admin/articles";
 	}
 

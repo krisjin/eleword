@@ -48,12 +48,8 @@ public class IndexAction {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String listArticles(HttpServletRequest request, HttpServletResponse response) {
 		Pagination<Article> page = new Pagination<Article>();
-		
 		List<Blog> blog = blogService.queryAllBlogConfig();
-		
-		
 		String pageCount = request.getParameter("page");
-
 		if (StringUtils.isNullOrEmpty(pageCount)) {
 			page.setCurrentPage(1);
 		} else {
@@ -72,16 +68,12 @@ public class IndexAction {
 					art.setCategoryName(category.getName());
 				}
 			}
+			art.setCommentCount(commentService.selectCommentByArticleId(art.getId()).size());
 		}
-		
 		if(blog.size()>0){
 			request.setAttribute("blog", blog.get(0));
 		}
-		
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
-		
-		
-		
 		page.setResultSet(arts);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
@@ -95,8 +87,6 @@ public class IndexAction {
 		Pagination<Comment> commentPage = new Pagination<Comment>();
 		commentPage.setPageSize(15);
 		String pageCount = request.getParameter("page");
-		//String id = request.getParameter("id");
-
 		if (StringUtils.isNullOrEmpty(pageCount)) {
 			commentPage.setCurrentPage(1);
 		} else {
@@ -104,7 +94,6 @@ public class IndexAction {
 		}
 		commentPage.getStartPage();
 		commentPage =commentService.selectCommentWithPageByArticleId(commentPage, Long.valueOf(id));
-		
 		Article article = articleService.queryById(Long.valueOf(id));
 		List<Category> categories = categoryService.selectAll();
 		for (Category cate : categories) {
@@ -114,9 +103,10 @@ public class IndexAction {
 		}
 		User user =userService.selectUserByName(ConstantEnum.admin.toString());
 		List<Blog> blog = blogService.queryAllBlogConfig();
+		
+		request.setAttribute("commentCount", commentService.selectCommentByArticleId(id).size());
 		request.setAttribute("blog", blog.get(0));
 		request.setAttribute("avatar", user.getAvatar());
-//		request.setAttribute("id", id);
 		request.setAttribute("pa", commentPage);
 		request.setAttribute("categories", categories);
 		request.setAttribute("article", article);
