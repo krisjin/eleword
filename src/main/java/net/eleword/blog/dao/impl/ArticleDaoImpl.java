@@ -5,7 +5,6 @@ import java.util.List;
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Article;
-import net.eleword.blog.entity.vo.ArticleArchiveVo;
 import net.eleword.blog.util.Pagination;
 
 import org.springframework.stereotype.Repository;
@@ -54,9 +53,10 @@ public class ArticleDaoImpl extends HibernateDao<Article, Long> implements Artic
 		return findPage(page,hql,categoryId);
 	}
 
-	public List<ArticleArchiveVo> selectArticleArchive() {
-		String hql="select Date_Format(postDate,'%Y-%m') months,count(*) counts from Article  GROUP BY months";
-		return find(hql);
+	public List selectArticleArchive() {
+		String hql="select Date_Format(post_date,'%Y-%m') as months,count(id) as counts from article  GROUP BY months";
+		return createSqlQuery(hql).list();
+//		return find(hql);
 	}
 
 	public Pagination<Article>selectArticleByArchiveDate(Pagination<Article> page,String date) {

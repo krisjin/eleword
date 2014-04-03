@@ -12,6 +12,7 @@ import net.eleword.blog.service.BlogService;
 import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
+import net.eleword.blog.util.DateUtils;
 import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
 
@@ -69,7 +70,8 @@ public class CategoryViewAction  {
 			}
 		}
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
-		
+		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("blog",blogService.queryAllBlogConfig().get(0));
 		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute("categoryId", id);

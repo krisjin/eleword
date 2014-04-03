@@ -21,7 +21,6 @@ public class ConvertUtils {
 	}
 
 	/**
-	 * 
 	 * @Title: convertElementPropertyToList
 	 * @Description: 提取集合中的对象的属性(通过getter函数), 组合成List.
 	 * @param collection
@@ -90,4 +89,6 @@ public class ConvertUtils {
 		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
 		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
 	}
+	
+	
 }

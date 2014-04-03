@@ -1,5 +1,7 @@
 package net.eleword.blog.action;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.service.CommentService;
 import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
+import net.eleword.blog.util.DateUtils;
 import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
 
@@ -60,7 +63,6 @@ public class IndexAction {
 		List<Category> categories = categoryService.selectAll();
 
 		List<Article> arts = page.getResultSet();
-
 		for (Article art : arts) {
 			art.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()), 400));
 			for (Category category : categories) {
@@ -73,8 +75,11 @@ public class IndexAction {
 		if(blog.size()>0){
 			request.setAttribute("blog", blog.get(0));
 		}
+		
+		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		page.setResultSet(arts);
+		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
 		request.setAttribute("avatar", user.getAvatar());
@@ -103,7 +108,8 @@ public class IndexAction {
 		}
 		User user =userService.selectUserByName(ConstantEnum.admin.toString());
 		List<Blog> blog = blogService.queryAllBlogConfig();
-		
+		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("commentCount", commentService.selectCommentByArticleId(id).size());
 		request.setAttribute("blog", blog.get(0));
 		request.setAttribute("avatar", user.getAvatar());
@@ -115,6 +121,57 @@ public class IndexAction {
 
 	}
 
+	
+	@RequestMapping(value="/articles/archive/{date}",method=RequestMethod.GET)
+	public String artilceArchive(@PathVariable("date") String date,HttpServletRequest request) {
+		String encodeDate="";
+		Pagination<Article> page =new Pagination<Article>();
+		String pageCount=request.getParameter("page");
+		
+		if(StringUtils.isNullOrEmpty(pageCount)){
+			page.setCurrentPage(1);
+		}else{
+			page.setCurrentPage(Integer.valueOf(pageCount));
+		}
+		page.getStartPage();
+		try {
+			encodeDate=URLDecoder.decode(date, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		List<Blog> blog = blogService.queryAllBlogConfig();
+		articleService.selectArticleArchiveDateWithPage(page, DateUtils.handleArticleArchiveDate(encodeDate));
+		List<Category> categories = categoryService.selectAll();
+		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		List<Article> arts = page.getResultSet();
+		
+		for (Article art : arts) {
+			art.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()), 400));
+			for (Category category : categories) {
+				if (art.getCategoryId() == category.getId()) {
+					art.setCategoryName(category.getName());
+				}
+			}
+			art.setCommentCount(commentService.selectCommentByArticleId(art.getId()).size());
+		}
+		if(blog.size()>0){
+			request.setAttribute("blog", blog.get(0));
+		}
+		
+		
+		page.setResultSet(arts);
+		request.setAttribute("articleArchive", articleArchive);
+		request.setAttribute("categories", categories);
+		request.setAttribute("pa", page);
+		request.setAttribute("avatar", user.getAvatar());
+		request.setAttribute(ConstantEnum.pageTitle.toString(), encodeDate+":文章存档");
+		request.setAttribute("archiveDate", encodeDate);
+		return "artilceArchive.htm";
+	}
+	
+	
 	public ArticleService getArticleService() {
 		return articleService;
 	}

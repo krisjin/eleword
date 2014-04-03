@@ -9,7 +9,7 @@
 		<ul class="unstyled">
 		<#list categories as category>
 			<li>
-			<a href="${request.contextPath}/category/${category.id}">${category.name}(${category.articleNumber})</a>
+			<a href="${request.contextPath}/category/${category.id}">${category.name}<span class="text-error">(${category.articleNumber})</span></a>
 		 	</li>
 	    </#list>
 	    </ul>
@@ -23,5 +23,21 @@
 	</div>
 	<div>
 		<a href="#">ddddddddddddddddd</a>
+	</div>
+	
+	<h4>文章存档</h4>
+	<div class="progress" style="height: 2px;">
+		<div class="bar bar-success" style="width: 35%;"></div>
+		<div class="bar bar-warning" style="width: 32%;"></div>
+		<div class="bar bar-danger" style="width: 33%;"></div>
+	</div>
+	<div>
+		<ul class="unstyled">
+		<#list articleArchive as aa>
+			<li>
+			<a href="${request.contextPath}/articles/archive/${aa[0]}">${aa[0]}<span class="text-error">(${aa[1]})</span></a>
+			</li>
+		</#list>
+		</ul>
 	</div>
 </div>

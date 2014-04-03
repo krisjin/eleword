@@ -59,4 +59,12 @@ public class ArticleService {
 		return articleDao.selectArticleWithPageByCategoryId(page,categoryId);
 	}
 	
+	public List queryArticleArchive(){
+		return articleDao.selectArticleArchive();
+	}
+	
+	public Pagination<Article> selectArticleArchiveDateWithPage(Pagination<Article> page, String date){
+		
+		return articleDao.selectArticleByArchiveDate(page, date);
+	}
 }
