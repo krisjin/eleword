@@ -23,7 +23,6 @@ public class Folder extends IdEntity implements Serializable {
 
 	private int sort;
 
-	private int count;
 
 	private int status;
 
@@ -96,14 +95,6 @@ public class Folder extends IdEntity implements Serializable {
 		this.sort = sort;
 	}
 
-	@Column(name = "count")
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
 
 	@Column(name = "status")
 	public int getStatus() {

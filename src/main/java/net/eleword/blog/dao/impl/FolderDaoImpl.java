@@ -31,5 +31,6 @@ public class FolderDaoImpl extends HibernateDao<Folder,Long> implements FolderDa
 	public Folder select(long id) {
 		
 		return get(id);
-	}}
+	}
+	}
 
