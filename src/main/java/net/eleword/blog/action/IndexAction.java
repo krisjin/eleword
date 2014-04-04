@@ -166,7 +166,7 @@ public class IndexAction {
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
 		request.setAttribute("avatar", user.getAvatar());
-		request.setAttribute(ConstantEnum.pageTitle.toString(), encodeDate+":文章存档");
+		request.setAttribute(ConstantEnum.pageTitle.toString(), encodeDate+":文章归档");
 		request.setAttribute("archiveDate", encodeDate);
 		return "artilceArchive.htm";
 	}

@@ -4,11 +4,11 @@
 	<div id="blog-container">
 		<#include "silder.htm">
 		<div id="blog-content" >
-		<h3>${archiveDate}文章存档</h3>
+		<h3>${archiveDate}文章归档</h3>
 		<hr>
 			<#list articles as art>
 				<div style="margin-bottom: 36px;">
-				<h4><a href="article/${art.id}">${art.title}</a></h4>
+				<h4><a href="${request.contextPath}/article/${art.id}">${art.title}</a></h4>
 				<div class="title-info" style="padding: 2px 2px">
 					<i class="icon-calendar"></i>${art.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp; 
 					<i class="icon-user"></i>${art.author}&nbsp;|&nbsp;

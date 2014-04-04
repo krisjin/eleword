@@ -10,6 +10,7 @@ import net.eleword.blog.entity.User;
 import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.BlogService;
 import net.eleword.blog.service.CategoryService;
+import net.eleword.blog.service.CommentService;
 import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.DateUtils;
@@ -42,6 +43,9 @@ public class CategoryViewAction  {
 	@Autowired
 	private BlogService blogService;
 	
+	@Autowired
+	private CommentService commentService;
+	
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
 	public String category(@PathVariable("id") Long id,HttpServletRequest request) {
 
@@ -68,14 +72,17 @@ public class CategoryViewAction  {
 					tmpCategoryName = category.getName();
 				}
 			}
+			art.setCommentCount(commentService.selectCommentByArticleId(art.getId()).size());
 		}
+		page.setResultSet(arts);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("blog",blogService.queryAllBlogConfig().get(0));
 		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute("categoryId", id);
-		page.setResultSet(arts);
+		
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
 		request.setAttribute(ConstantEnum.pageTitle.toString(), tmpCategoryName + "分类的文章");

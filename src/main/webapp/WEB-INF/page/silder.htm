@@ -1,43 +1,36 @@
 <div id="blog-sidebar">
-	<h4>分类目录</h4>
-	<div class="progress" style="height: 2px;">
-		<div class="bar bar-success" style="width: 35%;"></div>
-		<div class="bar bar-warning" style="width: 32%;"></div>
-		<div class="bar bar-danger" style="width: 33%;"></div>
-	</div>
+	<div class="">
+	<h4 class="">分类目录</h4>
 	<div>
 		<ul class="unstyled">
 		<#list categories as category>
-			<li>
-			<a href="${request.contextPath}/category/${category.id}">${category.name}<span class="text-error">(${category.articleNumber})</span></a>
+			<li style="padding-bottom: 4px;">
+			<a href="${request.contextPath}/category/${category.id}" title="${category.name}">${category.name}<span class="text-error">(${category.articleNumber})</span></a>
 		 	</li>
 	    </#list>
 	    </ul>
 	</div>
-
-	<h4>最近文章</h4>
-	<div class="progress" style="height: 2px;">
-		<div class="bar bar-success" style="width: 35%;"></div>
-		<div class="bar bar-warning" style="width: 32%;"></div>
-		<div class="bar bar-danger" style="width: 33%;"></div>
 	</div>
+<hr>
+<div class="">
+	<h4>近期文章</h4>
 	<div>
 		<a href="#">ddddddddddddddddd</a>
 	</div>
-	
-	<h4>文章存档</h4>
-	<div class="progress" style="height: 2px;">
-		<div class="bar bar-success" style="width: 35%;"></div>
-		<div class="bar bar-warning" style="width: 32%;"></div>
-		<div class="bar bar-danger" style="width: 33%;"></div>
 	</div>
+	<hr>
+	
+	<div class="">
+	<h4>文章归档</h4>
 	<div>
-		<ul class="unstyled">
+		<ul class="unstyled" >
 		<#list articleArchive as aa>
-			<li>
-			<a href="${request.contextPath}/articles/archive/${aa[0]}">${aa[0]}<span class="text-error">(${aa[1]})</span></a>
+			<li style="padding-bottom: 4px;">
+				<a href="${request.contextPath}/articles/archive/${aa[0]}" >${aa[0]}<span class="text-error">(${aa[1]})</span></a>
 			</li>
 		</#list>
 		</ul>
+	</div>
+	
 	</div>
 </div>

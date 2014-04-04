@@ -91,3 +91,6 @@ body {
 	color: #660000;
 }
 
+.category-title ul li{
+	height: 46px;
+}

@@ -54,13 +54,13 @@ public class ArticleDaoImpl extends HibernateDao<Article, Long> implements Artic
 	}
 
 	public List selectArticleArchive() {
-		String hql="select Date_Format(post_date,'%Y-%m') as months,count(id) as counts from article  GROUP BY months";
+		String hql="select Date_Format(post_date,'%Y-%m') as months,count(id) as counts from article  GROUP BY months order by months desc";
 		return createSqlQuery(hql).list();
 //		return find(hql);
 	}
 
 	public Pagination<Article>selectArticleByArchiveDate(Pagination<Article> page,String date) {
-		String hql="from Article where DATE_FORMAT(postDate,'%Y-%m')='"+date+"'" +"";
+		String hql="from Article where DATE_FORMAT(postDate,'%Y-%m')='"+date+"' order by postDate desc";
 		return findPage(page,hql);
 	}
 	
