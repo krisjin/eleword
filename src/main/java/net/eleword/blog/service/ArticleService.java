@@ -67,4 +67,8 @@ public class ArticleService {
 		
 		return articleDao.selectArticleByArchiveDate(page, date);
 	}
+	
+	public List<Article> selectRecnetArticle(int size){
+		return articleDao.selectRecentArticle(size);
+	}
 }

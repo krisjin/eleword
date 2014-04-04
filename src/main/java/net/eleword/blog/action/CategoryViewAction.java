@@ -77,12 +77,13 @@ public class CategoryViewAction  {
 		page.setResultSet(arts);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		List<Article> recentArticle = articleService.selectRecnetArticle(10);
 		
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("blog",blogService.queryAllBlogConfig().get(0));
 		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute("categoryId", id);
-		
+		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
 		request.setAttribute(ConstantEnum.pageTitle.toString(), tmpCategoryName + "分类的文章");

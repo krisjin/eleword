@@ -63,6 +63,11 @@ public class ArticleDaoImpl extends HibernateDao<Article, Long> implements Artic
 		String hql="from Article where DATE_FORMAT(postDate,'%Y-%m')='"+date+"' order by postDate desc";
 		return findPage(page,hql);
 	}
+
+	public List<Article> selectRecentArticle(int size) {
+		String hql="from Article order by postDate desc";
+		return find(hql, 0, size,null);
+	}
 	
 	
 

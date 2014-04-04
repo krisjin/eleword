@@ -5,11 +5,19 @@
 	<div style="float: right;"><a href="${request.contextPath}/admin/colors/add">添加背景色</a></div>
 	<div id="blog-category">
 		<div class="position-title">背景色列表</div>
-		<div class="row">
-			<#list colors as color >
-		  		<div class="span2" title="名称 : ${color.name} | RGB:(${color.code}) | 描述：${color.description}" style="background-color:rgb(${color.code});width:90px;height:80px;margin-bottom:5px;">${color.code}</div>
-		     </#list>
-		</div>
+		<ul class="thumbnails">
+		<#list colors as color >
+              <li class="span2">
+                <div class="thumbnail">
+                  <img  style="width: 150px; height: 120px;background-color: rgb(${color.code});" >
+                  <div class="caption" style="font-size: 12px;">
+                    <span>名称:${color.name}</span><br>
+                     <span>RGB:${color.code}</span>
+                  </div>
+                </div>
+              </li>
+         </#list>
+       </ul>
 	</div>
 </div>
 <#assign paginationData> 

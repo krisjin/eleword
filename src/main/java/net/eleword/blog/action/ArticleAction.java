@@ -1,7 +1,5 @@
 package net.eleword.blog.action;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Category;
+import net.eleword.blog.entity.User;
 import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.CategoryService;
+import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.Pagination;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +67,10 @@ public class ArticleAction {
 			@RequestParam(value="categoryId") Long categoryId,
 			HttpServletRequest request
 			) {
+		User user = (User)request.getSession().getAttribute(ConstantEnum.USER_SESSION.toString());
 		Article article = new Article();
-		article.setAuthor("zhagnsan");
+		
+		article.setAuthor(user.getUsername());
 		article.setContent(content);
 		article.setCategoryId(Long.valueOf(categoryId));
 		article.setTitle(title);
@@ -126,9 +128,16 @@ public class ArticleAction {
 		return "redirect:/admin/articles";
 	}
 
-	@RequestMapping(value="/admin/article/delete/{id}",method=RequestMethod.POST)
-	public String delete(@PathVariable("id") Long id) {
+	@RequestMapping(value="/admin/article/delete/{id}/{categoryId}",method=RequestMethod.POST)
+	public String delete(@PathVariable("id") Long id,@PathVariable("categoryId") Long categoryId) {
 		articleService.deleteById(Long.valueOf(id));
+		Category category = categoryService.selectCategoryById(categoryId);
+		
+		if(category.getArticleNumber()>0){
+			category.setArticleNumber(category.getArticleNumber()-1);
+			categoryService.updateArticleNumber(category);
+		}
+		
 		return "redirect:/admin/articles";
 	}
 	

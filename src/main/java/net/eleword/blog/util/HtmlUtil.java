@@ -219,10 +219,10 @@ public class HtmlUtil {
 	 * @return
 	 */
 	public static String subStrByte(String content, int length) {
+		content=content.trim();
 		int strByteLength = 0;
 		if (null == content || "".equals(content) || content.length() == 0) return "";
 		strByteLength = content.getBytes().length;
-
 		if (strByteLength < length) return content;
 		for (int i = 0; i < length; i++) {
 			String tmp = content.substring(i, i + 1);

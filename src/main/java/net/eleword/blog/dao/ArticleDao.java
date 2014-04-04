@@ -36,4 +36,6 @@ public interface ArticleDao extends BaseDao<Article> {
 	List selectArticleArchive();
 
 	Pagination<Article> selectArticleByArchiveDate(Pagination<Article> page, String date);
+	
+	List<Article> selectRecentArticle(int size);
 }

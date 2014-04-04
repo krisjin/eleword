@@ -60,11 +60,13 @@ public class IndexAction {
 		}
 		page.getStartPage();
 		page = articleService.selectArticleWithPage(page);
+		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		
 		List<Category> categories = categoryService.selectAll();
 
 		List<Article> arts = page.getResultSet();
 		for (Article art : arts) {
-			art.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()), 400));
+			art.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()),300));
 			for (Category category : categories) {
 				if (art.getCategoryId() == category.getId()) {
 					art.setCategoryName(category.getName());
@@ -79,6 +81,7 @@ public class IndexAction {
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		page.setResultSet(arts);
+		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
@@ -109,6 +112,9 @@ public class IndexAction {
 		User user =userService.selectUserByName(ConstantEnum.admin.toString());
 		List<Blog> blog = blogService.queryAllBlogConfig();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		
+		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("commentCount", commentService.selectCommentByArticleId(id).size());
 		request.setAttribute("blog", blog.get(0));
@@ -145,6 +151,7 @@ public class IndexAction {
 		List<Category> categories = categoryService.selectAll();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		List<Article> recentArticle = articleService.selectRecnetArticle(10);
 		List<Article> arts = page.getResultSet();
 		
 		for (Article art : arts) {
@@ -162,6 +169,7 @@ public class IndexAction {
 		
 		
 		page.setResultSet(arts);
+		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
