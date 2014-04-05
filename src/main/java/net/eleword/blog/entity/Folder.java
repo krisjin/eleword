@@ -1,13 +1,16 @@
 package net.eleword.blog.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="folder")
@@ -34,6 +37,8 @@ public class Folder extends IdEntity implements Serializable {
 	private Date updateTime;
 
 	private String type;
+	
+	private List<Folder> folderList =new ArrayList<Folder>();
 
 	@Column(name = "father_id")
 	public long getFatherId() {
@@ -136,5 +141,15 @@ public class Folder extends IdEntity implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	@Transient
+	public List<Folder> getFolderList() {
+		return folderList;
+	}
 
+	public void setFolderList(List<Folder> folderList) {
+		this.folderList = folderList;
+	}
+
+	
 }

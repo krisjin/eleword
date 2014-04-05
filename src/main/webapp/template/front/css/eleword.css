@@ -41,6 +41,13 @@ body {
 	height: auto;
 	margin-right: 8px;
 }
+.blog-folders {
+	float: left;
+	min-height: 500px;
+	width: 502px;
+	height: auto;
+	margin-right: 8px;
+}
 
 .blog-addarticle {
 	float: left;

@@ -3,8 +3,6 @@ package net.eleword.blog.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.eleword.blog.entity.User;
-
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;

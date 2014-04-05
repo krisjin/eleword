@@ -11,11 +11,13 @@ import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Blog;
 import net.eleword.blog.entity.Category;
 import net.eleword.blog.entity.Comment;
+import net.eleword.blog.entity.Folder;
 import net.eleword.blog.entity.User;
 import net.eleword.blog.service.ArticleService;
 import net.eleword.blog.service.BlogService;
 import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.service.CommentService;
+import net.eleword.blog.service.FolderService;
 import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.DateUtils;
@@ -48,6 +50,9 @@ public class IndexAction {
 	@Autowired
 	private BlogService blogService;
 	
+	@Autowired
+	private FolderService folderService;
+	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String listArticles(HttpServletRequest request, HttpServletResponse response) {
 		Pagination<Article> page = new Pagination<Article>();
@@ -79,8 +84,12 @@ public class IndexAction {
 		}
 		
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		List<Folder> folderList = folderService.selectAllFolder();
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		
 		page.setResultSet(arts);
+		
+		request.setAttribute("folderList", folderList);
 		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);

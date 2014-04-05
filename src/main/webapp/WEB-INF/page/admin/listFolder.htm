@@ -1,33 +1,91 @@
-<#import "../macro/pagination.ftl" as pagination>
 <#include "header_admin.htm">
-<#assign articles=pa.resultSet>
+<script>
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			allowFileManager : true,
+			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
+					'justifyright', 'insertorderedlist', 'insertunorderedlist',
+					'clearhtml', 'quickformat', 'formatblock', 'fontname',
+					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'lineheight', 'removeformat', '|',
+					'image', 'multiimage', 'insertfile', 'table', 'hr',
+					'emoticons', 'baidumap', 'link', 'unlink', 'fullscreen' ]
+		});
+
+	});
+</script>
 <div id="blog-container">
+<div class="position-title">添加目录</div>
+			<div class="well" style="margin-left: 0px;padding-left: 0px;" >
+				<form class="form-horizontal" action="${request.contextPath}/admin/folder/post" method="post">
+				 	<div class="control-group">
+					    <label class="control-label">目录名称</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" id="name" name="name" data-rule="目录名称:required;name">
+					    </div>
+					</div>
+					<div class="control-group">
+					    <label class="control-label">英文名称</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" name="ename" id="ename" data-rule="英文名称:required;ename">
+					    </div>
+					</div>
+					<div class="control-group">
+					    <label class="control-label">上级目录</label>
+					    <div class="controls">
+					    	<select name="fatherId">
+					    		<option value="0">根目录</option>
+					    	</select>
+					    </div>
+					</div>
+					<div class="control-group">
+					    <label class="control-label">上级目录</label>
+					    <div class="controls">
+					    	<textarea name="content" id="content" style="width:760px; height: 300px; visibility: false;" ></textarea>
+					    </div>
+					</div>
+					<div class="control-group">
+					    <div class="controls">
+					    <button type="submit" class="btn btn-info">添 加</button>
+					    </div>
+					  </div>
+				</form>
+			</div>
+
 	<div id="blog-category">
-		<div class="position-title">文章列表</div>
+		<div class="position-title">目录列表</div>
 		<form action="" method="post" id="formdel">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
-					<td>序号</td>
-					<td>标题</td>
+					<td>顺序</td>
+					<td>名称</td>
+					<td>英文名称</td>
+					<td>状态</td>
 					<td>操作</td>
 				</tr>
-				<#list articles as art>
+				<#list folderList as folder>
 				<tr>
-					<td>${art_index+1}</td>
-					<td><a href="${request.contextPath}/article/${art.id}">${art.title}</a></td>
+					<td>${folder.sort}</td>
+					<td>${folder.name}</td>
+					<td>${folder.ename}</td>
 					<td>
-						<a href="article/${art.id}">编辑</a> |
-						<a href="#" onclick="return deleteArticle(${art.id});">删除</a></td>
+						<#if (folder.status)==1>
+							显示
+						<#else>
+							隐藏
+						</#if>
+					</td>
+					<td>
+						<a href="${request.contextPath}/article/${folder.id}">编辑</a> |
+						<a href="#" onclick="return deleteArticle(${folder.id});">删除</a>
+					</td>
 				</tr>
 				</#list>
 			</table>
 		</form>
 	</div>
 </div>
-<#assign paginationData> 
-	<@pagination.doPagination "articles"/> 
-</#assign>
-${paginationData}
 <#include "footer_admin.htm">
 <script type="text/javascript">
 <!--

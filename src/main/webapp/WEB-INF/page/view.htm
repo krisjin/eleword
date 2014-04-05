@@ -51,28 +51,28 @@
 				<div class="bar bar-warning" style="width: 32%;"></div>
 				<div class="bar bar-danger" style="width: 33%;"></div>
 			</div>
-			<form action="${request.contextPath}/comments/${article.id}" method="post">
+			<form action="${request.contextPath}/comments/${article.id}" method="post" class="form-inline">
 				<input type="hidden" name="articleId" value="${article.id}">
 				  <div class="control-group" >
-				    <label class="control-label">昵称</label>
+				    
 				    <div class="controls">
-				      <input type="text" id="nickname" name="nickname" data-rule="昵称:required,nickname">
+				      <label class="control-label" style="width:50px;">昵称</label><input type="text" id="nickname" name="nickname" data-rule="昵称:required,nickname">
 				    </div>
 				  </div>
 				  <div class="control-group">
-				    <label class="control-label" >Email</label>
+				   
 				    <div class="controls">
-				      <input type="email" id="email" name="email" data-rule="Email:required,email">
+				       <label class="control-label" style="width:50px;">Email</label><input type="email" id="email" name="email" data-rule="Email:required,email">
 				    </div>
 				  </div>
 				  <div class="control-group">
-				    <label class="control-label">内容</label>
+				    
 				    <div class="controls">
-				      <textarea  id="content" style="height: 80px;width: 380px;" name="content" data-rule="内容:required,content"></textarea>
+				      <label class="control-label" style="width:50px;">内容</label><textarea  id="content" style="height: 80px;width: 205px;" name="content" data-rule="内容:required,content"></textarea>
 				    </div>
 				  </div>
 				  <div class="control-group">
-				    <div class="controls">
+				    <div class="controls" style="margin-left: 50px;">
 				      <button type="submit" class="btn">发表评论</button>
 				    </div>
 				  </div>

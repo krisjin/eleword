@@ -1,5 +1,7 @@
 package net.eleword.blog.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import net.eleword.blog.dao.FolderDao;
@@ -31,6 +33,15 @@ public class FolderDaoImpl extends HibernateDao<Folder, Long> implements FolderD
 
 	public Folder select(long id) {
 		return get(id);
+	}
+
+	public List<Folder> selectAllFolder() {
+		String hql="from Folder where fatherId=0 and status=1";
+		return find(hql);
+	}
+
+	public Folder selectFolderByName(String name) {
+		return findUniqueBy("ename", name);
 	}
 	
 	
