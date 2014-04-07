@@ -3,6 +3,8 @@
 	var editor;
 	KindEditor.ready(function(K) {
 		editor = K.create('textarea[name="content"]', {
+			uploadJson : '${request.contextPath}/template/editor/jsp/upload_json.jsp',
+			fileManagerJson : '${request.contextPath}/template/editor/jsp/file_manager_json.jsp',
 			allowFileManager : true,
 			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
 					'justifyright', 'insertorderedlist', 'insertunorderedlist',
@@ -15,8 +17,10 @@
 
 	});
 </script>
+
 <div id="blog-container">
-<div class="position-title">添加目录</div>
+		<#if flag="add">
+			<div class="position-title">添加目录</div>
 			<div class="well" style="margin-left: 0px;padding-left: 0px;" >
 				<form class="form-horizontal" action="${request.contextPath}/admin/folder/post" method="post">
 				 	<div class="control-group">
@@ -40,7 +44,7 @@
 					    </div>
 					</div>
 					<div class="control-group">
-					    <label class="control-label">上级目录</label>
+					    <label class="control-label">目录内容</label>
 					    <div class="controls">
 					    	<textarea name="content" id="content" style="width:760px; height: 300px; visibility: false;" ></textarea>
 					    </div>
@@ -52,6 +56,47 @@
 					  </div>
 				</form>
 			</div>
+			
+			<#else>
+			<div class="position-title">修改目录</div>
+			<div class="well" style="margin-left: 0px;padding-left: 0px;" >
+				<form class="form-horizontal" action="${request.contextPath}/admin/folder/update" method="post">
+					<input type="hidden" name="id" value="${folder.id}">
+				 	<div class="control-group">
+					    <label class="control-label">目录名称</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" id="name" name="name" value="${folder.name}" data-rule="目录名称:required;name">
+					    </div>
+					</div>
+					<div class="control-group">
+					    <label class="control-label">英文名称</label>
+					    <div class="controls">
+					      <input type="text" class="input-xlarge" name="ename" id="ename" value="${folder.ename}" data-rule="英文名称:required;ename">
+					    </div>
+					</div>
+					<div class="control-group">
+					    <label class="control-label">上级目录</label>
+					    <div class="controls">
+					    	<select name="fatherId">
+					    		<option value="0">根目录</option>
+					    	</select>
+					    </div>
+					</div>
+					<div class="control-group">
+					    <label class="control-label">目录内容</label>
+					    <div class="controls">
+					    	<textarea name="content" id="content" style="width:760px; height: 300px; visibility: false;" >${folder.content}</textarea>
+					    </div>
+					</div>
+					<div class="control-group">
+					    <div class="controls">
+					    <button type="submit" class="btn btn-info">修改</button>
+					   <button type="button" class="btn btn-inverse" onclick="javascript:history.go(-1);">取 消</button>
+					    </div>
+					  </div>
+				</form>
+			</div>
+			</#if>
 
 	<div id="blog-category">
 		<div class="position-title">目录列表</div>
@@ -77,7 +122,7 @@
 						</#if>
 					</td>
 					<td>
-						<a href="${request.contextPath}/article/${folder.id}">编辑</a> |
+						<a href="${request.contextPath}/admin/folder/${folder.id}">编辑</a> |
 						<a href="#" onclick="return deleteArticle(${folder.id});">删除</a>
 					</td>
 				</tr>

@@ -23,7 +23,6 @@ public class FolderDaoImpl extends HibernateDao<Folder, Long> implements FolderD
 
 	public void update(Folder entity) {
 		saveOrUpdate(entity);
-
 	}
 
 	public void deleteById(long id) {
