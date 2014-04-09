@@ -1,16 +1,16 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet
+ * Copyright (C) 2006-2011 kindsoft.net
+ *
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ *******************************************************************************/
 
-KindEditor.plugin('link', function(K) {
+KindEditor.plugin('link', function (K) {
 	var self = this, name = 'link';
 	self.plugin.link = {
-		edit : function() {
+		edit: function () {
 			var lang = self.lang(name + '.'),
 				html = '<div style="padding:20px;">' +
 					//url
@@ -24,13 +24,13 @@ KindEditor.plugin('link', function(K) {
 					'</div>' +
 					'</div>',
 				dialog = self.createDialog({
-					name : name,
-					width : 450,
-					title : self.lang(name),
-					body : html,
-					yesBtn : {
-						name : self.lang('yes'),
-						click : function(e) {
+					name: name,
+					width: 450,
+					title: self.lang(name),
+					body: html,
+					yesBtn: {
+						name: self.lang('yes'),
+						click: function (e) {
 							var url = K.trim(urlBox.val());
 							if (url == 'http://' || K.invalidUrl(url)) {
 								alert(self.lang('invalidUrl'));
@@ -58,7 +58,7 @@ KindEditor.plugin('link', function(K) {
 			urlBox[0].focus();
 			urlBox[0].select();
 		},
-		'delete' : function() {
+		'delete': function () {
 			self.exec('unlink', null);
 		}
 	};

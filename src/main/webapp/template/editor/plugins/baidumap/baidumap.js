@@ -1,19 +1,19 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet
+ * Copyright (C) 2006-2011 kindsoft.net
+ *
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ *******************************************************************************/
 
 // Baidu Maps: http://dev.baidu.com/wiki/map/index.php?title=%E9%A6%96%E9%A1%B5
 
-KindEditor.plugin('baidumap', function(K) {
+KindEditor.plugin('baidumap', function (K) {
 	var self = this, name = 'baidumap', lang = self.lang(name + '.');
 	var mapWidth = K.undef(self.mapWidth, 558);
 	var mapHeight = K.undef(self.mapHeight, 360);
-	self.clickToolbar(name, function() {
+	self.clickToolbar(name, function () {
 		var html = ['<div style="padding:10px 20px;">',
 			'<div class="ke-header">',
 			// left start
@@ -32,13 +32,13 @@ KindEditor.plugin('baidumap', function(K) {
 			'<div class="ke-map" style="width:' + mapWidth + 'px;height:' + mapHeight + 'px;"></div>',
 			'</div>'].join('');
 		var dialog = self.createDialog({
-			name : name,
-			width : mapWidth + 42,
-			title : self.lang(name),
-			body : html,
-			yesBtn : {
-				name : self.lang('yes'),
-				click : function(e) {
+			name: name,
+			width: mapWidth + 42,
+			title: self.lang(name),
+			body: html,
+			yesBtn: {
+				name: self.lang('yes'),
+				click: function (e) {
 					var map = win.map;
 					var centerObj = map.getCenter();
 					var center = centerObj.lng + ',' + centerObj.lat;
@@ -58,7 +58,7 @@ KindEditor.plugin('baidumap', function(K) {
 					self.hideDialog().focus();
 				}
 			},
-			beforeRemove : function() {
+			beforeRemove: function () {
 				searchBtn.remove();
 				if (doc) {
 					doc.write('');
@@ -72,11 +72,13 @@ KindEditor.plugin('baidumap', function(K) {
 			checkbox = K('[name="insertDynamicMap"]', dialog.div),
 			win, doc;
 		var iframe = K('<iframe class="ke-textarea" frameborder="0" src="' + self.pluginsPath + 'baidumap/map.html" style="width:' + mapWidth + 'px;height:' + mapHeight + 'px;"></iframe>');
+
 		function ready() {
 			win = iframe[0].contentWindow;
 			doc = K.iframeDoc(iframe);
 		}
-		iframe.bind('load', function() {
+
+		iframe.bind('load', function () {
 			iframe.unbind('load');
 			if (K.IE) {
 				ready();
@@ -86,7 +88,7 @@ KindEditor.plugin('baidumap', function(K) {
 		});
 		K('.ke-map', div).replaceWith(iframe);
 		// search map
-		searchBtn.click(function() {
+		searchBtn.click(function () {
 			win.search(addressBox.val());
 		});
 	});

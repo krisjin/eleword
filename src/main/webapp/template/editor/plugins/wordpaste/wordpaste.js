@@ -1,28 +1,28 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet
+ * Copyright (C) 2006-2011 kindsoft.net
+ *
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ *******************************************************************************/
 
-KindEditor.plugin('wordpaste', function(K) {
+KindEditor.plugin('wordpaste', function (K) {
 	var self = this, name = 'wordpaste';
-	self.clickToolbar(name, function() {
+	self.clickToolbar(name, function () {
 		var lang = self.lang(name + '.'),
 			html = '<div style="padding:10px 20px;">' +
 				'<div style="margin-bottom:10px;">' + lang.comment + '</div>' +
 				'<iframe class="ke-textarea" frameborder="0" style="width:408px;height:260px;"></iframe>' +
 				'</div>',
 			dialog = self.createDialog({
-				name : name,
-				width : 450,
-				title : self.lang(name),
-				body : html,
-				yesBtn : {
-					name : self.lang('yes'),
-					click : function(e) {
+				name: name,
+				width: 450,
+				title: self.lang(name),
+				body: html,
+				yesBtn: {
+					name: self.lang('yes'),
+					click: function (e) {
 						var str = doc.body.innerHTML;
 						str = K.clearMsWord(str, self.filterMode ? self.htmlTags : K.options.htmlTags);
 						self.insertHtml(str).hideDialog().focus();

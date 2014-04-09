@@ -1,50 +1,54 @@
 <div id="blog-sidebar">
 	<div class="">
-	<h4 class="">分类目录</h4>
-	<div>
-		<ul class="unstyled">
-		<#list categories as category>
-			<li style="padding-bottom: 4px;">
-			<a href="${request.contextPath}/category/${category.id}" title="${category.name}">${category.name}</a>
-			<span class="muted">(${category.articleNumber})</span>
-		 	</li>
-	    </#list>
-	    </ul>
-	</div>
-	</div>
-<hr>
-	<div class="">
-		<h4>最新文章</h4>
+		<h4 class="">分类目录</h4>
+
 		<div>
-			<ul class="unstyled" >
-			<#list recentArticle as ra>
-				<li style="padding-bottom: 4px;">
-					<a href="${request.contextPath}/article/${ra.id}" title="${ra.title}">
-					<#if ((ra.title?length)>13)>
-						${ra.title[0..13]}
-					<#else>
-						${ra.title}
-					</#if>
-					</a>
-				</li>
-			</#list>
+			<ul class="unstyled">
+				<#list categories as category>
+					<li style="padding-bottom: 4px;">
+						<a href="${request.contextPath}/category/${category.id}"
+								title="${category.name}">${category.name}</a>
+						<span class="muted">(${category.articleNumber})</span>
+					</li>
+				</#list>
 			</ul>
 		</div>
 	</div>
 	<hr>
-	
 	<div class="">
-		<h4>文章归档</h4>
+		<h4>最新文章</h4>
+
 		<div>
-			<ul class="unstyled" >
-			<#list articleArchive as aa>
-				<li style="padding-bottom: 4px;">
-					<a href="${request.contextPath}/articles/archive/${aa[0]}" >${aa[0]}</a>
-					<span class="muted">(${aa[1]})</span>
-				</li>
-			</#list>
+			<ul class="unstyled">
+				<#list recentArticle as ra>
+					<li style="padding-bottom: 4px;">
+						<a href="${request.contextPath}/article/${ra.id}" title="${ra.title}">
+							<#if ((ra.title?length)>13)>
+								${ra.title[0..13]}
+								<#else>
+									${ra.title}
+							</#if>
+						</a>
+					</li>
+				</#list>
 			</ul>
 		</div>
-	
+	</div>
+	<hr>
+
+	<div class="">
+		<h4>文章归档</h4>
+
+		<div>
+			<ul class="unstyled">
+				<#list articleArchive as aa>
+					<li style="padding-bottom: 4px;">
+						<a href="${request.contextPath}/articles/archive/${aa[0]}">${aa[0]}</a>
+						<span class="muted">(${aa[1]})</span>
+					</li>
+				</#list>
+			</ul>
+		</div>
+
 	</div>
 </div>

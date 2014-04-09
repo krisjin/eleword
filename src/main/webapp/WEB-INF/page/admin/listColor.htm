@@ -1,27 +1,28 @@
 <#import "../macro/pagination.ftl" as pagination>
-<#include "header_admin.htm">
-<#assign colors=pa.resultSet>
-<div id="blog-container">
-	<div style="float: right;"><a href="${request.contextPath}/admin/colors/add">添加背景色</a></div>
-	<div id="blog-category">
-		<div class="position-title">背景色列表</div>
-		<ul class="thumbnails">
-		<#list colors as color >
-              <li class="span2">
-                <div class="thumbnail">
-                  <img  style="width: 150px; height: 120px;background-color: rgb(${color.code});" >
-                  <div class="caption" style="font-size: 12px;">
-                    <span>名称:${color.name}</span><br>
-                     <span>RGB:${color.code}</span>
-                  </div>
-                </div>
-              </li>
-         </#list>
-       </ul>
-	</div>
-</div>
-<#assign paginationData> 
-	<@pagination.doPagination "color"/> 
-</#assign>
-${paginationData}
-<#include "footer_admin.htm">
+	<#include "header_admin.htm">
+		<#assign colors=pa.resultSet>
+			<div id="blog-container">
+				<div style="float: right;"><a href="${request.contextPath}/admin/colors/add">添加背景色</a></div>
+				<div id="blog-category">
+					<div class="position-title">背景色列表</div>
+					<ul class="thumbnails">
+						<#list colors as color >
+							<li class="span2">
+								<div class="thumbnail">
+									<img style="width: 150px; height: 120px;background-color: rgb(${color.code});">
+
+									<div class="caption" style="font-size: 12px;">
+										<span>名称:${color.name}</span><br>
+										<span>RGB:${color.code}</span>
+									</div>
+								</div>
+							</li>
+						</#list>
+					</ul>
+				</div>
+			</div>
+			<#assign paginationData>
+				<@pagination.doPagination "color"/>
+			</#assign>
+			${paginationData}
+			<#include "footer_admin.htm">

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd
-	         http://www.springframework.org/schema/lang
-	         http://www.springframework.org/schema/lang/spring-lang.xsd      
+
+
 	         http://www.springframework.org/schema/tx   
 	         http://www.springframework.org/schema/tx/spring-tx.xsd    
 	         http://www.springframework.org/schema/aop     
@@ -22,52 +25,54 @@
 
 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-		<property name="ignoreResourceNotFound" value="true" />
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+		<property name="ignoreResourceNotFound" value="true"/>
 		<property name="locations">
 			<list>
 				<value>classpath*:/application.properties</value>
 			</list>
 		</property>
 	</bean>
-	<context:annotation-config />
+	<context:annotation-config/>
 
-	<context:component-scan base-package="net.eleword.blog" />
-	<mvc:annotation-driven />
+	<context:component-scan base-package="net.eleword.blog"/>
+	<mvc:annotation-driven/>
 
-	<mvc:default-servlet-handler />
+	<mvc:default-servlet-handler/>
 
-	<tx:annotation-driven />
+	<tx:annotation-driven/>
 
-	<task:annotation-driven />
+	<task:annotation-driven/>
 
-	<cache:annotation-driven />
+	<cache:annotation-driven/>
 
 
-	<bean class="net.eleword.blog.util.SpringContextHolder" lazy-init="false" />
+	<bean class="net.eleword.blog.util.SpringContextHolder" lazy-init="false"/>
 
 	<!-- spring自己的换管理器，这里定义了两个缓存位置名称 ，既注解中的value -->
 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
 		<property name="caches">
 			<set>
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="config" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="folder" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="article" />
-				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="attachment" />
+				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default"/>
+				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="config"/>
+				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="folder"/>
+				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="article"/>
+				<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="attachment"/>
 			</set>
 		</property>
 	</bean>
 	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding" value="utf-8" />
-		<property name="maxUploadSize" value="10485760000" />
-		<property name="maxInMemorySize" value="40960" />
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="maxUploadSize" value="10485760000"/>
+		<property name="maxInMemorySize" value="40960"/>
 	</bean>
 	<!-- FreeMarker的配置 -->
 	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/" /><!-- 指定路径 -->
-		<property name="defaultEncoding" value="UTF-8" /><!-- 指定编码格式 -->
+		<property name="templateLoaderPath" value="/"/>
+		<!-- 指定路径 -->
+		<property name="defaultEncoding" value="UTF-8"/>
+		<!-- 指定编码格式 -->
 		<property name="freemarkerSettings">
 			<props>
 				<prop key="template_update_delay">10</prop>
@@ -87,36 +92,37 @@
 	<!-- 配置 FreeMarker视图解析器 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
-		<property name="cache" value="false" />
-		<property name="prefix" value="/WEB-INF/page/" />
-		<property name="suffix" value="" /><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
-		<property name="contentType" value="text/html;charset=utf-8" />
-		<property name="exposeRequestAttributes" value="true" />
-		<property name="exposeSessionAttributes" value="true" />
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="requestContextAttribute" value="request" />
+		<property name="cache" value="false"/>
+		<property name="prefix" value="/WEB-INF/page/"/>
+		<property name="suffix" value=""/>
+		<!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+		<property name="contentType" value="text/html;charset=utf-8"/>
+		<property name="exposeRequestAttributes" value="true"/>
+		<property name="exposeSessionAttributes" value="true"/>
+		<property name="exposeSpringMacroHelpers" value="true"/>
+		<property name="requestContextAttribute" value="request"/>
 	</bean>
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<!-- Connection Info -->
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="maxActive" value="${datasource.maxActive}" />
-		<property name="maxIdle" value="${datasource.maxIdle}" />
-		<property name="maxWait" value="${datasource.maxWait}" />
-		<property name="validationQuery" value="${validationQuery}" />
-		<property name="testWhileIdle" value="${testWhileIdle}" />
-		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
-		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="maxActive" value="${datasource.maxActive}"/>
+		<property name="maxIdle" value="${datasource.maxIdle}"/>
+		<property name="maxWait" value="${datasource.maxWait}"/>
+		<property name="validationQuery" value="${validationQuery}"/>
+		<property name="testWhileIdle" value="${testWhileIdle}"/>
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/>
 	</bean>
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource"/>
 		<property name="namingStrategy">
-			<bean class="org.hibernate.cfg.ImprovedNamingStrategy" />
+			<bean class="org.hibernate.cfg.ImprovedNamingStrategy"/>
 		</property>
 		<property name="hibernateProperties">
 			<props>
@@ -130,27 +136,27 @@
 				<prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
 			</props>
 		</property>
-		<property name="packagesToScan" value="net.eleword.blog.entity" />
+		<property name="packagesToScan" value="net.eleword.blog.entity"/>
 	</bean>
 
 	<bean id="defaultTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<!-- 配置事务的传播特性 -->
 	<tx:advice id="txAdvice" transaction-manager="defaultTransactionManager">
 		<tx:attributes>
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="del*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="save*" propagation="REQUIRED" />
-			<tx:method name="*" read-only="true" />
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="*" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
 
 	<!-- 那些类的哪些方法参与事务 -->
 	<aop:config>
-		<aop:pointcut id="allManagerMethod" expression="execution(* net.eleword.blog.service..*.*(..))" />
-		<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice" />
+		<aop:pointcut id="allManagerMethod" expression="execution(* net.eleword.blog.service..*.*(..))"/>
+		<aop:advisor pointcut-ref="allManagerMethod" advice-ref="txAdvice"/>
 	</aop:config>
 </beans>

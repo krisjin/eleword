@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-2-11下午4:41:56
  */
@@ -35,7 +35,7 @@ public class MD5Util {
 
 		return hexString.toString();
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(encrypt("admin"));
 	}

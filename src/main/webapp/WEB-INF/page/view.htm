@@ -1,85 +1,99 @@
 <#import "macro/pagination-comment.ftl" as pagination>
-<#include "header.htm"> 
-	<div id="blog-container">
-		<#include "silder.htm">
-		<div id="blog-content" >
-			<div class="page-header" style="text-align: left;">
-			  <h3>${article.title}</h3>
-			  <div class="title-info" style="padding: 2px 2px">
-					<i class="icon-calendar"></i>${article.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp; 
-					<i class="icon-user"></i>${article.author}&nbsp;|&nbsp;
-					<i class="icon-tags"></i><a href="${request.contextPath}/category/${article.categoryId}">${article.categoryName}</a>&nbsp;|&nbsp;
-					<i class="icon-comment"></i><a href="${request.contextPath}/article/${article.id}#comments">评论(${commentCount})</a>
+	<#include "header.htm">
+		<div id="blog-container">
+			<#include "silder.htm">
+				<div id="blog-content">
+					<div class="page-header" style="text-align: left;">
+						<h3>${article.title}</h3>
+
+						<div class="title-info" style="padding: 2px 2px">
+							<i class="icon-calendar"></i>${article.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp;
+							<i class="icon-user"></i>${article.author}&nbsp;|&nbsp;
+							<i class="icon-tags"></i><a
+								href="${request.contextPath}/category/${article.categoryId}">${article.categoryName}</a>&nbsp;|&nbsp;
+							<i class="icon-comment"></i><a
+								href="${request.contextPath}/article/${article.id}#comments">评论(${commentCount})</a>
+						</div>
+					</div>
+					<div style="word-wrap:break-word;">
+						${article.content}
+					</div>
+					<div style="border-bottom: 1px solid white;margin-top: 25px;"></div>
+
+					<#assign comments=pa.resultSet>
+						<#if (comments?size>0)>
+							<h5>评论列表</h5>
+
+							<div class="progress" style="height: 1px;">
+								<div class="bar bar-success" style="width: 35%;"></div>
+								<div class="bar bar-warning" style="width: 32%;"></div>
+								<div class="bar bar-danger" style="width: 33%;"></div>
+							</div>
+							<div id="comments">
+								<#list comments as comment>
+									<div class="media">
+										<a class="pull-left">
+											<img class="img-rounded"
+													src="${request.contextPath}/template/front/img/defaultface.png">
+										</a>
+
+										<div class="media-body" style="font-size: 10pt;">
+											<div class="media-heading">
+												<span style="font-size: 14px;font-weight: bold;color: #666666;">${comment.commentNickname}</span><span
+													style="font-size: 9pt;color: #666666;">&nbsp;发表于&nbsp;${comment.commentDate}</span>
+											</div>
+											${comment.commentContent}
+										</div>
+									</div>
+									<hr>
+								</#list>
+								<#assign paginationData> <@pagination.doPagination "article"/></#assign>
+								${paginationData}
+							</div>
+						</#if>
+
+
+						<h5>发表评论</h5>
+
+						<div class="progress" style="height: 1px;">
+							<div class="bar bar-success" style="width: 35%;"></div>
+							<div class="bar bar-warning" style="width: 32%;"></div>
+							<div class="bar bar-danger" style="width: 33%;"></div>
+						</div>
+						<form action="${request.contextPath}/comments/${article.id}" method="post" class="form-inline">
+							<input type="hidden" name="articleId" value="${article.id}">
+
+							<div class="control-group">
+
+								<div class="controls">
+									<label class="control-label" style="width:50px;">昵称</label><input type="text"
+										id="nickname" name="nickname" data-rule="昵称:required,nickname">
+								</div>
+							</div>
+							<div class="control-group">
+
+								<div class="controls">
+									<label class="control-label" style="width:50px;">Email</label><input type="email"
+										id="email" name="email" data-rule="Email:required,email">
+								</div>
+							</div>
+							<div class="control-group">
+
+								<div class="controls">
+									<label class="control-label" style="width:50px;">内容</label><textarea id="content"
+										style="height: 80px;width: 205px;" name="content"
+										data-rule="内容:required,content"></textarea>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls" style="margin-left: 50px;">
+									<button type="submit" class="btn">发表评论</button>
+								</div>
+							</div>
+						</form>
 				</div>
-			</div>
-			<div style="word-wrap:break-word;">
-				${article.content}
-			</div>
-			<div style="border-bottom: 1px solid white;margin-top: 25px;"></div>
-			
-			<#assign comments=pa.resultSet>
-			<#if (comments?size>0)>
-			<h5>评论列表</h5>
-			<div class="progress" style="height: 1px;">
-				<div class="bar bar-success" style="width: 35%;"></div>
-				<div class="bar bar-warning" style="width: 32%;"></div>
-				<div class="bar bar-danger" style="width: 33%;"></div>
-			</div>
-			<div id="comments">
-			<#list comments as comment>
-			<div class="media">
-              <a class="pull-left">
-                <img class="img-rounded" src="${request.contextPath}/template/front/img/defaultface.png">
-              </a>
-              <div class="media-body" style="font-size: 10pt;">
-                <div class="media-heading">
-                <span style="font-size: 14px;font-weight: bold;color: #666666;">${comment.commentNickname}</span><span style="font-size: 9pt;color: #666666;">&nbsp;发表于&nbsp;${comment.commentDate}</span>
-                </div>
-                	${comment.commentContent}
-              </div>
-            </div>
-             <hr>
-            </#list>
-            	<#assign paginationData> <@pagination.doPagination "article"/> </#assign> ${paginationData}
-             </div>
-            </#if>
-            
-            
-            <h5>发表评论</h5>
-            <div class="progress" style="height: 1px;">
-				<div class="bar bar-success" style="width: 35%;"></div>
-				<div class="bar bar-warning" style="width: 32%;"></div>
-				<div class="bar bar-danger" style="width: 33%;"></div>
-			</div>
-			<form action="${request.contextPath}/comments/${article.id}" method="post" class="form-inline">
-				<input type="hidden" name="articleId" value="${article.id}">
-				  <div class="control-group" >
-				    
-				    <div class="controls">
-				      <label class="control-label" style="width:50px;">昵称</label><input type="text" id="nickname" name="nickname" data-rule="昵称:required,nickname">
-				    </div>
-				  </div>
-				  <div class="control-group">
-				   
-				    <div class="controls">
-				       <label class="control-label" style="width:50px;">Email</label><input type="email" id="email" name="email" data-rule="Email:required,email">
-				    </div>
-				  </div>
-				  <div class="control-group">
-				    
-				    <div class="controls">
-				      <label class="control-label" style="width:50px;">内容</label><textarea  id="content" style="height: 80px;width: 205px;" name="content" data-rule="内容:required,content"></textarea>
-				    </div>
-				  </div>
-				  <div class="control-group">
-				    <div class="controls" style="margin-left: 50px;">
-				      <button type="submit" class="btn">发表评论</button>
-				    </div>
-				  </div>
-			</form>
 		</div>
-	</div>
-	<div style="padding-top: 30px; clear: both;">
-		<hr>
-	</div>
-<#include "footer.htm">
+		<div style="padding-top: 30px; clear: both;">
+			<hr>
+		</div>
+		<#include "footer.htm">

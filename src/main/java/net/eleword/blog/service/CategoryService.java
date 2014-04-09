@@ -1,16 +1,15 @@
 package net.eleword.blog.service;
 
-import java.util.List;
-
 import net.eleword.blog.dao.CategoryDao;
 import net.eleword.blog.entity.Category;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-27上午10:13:09
  */
@@ -40,8 +39,8 @@ public class CategoryService {
 	public void update(Category category) {
 		categoryDao.update(category);
 	}
-	
-	public void updateArticleNumber(Category category){
+
+	public void updateArticleNumber(Category category) {
 		categoryDao.updateArticleNumber(category);
 	}
 }

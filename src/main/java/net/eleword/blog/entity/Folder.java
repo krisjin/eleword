@@ -1,19 +1,13 @@
 package net.eleword.blog.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 @Entity
-@Table(name="folder")
+@Table(name = "folder")
 public class Folder extends IdEntity implements Serializable {
 
 	private long fatherId;
@@ -37,8 +31,8 @@ public class Folder extends IdEntity implements Serializable {
 	private Date updateTime;
 
 	private String type;
-	
-	private List<Folder> folderList =new ArrayList<Folder>();
+
+	private List<Folder> folderList = new ArrayList<Folder>();
 
 	@Column(name = "father_id")
 	public long getFatherId() {
@@ -49,7 +43,7 @@ public class Folder extends IdEntity implements Serializable {
 		this.fatherId = fatherId;
 	}
 
-	@Column(name = "ename" ,nullable=false)
+	@Column(name = "ename", nullable = false)
 	public String getEname() {
 		return ename;
 	}
@@ -58,7 +52,7 @@ public class Folder extends IdEntity implements Serializable {
 		this.ename = ename;
 	}
 
-	@Column(name = "name",nullable=false)
+	@Column(name = "name", nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -141,7 +135,7 @@ public class Folder extends IdEntity implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	@Transient
 	public List<Folder> getFolderList() {
 		return folderList;
@@ -151,5 +145,5 @@ public class Folder extends IdEntity implements Serializable {
 		this.folderList = folderList;
 	}
 
-	
+
 }

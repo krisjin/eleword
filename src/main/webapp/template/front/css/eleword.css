@@ -9,7 +9,7 @@ body {
 	max-width: 970px;
 }
 
-.container-narrow>hr {
+.container-narrow > hr {
 	margin: 30px 0;
 }
 
@@ -41,6 +41,7 @@ body {
 	height: auto;
 	margin-right: 8px;
 }
+
 .blog-folders {
 	float: left;
 	min-height: 500px;
@@ -77,7 +78,7 @@ body {
 	margin: 60px 0;
 }
 
-.marketing p+h4 {
+.marketing p + h4 {
 	margin-top: 28px;
 }
 
@@ -88,16 +89,17 @@ body {
 	border-bottom: 2px solid #403c68;
 	margin-bottom: 25px;
 }
-.title-info{
+
+.title-info {
 	font-family: "Microsoft YaHei" ! important;
 	font-size: 12px;
 	color: #660000;
 }
 
-.title-info a,visited{
+.title-info a, visited {
 	color: #660000;
 }
 
-.category-title ul li{
+.category-title ul li {
 	height: 46px;
 }

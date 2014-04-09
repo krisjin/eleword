@@ -1,16 +1,17 @@
 package net.eleword.blog.util;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang3.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 public class HttpUtils {
 
 	/**
 	 * 得到请求的IP地址
-	 * 
+	 *
 	 * @param request
+	 *
 	 * @return
 	 */
 	public static String getIp(HttpServletRequest request) {
@@ -29,7 +30,9 @@ public class HttpUtils {
 
 	/**
 	 * 得到请求的根目录
+	 *
 	 * @param request
+	 *
 	 * @return
 	 */
 	public static String getBasePath(HttpServletRequest request) {
@@ -40,8 +43,9 @@ public class HttpUtils {
 
 	/**
 	 * 得到结构目录
-	 * 
+	 *
 	 * @param request
+	 *
 	 * @return
 	 */
 	public static String getContextPath(HttpServletRequest request) {

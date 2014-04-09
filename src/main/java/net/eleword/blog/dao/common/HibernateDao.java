@@ -1,34 +1,26 @@
 package net.eleword.blog.dao.common;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import net.eleword.blog.dao.common.PropertyFilter.MatchType;
 import net.eleword.blog.util.Pagination;
 import net.eleword.blog.util.ReflectionUtils;
-
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.hibernate.impl.CriteriaImpl;
 import org.hibernate.transform.ResultTransformer;
 import org.springframework.util.Assert;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-27上午6:42:20
  */
@@ -48,26 +40,26 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 	public HibernateDao(final SessionFactory sessionFactory, final Class<T> entityClass) {
 		super(sessionFactory, entityClass);
 	}
-	
+
 	/**
-	 * 
+	 * @param page
+	 *
+	 * @return
 	 * @Title: getAll
 	 * @Description: 分页获取全部对象.
-	 * @param page
-	 * @return
 	 */
 	public Pagination<T> getAll(final Pagination<T> page) {
 		return findPage(page);
 	}
-	
+
 	/**
-	 * 
+	 * @param page   分页参数. 注意不支持其中的orderBy参数.
+	 * @param hql    hql语句.
+	 * @param values 数量可变的查询参数，按顺序绑定
+	 *
+	 * @return 分页查询结果
 	 * @Title: findPage
 	 * @Description: 按HQL分页查询.
-	 * @param page 分页参数. 注意不支持其中的orderBy参数.
-	 * @param hql hql语句.
-	 * @param values 数量可变的查询参数，按顺序绑定
-	 * @return 分页查询结果
 	 */
 	@SuppressWarnings("unchecked")
 	public Pagination<T> findPage(final Pagination<T> page, final String hql, final Object... values) {
@@ -86,15 +78,15 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 		page.setResultSet(result);
 		return page;
 	}
-	
+
 	/**
-	 * 
-	 * @Title: findPage
-	 * @Description: 按HQL分页查询.
-	 * @param page 分页参数. 注意不支持其中的orderBy参数.
+	 * @param page   分页参数. 注意不支持其中的orderBy参数.
 	 * @param hql
 	 * @param values 命名参数,按名称绑定
+	 *
 	 * @return
+	 * @Title: findPage
+	 * @Description: 按HQL分页查询.
 	 */
 	@SuppressWarnings("unchecked")
 	public Pagination<T> findPage(final Pagination<T> page, final String hql, final Map<String, ?> values) {
@@ -113,14 +105,14 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 		page.setResultSet(result);
 		return page;
 	}
-	
+
 	/**
-	 * 
+	 * @param page       分页参数.
+	 * @param criterions 数量可变的Criterion.
+	 *
+	 * @return 分页查询结果
 	 * @Title: findPage
 	 * @Description: 按Criteria分页查询.
-	 * @param page 分页参数.
-	 * @param criterions 数量可变的Criterion.
-	 * @return 分页查询结果
 	 */
 	@SuppressWarnings("unchecked")
 	protected Pagination<T> findPage(final Pagination<T> page, final Criterion... criterions) {
@@ -139,31 +131,31 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 		page.setResultSet(result);
 		return page;
 	}
-	
+
 	/**
-	 * 
-	 * @Title: setPageParameterToQuery
-	 * @Description: 设置分页参数到Query对象,辅助函数.
 	 * @param q
 	 * @param page
+	 *
 	 * @return
+	 * @Title: setPageParameterToQuery
+	 * @Description: 设置分页参数到Query对象, 辅助函数.
 	 */
 	protected Query setPageParameterToQuery(final Query q, final Pagination<T> page) {
 
 		Assert.isTrue(page.getPageSize() > 0, "Page Size must larger than zero");
 
 		q.setFirstResult(page.getStartPage() - 1);
-		q.setMaxResults(page.getPageSize()+page.getStartPage());
+		q.setMaxResults(page.getPageSize() + page.getStartPage());
 		return q;
 	}
-	
+
 	/**
-	 * 
-	 * @Title: setPageParameterToCriteria
-	 * @Description: 设置分页参数到Criteria对象,辅助函数.
 	 * @param c
 	 * @param page
+	 *
 	 * @return
+	 * @Title: setPageParameterToCriteria
+	 * @Description: 设置分页参数到Criteria对象, 辅助函数.
 	 */
 	protected Criteria setPageParameterToCriteria(final Criteria c, final Pagination<T> page) {
 
@@ -190,33 +182,33 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 	}
 
 	/**
-	 * 
+	 * @param hql
+	 * @param values
+	 *
+	 * @return
 	 * @Title: countHqlResult
 	 * @Description: 执行count查询获得本次Hql查询所能获得的对象总数.
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
-	 * @param hql
-	 * @param values
-	 * @return
 	 */
 	protected long countHqlResult(final String hql, final Object... values) {
 		String countHql = prepareCountHql(hql);
 
 		try {
 			Long count = findUnique(countHql, values);
-			return count == null?0:count;
+			return count == null ? 0 : count;
 		} catch (Exception e) {
 			throw new RuntimeException("hql can't be auto count, hql is:" + countHql, e);
 		}
 	}
 
 	/**
-	 * 
+	 * @param hql
+	 * @param values
+	 *
+	 * @return
 	 * @Title: countHqlResult
 	 * @Description: 执行count查询获得本次Hql查询所能获得的对象总数.
 	 * 本函数只能自动处理简单的hql语句,复杂的hql查询请另行编写count语句查询.
-	 * @param hql
-	 * @param values
-	 * @return
 	 */
 	protected long countHqlResult(final String hql, final Map<String, ?> values) {
 		String countHql = prepareCountHql(hql);
@@ -230,11 +222,11 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 	}
 
 	/**
-	 * 
+	 * @param orgHql
+	 *
+	 * @return
 	 * @Title: prepareCountHql
 	 * @Description: 去除order by
-	 * @param orgHql
-	 * @return
 	 */
 	private String prepareCountHql(String orgHql) {
 //		String fromHql = orgHql;
@@ -255,13 +247,13 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 		String countHql = "select count(*) " + fromHql;
 		return countHql;
 	}
-	
+
 	/**
-	 * 
+	 * @param c
+	 *
+	 * @return
 	 * @Title: countCriteriaResult
 	 * @Description: 执行count查询获得本次Criteria查询所能获得的对象总数.
-	 * @param c
-	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	protected long countCriteriaResult(final Criteria c) {
@@ -302,13 +294,13 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 	}
 
 	/**
-	 * 
-	 * @Title: findBy
-	 * @Description: 按属性查找对象列表,支持多种匹配方式.
 	 * @param propertyName
 	 * @param value
-	 * @param matchType 匹配方式,目前支持的取值见PropertyFilter的MatcheType enum.
+	 * @param matchType    匹配方式,目前支持的取值见PropertyFilter的MatcheType enum.
+	 *
 	 * @return
+	 * @Title: findBy
+	 * @Description: 按属性查找对象列表, 支持多种匹配方式.
 	 */
 	public List<T> findBy(final String propertyName, final Object value, final MatchType matchType) {
 		Criterion criterion = buildCriterion(propertyName, value, matchType);
@@ -316,11 +308,11 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 	}
 
 	/**
-	 * 
+	 * @param filters
+	 *
+	 * @return
 	 * @Title: find
 	 * @Description: 按属性过滤条件列表查找对象列表.
-	 * @param filters
-	 * @return
 	 */
 	public List<T> find(List<PropertyFilter> filters) {
 		Criterion[] criterions = buildCriterionByPropertyFilter(filters);
@@ -328,59 +320,59 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 	}
 
 	/**
-	 * 
-	 * @Title: findPage
-	 * @Description: 按属性过滤条件列表分页查找对象.
 	 * @param page
 	 * @param filters
+	 *
 	 * @return
+	 * @Title: findPage
+	 * @Description: 按属性过滤条件列表分页查找对象.
 	 */
 	public Pagination<T> findPage(final Pagination<T> page, final List<PropertyFilter> filters) {
 		Criterion[] criterions = buildCriterionByPropertyFilter(filters);
 		return findPage(page, criterions);
 	}
-	
+
 	/**
-	 * 
-	 * @Title: buildCriterion
-	 * @Description: 按属性条件参数创建Criterion,辅助函数.
 	 * @param propertyName
 	 * @param propertyValue
 	 * @param matchType
+	 *
 	 * @return
+	 * @Title: buildCriterion
+	 * @Description: 按属性条件参数创建Criterion, 辅助函数.
 	 */
 	protected Criterion buildCriterion(final String propertyName, final Object propertyValue, final MatchType matchType) {
 		Assert.hasText(propertyName, "propertyName不能为空");
 		Criterion criterion = null;
 		//根据MatchType构造criterion
 		switch (matchType) {
-		case EQ:
-			criterion = Restrictions.eq(propertyName, propertyValue);
-			break;
-		case LIKE:
-			criterion = Restrictions.like(propertyName, (String) propertyValue, MatchMode.ANYWHERE);
-			break;
-		case LE:
-			criterion = Restrictions.le(propertyName, propertyValue);
-			break;
-		case LT:
-			criterion = Restrictions.lt(propertyName, propertyValue);
-			break;
-		case GE:
-			criterion = Restrictions.ge(propertyName, propertyValue);
-			break;
-		case GT:
-			criterion = Restrictions.gt(propertyName, propertyValue);
+			case EQ:
+				criterion = Restrictions.eq(propertyName, propertyValue);
+				break;
+			case LIKE:
+				criterion = Restrictions.like(propertyName, (String) propertyValue, MatchMode.ANYWHERE);
+				break;
+			case LE:
+				criterion = Restrictions.le(propertyName, propertyValue);
+				break;
+			case LT:
+				criterion = Restrictions.lt(propertyName, propertyValue);
+				break;
+			case GE:
+				criterion = Restrictions.ge(propertyName, propertyValue);
+				break;
+			case GT:
+				criterion = Restrictions.gt(propertyName, propertyValue);
 		}
 		return criterion;
 	}
-	
+
 	/**
-	 * 
-	 * @Title: buildCriterionByPropertyFilter
-	 * @Description: 按属性条件列表创建Criterion数组,辅助函数.
 	 * @param filters
+	 *
 	 * @return
+	 * @Title: buildCriterionByPropertyFilter
+	 * @Description: 按属性条件列表创建Criterion数组, 辅助函数.
 	 */
 	protected Criterion[] buildCriterionByPropertyFilter(final List<PropertyFilter> filters) {
 		List<Criterion> criterionList = new ArrayList<Criterion>();
@@ -400,7 +392,7 @@ public abstract class HibernateDao<T, PK extends Serializable> extends BaseHiber
 		}
 		return criterionList.toArray(new Criterion[criterionList.size()]);
 	}
-	
+
 	public List<Map<String, Object>> findPageBySql(final String sql, final Object... values) {
 		SQLQuery q = createSqlQuery(sql, values);
 
