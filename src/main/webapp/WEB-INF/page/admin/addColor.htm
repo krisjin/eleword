@@ -1,34 +1,38 @@
 <#include "header_admin.htm">
-<div id="blog-container">
+	<div id="blog-container">
 
- <form class="form-horizontal" action="save" method="post">
- <h3  class="position-title" style="margin-bottom: 20px;">添加背景色</h3>
-  <div class="control-group">
-    <label class="control-label" for="inputEmail">背景色名称</label>
-    <div class="controls">
-      <input type="text" id="name" name="name" data-rule="背景色名称:required,name">
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">背景色RGB</label>
-    <div class="controls">
-      <input type="text" name="code" data-rule="背景色RGB:required,code">
-    </div>
-  </div>
-  
-  <div class="control-group">
-    <label class="control-label">背景色描述</label>
-    <div class="controls">
-      <textarea  name="description" data-rule="背景色描述:required,description" rows="4"></textarea>
-    </div>
-  </div>
-  <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn">提 &nbsp;&nbsp;交</button>
-    </div>
-  </div>
-</form>
+		<form class="form-horizontal" action="save" method="post">
+			<h3 class="position-title" style="margin-bottom: 20px;">添加背景色</h3>
 
-</div>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">背景色名称</label>
 
-<#include "footer_admin.htm">
+				<div class="controls">
+					<input type="text" id="name" name="name" data-rule="背景色名称:required,name">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">背景色RGB</label>
+
+				<div class="controls">
+					<input type="text" name="code" data-rule="背景色RGB:required,code">
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">背景色描述</label>
+
+				<div class="controls">
+					<textarea name="description" data-rule="背景色描述:required,description" rows="4"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<button type="submit" class="btn">提 &nbsp;&nbsp;交</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+	<#include "footer_admin.htm">

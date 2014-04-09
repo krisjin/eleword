@@ -1,18 +1,7 @@
 package net.eleword.blog.dao.common;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import net.eleword.blog.util.ReflectionUtils;
-
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -22,9 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-27上午6:30:58
  */
@@ -45,7 +39,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 用于省略Dao层, 在Service层直接使用通用SimpleHibernateDao的构造函数.在构造函数中定义对象类型Class.
-	 * 
+	 *
 	 * @param sessionFactory
 	 * @param entityClass
 	 */
@@ -60,7 +54,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 采用@Autowired按类型注入SessionFactory, 当有多个SesionFactory的时候在子类重载本函数
-	 * 
+	 *
 	 * @param sessionFactory
 	 */
 	@Autowired
@@ -74,8 +68,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 保存新增的对象
-	 * 
+	 *
 	 * @param entity
+	 *
 	 * @return
 	 */
 	public Serializable save(final T entity) {
@@ -84,7 +79,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 保存新增的对象
-	 * 
+	 *
 	 * @param entity
 	 */
 	public void persist(final T entity) {
@@ -98,7 +93,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 更新一个对象
-	 * 
+	 *
 	 * @param entity
 	 */
 	public void merge(final T entity) {
@@ -107,9 +102,8 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 删除对象
-	 * 
-	 * @param entity
-	 *            对象必须是session中的对象或含id属性的transient对象
+	 *
+	 * @param entity 对象必须是session中的对象或含id属性的transient对象
 	 */
 	public void delete(final T entity) {
 		getSession().delete(entity);
@@ -118,7 +112,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按id删除对象
-	 * 
+	 *
 	 * @param id
 	 */
 	public void delete(final PK id) {
@@ -132,8 +126,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按id列表获取对象列表
-	 * 
+	 *
 	 * @param ids
+	 *
 	 * @return
 	 */
 	public List<T> get(final Collection<PK> ids) {
@@ -142,7 +137,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 获取全部对象.
-	 * 
+	 *
 	 * @return
 	 */
 	public List<T> getAll() {
@@ -151,9 +146,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 获取全部对象, 支持按属性行序
-	 * 
+	 *
 	 * @param orderByProperty
 	 * @param isAsc
+	 *
 	 * @return
 	 */
 	public List<T> getAll(String orderByProperty, boolean isAsc) {
@@ -168,9 +164,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按属性查找对象列表, 匹配方式为相等
-	 * 
+	 *
 	 * @param propertyName
 	 * @param value
+	 *
 	 * @return
 	 */
 	public List<T> findBy(final String propertyName, final Object value) {
@@ -180,9 +177,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按属性查找唯一对象, 匹配方式为相等.
-	 * 
+	 *
 	 * @param propertyName
 	 * @param value
+	 *
 	 * @return
 	 */
 	public T findUniqueBy(final String propertyName, final Object value) {
@@ -190,9 +188,12 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		return (T) createCriteria(criterion).uniqueResult();
 	}
 
-	/**按HQL查询对象列表.
+	/**
+	 * 按HQL查询对象列表.
+	 *
 	 * @param hql
 	 * @param values 数量可变的参数,按顺序绑定.
+	 *
 	 * @return
 	 */
 	public <X> List<X> find(final String hql, final Object... values) {
@@ -201,14 +202,12 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按HQL查询对象列表从第多少条到第多少条记录.
-	 * 
+	 *
 	 * @param hql
-	 * @param first
-	 *            起始条数
-	 * @param last
-	 *            结束条数
-	 * @param values
-	 *            数量可变的参数,按顺序绑定.
+	 * @param first  起始条数
+	 * @param last   结束条数
+	 * @param values 数量可变的参数,按顺序绑定.
+	 *
 	 * @return
 	 */
 	public <X> List<X> find(final String hql, final int first, final int last, final Object... values) {
@@ -220,10 +219,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按HQL查询对象列表
-	 * 
+	 *
 	 * @param hql
-	 * @param values
-	 *            命名参数,按名称绑定.
+	 * @param values 命名参数,按名称绑定.
+	 *
 	 * @return
 	 */
 	public <X> List<X> find(final String hql, final Map<String, ?> values) {
@@ -232,10 +231,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按HQL查询唯一对象.
-	 * 
+	 *
 	 * @param hql
-	 * @param values
-	 *            数量可变的参数,按顺序绑定.
+	 * @param values 数量可变的参数,按顺序绑定.
+	 *
 	 * @return
 	 */
 	public <X> X findUnique(final String hql, final Object... values) {
@@ -244,10 +243,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按HQL查询唯一对象.
-	 * 
+	 *
 	 * @param hql
-	 * @param values
-	 *            命名参数,按名称绑定.
+	 * @param values 命名参数,按名称绑定.
+	 *
 	 * @return
 	 */
 	public <X> X findUnique(final String hql, final Map<String, ?> values) {
@@ -256,10 +255,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 执行HQL进行批量修改/删除操作
-	 * 
+	 *
 	 * @param hql
-	 * @param values
-	 *            数量可变的参数,按顺序绑定.
+	 * @param values 数量可变的参数,按顺序绑定.
+	 *
 	 * @return 更新记录数
 	 */
 	public int batchExecute(final String hql, final Object... values) {
@@ -268,10 +267,10 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 执行HQL进行批量修改/删除操作.
-	 * 
+	 *
 	 * @param hql
-	 * @param values
-	 *            命名参数,按名称绑定.
+	 * @param values 命名参数,按名称绑定.
+	 *
 	 * @return 更新记录数.
 	 */
 	public int batchExecute(final String hql, final Map<String, ?> values) {
@@ -283,12 +282,12 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 
-	 * @Title: createQuery
-	 * @Description: 根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
 	 * @param queryString
 	 * @param values
+	 *
 	 * @return
+	 * @Title: createQuery
+	 * @Description: 根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
 	 */
 	protected Query createQuery(final String queryString, final Object... values) {
 		Query query = getSession().createQuery(queryString);
@@ -302,13 +301,12 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 
+	 * @param queryString
+	 * @param values      命名参数,按名称绑定.
+	 *
+	 * @return
 	 * @Title: createQuery
 	 * @Description: 根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
-	 * @param queryString
-	 * @param values
-	 *            命名参数,按名称绑定.
-	 * @return
 	 */
 	protected Query createQuery(final String queryString, final Map<String, ?> values) {
 		Query query = getSession().createQuery(queryString);
@@ -319,10 +317,13 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		return query;
 	}
 
-	/**根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
+	/**
+	 * 根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
+	 *
 	 * @param queryString
 	 * @param arg
 	 * @param values
+	 *
 	 * @return
 	 */
 	protected Query createQuery(final String queryString, final String arg, final Long[] values) {
@@ -334,12 +335,11 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	}
 
 	/**
-	 * 
+	 * @param criterions 数量可变的Criterion.
+	 *
+	 * @return
 	 * @Title: find
 	 * @Description: 按Criteria查询对象列表.
-	 * @param criterions
-	 *            数量可变的Criterion.
-	 * @return
 	 */
 	protected List<T> find(final Criterion... criterions) {
 		return createCriteria(criterions).list();
@@ -347,9 +347,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 按Criteria查询唯一对象
-	 * 
-	 * @param criterions
-	 *            数量可变的Criterion
+	 *
+	 * @param criterions 数量可变的Criterion
+	 *
 	 * @return
 	 */
 	public T findUnique(final Criterion... criterions) {
@@ -358,8 +358,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 根据Criterion条件创建Criteria.与find()函数可进行更加灵活的操作
-	 * 
+	 *
 	 * @param criterions
+	 *
 	 * @return
 	 */
 	protected Criteria createCriteria(final Criterion... criterions) {
@@ -380,7 +381,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 	 * Hibernate.initialize(user.getRoles())，初始化User的直接属性和关联集合.
 	 * Hibernate.initialize
 	 * (user.getDescription())，初始化User的直接属性和延迟加载的Description属性.
-	 * 
+	 *
 	 * @param proxy
 	 */
 	public void initProxyObject(Object proxy) {
@@ -396,8 +397,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 为Query添加distinct transformer. 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理.
-	 * 
+	 *
 	 * @param query
+	 *
 	 * @return
 	 */
 	private Query distinct(Query query) {
@@ -407,8 +409,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 为Criteria添加distinct transformer. 预加载关联对象的HQL会引起主对象重复, 需要进行distinct处理
-	 * 
+	 *
 	 * @param criteria
+	 *
 	 * @return
 	 */
 	private Criteria distinct(Criteria criteria) {
@@ -418,7 +421,7 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 取得对象的主键名
-	 * 
+	 *
 	 * @return
 	 */
 	public String getIdName() {
@@ -428,10 +431,11 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 
 	/**
 	 * 判断对象的属性值在数据库内是否唯一. 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
-	 * 
+	 *
 	 * @param propertyName
 	 * @param newValue
 	 * @param oldValue
+	 *
 	 * @return
 	 */
 	public boolean isPropertyUnique(final String propertyName, final Object newValue, final Object oldValue) {

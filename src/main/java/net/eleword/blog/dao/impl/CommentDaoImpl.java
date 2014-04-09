@@ -1,17 +1,16 @@
 package net.eleword.blog.dao.impl;
 
-import java.util.List;
-
 import net.eleword.blog.dao.CommentDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Comment;
 import net.eleword.blog.util.Pagination;
-
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-2-13上午11:40:05
  */
@@ -49,8 +48,8 @@ public class CommentDaoImpl extends HibernateDao<Comment, Long> implements Comme
 	}
 
 	public List<Comment> selectCommentByArticleId(Long id) {
-		String hql="from Comment where articleId=?";
-		return find(hql,id);
+		String hql = "from Comment where articleId=?";
+		return find(hql, id);
 	}
 
 }

@@ -1,13 +1,13 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet
+ * Copyright (C) 2006-2011 kindsoft.net
+ *
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ *******************************************************************************/
 
-KindEditor.plugin('flash', function(K) {
+KindEditor.plugin('flash', function (K) {
 	var self = this, name = 'flash', lang = self.lang(name + '.'),
 		allowFlashUpload = K.undef(self.allowFlashUpload, true),
 		allowFileManager = K.undef(self.allowFileManager, false),
@@ -16,7 +16,7 @@ KindEditor.plugin('flash', function(K) {
 		filePostName = K.undef(self.filePostName, 'imgFile'),
 		uploadJson = K.undef(self.uploadJson, self.basePath + 'php/upload_json.php');
 	self.plugin.flash = {
-		edit : function() {
+		edit: function () {
 			var html = [
 				'<div style="padding:20px;">',
 				//url
@@ -41,56 +41,56 @@ KindEditor.plugin('flash', function(K) {
 				'</div>'
 			].join('');
 			var dialog = self.createDialog({
-				name : name,
-				width : 450,
-				title : self.lang(name),
-				body : html,
-				yesBtn : {
-					name : self.lang('yes'),
-					click : function(e) {
-						var url = K.trim(urlBox.val()),
-							width = widthBox.val(),
-							height = heightBox.val();
-						if (url == 'http://' || K.invalidUrl(url)) {
-							alert(self.lang('invalidUrl'));
-							urlBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(width)) {
-							alert(self.lang('invalidWidth'));
-							widthBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(height)) {
-							alert(self.lang('invalidHeight'));
-							heightBox[0].focus();
-							return;
-						}
-						var html = K.mediaImg(self.themesPath + 'common/blank.gif', {
-								src : url,
-								type : K.mediaType('.swf'),
-								width : width,
-								height : height,
-								quality : 'high'
+					name: name,
+					width: 450,
+					title: self.lang(name),
+					body: html,
+					yesBtn: {
+						name: self.lang('yes'),
+						click: function (e) {
+							var url = K.trim(urlBox.val()),
+								width = widthBox.val(),
+								height = heightBox.val();
+							if (url == 'http://' || K.invalidUrl(url)) {
+								alert(self.lang('invalidUrl'));
+								urlBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(width)) {
+								alert(self.lang('invalidWidth'));
+								widthBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(height)) {
+								alert(self.lang('invalidHeight'));
+								heightBox[0].focus();
+								return;
+							}
+							var html = K.mediaImg(self.themesPath + 'common/blank.gif', {
+								src: url,
+								type: K.mediaType('.swf'),
+								width: width,
+								height: height,
+								quality: 'high'
 							});
-						self.insertHtml(html).hideDialog().focus();
+							self.insertHtml(html).hideDialog().focus();
+						}
 					}
-				}
-			}),
-			div = dialog.div,
-			urlBox = K('[name="url"]', div),
-			viewServerBtn = K('[name="viewServer"]', div),
-			widthBox = K('[name="width"]', div),
-			heightBox = K('[name="height"]', div);
+				}),
+				div = dialog.div,
+				urlBox = K('[name="url"]', div),
+				viewServerBtn = K('[name="viewServer"]', div),
+				widthBox = K('[name="width"]', div),
+				heightBox = K('[name="height"]', div);
 			urlBox.val('http://');
 
 			if (allowFlashUpload) {
 				var uploadbutton = K.uploadbutton({
-					button : K('.ke-upload-button', div)[0],
-					fieldName : filePostName,
-					extraParams : extraParams,
-					url : K.addParam(uploadJson, 'dir=flash'),
-					afterUpload : function(data) {
+					button: K('.ke-upload-button', div)[0],
+					fieldName: filePostName,
+					extraParams: extraParams,
+					url: K.addParam(uploadJson, 'dir=flash'),
+					afterUpload: function (data) {
 						dialog.hideLoading();
 						if (data.error === 0) {
 							var url = data.url;
@@ -106,12 +106,12 @@ KindEditor.plugin('flash', function(K) {
 							alert(data.message);
 						}
 					},
-					afterError : function(html) {
+					afterError: function (html) {
 						dialog.hideLoading();
 						self.errorDialog(html);
 					}
 				});
-				uploadbutton.fileBox.change(function(e) {
+				uploadbutton.fileBox.change(function (e) {
 					dialog.showLoading(self.lang('uploadLoading'));
 					uploadbutton.submit();
 				});
@@ -120,12 +120,12 @@ KindEditor.plugin('flash', function(K) {
 			}
 
 			if (allowFileManager) {
-				viewServerBtn.click(function(e) {
-					self.loadPlugin('filemanager', function() {
+				viewServerBtn.click(function (e) {
+					self.loadPlugin('filemanager', function () {
 						self.plugin.filemanagerDialog({
-							viewType : 'LIST',
-							dirName : 'flash',
-							clickFn : function(url, title) {
+							viewType: 'LIST',
+							dirName: 'flash',
+							clickFn: function (url, title) {
 								if (self.dialogs.length > 1) {
 									K('[name="url"]', div).val(url);
 									if (self.afterSelectFile) {
@@ -151,7 +151,7 @@ KindEditor.plugin('flash', function(K) {
 			urlBox[0].focus();
 			urlBox[0].select();
 		},
-		'delete' : function() {
+		'delete': function () {
 			self.plugin.getSelectedFlash().remove();
 			// [IE] 删除图片后立即点击图片按钮出错
 			self.addBookmark();

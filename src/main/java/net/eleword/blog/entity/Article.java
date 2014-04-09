@@ -1,19 +1,13 @@
 package net.eleword.blog.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-26上午11:13:03
  */
@@ -146,7 +140,7 @@ public class Article extends IdEntity implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	@Transient
 	public int getCommentCount() {
 		return commentCount;

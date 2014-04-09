@@ -1,17 +1,16 @@
 package net.eleword.blog.service;
 
-import java.util.List;
-
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.entity.Article;
 import net.eleword.blog.util.Pagination;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-29上午6:33:24
  */
@@ -44,31 +43,31 @@ public class ArticleService {
 	public void setArticleDao(ArticleDao articleDao) {
 		this.articleDao = articleDao;
 	}
-	
-	public List<Article> selectAll(){
+
+	public List<Article> selectAll() {
 		return articleDao.selectAll();
 	}
-	
-	public Pagination<Article> selectArticleWithPage(Pagination page){
-		
+
+	public Pagination<Article> selectArticleWithPage(Pagination page) {
+
 		return articleDao.selectArticleWithPage(page);
 	}
-	
-	public Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page,long categoryId){
-		
-		return articleDao.selectArticleWithPageByCategoryId(page,categoryId);
+
+	public Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page, long categoryId) {
+
+		return articleDao.selectArticleWithPageByCategoryId(page, categoryId);
 	}
-	
-	public List queryArticleArchive(){
+
+	public List queryArticleArchive() {
 		return articleDao.selectArticleArchive();
 	}
-	
-	public Pagination<Article> selectArticleArchiveDateWithPage(Pagination<Article> page, String date){
-		
+
+	public Pagination<Article> selectArticleArchiveDateWithPage(Pagination<Article> page, String date) {
+
 		return articleDao.selectArticleByArchiveDate(page, date);
 	}
-	
-	public List<Article> selectRecnetArticle(int size){
+
+	public List<Article> selectRecnetArticle(int size) {
 		return articleDao.selectRecentArticle(size);
 	}
 }

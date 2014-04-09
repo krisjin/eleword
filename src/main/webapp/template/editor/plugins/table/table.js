@@ -1,13 +1,13 @@
 /*******************************************************************************
-* KindEditor - WYSIWYG HTML Editor for Internet
-* Copyright (C) 2006-2011 kindsoft.net
-*
-* @author Roddy <luolonghao@gmail.com>
-* @site http://www.kindsoft.net/
-* @licence http://www.kindsoft.net/license.php
-*******************************************************************************/
+ * KindEditor - WYSIWYG HTML Editor for Internet
+ * Copyright (C) 2006-2011 kindsoft.net
+ *
+ * @author Roddy <luolonghao@gmail.com>
+ * @site http://www.kindsoft.net/
+ * @licence http://www.kindsoft.net/license.php
+ *******************************************************************************/
 
-KindEditor.plugin('table', function(K) {
+KindEditor.plugin('table', function (K) {
 	var self = this, name = 'table', lang = self.lang(name + '.'), zeroborder = 'ke-zeroborder';
 	// 设置颜色
 	function _setColor(box, color) {
@@ -16,33 +16,36 @@ KindEditor.plugin('table', function(K) {
 		box.css('color', color === '#000000' ? '#FFFFFF' : '#000000');
 		box.html(color);
 	}
+
 	// 初始化取色器
 	var pickerList = [];
+
 	function _initColorPicker(dialogDiv, colorBox) {
-		colorBox.bind('click,mousedown', function(e){
+		colorBox.bind('click,mousedown', function (e) {
 			e.stopPropagation();
 		});
 		function removePicker() {
-			K.each(pickerList, function() {
+			K.each(pickerList, function () {
 				this.remove();
 			});
 			pickerList = [];
 			K(document).unbind('click,mousedown', removePicker);
 			dialogDiv.unbind('click,mousedown', removePicker);
 		}
-		colorBox.click(function(e) {
+
+		colorBox.click(function (e) {
 			removePicker();
 			var box = K(this),
 				pos = box.pos();
 			var picker = K.colorpicker({
-				x : pos.x,
-				y : pos.y + box.height(),
-				z : 811214,
-				selectedColor : K(this).html(),
-				colors : self.colorTable,
-				noColor : self.lang('noColor'),
-				shadowMode : self.shadowMode,
-				click : function(color) {
+				x: pos.x,
+				y: pos.y + box.height(),
+				z: 811214,
+				selectedColor: K(this).html(),
+				colors: self.colorTable,
+				noColor: self.lang('noColor'),
+				shadowMode: self.shadowMode,
+				click: function (color) {
 					_setColor(box, color);
 					removePicker();
 				}
@@ -52,6 +55,7 @@ KindEditor.plugin('table', function(K) {
 			dialogDiv.bind('click,mousedown', removePicker);
 		});
 	}
+
 	// 取得下一行cell的index
 	function _getCellIndex(table, row, cell) {
 		var rowSpanCount = 0;
@@ -63,9 +67,10 @@ KindEditor.plugin('table', function(K) {
 		}
 		return cell.cellIndex - rowSpanCount;
 	}
+
 	self.plugin.table = {
 		//insert or modify table
-		prop : function(isInsert) {
+		prop: function (isInsert) {
 			var html = [
 				'<div style="padding:20px;">',
 				//rows, cols
@@ -119,184 +124,184 @@ KindEditor.plugin('table', function(K) {
 			].join('');
 			var bookmark = self.cmd.range.createBookmark();
 			var dialog = self.createDialog({
-				name : name,
-				width : 500,
-				title : self.lang(name),
-				body : html,
-				beforeRemove : function() {
-					colorBox.unbind();
-				},
-				yesBtn : {
-					name : self.lang('yes'),
-					click : function(e) {
-						var rows = rowsBox.val(),
-							cols = colsBox.val(),
-							width = widthBox.val(),
-							height = heightBox.val(),
-							widthType = widthTypeBox.val(),
-							heightType = heightTypeBox.val(),
-							padding = paddingBox.val(),
-							spacing = spacingBox.val(),
-							align = alignBox.val(),
-							border = borderBox.val(),
-							borderColor = K(colorBox[0]).html() || '',
-							bgColor = K(colorBox[1]).html() || '';
-						if (rows == 0 || !/^\d+$/.test(rows)) {
-							alert(self.lang('invalidRows'));
-							rowsBox[0].focus();
-							return;
-						}
-						if (cols == 0 || !/^\d+$/.test(cols)) {
-							alert(self.lang('invalidRows'));
-							colsBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(width)) {
-							alert(self.lang('invalidWidth'));
-							widthBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(height)) {
-							alert(self.lang('invalidHeight'));
-							heightBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(padding)) {
-							alert(self.lang('invalidPadding'));
-							paddingBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(spacing)) {
-							alert(self.lang('invalidSpacing'));
-							spacingBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(border)) {
-							alert(self.lang('invalidBorder'));
-							borderBox[0].focus();
-							return;
-						}
-						//modify table
-						if (table) {
-							if (width !== '') {
-								table.width(width + widthType);
-							} else {
-								table.css('width', '');
+					name: name,
+					width: 500,
+					title: self.lang(name),
+					body: html,
+					beforeRemove: function () {
+						colorBox.unbind();
+					},
+					yesBtn: {
+						name: self.lang('yes'),
+						click: function (e) {
+							var rows = rowsBox.val(),
+								cols = colsBox.val(),
+								width = widthBox.val(),
+								height = heightBox.val(),
+								widthType = widthTypeBox.val(),
+								heightType = heightTypeBox.val(),
+								padding = paddingBox.val(),
+								spacing = spacingBox.val(),
+								align = alignBox.val(),
+								border = borderBox.val(),
+								borderColor = K(colorBox[0]).html() || '',
+								bgColor = K(colorBox[1]).html() || '';
+							if (rows == 0 || !/^\d+$/.test(rows)) {
+								alert(self.lang('invalidRows'));
+								rowsBox[0].focus();
+								return;
 							}
-							if (table[0].width !== undefined) {
-								table.removeAttr('width');
+							if (cols == 0 || !/^\d+$/.test(cols)) {
+								alert(self.lang('invalidRows'));
+								colsBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(width)) {
+								alert(self.lang('invalidWidth'));
+								widthBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(height)) {
+								alert(self.lang('invalidHeight'));
+								heightBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(padding)) {
+								alert(self.lang('invalidPadding'));
+								paddingBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(spacing)) {
+								alert(self.lang('invalidSpacing'));
+								spacingBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(border)) {
+								alert(self.lang('invalidBorder'));
+								borderBox[0].focus();
+								return;
+							}
+							//modify table
+							if (table) {
+								if (width !== '') {
+									table.width(width + widthType);
+								} else {
+									table.css('width', '');
+								}
+								if (table[0].width !== undefined) {
+									table.removeAttr('width');
+								}
+								if (height !== '') {
+									table.height(height + heightType);
+								} else {
+									table.css('height', '');
+								}
+								if (table[0].height !== undefined) {
+									table.removeAttr('height');
+								}
+								table.css('background-color', bgColor);
+								if (table[0].bgColor !== undefined) {
+									table.removeAttr('bgColor');
+								}
+								if (padding !== '') {
+									table[0].cellPadding = padding;
+								} else {
+									table.removeAttr('cellPadding');
+								}
+								if (spacing !== '') {
+									table[0].cellSpacing = spacing;
+								} else {
+									table.removeAttr('cellSpacing');
+								}
+								if (align !== '') {
+									table[0].align = align;
+								} else {
+									table.removeAttr('align');
+								}
+								if (border !== '') {
+									table.attr('border', border);
+								} else {
+									table.removeAttr('border');
+								}
+								if (border === '' || border === '0') {
+									table.addClass(zeroborder);
+								} else {
+									table.removeClass(zeroborder);
+								}
+								if (borderColor !== '') {
+									table.attr('borderColor', borderColor);
+								} else {
+									table.removeAttr('borderColor');
+								}
+								self.hideDialog().focus();
+								self.cmd.range.moveToBookmark(bookmark);
+								self.cmd.select();
+								self.addBookmark();
+								return;
+							}
+							//insert new table
+							var style = '';
+							if (width !== '') {
+								style += 'width:' + width + widthType + ';';
 							}
 							if (height !== '') {
-								table.height(height + heightType);
-							} else {
-								table.css('height', '');
+								style += 'height:' + height + heightType + ';';
 							}
-							if (table[0].height !== undefined) {
-								table.removeAttr('height');
+							if (bgColor !== '') {
+								style += 'background-color:' + bgColor + ';';
 							}
-							table.css('background-color', bgColor);
-							if (table[0].bgColor !== undefined) {
-								table.removeAttr('bgColor');
+							var html = '<table';
+							if (style !== '') {
+								html += ' style="' + style + '"';
 							}
 							if (padding !== '') {
-								table[0].cellPadding = padding;
-							} else {
-								table.removeAttr('cellPadding');
+								html += ' cellpadding="' + padding + '"';
 							}
 							if (spacing !== '') {
-								table[0].cellSpacing = spacing;
-							} else {
-								table.removeAttr('cellSpacing');
+								html += ' cellspacing="' + spacing + '"';
 							}
 							if (align !== '') {
-								table[0].align = align;
-							} else {
-								table.removeAttr('align');
+								html += ' align="' + align + '"';
 							}
 							if (border !== '') {
-								table.attr('border', border);
-							} else {
-								table.removeAttr('border');
+								html += ' border="' + border + '"';
 							}
 							if (border === '' || border === '0') {
-								table.addClass(zeroborder);
-							} else {
-								table.removeClass(zeroborder);
+								html += ' class="' + zeroborder + '"';
 							}
 							if (borderColor !== '') {
-								table.attr('borderColor', borderColor);
-							} else {
-								table.removeAttr('borderColor');
+								html += ' bordercolor="' + borderColor + '"';
 							}
-							self.hideDialog().focus();
-							self.cmd.range.moveToBookmark(bookmark);
-							self.cmd.select();
+							html += '>';
+							for (var i = 0; i < rows; i++) {
+								html += '<tr>';
+								for (var j = 0; j < cols; j++) {
+									html += '<td>' + (K.IE ? '&nbsp;' : '<br />') + '</td>';
+								}
+								html += '</tr>';
+							}
+							html += '</table>';
+							if (!K.IE) {
+								html += '<br />';
+							}
+							self.insertHtml(html);
+							self.select().hideDialog().focus();
 							self.addBookmark();
-							return;
 						}
-						//insert new table
-						var style = '';
-						if (width !== '') {
-							style += 'width:' + width + widthType + ';';
-						}
-						if (height !== '') {
-							style += 'height:' + height + heightType + ';';
-						}
-						if (bgColor !== '') {
-							style += 'background-color:' + bgColor + ';';
-						}
-						var html = '<table';
-						if (style !== '') {
-							html += ' style="' + style + '"';
-						}
-						if (padding !== '') {
-							html += ' cellpadding="' + padding + '"';
-						}
-						if (spacing !== '') {
-							html += ' cellspacing="' + spacing + '"';
-						}
-						if (align !== '') {
-							html += ' align="' + align + '"';
-						}
-						if (border !== '') {
-							html += ' border="' + border + '"';
-						}
-						if (border === '' || border === '0') {
-							html += ' class="' + zeroborder + '"';
-						}
-						if (borderColor !== '') {
-							html += ' bordercolor="' + borderColor + '"';
-						}
-						html += '>';
-						for (var i = 0; i < rows; i++) {
-							html += '<tr>';
-							for (var j = 0; j < cols; j++) {
-								html += '<td>' + (K.IE ? '&nbsp;' : '<br />') + '</td>';
-							}
-							html += '</tr>';
-						}
-						html += '</table>';
-						if (!K.IE) {
-							html += '<br />';
-						}
-						self.insertHtml(html);
-						self.select().hideDialog().focus();
-						self.addBookmark();
 					}
-				}
-			}),
-			div = dialog.div,
-			rowsBox = K('[name="rows"]', div).val(3),
-			colsBox = K('[name="cols"]', div).val(2),
-			widthBox = K('[name="width"]', div).val(100),
-			heightBox = K('[name="height"]', div),
-			widthTypeBox = K('[name="widthType"]', div),
-			heightTypeBox = K('[name="heightType"]', div),
-			paddingBox = K('[name="padding"]', div).val(2),
-			spacingBox = K('[name="spacing"]', div).val(0),
-			alignBox = K('[name="align"]', div),
-			borderBox = K('[name="border"]', div).val(1),
-			colorBox = K('.ke-input-color', div);
+				}),
+				div = dialog.div,
+				rowsBox = K('[name="rows"]', div).val(3),
+				colsBox = K('[name="cols"]', div).val(2),
+				widthBox = K('[name="width"]', div).val(100),
+				heightBox = K('[name="height"]', div),
+				widthTypeBox = K('[name="widthType"]', div),
+				heightTypeBox = K('[name="heightType"]', div),
+				paddingBox = K('[name="padding"]', div).val(2),
+				spacingBox = K('[name="spacing"]', div).val(0),
+				alignBox = K('[name="align"]', div),
+				borderBox = K('[name="border"]', div).val(1),
+				colorBox = K('.ke-input-color', div);
 			_initColorPicker(div, colorBox.eq(0));
 			_initColorPicker(div, colorBox.eq(1));
 			_setColor(colorBox.eq(0), '#000000');
@@ -339,7 +344,7 @@ KindEditor.plugin('table', function(K) {
 			}
 		},
 		//modify cell
-		cellprop : function() {
+		cellprop: function () {
 			var html = [
 				'<div style="padding:20px;">',
 				//width, height
@@ -388,70 +393,70 @@ KindEditor.plugin('table', function(K) {
 			].join('');
 			var bookmark = self.cmd.range.createBookmark();
 			var dialog = self.createDialog({
-				name : name,
-				width : 500,
-				title : self.lang('tablecell'),
-				body : html,
-				beforeRemove : function() {
-					colorBox.unbind();
-				},
-				yesBtn : {
-					name : self.lang('yes'),
-					click : function(e) {
-						var width = widthBox.val(),
-							height = heightBox.val(),
-							widthType = widthTypeBox.val(),
-							heightType = heightTypeBox.val(),
-							padding = paddingBox.val(),
-							spacing = spacingBox.val(),
-							textAlign = textAlignBox.val(),
-							verticalAlign = verticalAlignBox.val(),
-							border = borderBox.val(),
-							borderColor = K(colorBox[0]).html() || '',
-							bgColor = K(colorBox[1]).html() || '';
-						if (!/^\d*$/.test(width)) {
-							alert(self.lang('invalidWidth'));
-							widthBox[0].focus();
-							return;
+					name: name,
+					width: 500,
+					title: self.lang('tablecell'),
+					body: html,
+					beforeRemove: function () {
+						colorBox.unbind();
+					},
+					yesBtn: {
+						name: self.lang('yes'),
+						click: function (e) {
+							var width = widthBox.val(),
+								height = heightBox.val(),
+								widthType = widthTypeBox.val(),
+								heightType = heightTypeBox.val(),
+								padding = paddingBox.val(),
+								spacing = spacingBox.val(),
+								textAlign = textAlignBox.val(),
+								verticalAlign = verticalAlignBox.val(),
+								border = borderBox.val(),
+								borderColor = K(colorBox[0]).html() || '',
+								bgColor = K(colorBox[1]).html() || '';
+							if (!/^\d*$/.test(width)) {
+								alert(self.lang('invalidWidth'));
+								widthBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(height)) {
+								alert(self.lang('invalidHeight'));
+								heightBox[0].focus();
+								return;
+							}
+							if (!/^\d*$/.test(border)) {
+								alert(self.lang('invalidBorder'));
+								borderBox[0].focus();
+								return;
+							}
+							cell.css({
+								width: width !== '' ? (width + widthType) : '',
+								height: height !== '' ? (height + heightType) : '',
+								'background-color': bgColor,
+								'text-align': textAlign,
+								'vertical-align': verticalAlign,
+								'border-width': border,
+								'border-style': border !== '' ? 'solid' : '',
+								'border-color': borderColor
+							});
+							self.hideDialog().focus();
+							self.cmd.range.moveToBookmark(bookmark);
+							self.cmd.select();
+							self.addBookmark();
 						}
-						if (!/^\d*$/.test(height)) {
-							alert(self.lang('invalidHeight'));
-							heightBox[0].focus();
-							return;
-						}
-						if (!/^\d*$/.test(border)) {
-							alert(self.lang('invalidBorder'));
-							borderBox[0].focus();
-							return;
-						}
-						cell.css({
-							width : width !== '' ? (width + widthType) : '',
-							height : height !== '' ? (height + heightType) : '',
-							'background-color' : bgColor,
-							'text-align' : textAlign,
-							'vertical-align' : verticalAlign,
-							'border-width' : border,
-							'border-style' : border !== '' ? 'solid' : '',
-							'border-color' : borderColor
-						});
-						self.hideDialog().focus();
-						self.cmd.range.moveToBookmark(bookmark);
-						self.cmd.select();
-						self.addBookmark();
 					}
-				}
-			}),
-			div = dialog.div,
-			widthBox = K('[name="width"]', div).val(100),
-			heightBox = K('[name="height"]', div),
-			widthTypeBox = K('[name="widthType"]', div),
-			heightTypeBox = K('[name="heightType"]', div),
-			paddingBox = K('[name="padding"]', div).val(2),
-			spacingBox = K('[name="spacing"]', div).val(0),
-			textAlignBox = K('[name="textAlign"]', div),
-			verticalAlignBox = K('[name="verticalAlign"]', div),
-			borderBox = K('[name="border"]', div).val(1),
-			colorBox = K('.ke-input-color', div);
+				}),
+				div = dialog.div,
+				widthBox = K('[name="width"]', div).val(100),
+				heightBox = K('[name="height"]', div),
+				widthTypeBox = K('[name="widthType"]', div),
+				heightTypeBox = K('[name="heightType"]', div),
+				paddingBox = K('[name="padding"]', div).val(2),
+				spacingBox = K('[name="spacing"]', div).val(0),
+				textAlignBox = K('[name="textAlign"]', div),
+				verticalAlignBox = K('[name="verticalAlign"]', div),
+				borderBox = K('[name="border"]', div).val(1),
+				colorBox = K('.ke-input-color', div);
 			_initColorPicker(div, colorBox.eq(0));
 			_initColorPicker(div, colorBox.eq(1));
 			_setColor(colorBox.eq(0), '#000000');
@@ -486,17 +491,17 @@ KindEditor.plugin('table', function(K) {
 			widthBox[0].focus();
 			widthBox[0].select();
 		},
-		insert : function() {
+		insert: function () {
 			this.prop(true);
 		},
-		'delete' : function() {
+		'delete': function () {
 			var table = self.plugin.getSelectedTable();
 			self.cmd.range.setStartBefore(table[0]).collapse(true);
 			self.cmd.select();
 			table.remove();
 			self.addBookmark();
 		},
-		colinsert : function(offset) {
+		colinsert: function (offset) {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0],
@@ -515,13 +520,13 @@ KindEditor.plugin('table', function(K) {
 			self.cmd.select();
 			self.addBookmark();
 		},
-		colinsertleft : function() {
+		colinsertleft: function () {
 			this.colinsert(0);
 		},
-		colinsertright : function() {
+		colinsertright: function () {
 			this.colinsert(1);
 		},
-		rowinsert : function(offset) {
+		rowinsert: function (offset) {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0];
@@ -559,13 +564,13 @@ KindEditor.plugin('table', function(K) {
 			self.cmd.select();
 			self.addBookmark();
 		},
-		rowinsertabove : function() {
+		rowinsertabove: function () {
 			this.rowinsert(0);
 		},
-		rowinsertbelow : function() {
+		rowinsertbelow: function () {
 			this.rowinsert(1);
 		},
-		rowmerge : function() {
+		rowmerge: function () {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0],
@@ -591,7 +596,7 @@ KindEditor.plugin('table', function(K) {
 			self.cmd.select();
 			self.addBookmark();
 		},
-		colmerge : function() {
+		colmerge: function () {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0],
@@ -613,7 +618,7 @@ KindEditor.plugin('table', function(K) {
 			self.cmd.select();
 			self.addBookmark();
 		},
-		rowsplit : function() {
+		rowsplit: function () {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0],
@@ -638,7 +643,7 @@ KindEditor.plugin('table', function(K) {
 			self.cmd.select();
 			self.addBookmark();
 		},
-		colsplit : function() {
+		colsplit: function () {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0],
@@ -659,7 +664,7 @@ KindEditor.plugin('table', function(K) {
 			self.cmd.select();
 			self.addBookmark();
 		},
-		coldelete : function() {
+		coldelete: function () {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0],
@@ -689,7 +694,7 @@ KindEditor.plugin('table', function(K) {
 			}
 			self.addBookmark();
 		},
-		rowdelete : function() {
+		rowdelete: function () {
 			var table = self.plugin.getSelectedTable()[0],
 				row = self.plugin.getSelectedRow()[0],
 				cell = self.plugin.getSelectedCell()[0],

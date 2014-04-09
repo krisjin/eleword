@@ -1,23 +1,17 @@
 package net.eleword.blog.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 /**
  * TODO 此处填写 class 信息
- * 
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-26上午11:13:51
  */
 @Entity
-@Table(name="comment")
+@Table(name = "comment")
 public class Comment extends IdEntity implements Serializable {
 
 	private static final long serialVersionUID = -3374963390660032076L;
@@ -31,14 +25,13 @@ public class Comment extends IdEntity implements Serializable {
 	private Date commentDate;
 
 	private String email;
-	
+
 	private long articleId;
-	
+
 	private String articleTitle;
-	
-	
-	
-	@Column(name="comment_user")
+
+
+	@Column(name = "comment_user")
 	public String getCommentUser() {
 		return commentUser;
 	}
@@ -46,7 +39,8 @@ public class Comment extends IdEntity implements Serializable {
 	public void setCommentUser(String commentUser) {
 		this.commentUser = commentUser;
 	}
-	@Column(name="comment_content")
+
+	@Column(name = "comment_content")
 	public String getCommentContent() {
 		return commentContent;
 	}
@@ -54,16 +48,17 @@ public class Comment extends IdEntity implements Serializable {
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
 	}
-	@Column(name="comment_nickname")
+
+	@Column(name = "comment_nickname")
 	public String getCommentNickname() {
 		return commentNickname;
 	}
-	
+
 	public void setCommentNickname(String commentNickname) {
 		this.commentNickname = commentNickname;
 	}
-	
-	@Column(name="comment_date")
+
+	@Column(name = "comment_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCommentDate() {
 		return commentDate;
@@ -72,7 +67,8 @@ public class Comment extends IdEntity implements Serializable {
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
 	}
-	@Column(name="email")
+
+	@Column(name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -80,7 +76,8 @@ public class Comment extends IdEntity implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Column(name="article_id")
+
+	@Column(name = "article_id")
 	public long getArticleId() {
 		return articleId;
 	}
@@ -97,5 +94,5 @@ public class Comment extends IdEntity implements Serializable {
 	public void setArticleTitle(String articleTitle) {
 		this.articleTitle = articleTitle;
 	}
-	
+
 }

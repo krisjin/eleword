@@ -1,22 +1,22 @@
 package net.eleword.blog.dao.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import net.eleword.blog.dao.BlogDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Blog;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * TODO 此处填写 class 信息
+ *
  * @author krisjin (mailto:krisjin86@163.com)
  */
 @Repository("blogDao")
-public class BlogDaoImpl  extends HibernateDao<Blog, Long> implements BlogDao{
+public class BlogDaoImpl extends HibernateDao<Blog, Long> implements BlogDao {
 
 	public Long add(Blog entity) {
-		
+
 		return null;
 	}
 
@@ -25,7 +25,7 @@ public class BlogDaoImpl  extends HibernateDao<Blog, Long> implements BlogDao{
 	}
 
 	public void deleteById(long id) {
-		
+
 	}
 
 	public Blog select(long id) {
