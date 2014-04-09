@@ -1,6 +1,5 @@
 package net.eleword.blog.util;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
@@ -26,7 +25,7 @@ public class ServletUtils {
 	public static final String AUTHENTICATION_HEADER = "Authorization";
 
 	public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
-	
+
 	/**
 	 * 
 	 * @Title: setExpiresHeader
@@ -35,12 +34,12 @@ public class ServletUtils {
 	 * @param expiresSeconds
 	 */
 	public static void setExpiresHeader(HttpServletResponse response, long expiresSeconds) {
-		//Http 1.0 header
+		// Http 1.0 header
 		response.setDateHeader("Expires", System.currentTimeMillis() + expiresSeconds * 1000);
-		//Http 1.1 header
+		// Http 1.1 header
 		response.setHeader("Cache-Control", "private, max-age=" + expiresSeconds);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: setDisableCacheHeader
@@ -48,13 +47,13 @@ public class ServletUtils {
 	 * @param response
 	 */
 	public static void setDisableCacheHeader(HttpServletResponse response) {
-		//Http 1.0 header
+		// Http 1.0 header
 		response.setDateHeader("Expires", 1L);
 		response.addHeader("Pragma", "no-cache");
-		//Http 1.1 header
+		// Http 1.1 header
 		response.setHeader("Cache-Control", "no-cache, no-store, max-age=0");
 	}
-	
+
 	/**
 	 * 
 	 * @Title: setLastModifiedHeader
@@ -65,7 +64,7 @@ public class ServletUtils {
 	public static void setLastModifiedHeader(HttpServletResponse response, long lastModifiedDate) {
 		response.setDateHeader("Last-Modified", lastModifiedDate);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: setEtag
@@ -76,19 +75,18 @@ public class ServletUtils {
 	public static void setEtag(HttpServletResponse response, String etag) {
 		response.setHeader("ETag", etag);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: checkIfModifiedSince
-	 * @Description: 根据浏览器If-Modified-Since Header, 计算文件是否已被修改.
-	 * 如果无修改, checkIfModify返回false ,设置304 not modify status.
+	 * @Description: 根据浏览器If-Modified-Since Header, 计算文件是否已被修改. 如果无修改,
+	 *               checkIfModify返回false ,设置304 not modify status.
 	 * @param request
 	 * @param response
 	 * @param lastModified
 	 * @return
 	 */
-	public static boolean checkIfModifiedSince(HttpServletRequest request, HttpServletResponse response,
-			long lastModified) {
+	public static boolean checkIfModifiedSince(HttpServletRequest request, HttpServletResponse response, long lastModified) {
 		long ifModifiedSince = request.getDateHeader("If-Modified-Since");
 		if ((ifModifiedSince != -1) && (lastModified < ifModifiedSince + 1000)) {
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
@@ -96,12 +94,12 @@ public class ServletUtils {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: checkIfNoneMatchEtag
-	 * @Description: 根据浏览器 If-None-Match Header, 计算Etag是否已无效.
-	 * 如果Etag有效, checkIfNoneMatch返回false, 设置304 not modify status.
+	 * @Description: 根据浏览器 If-None-Match Header, 计算Etag是否已无效. 如果Etag有效,
+	 *               checkIfNoneMatch返回false, 设置304 not modify status.
 	 * @param request
 	 * @param response
 	 * @param etag
@@ -132,7 +130,7 @@ public class ServletUtils {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: setFileDownloadHeader
@@ -142,13 +140,13 @@ public class ServletUtils {
 	 */
 	public static void setFileDownloadHeader(HttpServletResponse response, String fileName) {
 		try {
-			//中文文件名支持
+			// 中文文件名支持
 			String encodedfileName = new String(fileName.getBytes(), "ISO8859-1");
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + encodedfileName + "\"");
 		} catch (UnsupportedEncodingException e) {
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getParametersStartingWith
@@ -181,7 +179,7 @@ public class ServletUtils {
 		}
 		return params;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: encodeHttpBasic
@@ -194,7 +192,7 @@ public class ServletUtils {
 		String encode = userName + ":" + password;
 		return "Basic " + EncodeUtils.base64Encode(encode.getBytes());
 	}
-	
+
 	/**
 	 * 
 	 * @Title: sendMsg
@@ -211,7 +209,7 @@ public class ServletUtils {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @Title: sendMsg

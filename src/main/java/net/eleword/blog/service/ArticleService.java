@@ -44,31 +44,31 @@ public class ArticleService {
 	public void setArticleDao(ArticleDao articleDao) {
 		this.articleDao = articleDao;
 	}
-	
-	public List<Article> selectAll(){
+
+	public List<Article> selectAll() {
 		return articleDao.selectAll();
 	}
-	
-	public Pagination<Article> selectArticleWithPage(Pagination page){
-		
+
+	public Pagination<Article> selectArticleWithPage(Pagination page) {
+
 		return articleDao.selectArticleWithPage(page);
 	}
-	
-	public Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page,long categoryId){
-		
-		return articleDao.selectArticleWithPageByCategoryId(page,categoryId);
+
+	public Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page, long categoryId) {
+
+		return articleDao.selectArticleWithPageByCategoryId(page, categoryId);
 	}
-	
-	public List queryArticleArchive(){
+
+	public List queryArticleArchive() {
 		return articleDao.selectArticleArchive();
 	}
-	
-	public Pagination<Article> selectArticleArchiveDateWithPage(Pagination<Article> page, String date){
-		
+
+	public Pagination<Article> selectArticleArchiveDateWithPage(Pagination<Article> page, String date) {
+
 		return articleDao.selectArticleByArchiveDate(page, date);
 	}
-	
-	public List<Article> selectRecnetArticle(int size){
+
+	public List<Article> selectRecnetArticle(int size) {
 		return articleDao.selectRecentArticle(size);
 	}
 }

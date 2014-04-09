@@ -1,11 +1,14 @@
 package net.eleword.blog.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import net.eleword.blog.service.ArticleService;
+import net.eleword.blog.service.BlogService;
+import net.eleword.blog.service.CategoryService;
+import net.eleword.blog.service.ColorService;
+import net.eleword.blog.service.CommentService;
+import net.eleword.blog.service.FolderService;
+import net.eleword.blog.service.UserService;
 
-import org.apache.struts2.ServletActionContext;
-
-import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * TODO 此处填写 class 信息
@@ -14,11 +17,27 @@ import com.opensymphony.xwork2.ActionSupport;
  * @date 2014-2-17上午9:20:44
  */
 
-public class BaseAction extends ActionSupport {
+public class BaseAction {
 
-	public BaseAction() {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpSession session = request.getSession();
-		
-	}
+	@Autowired
+	public ArticleService articleService;
+
+	@Autowired
+	public CategoryService categoryService;
+
+	@Autowired
+	public CommentService commentService;
+
+	@Autowired
+	public UserService userService;
+
+	@Autowired
+	public BlogService blogService;
+
+	@Autowired
+	public FolderService folderService;
+	
+	@Autowired
+	public ColorService colorService;
+
 }

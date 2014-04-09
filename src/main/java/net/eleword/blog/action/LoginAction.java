@@ -4,12 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import net.eleword.blog.entity.User;
-import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.MD5Util;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,79 +20,44 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date 2014-1-28上午6:04:50
  */
 @Controller
-public class LoginAction {
+public class LoginAction extends BaseAction {
 
-	private String username;
-	private String password;
+	@RequestMapping(value = "/admin/login.htm", method = RequestMethod.GET)
+	public String loginPage() {
 
-	@Autowired
-	private UserService userService;
-
-	public String execute() {
-		return "login";
-	}
-	@RequestMapping(value="/admin/login",method=RequestMethod.GET)
-	public String loginPage(){
-		
 		return "admin/login.htm";
 	}
-	
-	
-	@RequestMapping(value="/admin/loging",method=RequestMethod.POST)
+
+	@RequestMapping(value = "/admin/signin.htm", method = RequestMethod.POST)
 	public String login(
-			@RequestParam(value="username") String username,
-			@RequestParam(value="password") String password,
+			@RequestParam(value = "username") String username, 
+			@RequestParam(value = "password") String password,
 			HttpServletRequest request
-			
-			) {
+	) {
 		HttpSession session = request.getSession();
 		User user = userService.selectUserByName(username);
 		if (user == null) {
 			request.setAttribute("msg", "用户名不存在!");
-			request.setAttribute("username",username);
+			request.setAttribute("username", username);
 			return "admin/login.htm";
 		}
 		if (!StringUtils.equals(user.getPassword(), MD5Util.encrypt(password))) {
 			request.setAttribute("msg", "用户密码不正确!");
-			request.setAttribute("username",username);
+			request.setAttribute("username", username);
 			return "admin/login.htm";
 		}
 		session.setAttribute(ConstantEnum.USER_SESSION.toString(), user);
-		return "redirect:/admin/index";
+		return "admin/main.htm";
 	}
-	
-	@RequestMapping(value="/admin/logout",method=RequestMethod.GET)
-	public String logout(HttpServletRequest request){
+
+	@RequestMapping(value = "/admin/logout.htm", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("USER_SESSION");
 		session.removeAttribute("USER_SESSION");
-    	session.invalidate();
-    	return "redirect:/index";
-    
-	}
-	
-	public String getUsername() {
-		return username;
-	}
+		session.invalidate();
+		return "redirect:/index.htm";
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
 	}
 
 }

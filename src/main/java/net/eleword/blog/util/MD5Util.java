@@ -35,7 +35,7 @@ public class MD5Util {
 
 		return hexString.toString();
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(encrypt("admin"));
 	}

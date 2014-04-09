@@ -22,7 +22,7 @@
 		<#if flag="add">
 			<div class="position-title">添加目录</div>
 			<div class="well" style="margin-left: 0px;padding-left: 0px;" >
-				<form class="form-horizontal" action="${request.contextPath}/admin/folder/post" method="post">
+				<form class="form-horizontal" action="${request.contextPath}/admin/folder/post.htm" method="post">
 				 	<div class="control-group">
 					    <label class="control-label">目录名称</label>
 					    <div class="controls">
@@ -60,7 +60,7 @@
 			<#else>
 			<div class="position-title">修改目录</div>
 			<div class="well" style="margin-left: 0px;padding-left: 0px;" >
-				<form class="form-horizontal" action="${request.contextPath}/admin/folder/update" method="post">
+				<form class="form-horizontal" action="${request.contextPath}/admin/folder/update.htm" method="post">
 					<input type="hidden" name="id" value="${folder.id}">
 				 	<div class="control-group">
 					    <label class="control-label">目录名称</label>
@@ -122,8 +122,8 @@
 						</#if>
 					</td>
 					<td>
-						<a href="${request.contextPath}/admin/folder/${folder.id}">编辑</a> |
-						<a href="#" onclick="return deleteArticle(${folder.id});">删除</a>
+						<a href="${request.contextPath}/admin/folder/${folder.id}.htm">编辑</a> |
+						<a href="#" onclick="return deleteFolder(${folder.id});">删除</a>
 					</td>
 				</tr>
 				</#list>
@@ -134,12 +134,12 @@
 <#include "footer_admin.htm">
 <script type="text/javascript">
 <!--
-function deleteArticle(id){
+function deleteFolder(id){
 	var frm=document.getElementById("formdel")
-	var url="article/delete/"+id;
+	var url="folder/delete/"+id+".htm";
 	
 	frm.action=url;
-	if(confirm('确实要删除此文章吗？')){
+	if(confirm('确实要删除此目录吗？')){
 		frm.submit();
 	}
 	return false;

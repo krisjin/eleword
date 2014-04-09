@@ -6,18 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Category;
+import net.eleword.blog.entity.Folder;
 import net.eleword.blog.entity.User;
-import net.eleword.blog.service.ArticleService;
-import net.eleword.blog.service.BlogService;
-import net.eleword.blog.service.CategoryService;
-import net.eleword.blog.service.CommentService;
-import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.DateUtils;
 import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,22 +27,10 @@ import com.mysql.jdbc.StringUtils;
  * @date 2014-2-2上午11:17:57
  */
 @Controller
-public class CategoryViewAction  {
+public class CategoryViewAction extends BaseAction {
 
-	@Autowired
-	private ArticleService articleService;
-	@Autowired
-	private CategoryService categoryService;
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private BlogService blogService;
-	
-	@Autowired
-	private CommentService commentService;
-	
-	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
-	public String category(@PathVariable("id") Long id,HttpServletRequest request) {
+	@RequestMapping(value = "/category/{id}.htm", method = RequestMethod.GET)
+	public String category(@PathVariable("id") Long id, HttpServletRequest request) {
 
 		Pagination<Article> page = new Pagination<Article>();
 		String pageCount = request.getParameter("page");
@@ -78,9 +61,11 @@ public class CategoryViewAction  {
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		List<Article> recentArticle = articleService.selectRecnetArticle(10);
-		
+		List<Folder> folderLlist = folderService.selectAllFolder();
+
+		request.setAttribute("folderList", folderLlist);
 		request.setAttribute("articleArchive", articleArchive);
-		request.setAttribute("blog",blogService.queryAllBlogConfig().get(0));
+		request.setAttribute("blog", blogService.queryAllBlogConfig().get(0));
 		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute("categoryId", id);
 		request.setAttribute("recentArticle", recentArticle);

@@ -2,8 +2,7 @@ package net.eleword.blog.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang.StringUtils;
 
 public class HttpUtils {
 
@@ -29,6 +28,7 @@ public class HttpUtils {
 
 	/**
 	 * 得到请求的根目录
+	 * 
 	 * @param request
 	 * @return
 	 */

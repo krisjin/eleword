@@ -49,8 +49,8 @@ public class CommentDaoImpl extends HibernateDao<Comment, Long> implements Comme
 	}
 
 	public List<Comment> selectCommentByArticleId(Long id) {
-		String hql="from Comment where articleId=?";
-		return find(hql,id);
+		String hql = "from Comment where articleId=?";
+		return find(hql, id);
 	}
 
 }

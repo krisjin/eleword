@@ -1,6 +1,5 @@
 package net.eleword.blog.dao.common;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,14 +13,13 @@ import net.eleword.blog.util.ServletUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
 
-
 /**
  * 
  * @ClassName: PropertyFilter
  * @Description: 与具体ORM实现无关的属性过滤条件封装类, 主要记录页面中简单的搜索过滤条件.
  * @author shenmiao@staff.hexun.com
  * @date 2010-11-10 下午02:15:38
- *
+ * 
  */
 public class PropertyFilter {
 
@@ -56,18 +54,29 @@ public class PropertyFilter {
 
 	/**
 	 * 
-	 * <p>Title: 构造函数</p>
-	 * <p>Description: </p>
+	 * <p>
+	 * Title: 构造函数
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
 	 */
 	public PropertyFilter() {
 	}
-	
+
 	/**
 	 * 
-	 * <p>Title: 构造函数</p>
-	 * <p>Description: </p>
-	 * @param filterName 比较属性字符串,含待比较的比较类型、属性值类型及属性列表.
-	 * @param value 待比较的值.
+	 * <p>
+	 * Title: 构造函数
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 * 
+	 * @param filterName
+	 *            比较属性字符串,含待比较的比较类型、属性值类型及属性列表.
+	 * @param value
+	 *            待比较的值.
 	 */
 	public PropertyFilter(final String filterName, final String value) {
 
@@ -93,7 +102,7 @@ public class PropertyFilter {
 
 		this.matchValue = ConvertUtils.convertStringToObject(value, propertyClass);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: buildFromHttpRequest
@@ -104,12 +113,12 @@ public class PropertyFilter {
 	public static List<PropertyFilter> buildFromHttpRequest(final HttpServletRequest request) {
 		return buildFromHttpRequest(request, "filter");
 	}
-	
+
 	/**
 	 * 
 	 * @Title: buildFromHttpRequest
 	 * @Description: 从HttpRequest中创建PropertyFilter列表
-	 * PropertyFilter命名规则为Filter属性前缀_比较类型属性类型_属性名.
+	 *               PropertyFilter命名规则为Filter属性前缀_比较类型属性类型_属性名.
 	 * @param request
 	 * @param filterPrefix
 	 * @return
@@ -117,14 +126,14 @@ public class PropertyFilter {
 	public static List<PropertyFilter> buildFromHttpRequest(final HttpServletRequest request, final String filterPrefix) {
 		List<PropertyFilter> filterList = new ArrayList<PropertyFilter>();
 
-		//从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
+		// 从request中获取含属性前缀名的参数,构造去除前缀名后的参数Map.
 		Map<String, Object> filterParamMap = ServletUtils.getParametersStartingWith(request, filterPrefix + "_");
 
-		//分析参数Map,构造PropertyFilter列表
+		// 分析参数Map,构造PropertyFilter列表
 		for (Map.Entry<String, Object> entry : filterParamMap.entrySet()) {
 			String filterName = entry.getKey();
 			String value = (String) entry.getValue();
-			//如果value值为空,则忽略此filter.
+			// 如果value值为空,则忽略此filter.
 			if (StringUtils.isNotBlank(value)) {
 				PropertyFilter filter = new PropertyFilter(filterName, value);
 				filterList.add(filter);
@@ -133,7 +142,7 @@ public class PropertyFilter {
 
 		return filterList;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getPropertyClass
@@ -143,7 +152,7 @@ public class PropertyFilter {
 	public Class<?> getPropertyClass() {
 		return propertyClass;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getMatchType
@@ -153,7 +162,7 @@ public class PropertyFilter {
 	public MatchType getMatchType() {
 		return matchType;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getMatchValue
@@ -163,7 +172,7 @@ public class PropertyFilter {
 	public Object getMatchValue() {
 		return matchValue;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getPropertyNames
@@ -173,7 +182,7 @@ public class PropertyFilter {
 	public String[] getPropertyNames() {
 		return propertyNames;
 	}
-	
+
 	/**
 	 * 
 	 * @Title: getPropertyName
@@ -184,7 +193,7 @@ public class PropertyFilter {
 		Assert.isTrue(propertyNames.length == 1, "There are not only one property in this filter.");
 		return propertyNames[0];
 	}
-	
+
 	/**
 	 * 
 	 * @Title: hasMultiProperties

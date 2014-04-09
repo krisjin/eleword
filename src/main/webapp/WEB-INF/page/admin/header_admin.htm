@@ -30,8 +30,8 @@
 </head>
 
 <body>
-	<div class="container-narrow" style="background-color: white;padding: 20px;border:  solid rgb(233,231,239) 1px ;">
-		<div class="masthead">
+	<div class="container-narrow" style="background-color: white;padding: 20px 20px 0px 20px ;border:  solid rgb(233,231,239) 1px ;">
+		<div class="masthead" >
 			<ul class="nav nav-pills pull-right">
 			<#if Session.USER_SESSION?exists>
 			
@@ -41,38 +41,38 @@
 						class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span
 						class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="${request.contextPath}/admin/logout"><i class="icon-off"></i> 注销</a></li>
+						<li><a href="${request.contextPath}/admin/logout.htm"><i class="icon-off"></i> 注销</a></li>
 					</ul>
 				</div>
 				</#if>
 			</ul>
 			<h3 class="muted">
-				后台管理
+				<a href="${request.contextPath}/admin/index.htm">后台管理</a>
 			</h3>
 		</div>
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">
 					<ul class="nav">
-						<li ><a href="${request.contextPath}/admin/index">管理首页</a></li>
-						<li id="postArticleId" onclick="showActive('postArticleId',this)"><a href="${request.contextPath}/admin/article/add">发表文章</a></li>
-						<li><a href="${request.contextPath}/admin/articles">文章管理</a></li>
-						<li><a href="${request.contextPath}/admin/categories">分类管理</a></li>
-						<li><a href="${request.contextPath}/admin/comments">评论管理</a></li>
-						<li><a href="${request.contextPath}/admin/folders">目录管理</a></li>
-						<li><a href="${request.contextPath}/admin/blog/config">博客设置</a></li>
-						<li><a href="${request.contextPath}/admin/colors">背景色管理</a></li>
+<!-- 						<li ><a href="${request.contextPath}/admin/index">管理首页</a></li> -->
+						<li id="postArticleId" onclick="showActive('postArticleId',this)"><a href="${request.contextPath}/admin/article/add.htm">发表文章</a></li>
+						<li><a href="${request.contextPath}/admin/articles.htm">文章管理</a></li>
+						<li><a href="${request.contextPath}/admin/categories.htm">分类管理</a></li>
+						<li><a href="${request.contextPath}/admin/comments.htm">评论管理</a></li>
+						<li><a href="${request.contextPath}/admin/folders.htm">目录管理</a></li>
+						<li><a href="${request.contextPath}/admin/blog/config.htm">博客设置</a></li>
+						<li><a href="${request.contextPath}/admin/colors.htm">背景色管理</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">个人信息管理
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="${request.contextPath}/admin/password">修改个人信息</a></li>
-								<li><a href="${request.contextPath}/admin/password">修改登录密码</a></li>
-								<li><a href="${request.contextPath}/admin/avatar">修改个人头像</a></li>
+								<li><a href="${request.contextPath}/admin/password.htm">修改个人信息</a></li>
+								<li><a href="${request.contextPath}/admin/password.htm">修改登录密码</a></li>
+								<li><a href="${request.contextPath}/admin/avatar.htm">修改个人头像</a></li>
 							</ul>
 						</li>
-						<li><a href="${request.contextPath}">博客首页</a></li>
+						<li><a href="${request.contextPath}/index.htm">博客首页</a></li>
 						
 					</ul>
 				</div>

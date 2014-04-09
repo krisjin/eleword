@@ -9,11 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.eleword.blog.entity.User;
-import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.MD5Util;
 
-import org.apache.commons.fileupload.FileItem;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,18 +24,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  * @date 2014-2-16上午8:52:51
  */
 @Controller("uploadAction")
-public class UploadAction {
+public class UploadAction extends BaseAction{
 
 	private String relativelyPath="/user/avatar";
 
-	@Autowired
-	private UserService userService;
-
-	public String execute() {
-		return "uploadAvatar";
-	}
-	
-	@RequestMapping(value="/admin/avatar",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/avatar.htm",method=RequestMethod.GET)
 	public String avatar(HttpServletRequest request) {
 //		HttpSession session = request.getSession();
 //		User user = (User) session.getAttribute("USER_SESSION");
@@ -75,7 +65,7 @@ public class UploadAction {
 
 	
 	
-	@RequestMapping(value="/admin/avatar/save",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/avatar/save.htm",method=RequestMethod.POST)
 	public String saveAvatar(HttpServletRequest request,@RequestParam(value="file") CommonsMultipartFile file) {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("USER_SESSION");

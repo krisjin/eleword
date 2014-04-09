@@ -18,7 +18,7 @@
 					<#list comments as comment>
 					<tr>
 						<td>
-						<a href="${request.contextPath}/article/${comment.articleId}" title="${comment.articleTitle}">
+						<a href="${request.contextPath}/article/${comment.articleId}.htm" title="${comment.articleTitle}">
 							<#if ((comment.articleTitle?length) >15)>
 								${comment.articleTitle[0..15]}
 							<#else>
@@ -56,7 +56,7 @@ ${paginationData}
 
 function deleteComment(commentId){
 	var frm=document.getElementById("formcate");
-	var url="comments/delete/"+commentId;
+	var url="comments/delete/"+commentId+".htm";
 	
 	frm.action=url;
 	if(confirm('确实要删除此评论吗!')){

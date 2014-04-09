@@ -1,30 +1,31 @@
 package net.eleword.blog.util;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
-
-
 /**
  * TODO 此处填写 class 信息
+ * 
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-2-1下午2:12:07
  */
 public class HtmlUtil {
 	private static final String REGXP_HTML_TAG = "<([^>]*)>"; // 过滤所有以<开头以>结尾的标签
-	
+
 	private static final String REGXP_FOR_IMG_TAG = "<\\s*img\\s+([^>]*)\\s*>"; // 找出IMG标签
-	
+
 	private static final String regxpForImaTagSrcAttrib = "src=\"([^\"]+)\""; // 找出IMG标签的SRC属性
 
-	private static final String REGXP_SRCATR_VALUE="<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>";
-	
-	private HtmlUtil() {}
+	private static final String REGXP_SRCATR_VALUE = "<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>";
+
+	private HtmlUtil() {
+	}
 
 	/**
 	 * 替换标记以正常显示
+	 * 
 	 * @param input
 	 * @return String
 	 */
@@ -139,6 +140,7 @@ public class HtmlUtil {
 	 * 
 	 * 基本功能：替换指定的标签
 	 * <p>
+	 * 
 	 * @param str
 	 * @param beforeTag
 	 *            要替换的标签
@@ -151,7 +153,7 @@ public class HtmlUtil {
 	 * @return String
 	 * @如：替换img标签的src属性值为[img]属性值[/img]
 	 */
-	public static String replaceHtmlTag(String str, String beforeTag,String tagAttrib, String startTag, String endTag) {
+	public static String replaceHtmlTag(String str, String beforeTag, String tagAttrib, String startTag, String endTag) {
 		String regxpForTag = "<\\s*" + beforeTag + "\\s+([^>]*)\\s*>";
 		String regxpForTagAttrib = tagAttrib + "=\"([^\"]+)\"";
 		Pattern patternForTag = Pattern.compile(regxpForTag);
@@ -161,11 +163,9 @@ public class HtmlUtil {
 		boolean result = matcherForTag.find();
 		while (result) {
 			StringBuffer sbreplace = new StringBuffer();
-			Matcher matcherForAttrib = patternForAttrib.matcher(matcherForTag
-					.group(1));
+			Matcher matcherForAttrib = patternForAttrib.matcher(matcherForTag.group(1));
 			if (matcherForAttrib.find()) {
-				matcherForAttrib.appendReplacement(sbreplace, startTag
-						+ matcherForAttrib.group(1) + endTag);
+				matcherForAttrib.appendReplacement(sbreplace, startTag + matcherForAttrib.group(1) + endTag);
 			}
 			matcherForTag.appendReplacement(sb, sbreplace.toString());
 			result = matcherForTag.find();
@@ -173,79 +173,81 @@ public class HtmlUtil {
 		matcherForTag.appendTail(sb);
 		return sb.toString();
 	}
-	
-	
+
 	/**
 	 * Gets Single Img Tag Attribute
+	 * 
 	 * @param input
 	 * @return
 	 */
-	public static String getImgAtr(String input){
+	public static String getImgAtr(String input) {
 		Pattern p = Pattern.compile(REGXP_SRCATR_VALUE);
-		Matcher matcher=p.matcher(input);
-		String retVal=null;
-		boolean result=matcher.find();
-		while(result){
-			retVal=matcher.group(1);
-			result=matcher.find();
+		Matcher matcher = p.matcher(input);
+		String retVal = null;
+		boolean result = matcher.find();
+		while (result) {
+			retVal = matcher.group(1);
+			result = matcher.find();
 		}
 		return retVal;
 	}
-	
-	
+
 	/**
 	 * Gets Multi Img Tag Attribute
+	 * 
 	 * @param input
 	 * @return
 	 */
-	public static List getMutiImgAtr(String input){
-		Pattern p =Pattern.compile(REGXP_SRCATR_VALUE);
-		Matcher matcher=p.matcher(input);
+	public static List getMutiImgAtr(String input) {
+		Pattern p = Pattern.compile(REGXP_SRCATR_VALUE);
+		Matcher matcher = p.matcher(input);
 		List<String> list = new ArrayList<String>();
-		boolean flag =matcher.find();
-		
-		while(flag){
+		boolean flag = matcher.find();
+
+		while (flag) {
 			list.add(matcher.group(1));
-			flag=matcher.find();
+			flag = matcher.find();
 		}
 		return list;
 	}
-	
-	
 
-	/**按字节截取字符串
+	/**
+	 * 按字节截取字符串
+	 * 
 	 * @param content
 	 * @param length
 	 * @return
 	 */
 	public static String subStrByte(String content, int length) {
-		content=content.trim();
+		content = content.trim();
 		int strByteLength = 0;
-		if (null == content || "".equals(content) || content.length() == 0) return "";
+		if (null == content || "".equals(content) || content.length() == 0)
+			return "";
 		strByteLength = content.getBytes().length;
-		if (strByteLength < length) return content;
+		if (strByteLength < length)
+			return content;
 		for (int i = 0; i < length; i++) {
 			String tmp = content.substring(i, i + 1);
-			if (tmp.getBytes().length > 1) length--;
+			if (tmp.getBytes().length > 1)
+				length--;
 		}
-		return content.substring(0, length)+"...";
+		return content.substring(0, length) + "...";
 	}
-	
-	public static void main(String[] args){
-		
-	
-		//String str="<span class='<p style=padding-right:0px;padding-left:0px;font-size:14px;padding-bottom:0px;margin:16px 0px 0px;padding-top:0px;'><img  src='/blog/uploadimage/2.jpg'/>fd的算法导数afdsfdsf</p><img  src='/blog/uploadimage/20120120/dfd.jpg'/>";
-		//String strs=HtmlRegexpUtil.filterHtml(str);
-	//	String strs=HtmlRegexpUtil.filterStr("上a发d的abce", 5);
-	//	System.out.println(strs);
-		//List img=HtmlRegexpUtil.getMutiImgAtr(str);
-		
-//		for(Iterator iter=img.iterator();iter.hasNext();){
-//			String obj=(String)iter.next();
-//			System.out.println(obj);
-//			
-//		}
-			
+
+	public static void main(String[] args) {
+
+		// String
+		// str="<span class='<p style=padding-right:0px;padding-left:0px;font-size:14px;padding-bottom:0px;margin:16px 0px 0px;padding-top:0px;'><img  src='/blog/uploadimage/2.jpg'/>fd的算法导数afdsfdsf</p><img  src='/blog/uploadimage/20120120/dfd.jpg'/>";
+		// String strs=HtmlRegexpUtil.filterHtml(str);
+		// String strs=HtmlRegexpUtil.filterStr("上a发d的abce", 5);
+		// System.out.println(strs);
+		// List img=HtmlRegexpUtil.getMutiImgAtr(str);
+
+		// for(Iterator iter=img.iterator();iter.hasNext();){
+		// String obj=(String)iter.next();
+		// System.out.println(obj);
+		//
+		// }
+
 	}
 }
-

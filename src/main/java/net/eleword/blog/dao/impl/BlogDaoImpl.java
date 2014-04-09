@@ -10,13 +10,14 @@ import net.eleword.blog.entity.Blog;
 
 /**
  * TODO 此处填写 class 信息
+ * 
  * @author krisjin (mailto:krisjin86@163.com)
  */
 @Repository("blogDao")
-public class BlogDaoImpl  extends HibernateDao<Blog, Long> implements BlogDao{
+public class BlogDaoImpl extends HibernateDao<Blog, Long> implements BlogDao {
 
 	public Long add(Blog entity) {
-		
+
 		return null;
 	}
 
@@ -25,7 +26,7 @@ public class BlogDaoImpl  extends HibernateDao<Blog, Long> implements BlogDao{
 	}
 
 	public void deleteById(long id) {
-		
+
 	}
 
 	public Blog select(long id) {
@@ -37,4 +38,3 @@ public class BlogDaoImpl  extends HibernateDao<Blog, Long> implements BlogDao{
 	}
 
 }
-

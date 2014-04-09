@@ -15,8 +15,6 @@
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
-
 <style type="text/css">
  body{
 	background-color: rgb(${blog.background});
@@ -26,10 +24,10 @@
 <!-- background-image: url('${request.contextPath}/template/banner/banner1.jpg'); -->
 <body>
 	<div class="container-narrow" style="background-color: white;border:solid rgb(233,231,239) 1px ;" >
-      <div class="masthead" style="height: 150px;background-color:rgb(${blog.banner_color});">
+      <div class="masthead" style="height: 130px;background-color:rgb(${blog.banner_color});">
       	<div style="padding: 30px 0px 0px 35px;">
 	        <h3>
-		        <a href="http://localhost:8080/eleword/">${blog.title}</a>
+		        <a href="${request.contextPath}/index.htm">${blog.title}</a>
 	        </h3>
 	        <p style="font-size: 14px;color: rgb(98,42,29); margin: 10px 0 0 60px;">${blog.description}</p>
         </div>
@@ -38,9 +36,9 @@
 	  <div class="navbar navbar" style="margin-top: 0px;">
  		 <div class="navbar-inner">
 		    <ul class="nav">
-		      <li class="active"><a href="#">首页</a></li>
-		      <#list folderList as folder>
-		      	<li><a href="${request.contextPath}/${folder.ename}">${folder.name}</a></li>
+		      <li  <#if active?exists><#if active="index">  class="active"</#if></#if>><a href="${request.contextPath}/index.htm">首页</a></li>
+		       <#list folderList as folder>
+		      	<li <#if active?exists> <#if active=(folder.ename)>  class="active"</#if> </#if>><a href="${request.contextPath}/${folder.ename}.htm">${folder.name}</a></li>
 		      </#list>
    			 </ul>
   		 </div>

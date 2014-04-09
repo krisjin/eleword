@@ -5,7 +5,7 @@
 		<ul class="unstyled">
 		<#list categories as category>
 			<li style="padding-bottom: 4px;">
-			<a href="${request.contextPath}/category/${category.id}" title="${category.name}">${category.name}</a>
+			<a href="${request.contextPath}/category/${category.id}.htm" title="${category.name}">${category.name}</a>
 			<span class="muted">(${category.articleNumber})</span>
 		 	</li>
 	    </#list>
@@ -19,7 +19,7 @@
 			<ul class="unstyled" >
 			<#list recentArticle as ra>
 				<li style="padding-bottom: 4px;">
-					<a href="${request.contextPath}/article/${ra.id}" title="${ra.title}">
+					<a href="${request.contextPath}/article/${ra.id}.htm" title="${ra.title}">
 					<#if ((ra.title?length)>13)>
 						${ra.title[0..13]}
 					<#else>
@@ -39,7 +39,7 @@
 			<ul class="unstyled" >
 			<#list articleArchive as aa>
 				<li style="padding-bottom: 4px;">
-					<a href="${request.contextPath}/articles/archive/${aa[0]}" >${aa[0]}</a>
+					<a href="${request.contextPath}/articles/archive/${aa[0]}.htm" >${aa[0]}</a>
 					<span class="muted">(${aa[1]})</span>
 				</li>
 			</#list>

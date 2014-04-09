@@ -8,13 +8,17 @@ package net.eleword.blog.dao.common;
  */
 
 public interface BaseDao<T> {
-	
+
 	Long add(T entity);
+	
 
 	void update(T entity);
+	
 
 	void deleteById(long id);
+	
 
 	T select(long id);
 	
+
 }

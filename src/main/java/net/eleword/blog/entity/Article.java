@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "article")
 public class Article extends IdEntity implements Serializable {
+	
 	private static final long serialVersionUID = -2795641924523901764L;
 
 	private String title;
@@ -146,7 +147,7 @@ public class Article extends IdEntity implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	@Transient
 	public int getCommentCount() {
 		return commentCount;

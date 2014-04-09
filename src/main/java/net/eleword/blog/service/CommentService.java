@@ -36,7 +36,8 @@ public class CommentService {
 	public void deleteById(long id) {
 		commentDao.deleteById(id);
 	}
-	public List<Comment> selectCommentByArticleId(Long id){
+
+	public List<Comment> selectCommentByArticleId(Long id) {
 		return commentDao.selectCommentByArticleId(id);
 	}
 

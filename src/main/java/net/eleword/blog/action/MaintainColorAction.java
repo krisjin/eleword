@@ -3,10 +3,8 @@ package net.eleword.blog.action;
 import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Color;
-import net.eleword.blog.service.ColorService;
 import net.eleword.blog.util.Pagination;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,12 +19,9 @@ import com.mysql.jdbc.StringUtils;
  * @date 2014-3-13下午12:59:29
  */
 @Controller
-public class MaintainColorAction{
+public class MaintainColorAction extends BaseAction {
 
-	@Autowired
-	private ColorService colorService;
-	
-	@RequestMapping(value="/admin/colors",method=RequestMethod.GET)
+	@RequestMapping(value = "/admin/colors.htm", method = RequestMethod.GET)
 	public String listColors(HttpServletRequest request) {
 		Pagination<Color> page = new Pagination<Color>();
 		String pageCount = request.getParameter("page");
@@ -41,17 +36,17 @@ public class MaintainColorAction{
 		request.setAttribute("pa", page);
 		return "admin/listColor.htm";
 	}
-	
-	@RequestMapping(value="/admin/colors/add",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/admin/colors/add.htm", method = RequestMethod.GET)
 	public String add() {
 		return "admin/addColor.htm";
 	}
 
-	@RequestMapping(value="/admin/colors/save",method=RequestMethod.POST)
+	@RequestMapping(value = "/admin/colors/save.htm", method = RequestMethod.POST)
 	public String addSave(
-			@RequestParam(value="code") String code,
-			@RequestParam(value="name") String name,
-			@RequestParam(value="description") String description,
+			@RequestParam(value = "code") String code, 
+			@RequestParam(value = "name") String name, 
+			@RequestParam(value = "description") String description,
 			HttpServletRequest request) {
 		Color color = new Color();
 		color.setCode(code);
@@ -64,13 +59,7 @@ public class MaintainColorAction{
 			return "admin/addColor.htm";
 		}
 		colorService.addColor(color);
-		return "redirect:/admin/colors";
+		return "redirect:/admin/colors.htm";
 	}
 
-	public void validate() {
-		
-	}
-	public String delete() {
-		return "list";
-	}
 }

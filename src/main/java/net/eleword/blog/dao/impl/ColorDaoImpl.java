@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 颜色表数据访问层实现
+ * 
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-3-13下午12:37:59
  */
@@ -34,7 +35,7 @@ public class ColorDaoImpl extends HibernateDao<Color, Long> implements ColorDao 
 	}
 
 	public Pagination<Color> selectColorWithPage(Pagination<Color> page) {
-		
+
 		return findPage(page);
 	}
 

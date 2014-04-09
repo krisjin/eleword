@@ -20,5 +20,5 @@ public enum ArticleStatus {
 	public int getStatus() {
 		return status;
 	}
-	
+
 }

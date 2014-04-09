@@ -16,6 +16,8 @@ import javax.persistence.Transient;
 @Table(name="folder")
 public class Folder extends IdEntity implements Serializable {
 
+	private static final long serialVersionUID = -727034702046757050L;
+
 	private long fatherId;
 
 	private String ename;

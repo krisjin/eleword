@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ColorService {
-	
+
 	@Autowired
 	private ColorDao colorDao;
 
@@ -28,16 +28,16 @@ public class ColorService {
 	public void deleteColorById(Long id) {
 		colorDao.deleteById(id);
 	}
-	
-	public Pagination<Color> queryColorWithPage(Pagination<Color> page){
+
+	public Pagination<Color> queryColorWithPage(Pagination<Color> page) {
 		return colorDao.selectColorWithPage(page);
 	}
-	
-	public Color queryColorByCode(String code){
+
+	public Color queryColorByCode(String code) {
 		return colorDao.selectColorByCode(code);
 	}
-	
-	public List<Color> queryAllColors(){
+
+	public List<Color> queryAllColors() {
 		return colorDao.getAllColors();
 	}
 }

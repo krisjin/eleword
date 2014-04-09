@@ -190,9 +190,12 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		return (T) createCriteria(criterion).uniqueResult();
 	}
 
-	/**按HQL查询对象列表.
+	/**
+	 * 按HQL查询对象列表.
+	 * 
 	 * @param hql
-	 * @param values 数量可变的参数,按顺序绑定.
+	 * @param values
+	 *            数量可变的参数,按顺序绑定.
 	 * @return
 	 */
 	public <X> List<X> find(final String hql, final Object... values) {
@@ -319,7 +322,9 @@ public abstract class BaseHibernateDao<T, PK extends Serializable> {
 		return query;
 	}
 
-	/**根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
+	/**
+	 * 根据查询HQL与参数列表创建Query对象.与find()函数可进行更加灵活的操作.
+	 * 
 	 * @param queryString
 	 * @param arg
 	 * @param values

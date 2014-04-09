@@ -8,13 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.eleword.blog.entity.Comment;
 import net.eleword.blog.entity.User;
-import net.eleword.blog.service.ArticleService;
-import net.eleword.blog.service.CommentService;
-import net.eleword.blog.service.UserService;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.HttpUtils;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,27 +24,16 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date 2014-2-13下午12:34:10
  */
 @Controller
-public class CommentAction {
+public class CommentAction extends BaseAction {
 
-
-	@Autowired
-	private CommentService commentService;
-	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private ArticleService articleService;
-	
-	@RequestMapping(value="/comments/{id}",method = RequestMethod.POST)
+	@RequestMapping(value = "/comments/{id}.htm", method = RequestMethod.POST)
 	public String post(
 			@PathVariable("id") Long articleId,
-			@RequestParam(value="content") String content,
-			@RequestParam(value="nickname") String nickname,
-			@RequestParam(value="email") String email,
-			HttpServletRequest request,HttpServletResponse response
-			) {
-		
+			@RequestParam(value = "content") String content, 
+			@RequestParam(value = "nickname") String nickname,
+			@RequestParam(value = "email") String email, 
+			HttpServletRequest request, HttpServletResponse response) {
+
 		Comment comment = new Comment();
 		comment.setCommentContent(content);
 		comment.setCommentDate(new Date());
@@ -58,7 +43,7 @@ public class CommentAction {
 		commentService.saveComment(comment);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		request.setAttribute("avatar", user.getAvatar());
-		String path=HttpUtils.getBasePath(request)+"/article/"+articleId+"#comments";
+		String path = HttpUtils.getBasePath(request) + "/article/" + articleId + ".htm" + "#comments";
 		try {
 			response.sendRedirect(path);
 		} catch (IOException e) {
@@ -66,6 +51,4 @@ public class CommentAction {
 		}
 		return null;
 	}
-
-
 }

@@ -35,13 +35,12 @@ public class FolderDaoImpl extends HibernateDao<Folder, Long> implements FolderD
 	}
 
 	public List<Folder> selectAllFolder() {
-		String hql="from Folder where fatherId=0 and status=1";
+		String hql = "from Folder where fatherId=0 and status=1";
 		return find(hql);
 	}
 
 	public Folder selectFolderByName(String name) {
 		return findUniqueBy("ename", name);
 	}
-	
-	
+
 }

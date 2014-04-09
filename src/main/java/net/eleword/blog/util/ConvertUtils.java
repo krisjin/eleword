@@ -89,6 +89,5 @@ public class ConvertUtils {
 		dc.setPatterns(new String[] { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss" });
 		org.apache.commons.beanutils.ConvertUtils.register(dc, Date.class);
 	}
-	
-	
+
 }

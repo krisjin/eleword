@@ -17,6 +17,8 @@ import javax.persistence.Table;
 @Table(name = "color")
 public class Color extends IdEntity implements Serializable {
 
+	private static final long serialVersionUID = 2679116607447263872L;
+
 	private String name;
 
 	private String description;

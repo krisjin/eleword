@@ -2,8 +2,6 @@ package net.eleword.blog.util;
 
 import java.util.List;
 
-import net.eleword.blog.entity.Article;
-
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -14,9 +12,9 @@ import org.apache.commons.lang.StringUtils;
  */
 
 public class Pagination<T> {
-	
-	public static final String ASC="asc",DESC="desc";
-	
+
+	public static final String ASC = "asc", DESC = "desc";
+
 	private int pageSize = 20;
 
 	private int startPage;
@@ -30,15 +28,16 @@ public class Pagination<T> {
 	private String orderProperty;
 
 	private String order;
-	
+
 	private List<T> resultSet;
 
 	private boolean autoCount = true;
 
-	private int currentPage=1;
+	private int currentPage = 1;
 
 	/**
 	 * 每页记录数
+	 * 
 	 * @return
 	 */
 
@@ -52,17 +51,20 @@ public class Pagination<T> {
 
 	/**
 	 * 开始页
+	 * 
 	 * @return
 	 */
 	public int getStartPage() {
-		return ((currentPage-1)*pageSize)+1;
+		return ((currentPage - 1) * pageSize) + 1;
 	}
 
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
 
-	/**获取总记录数
+	/**
+	 * 获取总记录数
+	 * 
 	 * @return
 	 */
 	public long getTotalRecords() {
@@ -73,7 +75,9 @@ public class Pagination<T> {
 		this.totalRecords = totalRecords;
 	}
 
-	/**分页action
+	/**
+	 * 分页action
+	 * 
 	 * @return
 	 */
 	public String getPageAction() {
@@ -90,6 +94,7 @@ public class Pagination<T> {
 
 	/**
 	 * 设置排序属性
+	 * 
 	 * @param orderProperty
 	 */
 	public void setOrderProperty(String orderProperty) {
@@ -98,6 +103,7 @@ public class Pagination<T> {
 
 	/**
 	 * 获取返回结果集
+	 * 
 	 * @return
 	 */
 	public List<T> getResultSet() {
@@ -108,7 +114,9 @@ public class Pagination<T> {
 		this.resultSet = resultSet;
 	}
 
-	/**设置查询时是否先查询获取总记录数
+	/**
+	 * 设置查询时是否先查询获取总记录数
+	 * 
 	 * @return
 	 */
 	public boolean isAutoCount() {
@@ -121,16 +129,18 @@ public class Pagination<T> {
 
 	/**
 	 * 获取总页数
+	 * 
 	 * @return
 	 */
 	public int getTotalPages() {
-		int totalPages=(int) (Math.ceil((double) totalRecords / (double) pageSize));
-		this.totalPages=totalPages;
+		int totalPages = (int) (Math.ceil((double) totalRecords / (double) pageSize));
+		this.totalPages = totalPages;
 		return totalPages;
 	}
 
 	/**
 	 * 获取当前页
+	 * 
 	 * @return
 	 */
 	public int getCurrentPage() {
@@ -140,8 +150,10 @@ public class Pagination<T> {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
-	
-	/**是否已设置排序字段,无默认值.
+
+	/**
+	 * 是否已设置排序字段,无默认值.
+	 * 
 	 * @return
 	 */
 	public boolean isOrderBySetted() {
@@ -155,7 +167,5 @@ public class Pagination<T> {
 	public void setOrder(String order) {
 		this.order = order;
 	}
-	
-	
 
 }

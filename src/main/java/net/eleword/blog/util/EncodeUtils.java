@@ -1,6 +1,5 @@
 package net.eleword.blog.util;
 
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -16,12 +15,12 @@ import org.apache.commons.lang.StringEscapeUtils;
  * @Description: 各种格式的编码加码工具类.集成Commons-Codec,Commons-Lang及JDK提供的编解码方法.
  * @author shenmiao@staff.hexun.com
  * @date 2012-10-15 下午03:21:43
- *
+ * 
  */
 public class EncodeUtils {
 
 	private static final String DEFAULT_URL_ENCODING = "UTF-8";
-	
+
 	/**
 	 * 
 	 * @Title: hexEncode
@@ -32,7 +31,7 @@ public class EncodeUtils {
 	public static String hexEncode(byte[] input) {
 		return Hex.encodeHexString(input);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: hexDecode
@@ -47,7 +46,7 @@ public class EncodeUtils {
 			throw new IllegalStateException("Hex Decoder exception", e);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @Title: base64Encode
@@ -58,7 +57,7 @@ public class EncodeUtils {
 	public static String base64Encode(byte[] input) {
 		return new String(Base64.encodeBase64(input));
 	}
-	
+
 	/**
 	 * 
 	 * @Title: base64UrlSafeEncode
@@ -69,7 +68,7 @@ public class EncodeUtils {
 	public static String base64UrlSafeEncode(byte[] input) {
 		return Base64.encodeBase64URLSafeString(input);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: base64Decode
@@ -80,11 +79,11 @@ public class EncodeUtils {
 	public static byte[] base64Decode(String input) {
 		return Base64.decodeBase64(input);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: urlEncode
-	 * @Description: URL 编码, Encode默认为UTF-8. 
+	 * @Description: URL 编码, Encode默认为UTF-8.
 	 * @param input
 	 * @return
 	 */
@@ -95,11 +94,11 @@ public class EncodeUtils {
 			throw new IllegalArgumentException("Unsupported Encoding Exception", e);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @Title: urlDecode
-	 * @Description: URL 解码, Encode默认为UTF-8. 
+	 * @Description: URL 解码, Encode默认为UTF-8.
 	 * @param input
 	 * @return
 	 */
@@ -110,7 +109,7 @@ public class EncodeUtils {
 			throw new IllegalArgumentException("Unsupported Encoding Exception", e);
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @Title: htmlEscape
@@ -121,7 +120,7 @@ public class EncodeUtils {
 	public static String htmlEscape(String html) {
 		return StringEscapeUtils.escapeHtml(html);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: htmlUnescape
@@ -132,7 +131,7 @@ public class EncodeUtils {
 	public static String htmlUnescape(String htmlEscaped) {
 		return StringEscapeUtils.unescapeHtml(htmlEscaped);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: xmlEscape
@@ -143,7 +142,7 @@ public class EncodeUtils {
 	public static String xmlEscape(String xml) {
 		return StringEscapeUtils.escapeXml(xml);
 	}
-	
+
 	/**
 	 * 
 	 * @Title: xmlUnescape

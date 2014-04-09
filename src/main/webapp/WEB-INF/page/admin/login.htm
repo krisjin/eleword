@@ -6,8 +6,8 @@
 <meta name="description" content="">
 <title>登录</title>
 
-<link href="../template/front/css/bootstrap.css" rel="stylesheet">
-<link href="../template/front/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/bootstrap.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="${request.contextPath}/template/front/css/jquery.validator.css" rel="stylesheet">
 
 
@@ -51,7 +51,7 @@ body {
 </head>
 <body>
 	<div class="container">
-		<form class="form-signin" action="loging" method="post">
+		<form class="form-signin" action="${request.contextPath}/admin/signin.htm" method="post">
 			<h2 class="form-signin-heading" style="text-align: center; margin-top: 30px; margin-bottom: 10px;">登录</h2>
 			<div style="margin-left: 120px;">
 			<label>用户名</label>
@@ -59,7 +59,7 @@ body {
 			</div>
 			<div style="margin-left: 120px;"> 
 			<label>密码</label>
-			<input type="password"  name="password" id="password" data-rule="密码:required,passwords">
+			<input type="password"  name="password" id="password" data-rule="required">
 			</div>
 			<#if msg?exists>
 				<div>

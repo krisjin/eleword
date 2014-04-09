@@ -22,26 +22,25 @@ public class FolderService {
 	public List<Folder> selectAllFolder() {
 		return folderDao.selectAllFolder();
 	}
-	
-	public void addFolder(Folder folder){
+
+	public void addFolder(Folder folder) {
 		folderDao.add(folder);
 	}
-	
-	public Folder selectFolderByName(String name){
+
+	public Folder selectFolderByName(String name) {
 		return folderDao.selectFolderByName(name);
 	}
-	
-	public Folder selectFolderById(Long id){
+
+	public Folder selectFolderById(Long id) {
 		return folderDao.select(id);
 	}
-	
-	public void update(Folder folder){
+
+	public void update(Folder folder) {
 		folderDao.update(folder);
 	}
-	
-	public void deleteFolderById(Long id){
+
+	public void deleteFolderById(Long id) {
 		folderDao.deleteById(id);
 	}
-	
-	
+
 }

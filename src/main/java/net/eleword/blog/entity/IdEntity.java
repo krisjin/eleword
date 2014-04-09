@@ -18,8 +18,9 @@ public abstract class IdEntity implements Serializable {
 
 	private static final long serialVersionUID = 7102470486904089473L;
 	protected long id;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
 		return id;
 	}

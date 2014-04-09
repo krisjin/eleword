@@ -18,17 +18,18 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * 
  * @ClassName: SpringContextHolder
- * @Description: 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候中取出ApplicaitonContext.
+ * @Description: 以静态变量保存Spring ApplicationContext,
+ *               可在任何代码任何地方任何时候中取出ApplicaitonContext.
  * @author shenmiao@staff.hexun.com
  * @date 2012-10-15 上午10:22:14
- *
+ * 
  */
 public class SpringContextHolder implements ApplicationContextAware, DisposableBean {
 
 	private static ApplicationContext applicationContext = null;
 
 	private static Logger logger = LoggerFactory.getLogger(SpringContextHolder.class);
-	
+
 	/**
 	 * 
 	 * @Title: setApplicationContext
@@ -39,8 +40,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 		logger.debug("注入ApplicationContext到SpringContextHolder:" + applicationContext);
 
 		if (SpringContextHolder.applicationContext != null) {
-			logger.warn("SpringContextHolder中的ApplicationContext被覆盖, 原有ApplicationContext为:"
-					+ SpringContextHolder.applicationContext);
+			logger.warn("SpringContextHolder中的ApplicationContext被覆盖, 原有ApplicationContext为:" + SpringContextHolder.applicationContext);
 		}
 
 		SpringContextHolder.applicationContext = applicationContext;
@@ -69,7 +69,8 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 * 
 	 * @Title: getBean
 	 * @Description: 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
-	 * @param name bean的name
+	 * @param name
+	 *            bean的name
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String name) {
@@ -81,7 +82,8 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 * 
 	 * @Title: getBean
 	 * @Description: 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
-	 * @param requiredType bean的type
+	 * @param requiredType
+	 *            bean的type
 	 */
 	public static <T> T getBean(Class<T> requiredType) {
 		assertContextInjected();

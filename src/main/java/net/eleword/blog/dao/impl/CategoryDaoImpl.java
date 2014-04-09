@@ -1,4 +1,3 @@
-
 package net.eleword.blog.dao.impl;
 
 import java.util.List;
@@ -12,22 +11,23 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 文章分类数据访问层实现
+ * 
  * @author krisjin (mailto:krisjin86@163.com)
  * @date 2014-1-27上午6:23:22
  */
 @Repository("categoryDao")
-public class CategoryDaoImpl extends HibernateDao<Category,Long> implements CategoryDao{
+public class CategoryDaoImpl extends HibernateDao<Category, Long> implements CategoryDao {
 
 	public Long add(Category entity) {
 		return (Long) save(entity);
 	}
 
 	public void update(Category entity) {
-		Query query =createQuery("update Category set name=? ,orderValue=?  where id=?", entity.getName(),entity.getOrderValue(),entity.getId());
+		Query query = createQuery("update Category set name=? ,orderValue=?  where id=?", entity.getName(), entity.getOrderValue(), entity.getId());
 		query.executeUpdate();
 	}
-	
-	public void updateArticleNumber(Category entity){
+
+	public void updateArticleNumber(Category entity) {
 		saveOrUpdate(entity);
 	}
 
@@ -36,14 +36,13 @@ public class CategoryDaoImpl extends HibernateDao<Category,Long> implements Cate
 	}
 
 	public Category select(long id) {
-	
+
 		return get(id);
 	}
 
-	public List<Category> selectAll(){
-		
-		return getAll("orderValue",true);
-	}
-	
-}
+	public List<Category> selectAll() {
 
+		return getAll("orderValue", true);
+	}
+
+}
