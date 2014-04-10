@@ -26,7 +26,7 @@ HashMap<String, String> extMap = new HashMap<String, String>();
 extMap.put("image", "gif,jpg,jpeg,png,bmp");
 extMap.put("flash", "swf,flv");
 extMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
-extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2,tar");
+extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2,tar,pdf");
 
 //最大文件大小
 long maxSize = 35000000;
