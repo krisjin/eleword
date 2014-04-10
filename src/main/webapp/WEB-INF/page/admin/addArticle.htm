@@ -3,6 +3,8 @@
 	var editor;
 	KindEditor.ready(function(K) {
 		editor = K.create('textarea[name="content"]', {
+			uploadJson : '${request.contextPath}/template/editor/jsp/upload_json.jsp',
+			fileManagerJson : '${request.contextPath}/template/editor/jsp/file_manager_json.jsp',
 			allowFileManager : true,
 			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
 					'justifyright', 'insertorderedlist', 'insertunorderedlist',
