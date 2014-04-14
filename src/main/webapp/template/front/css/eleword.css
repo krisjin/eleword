@@ -6,7 +6,7 @@ body {
 /* Custom container */
 .container-narrow {
 	margin: 0 auto;
-	max-width: 970px;
+	max-width: 84%;
 }
 
 .container-narrow>hr {
@@ -14,8 +14,14 @@ body {
 }
 
 #blog-container {
-	margin: 0 auto;
-	width: 970px;
+	
+	
+}
+
+.right-slider{
+	
+	width: 22%;
+	float: right;
 }
 
 #blog-sidebar {
@@ -28,7 +34,7 @@ body {
 
 #blog-content {
 	float: left;
-	width: 700px;
+	width: 72%;
 	min-height: 500px;
 	height: auto;
 	margin-left: 20px;
