@@ -57,27 +57,22 @@
 				<div class="bar bar-warning" style="width: 32%;"></div>
 				<div class="bar bar-danger" style="width: 33%;"></div>
 			</div>
-			<form action="${request.contextPath}/comments/${article.id}.htm" method="post" class="form-inline">
+			
+			<form action="${request.contextPath}/comments/${article.id}.htm" method="post" class="form">
 				<input type="hidden" name="articleId" value="${article.id}">
-				  <div class="control-group" >
-				    
-				    <div class="controls">
-				      <label class="control-label" style="width:50px;">昵称</label><input type="text" id="nickname" name="nickname"  class="input-xlarge" data-rule="昵称:required,nickname">
-				    </div>
-				  </div>
-				  <div class="control-group">
-				   
-				    <div class="controls">
-				       <label class="control-label" style="width:50px;">Email</label><input type="email" id="email" name="email" class="input-xlarge" data-rule="Email:required,email">
-				    </div>
-				  </div>
-				  <div class="control-group">
-				    
-				    <div class="controls">
-				      <label class="control-label" style="width:50px;">内容</label><textarea  id="content" style="height: 130px;width: 270px;" name="content" data-rule="内容:required,content"></textarea>
-				    </div>
-				  </div>
-				  <div class="control-group">
+				<div class="input-prepend input-append">
+				  <span class="add-on">昵称</span>
+				  <input class="span4"  type="text"  id="nickname" name="nickname"  data-rule="昵称:required,nickname">
+				</div>
+				<div class="input-prepend input-append">
+				  <span class="add-on">邮件</span>
+				  <input class="span4" id="email" name="email" data-rule="邮件:required,email" type="text">
+				</div>
+				<div class="input-prepend input-append">
+				  <span class="add-on">内容</span>
+				  <textarea class="span4" id="content" rows="6" name="content" data-rule="内容:required,content"></textarea>
+				</div>
+				 <div class="control-group">
 				    <div class="controls" style="margin-left: 50px;">
 				      <button type="submit" class="btn">发表评论</button>
 				    </div>

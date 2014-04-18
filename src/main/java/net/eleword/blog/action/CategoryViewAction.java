@@ -62,7 +62,10 @@ public class CategoryViewAction extends BaseAction {
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		List<Article> recentArticle = articleService.selectRecnetArticle(10);
 		List<Folder> folderLlist = folderService.selectAllFolder();
-
+		
+		if(user!=null)
+			request.setAttribute("user", user);
+		
 		request.setAttribute("folderList", folderLlist);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("blog", blogService.queryAllBlogConfig().get(0));

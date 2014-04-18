@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.Blog;
 import net.eleword.blog.entity.Folder;
+import net.eleword.blog.entity.User;
+import net.eleword.blog.util.ConstantEnum;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +28,13 @@ public class FolderAction extends BaseAction {
 
 		List<Blog> blog = blogService.queryAllBlogConfig();
 		List<Folder> folderList = folderService.selectAllFolder();
-
+		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		
 		if (blog.size() > 0) {
 			request.setAttribute("blog", blog.get(0));
 		}
+		if(user!=null)
+			request.setAttribute("user", user);
 		request.setAttribute("folderList", folderList);
 		request.setAttribute("active", ename);
 		request.setAttribute("folder", folder);

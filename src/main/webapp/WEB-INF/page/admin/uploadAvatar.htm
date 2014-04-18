@@ -2,18 +2,31 @@
 <div id="blog-container">
 	<div id="blog-sidebar"></div>
 	<div class="position-title">上传头像</div>
-	<div id="blog-content" style="margin-top:20px; ">
-		<form class="form-horizontal" method="post" action="${request.contextPath}/admin/avatar/save.htm" enctype="multipart/form-data">
+	<div id="blog-content" style="margin-top: 20px;">
+		<form class="form-horizontal" method="post" action="${request.contextPath}/admin/avatar/save.htm"
+			enctype="multipart/form-data">
 			<div class="control-group">
-				<label class="control-label" >选择头像</label>
+				<label class="control-label">选择头像</label>
 				<div class="controls">
-					<input type="file" id="file" name="file">
+					<input type="file" id="file" name="file" class="btn btn-link">
 				</div>
 			</div>
-			<input class="btn" type="submit" value="上传">
+			<div class="control-group">
+				<label class="control-label" for="inputEmail">已有头像</label>
+				<div class="controls">
+					<#if user?exists>
+					 <img class="img-polaroid" alt="" src="${request.contextPath}/user/avatar/${user.avatar}">
+					</#if>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputEmail"></label>
+				<div class="controls">
+					<input class="btn btn-large btn-success" type="submit" value="上 传">
+				</div>
+			</div>
+			
 		</form>
 	</div>
 </div>
-
-
 <#include "footer_admin.htm">

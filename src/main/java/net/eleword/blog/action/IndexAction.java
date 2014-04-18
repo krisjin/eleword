@@ -60,9 +60,11 @@ public class IndexAction extends BaseAction {
 
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		List<Folder> folderList = folderService.selectAllFolder();
-		User user = userService.selectUserByName(ConstantEnum.admin.toString());
-
 		page.setResultSet(arts);
+		User user = userService.selectUserByName(ConstantEnum.admin.toString());
+		
+		if(user!=null)
+		request.setAttribute("user", user);
 
 		request.setAttribute("active", "index");
 		request.setAttribute("folderList", folderList);
@@ -70,7 +72,6 @@ public class IndexAction extends BaseAction {
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
-		request.setAttribute("avatar", user.getAvatar());
 		request.setAttribute(ConstantEnum.pageTitle.toString(), "Eleword博客");
 		return "index.htm";
 	}
@@ -99,7 +100,9 @@ public class IndexAction extends BaseAction {
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		List<Article> recentArticle = articleService.selectRecnetArticle(10);
 		List<Folder> folderList = folderService.selectAllFolder();
-
+		
+		if(user!=null)
+			request.setAttribute("user", user);
 		request.setAttribute("folderList", folderList);
 		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
@@ -158,7 +161,8 @@ public class IndexAction extends BaseAction {
 		if (blog.size() > 0) {
 			request.setAttribute("blog", blog.get(0));
 		}
-
+		if(user!=null)
+			request.setAttribute("user", user);
 		request.setAttribute("folderList", folderList);
 		page.setResultSet(arts);
 		request.setAttribute("recentArticle", recentArticle);
