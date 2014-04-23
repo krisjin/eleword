@@ -1,24 +1,23 @@
 <#import "../macro/pagination.ftl" as pagination>
 <#include "header_admin.htm">
-<#assign articles=pa.resultSet>
+<#assign wss=pa.resultSet>
 <div id="blog-container">
 	<div id="blog-category">
-	<div style="float: right;"><a href="${request.contextPath}/admin/article/add.htm">添加文章</a></div>
 		<div class="position-title">文章列表</div>
 		<form action="" method="post" id="formdel">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
-					<td>序号</td>
-					<td>标题</td>
-					<td>操作</td>
+					<td>IP</td>
+					<td>URL</td>
+					<td>日期</td>
 				</tr>
-				<#list articles as art>
+				<#list wss as ws>
 				<tr>
-					<td>${art_index+1}</td>
-					<td><a href="${request.contextPath}/article/${art.id}.htm">${art.title}</a></td>
+					<td>${ws.ip}</td>
+					<td><a href="${ws.url}">${ws.url}</a></td>
 					<td>
-						<a href="article/${art.id}.htm">编辑</a> |
-						<a href="#" onclick="return deleteArticle(${art.id},${art.categoryId});">删除</a></td>
+						${ws.date}
+					</td>
 				</tr>
 				</#list>
 			</table>
@@ -26,7 +25,7 @@
 	</div>
 </div>
 <#assign paginationData> 
-	<@pagination.doPagination "articles.htm"/> 
+	<@pagination.doPagination "statistics.htm"/> 
 </#assign>
 ${paginationData}
 <#include "footer_admin.htm">

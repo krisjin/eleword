@@ -2,32 +2,30 @@ package net.eleword.blog.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
-
 public class HttpUtils {
 
 	/**
-	 * 得到请求的IP地址
+	 * 获取IP地址
 	 * 
 	 * @param request
 	 * @return
 	 */
 	public static String getIp(HttpServletRequest request) {
-		String ip = request.getHeader("X-Real-IP");
-		if (StringUtils.isBlank(ip)) {
-			ip = request.getHeader("Host");
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
 		}
-		if (StringUtils.isBlank(ip)) {
-			ip = request.getHeader("X-Forwarded-For");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
 		}
-		if (StringUtils.isBlank(ip)) {
-			ip = "0.0.0.0";
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
 		}
 		return ip;
 	}
 
 	/**
-	 * 得到请求的根目录
+	 * 获取根目录
 	 * 
 	 * @param request
 	 * @return
@@ -39,7 +37,7 @@ public class HttpUtils {
 	}
 
 	/**
-	 * 得到结构目录
+	 * 获取目录
 	 * 
 	 * @param request
 	 * @return
@@ -49,9 +47,6 @@ public class HttpUtils {
 		return path;
 	}
 
-	/**
-	 * @return
-	 */
 	public static String getRealPath() {
 		return System.getProperty(ConstantEnum.ApplicationPath.toString());
 	}
