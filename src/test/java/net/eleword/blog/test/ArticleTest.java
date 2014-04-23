@@ -42,13 +42,13 @@ public class ArticleTest {
 		// System.out.println(str);
 		// search();
 	}
-	
-//	@Test
+
+	// @Test
 	public void index() throws IOException {
-		 IndexHolder index=IndexHolder.init("e:/eleword-index");
-		 index.add(getArticles());
-//		 index.update(getArticles());
-//		 index.delete(getArticles());
+		IndexHolder index = IndexHolder.init("e:/eleword-index");
+		index.add(getArticles());
+		// index.update(getArticles());
+		// index.delete(getArticles());
 
 	}
 
