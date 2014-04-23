@@ -36,6 +36,10 @@
 	<mvc:annotation-driven />
 
 	<mvc:default-servlet-handler />
+	
+	<mvc:resources mapping="/template/front/img/**" location="img/"/>
+	<mvc:resources mapping="/template/front/css/**" location="css/"/>
+	<mvc:resources mapping="/template/front/js/**" location="js/"/>
 
 	<tx:annotation-driven />
 

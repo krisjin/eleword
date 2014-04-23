@@ -48,6 +48,7 @@ public class UploadAction extends BaseAction {
 		if (file != null) {
 			try {
 				String imgName = user.getId() + MD5Util.encrypt(String.valueOf(user.getId())) + ".jpg";
+				@SuppressWarnings("deprecation")
 				String avatarFolder = request.getRealPath("/") + relativelyPath + "/";
 				File tmpFile = new File(avatarFolder);
 				if (!tmpFile.exists()) {
