@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * @date 2014-4-21下午1:55:10
  */
 @Entity
-@Table(name = "mdiea")
+@Table(name = "media")
 public class Media extends IdEntity {
 
 	private static final long serialVersionUID = -6036205385242273137L;
