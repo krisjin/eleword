@@ -1,7 +1,12 @@
 package net.eleword.blog.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * TODO 此处填写 class 信息
@@ -19,6 +24,11 @@ public class Media extends IdEntity {
 
 	private String url;
 
+	private String status;
+
+	private Date createDate;
+
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -27,6 +37,7 @@ public class Media extends IdEntity {
 		this.name = name;
 	}
 
+	@Column(name = "url")
 	public String getUrl() {
 		return url;
 	}
@@ -34,4 +45,23 @@ public class Media extends IdEntity {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
+	@Column(name = "status")
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	@Column(name = "create_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
 }

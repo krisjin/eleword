@@ -2,8 +2,11 @@ package net.eleword.blog.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * TODO 此处填写 class 信息
@@ -36,7 +39,8 @@ public class News extends IdEntity {
 	private String mediaUrl;
 
 	private String thumbnailsUrl;
-
+	
+	@Column(name="title")
 	public String getTitle() {
 		return title;
 	}
@@ -44,7 +48,8 @@ public class News extends IdEntity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	
+	@Column(name="content")
 	public String getContent() {
 		return content;
 	}
@@ -52,7 +57,8 @@ public class News extends IdEntity {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	
+	@Column(name="user")
 	public String getUser() {
 		return user;
 	}
@@ -60,7 +66,9 @@ public class News extends IdEntity {
 	public void setUser(String user) {
 		this.user = user;
 	}
-
+	
+	@Column(name="post_date")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getPostDate() {
 		return postDate;
 	}
@@ -68,7 +76,8 @@ public class News extends IdEntity {
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
-
+	
+	@Column(name="status")
 	public short getStatus() {
 		return status;
 	}
@@ -76,7 +85,8 @@ public class News extends IdEntity {
 	public void setStatus(short status) {
 		this.status = status;
 	}
-
+	
+	@Column(name="media")
 	public String getMedia() {
 		return media;
 	}
@@ -84,7 +94,8 @@ public class News extends IdEntity {
 	public void setMedia(String media) {
 		this.media = media;
 	}
-
+	
+	@Column(name="media_url")
 	public String getMediaUrl() {
 		return mediaUrl;
 	}
@@ -92,7 +103,8 @@ public class News extends IdEntity {
 	public void setMediaUrl(String mediaUrl) {
 		this.mediaUrl = mediaUrl;
 	}
-
+	
+	@Column(name="thumbnails_url")
 	public String getThumbnailsUrl() {
 		return thumbnailsUrl;
 	}

@@ -287,3 +287,14 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', '1c4ca4238a0b923820dcc509a6f75849b.jpg', null, 'admin', '202cb962ac59075b964b07152d234b70', 'admin', null);
+
+
+
+DROP TABLE IF EXISTS `webstatistics`;
+CREATE TABLE `webstatistics` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `ip` varchar(512) default NULL,
+  `url` varchar(512) default NULL,
+  `date` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
