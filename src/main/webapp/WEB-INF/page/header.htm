@@ -37,9 +37,9 @@
 	  </div>
 </div>  	
   </div>
-  <div class="navbar navbar" style="margin-top: 0px;">
+  <div class="navbar" style="margin-top: 0px;">
  		 <div class="navbar-inner">
-		    <ul class="nav">
+		    <ul class="nav" style="font-size:14px;    font-weight:bold;  font-family: "Microsoft YaHei" ! important;height:80px;">
 		      <li  <#if active?exists><#if active="index">  class="active"</#if></#if>><a href="${request.contextPath}/index.htm">首页</a></li>
 		       <#list folderList as folder>
 		      	<li <#if active?exists> <#if active=(folder.ename)>  class="active"</#if> </#if>><a href="${request.contextPath}/${folder.ename}.htm">${folder.name}</a></li>

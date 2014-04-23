@@ -1,6 +1,7 @@
 body {
 	padding-top: 20px;
 	padding-bottom: 40px;
+	font-family: "Microsoft YaHei" ! important;
 }
 
 /* Custom container */
@@ -98,6 +99,22 @@ body {
 	font-family: "Microsoft YaHei" ! important;
 	font-size: 12px;
 	color: #363636;
+}
+
+.slider-title{
+	color:#CD5C5C;
+	border-bottom: 3px solid #CD5C5C;
+	margin-bottom: 6px;
+}
+.slider-title2{
+	color:#008B45;
+	border-bottom: 3px solid #008B45;
+	margin-bottom: 6px;
+}
+.slider-title3{
+	color:#4682B4;
+	border-bottom: 3px solid #4682B4;
+	margin-bottom: 6px;
 }
 
 .title-info a,visited{
