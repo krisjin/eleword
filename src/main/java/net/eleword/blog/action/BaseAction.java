@@ -6,6 +6,7 @@ import net.eleword.blog.service.CategoryService;
 import net.eleword.blog.service.ColorService;
 import net.eleword.blog.service.CommentService;
 import net.eleword.blog.service.FolderService;
+import net.eleword.blog.service.NewsService;
 import net.eleword.blog.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseAction {
 
+	@Autowired
+	public NewsService newsService;
+	
 	@Autowired
 	public ArticleService articleService;
 

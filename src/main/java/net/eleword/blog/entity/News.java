@@ -32,7 +32,7 @@ public class News extends IdEntity {
 	/**
 	 * 0:无效；1有效 Comment for <code>status</code>
 	 */
-	private short status;
+	private int status;
 
 	private String media;
 
@@ -78,11 +78,11 @@ public class News extends IdEntity {
 	}
 	
 	@Column(name="status")
-	public short getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(short status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	

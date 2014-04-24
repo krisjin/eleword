@@ -30,11 +30,11 @@ public class NewsDaoImpl extends HibernateDao<News,Long> implements NewsDao {
 
 	public News select(long id) {
 		
-		return select(id);
+		return get(id);
 	}
 
 	public Pagination<News> selectNewsWithPage(Pagination<News> page) {
-		String hql = "from News n  where n.status =1 order by n.postDate desc";
+		String hql = "from News n   order by n.postDate desc";
 		return findPage(page, hql);
 	}
 

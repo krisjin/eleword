@@ -59,7 +59,6 @@ public class UploadAction extends BaseAction {
 					avatarFile.delete();
 				}
 				BufferedImage src = ImageIO.read(file.getInputStream());
-
 				ResampleOp resampleOp = new ResampleOp(150, 150);
 				resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.VerySharp);
 				BufferedImage rescaled = resampleOp.filter(src, null);

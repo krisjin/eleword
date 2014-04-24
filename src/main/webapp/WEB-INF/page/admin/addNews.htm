@@ -1,31 +1,21 @@
 <#include "header_admin.htm">
 <script>
 	var editor;
-	KindEditor
-			.ready(function(K) {
-				editor = K
-						.create(
-								'textarea[name="content"]',
-								{
-									uploadJson : '${request.contextPath}/template/editor/jsp/upload_json.jsp',
-									fileManagerJson : '${request.contextPath}/template/editor/jsp/file_manager_json.jsp',
-									allowFileManager : true,
-									items : [ 'source', 'code', 'justifyleft',
-											'justifycenter', 'justifyright',
-											'insertorderedlist',
-											'insertunorderedlist', 'clearhtml',
-											'quickformat', 'formatblock',
-											'fontname', 'fontsize', '|',
-											'forecolor', 'hilitecolor', 'bold',
-											'italic', 'underline',
-											'lineheight', 'removeformat', '|',
-											'image', 'multiimage',
-											'insertfile', 'table', 'hr',
-											'emoticons', 'baidumap', 'link',
-											'unlink', 'fullscreen' ]
-								});
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			uploadJson : '${request.contextPath}/template/editor/jsp/upload_json.jsp',
+			fileManagerJson : '${request.contextPath}/template/editor/jsp/file_manager_json.jsp',
+			allowFileManager : true,
+			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
+					'justifyright', 'insertorderedlist', 'insertunorderedlist',
+					'clearhtml', 'quickformat', 'formatblock', 'fontname',
+					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'lineheight', 'removeformat', '|',
+					'image', 'multiimage', 'insertfile', 'table', 'hr',
+					'emoticons', 'baidumap', 'link', 'unlink', 'fullscreen' ]
+		});
 
-			});
+	});
 </script>
 <script type="text/javascript">
 	function validateArticle() {
@@ -39,76 +29,126 @@
 
 	<#if flag=="query">
 	<div class="position-title">新增新闻</div>
-	<div id="msg_holder" style="color: red;"></div>
-	<div class="">
-		<form action="${request.contextPath}/admin/news/save.htm" method="post" id="media_add">
-			<div class="input-prepend">
-				<span class="add-on">标题</span>
-				<input class="span4" type="text" name="title" id="title" data-rule="required;title">
+	<div>
+		<form action="${request.contextPath}/admin/news/saves.htm" method="post" enctype="multipart/form-data" >
+			<div class="row-fluid">
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">标题</span>
+					<input class="span6" type="text" name="title" id="title" data-rule="required;title">
+				  </div>
+			  </div>
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">媒体</span>
+					 <select name="media" class="span6">
+					 	<#list medias as media>
+							<option value="${media.name}">${media.name}</option> 
+						</#list>
+					</select>
+				  </div>
+			  </div>
+			</div>
+			<br>
+			<div class="row-fluid">
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">来源</span>
+					<input class="span6" type="text" name="url" id="url" data-rule="required;url">
+				  </div>
+			  </div>
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">状态</span>
+					<label class="radio inline" style="margin-left: 10px;">
+						<input type="radio" name="status" id="optionsRadios1" value="1" checked>有效
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="status" id="optionsRadios2" value="0">无效
+					</label>
+				  </div>
+			  </div>
 			</div>
 			<br>
 			<div class="input-prepend">
-				<span class="add-on">媒体</span>
-				 <select name="media" class="span4"> <#list medias as media>
-					<option value="${media.name}">${media.name}</option> </#list>
-				</select>
-
-			</div>
-			<br>
-			<div class="input-prepend">
-				<span class="add-on">来源</span>
-				<input class="span4" type="text" name="url" id="url" data-rule="required;url">
-			</div>
-			<br>
-			<div class="input-prepend">
-				<span>媒体状态</span>
-							  	&nbsp;
-				<label class="radio inline">
-					<input type="radio" name="status" id="optionsRadios1" value="1" checked>有效
-				</label>
-				<label class="radio inline">
-					<input type="radio" name="status" id="optionsRadios2" value="0">无效
-				</label>
+				<span class="add-on">缩略图</span>
+				<input class="span4" type="file" name="thumbnails" id="thumbnails" data-rule="required;thumbnails">
 			</div>
 			<br>
 			<div class="">
 				<span class="add-on" >内容</span>
-				
-				<textarea name="content" id="content" class="span7" style="height: 300px; visibility: false; width: 780px;"></textarea>
+				<textarea name="content" id="content"  style="height: 300px; visibility: false; width: 770px;"></textarea>
 			</div>
 
-			<br> <input type="submit" value="保 存" class="btn btn-large btn-success">
+			<br>
+			<input type="submit" value="保 存" class="btn btn-large btn-success">
 		</form>
 	</div>
 	<#else>
-	<div class="position-title">修改媒体</div>
-	<div id="msg_holder" style="color: red;"></div>
-	<div class="well">
-		<form action="${request.contextPath}/admin/media/updSave.htm" method="post"
-			id="media_add">
-			<input type="hidden" name="id" value="${media.id}">
-			<div class="input-prepend">
-				<span class="add-on">媒体名称</span> <input class="span9" type="text" name="name"
-					id="name" value="${media.name}" data-rule="媒体名称:required;name">
+	<div class="position-title">修改新闻</div>
+	<div>
+		<form action="${request.contextPath}/admin/news/updSave.htm" method="post" enctype="multipart/form-data" >
+			<input type="hidden" value="${news.id}" name="id">
+			<div class="row-fluid">
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">标题</span>
+					<input class="span6" type="text" name="title" value="${news.title}" id="title" data-rule="required;title">
+				  </div>
+			  </div>
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">媒体</span>
+					 <select name="media" class="span6">
+					 	<#list medias as media>
+							<option value="${media.name}" <#if (media.name)==(news.media)>selected="selected" </#if>>${media.name}</option> 
+						</#list>
+					</select>
+				  </div>
+			  </div>
+			</div>
+			<br>
+			<div class="row-fluid">
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">来源</span>
+					<input class="span6" type="text" name="url" value="${news.mediaUrl}" id="url" data-rule="required;url">
+				  </div>
+			  </div>
+			  <div class="span6">
+				  <div class="input-prepend">
+					<span class="add-on">状态</span>
+					<label class="radio inline" style="margin-left: 10px;">
+						<input type="radio" name="status" id="optionsRadios1" value="1" <#if news.status==1>checked</#if>>有效
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="status" id="optionsRadios2" value="0" <#if news.status==0>checked</#if>>无效
+					</label>
+				  </div>
+			  </div>
 			</div>
 			<br>
 			<div class="input-prepend">
-				<span class="add-on">媒体链接</span> <input class="span9" type="text" name="url" id="url"
-					value="${media.url}" data-rule="媒体链接:required;url">
+				<span class="add-on">缩略图</span>
+				<input class="span3" type="file" name="thumbnails"  id="thumbnails">
+				<input type="hidden" value="${news.thumbnailsUrl}" name="thumbnailsUrl">
+				<#if news.thumbnailsUrl?exists>
+					<img alt="" src="${request.contextPath}${news.thumbnailsUrl}">
+				</#if>
+				
+				
+				
 			</div>
 			<br>
-			<div>
-				<span>媒体状态</span> &nbsp; <label class="radio inline"> <input type="radio"
-					name="status" id="optionsRadios1" value="1"<#if
-					media.status==1>checked</#if>>有效
-				</label> <label class="radio inline"> <input type="radio" name="status"
-					id="optionsRadios2" value="0"<#if media.status==0>checked</#if>>无效
-				</label>
+			<div class="">
+				<span class="add-on" >内容</span>
+				<textarea name="content" id="content"  style="height: 300px; visibility: false; width: 770px;">${news.content}</textarea>
 			</div>
-			<br> <input type="submit" value="保 存" class="btn btn-large btn-success">
+
+			<br>
+			<input type="submit" value="保 存" class="btn btn-large btn-success">
 		</form>
 	</div>
-
 	</#if>
 
 </div>
