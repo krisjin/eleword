@@ -1,8 +1,12 @@
 package net.eleword.blog.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import net.eleword.blog.entity.Media;
 import net.eleword.blog.entity.News;
+import net.eleword.blog.service.MediaService;
 import net.eleword.blog.service.NewsService;
 import net.eleword.blog.util.Pagination;
 
@@ -23,7 +27,10 @@ public class NewsAction {
 
 	@Autowired
 	private NewsService newsService;
-
+	@Autowired
+	private MediaService mediaService;
+	
+	
 	@RequestMapping(value = "/admin/news.htm", method = RequestMethod.GET)
 	public String list(HttpServletRequest request) {
 		Pagination<News> page = new Pagination<News>();
@@ -36,8 +43,13 @@ public class NewsAction {
 		}
 		page.getStartPage();
 		page = newsService.selectNewsWithPage(page);
-
+		
+		List<Media> medias = mediaService.getAllMedia();
+		
+		
 		request.setAttribute("pa", page);
+		request.setAttribute("medias", medias);
+		request.setAttribute("flag", "query");
 		return "admin/listNews.htm";
 	}
 	

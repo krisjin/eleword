@@ -1,0 +1,134 @@
+<#import "../macro/pagination.ftl" as pagination>
+<#include "header_admin.htm">
+<script type="text/javascript">
+
+
+
+function updateCancle(){
+	var frm=document.getElementById("updSave");
+	var url="category!list";
+	frm.action=url;
+	frm.submit();
+}
+function deleteCategory(categoryId){
+	var frm=document.getElementById("formcate");
+	var url="category/delete/"+categoryId+".htm";
+	frm.action=url;
+	if(confirm('确实要删除此分类吗？')){
+		frm.submit();
+	}
+	return false;
+}
+</script>
+<div id="blog-container">
+	<div id="blog-category">
+		<div class="container-fluid">
+			<div class="row-fluid">
+				
+				<div class="span8">
+				
+				<#if flag=="query">
+					<div class="position-title">新增新闻</div>
+					<div id="msg_holder" style="color: red;"></div>
+					<div class="well">
+						<form  action="${request.contextPath}/admin/media/save.htm" method="post" id="media_add">
+							<div class="input-prepend">
+							  <span class="add-on">标题</span>
+							  <input class="span9"  type="text" name="name" id="name" data-rule="媒体名称:required;name">
+							</div>
+							<br>
+							<div class="input-prepend">
+							  <span class="add-on">媒体</span>
+							  <select name="name">
+							  	<#list medias as media>
+							  	<option value="${media.name}" >${media.name}</option>
+							  	</#list>
+							  </select>
+							  
+							</div>
+							<br>
+							<div class="input-prepend">
+							  <span class="add-on">来源</span>
+							  <input class="span9"  type="text" name="url" id="url" data-rule="媒体链接:required;url">
+							</div>
+							<br>
+							<input type="submit" value="保 存" class="btn btn-large btn-success" >
+						 </form>
+				     </div>
+				    <#else>
+				    <div class="position-title">修改媒体</div>
+					<div id="msg_holder" style="color: red;"></div>
+					<div class="well">
+						<form  action="${request.contextPath}/admin/media/updSave.htm" method="post" id="media_add">
+							<input type="hidden" name="id" value="${media.id}">
+							<div class="input-prepend">
+							  <span class="add-on">媒体名称</span>
+							  <input class="span9"  type="text" name="name" id="name" value="${media.name}" data-rule="媒体名称:required;name">
+							</div>
+							<br>
+							<div class="input-prepend">
+							  <span class="add-on">媒体链接</span>
+							  <input class="span9"  type="text" name="url" id="url" value="${media.url}" data-rule="媒体链接:required;url">
+							</div>
+							<br>
+							<div>
+							  <span>媒体状态</span>
+							  	&nbsp;
+								<label class="radio inline">
+								 	<input type="radio" name="status" id="optionsRadios1" value="1" <#if media.status==1>checked</#if>>有效
+								 </label>
+								<label class="radio inline">
+								  <input type="radio" name="status" id="optionsRadios2" value="0" <#if media.status==0>checked</#if>>无效
+								</label>
+							</div>
+							<br>
+							<input type="submit" value="保 存" class="btn btn-large btn-success" >
+						 </form>
+				      </div>
+				    
+				    </#if>
+				     
+				</div>
+				<div class="span4">
+					<div class="position-title">媒体列表</div>
+					<form action="" method="post" id="formcate">
+						<table class="table table-bordered table-hover">
+							<tr class="info">
+								<td>名称</td>
+								<td>创建日期</td>
+								<td>操作</td>
+							</tr>
+							<#assign medias=pa.resultSet>
+							<#list medias as media>
+							<tr>
+								<td>${media.name}</td>
+								<td>${media.createDate}</td>
+								<td><a href="${request.contextPath}/admin/media/${media.id}.htm">修改</a></td>
+							</tr>
+							</#list>
+						</table>
+					</form>
+					<#assign paginationData> 
+					<@pagination.doPagination "medias.htm"/> 
+					</#assign>
+					${paginationData}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<#include "footer_admin.htm">
+<script type="text/javascript">
+$('#media_add').validator({
+    stopOnError: false, //关闭此开关，以便一次性显示所有消息
+    msgMaker: false,    //不要自动生成消息
+    invalid: function(form, errors){
+        var html = '';
+        $.map(errors, function(msg){
+            html += '<p>'+ msg +'</p>'
+        });
+        $('#msg_holder').html(html);
+    }
+});
+</script>
