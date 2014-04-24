@@ -1,5 +1,7 @@
 package net.eleword.blog.dao;
 
+import java.util.List;
+
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Media;
 import net.eleword.blog.util.Pagination;
@@ -9,6 +11,9 @@ import net.eleword.blog.util.Pagination;
  * @author krisjin (mailto:krisjin86@163.com)
  */
 public interface MediaDao extends BaseDao<Media>{
-	Pagination<Media> selectMediaWithPage(Pagination<Media> page);
+	
+	Pagination<Media> selectMediaWithPage(Pagination<Media> page,int status);
+	
+	List<Media> getAllMedia();
 }
 

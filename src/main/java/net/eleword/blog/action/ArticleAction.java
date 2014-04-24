@@ -54,8 +54,10 @@ public class ArticleAction extends BaseAction {
 	}
 
 	@RequestMapping(value = "/admin/article/save.htm", method = RequestMethod.POST)
-	public String addSave(@RequestParam(value = "content") String content, @RequestParam(value = "title") String title, @RequestParam(value = "categoryId") Long categoryId,
-			HttpServletRequest request) {
+	public String addSave(@RequestParam(value = "content") String content,
+						  @RequestParam(value = "title") String title,
+						  @RequestParam(value = "categoryId") Long categoryId,
+						  HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute(ConstantEnum.USER_SESSION.toString());
 		Article article = new Article();
 
@@ -74,9 +76,7 @@ public class ArticleAction extends BaseAction {
 	}
 
 	@RequestMapping(value = "/admin/article/{id}.htm")
-	public String update(@PathVariable("id") Long id,
-	// @RequestParam(value="id") Long id,
-			HttpServletRequest request) {
+	public String update(@PathVariable("id") Long id,HttpServletRequest request) {
 		Article article = articleService.queryById(Long.valueOf(id));
 		List<Category> categories = categoryService.selectAll();
 		request.setAttribute("categories", categories);

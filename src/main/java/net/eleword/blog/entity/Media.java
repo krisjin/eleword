@@ -24,7 +24,7 @@ public class Media extends IdEntity {
 
 	private String url;
 
-	private String status;
+	private int status;
 
 	private Date createDate;
 
@@ -45,23 +45,24 @@ public class Media extends IdEntity {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	@Column(name = "status")
-	public String getStatus() {
-		return status;
-	}
 
-	public void setStatus(String status) {
+	@Column(name = "status")
+	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
 	@Column(name = "create_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public int getStatus() {
+		return status;
 	}
 
 }

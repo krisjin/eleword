@@ -80,4 +80,10 @@ public abstract class DateUtils {
 		}
 		return year + month;
 	}
+	
+	public static Date getCurrentDateTime(){
+		Date d=new Date(System.currentTimeMillis());
+		return d;
+	}
+	
 }
