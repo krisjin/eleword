@@ -60,7 +60,7 @@ public class UploadAction extends BaseAction {
 				}
 				BufferedImage src = ImageIO.read(file.getInputStream());
 
-				ResampleOp resampleOp = new ResampleOp(160, 150);
+				ResampleOp resampleOp = new ResampleOp(150, 150);
 				resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.VerySharp);
 				BufferedImage rescaled = resampleOp.filter(src, null);
 
