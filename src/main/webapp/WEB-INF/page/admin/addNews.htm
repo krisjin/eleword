@@ -1,102 +1,116 @@
 <#include "header_admin.htm">
 <script>
 	var editor;
-	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="content"]', {
-			uploadJson : '${request.contextPath}/template/editor/jsp/upload_json.jsp',
-			fileManagerJson : '${request.contextPath}/template/editor/jsp/file_manager_json.jsp',
-			allowFileManager : true,
-			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
-					'justifyright', 'insertorderedlist', 'insertunorderedlist',
-					'clearhtml', 'quickformat', 'formatblock', 'fontname',
-					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-					'italic', 'underline', 'lineheight', 'removeformat', '|',
-					'image', 'multiimage', 'insertfile', 'table', 'hr',
-					'emoticons', 'baidumap', 'link', 'unlink', 'fullscreen' ]
-		});
+	KindEditor
+			.ready(function(K) {
+				editor = K
+						.create(
+								'textarea[name="content"]',
+								{
+									uploadJson : '${request.contextPath}/template/editor/jsp/upload_json.jsp',
+									fileManagerJson : '${request.contextPath}/template/editor/jsp/file_manager_json.jsp',
+									allowFileManager : true,
+									items : [ 'source', 'code', 'justifyleft',
+											'justifycenter', 'justifyright',
+											'insertorderedlist',
+											'insertunorderedlist', 'clearhtml',
+											'quickformat', 'formatblock',
+											'fontname', 'fontsize', '|',
+											'forecolor', 'hilitecolor', 'bold',
+											'italic', 'underline',
+											'lineheight', 'removeformat', '|',
+											'image', 'multiimage',
+											'insertfile', 'table', 'hr',
+											'emoticons', 'baidumap', 'link',
+											'unlink', 'fullscreen' ]
+								});
 
-	});
+			});
 </script>
 <script type="text/javascript">
-function validateArticle(){
-	if(editor.isEmpty()){
-		alert("请填写文章内容!");
-		return false;
+	function validateArticle() {
+		if (editor.isEmpty()) {
+			alert("请填写文章内容!");
+			return false;
+		}
 	}
-}
 </script>
 <div id="blog-container">
 
- <#if actionName=="add">
-	<div id="blog-addarticle">
-		<form class="form-inline" action="save.htm" method="post" onsubmit="return validateArticle()" >
-		<div class="position-title">添加文章</div>
-			<div class="" >
-				<label class="control-label">文章标题</label> 
-				<input type="text" id="title" name="title" class="input-xxlarge" data-rule="文章标题:required;title"> 
-				
+	<#if flag=="query">
+	<div class="position-title">新增新闻</div>
+	<div id="msg_holder" style="color: red;"></div>
+	<div class="">
+		<form action="${request.contextPath}/admin/news/save.htm" method="post" id="media_add">
+			<div class="input-prepend">
+				<span class="add-on">标题</span>
+				<input class="span4" type="text" name="title" id="title" data-rule="required;title">
+			</div>
+			<br>
+			<div class="input-prepend">
+				<span class="add-on">媒体</span>
+				 <select name="media" class="span4"> <#list medias as media>
+					<option value="${media.name}">${media.name}</option> </#list>
+				</select>
+
+			</div>
+			<br>
+			<div class="input-prepend">
+				<span class="add-on">来源</span>
+				<input class="span4" type="text" name="url" id="url" data-rule="required;url">
+			</div>
+			<br>
+			<div class="input-prepend">
+				<span>媒体状态</span>
+							  	&nbsp;
+				<label class="radio inline">
+					<input type="radio" name="status" id="optionsRadios1" value="1" checked>有效
+				</label>
+				<label class="radio inline">
+					<input type="radio" name="status" id="optionsRadios2" value="0">无效
+				</label>
 			</div>
 			<br>
 			<div class="">
+				<span class="add-on" >内容</span>
 				
-				<div class="controls">
-				<label class="control-label">选择分类</label>
-					<select name="categoryId" class="input-xxlarge" data-rule="分类:required;categoryId">
-					<#list categories as category>
-						<option  value="${category.id}">${category.name}</option> 
-					</#list>
-				</select>
-				</div>
+				<textarea name="content" id="content" class="span7" style="height: 300px; visibility: false; width: 780px;"></textarea>
 			</div>
-			<br>
-			<div class="control-group">
-				<label class="control-label">文章内容</label>
-				<div class="controls">
-					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" ></textarea>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<button type="submit" class="btn btn-success">发表文章</button>
-				</div>
-			</div>
+
+			<br> <input type="submit" value="保 存" class="btn btn-large btn-success">
 		</form>
 	</div>
 	<#else>
-	<div id="blog-addarticle">
-		<form class="form-inline" action="usave.htm" method="post">
-		<div class="position-title">修改文章</div>
-		<input type="hidden" value="${article.id}" name="id">
-		<input type="hidden" value="${article.categoryId}" name="rawCategoryId">
-			<div class="">
-				<label class="control-label">文章标题</label> 
-				<input type="text" id="title" name="title" class="input-xxlarge"  value="${article.title}" required> 
-				<label class="control-label">选择分类</label> 
-				<select name="categoryId">
-					<#list categories as category>
-						<#if article.categoryId==category.id>
-						<option value="${category.id}" selected="selected">${category.name}</option> 
-						<#else>
-						<option value="${category.id}">${category.name}</option> 
-						</#if>
-					</#list>
-				</select>
+	<div class="position-title">修改媒体</div>
+	<div id="msg_holder" style="color: red;"></div>
+	<div class="well">
+		<form action="${request.contextPath}/admin/media/updSave.htm" method="post"
+			id="media_add">
+			<input type="hidden" name="id" value="${media.id}">
+			<div class="input-prepend">
+				<span class="add-on">媒体名称</span> <input class="span9" type="text" name="name"
+					id="name" value="${media.name}" data-rule="媒体名称:required;name">
 			</div>
 			<br>
-			<div class="control-group">
-				<label class="control-label">文章内容</label>
-				<div class="controls">
-					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" data-rule="required;content">${article.content}</textarea>
-				</div>
+			<div class="input-prepend">
+				<span class="add-on">媒体链接</span> <input class="span9" type="text" name="url" id="url"
+					value="${media.url}" data-rule="媒体链接:required;url">
 			</div>
-			<div class="control-group">
-				<div class="controls">
-					<button type="submit" class="btn btn-success">修改文章</button>
-				</div>
+			<br>
+			<div>
+				<span>媒体状态</span> &nbsp; <label class="radio inline"> <input type="radio"
+					name="status" id="optionsRadios1" value="1"<#if
+					media.status==1>checked</#if>>有效
+				</label> <label class="radio inline"> <input type="radio" name="status"
+					id="optionsRadios2" value="0"<#if media.status==0>checked</#if>>无效
+				</label>
 			</div>
+			<br> <input type="submit" value="保 存" class="btn btn-large btn-success">
 		</form>
 	</div>
+
 	</#if>
+
 </div>
 
 <#include "footer_admin.htm">

@@ -250,7 +250,7 @@ K.options = {
 	indentChar : '\t',
 	cssPath : '',
 	cssData : '',
-	minWidth : 650,
+	minWidth : 550,
 	minHeight : 100,
 	minChangeSize : 50,
 	zIndex : 811213,

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 /**
  * TODO 此处填写 class 信息
  * 
@@ -29,35 +28,32 @@ public class NewsAction {
 	private NewsService newsService;
 	@Autowired
 	private MediaService mediaService;
-	
-	
+
 	@RequestMapping(value = "/admin/news.htm", method = RequestMethod.GET)
 	public String list(HttpServletRequest request) {
 		Pagination<News> page = new Pagination<News>();
 		String pageCount = request.getParameter("page");
 
-		if (StringUtils.isEmpty(pageCount) || pageCount==null) {
+		if (StringUtils.isEmpty(pageCount) || pageCount == null) {
 			page.setCurrentPage(1);
 		} else {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
 		page.getStartPage();
 		page = newsService.selectNewsWithPage(page);
-		
-		List<Media> medias = mediaService.getAllMedia();
-		
-		
+
 		request.setAttribute("pa", page);
-		request.setAttribute("medias", medias);
 		request.setAttribute("flag", "query");
 		return "admin/listNews.htm";
 	}
-	
+
 	@RequestMapping(value = "/admin/news/add.htm", method = RequestMethod.GET)
-	public String add(){
-		
+	public String add(HttpServletRequest request) {
+		List<Media> medias = mediaService.getAllMedia();
+
+		request.setAttribute("medias", medias);
+		request.setAttribute("flag", "query");
 		return "admin/addNews.htm";
 	}
-	
-	
+
 }

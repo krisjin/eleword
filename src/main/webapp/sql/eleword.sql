@@ -298,3 +298,28 @@ CREATE TABLE `webstatistics` (
   `date` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE `media` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(512) DEFAULT NULL,
+  `url` varchar(512) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE `news` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `content` varchar(255) DEFAULT NULL,
+  `media` varchar(255) DEFAULT NULL,
+  `media_url` varchar(255) DEFAULT NULL,
+  `post_date` datetime DEFAULT NULL,
+  `status` smallint(6) DEFAULT NULL,
+  `thumbnails_url` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `user` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
