@@ -313,7 +313,7 @@ CREATE TABLE `media` (
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `content` varchar(255) DEFAULT NULL,
+  `content` text,
   `media` varchar(255) DEFAULT NULL,
   `media_url` varchar(255) DEFAULT NULL,
   `post_date` datetime DEFAULT NULL,
@@ -321,5 +321,6 @@ CREATE TABLE `news` (
   `thumbnails_url` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `user` varchar(255) DEFAULT NULL,
+  `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
