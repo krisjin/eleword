@@ -1,0 +1,22 @@
+<#include "header.htm"> 
+	<div id="blog-container">
+		<div class="right-slider">
+			<#include "silder.htm">
+		</div>
+		<div id="blog-content">
+			<div class="page-header" style="text-align: left;">
+			  <h3>${news.title}</h3>
+			  <div class="title-info" style="padding: 2px 2px">
+					${news.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp; 
+					来源:<a href="${news.mediaUrl}" target="_blank">&nbsp;${news.media}&nbsp;</a>
+				</div>
+			</div>
+			<div style="word-wrap:break-word;">
+				${news.content}
+			</div>
+		</div>
+	</div>
+	<div style="padding-top: 30px; clear: both;">
+		<hr>
+	</div>
+<#include "footer.htm">

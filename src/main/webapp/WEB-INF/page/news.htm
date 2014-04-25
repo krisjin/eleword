@@ -5,33 +5,31 @@
 		<div class="right-slider">
 		<#include "silder.htm">
 		</div>
-		<div id="blog-content" >
-			<#list newses as news>
-				<div style="margin-bottom: 36px;">
-				<h4><a href="${request.contextPath}/news/${news.id}.htm">${news.title}</a></h4>
-				<div class="title-info" style="padding: 2px 2px">
-					${news.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp; 
-				</div>
-				<div class="muted" style="padding-top:5px;margin-bottom: 5px;">${news.content}</div>
-				<div style="border-bottom: 1px solid rgb(233,231,239);" ></div>
-				</div>
-			</#list>
-			
+		<div id="blog-content" style="margin-top: 11px;">
 			<ul class="media-list">
-              <li class="media">
-                <a class="pull-left" href="#">
-                  <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 64px; height: 64px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABMUlEQVR4Xu2YQQ7DIAwEk7/xbN7EF1pxQKLUBGNAimB6bLCD14un5Q4hfK6DPzcC4ACOADPg4Bl4MQShABSAAlAAChysABgEg2AQDILBgyHAnyEwCAbBIBgEg2DwYAXA4CgGvfc//nHO/fkprZGeSeZbkbNm8iEH5IXVisyL0QiwIufTCZ8mgLWTZVzLLRp39Iy0KQLkL8y7XNts+X2Kj7HSM03OnqLztVMESBus2VfqakscS06LCMsEiJvRdlPqsCSAJmevCEsFSJuZ5YC8uNas0AoxJIDUkScMxvW1c56eWXNqCy7XDQtgffFb4hBg9JfgWzpp3QcOwAFciXElxpWYdYLuEAcFoAAUgAJQYIdpbq0BCkABKAAFoIB1gu4QBwWgABSAAlBgh2lureF4CnwBY4p/kL73J+sAAAAASUVORK5CYII=">
+			 <#list newses as news>
+              <li class="media" >
+                <a class="pull-left" href="${request.contextPath}/news/${news.id}.htm">
+                  <img class="media-object"   src="${request.contextPath}${news.thumbnailsUrl}">
                 </a>
+               
                 <div class="media-body">
-                  <h4 class="media-heading">Media heading</h4>
-                  <p>Cras sit ame vestibulum in vulputate at, tempus viverra turpis.</p>
+                  <h4 class="media-heading"><a href="${request.contextPath}/news/${news.id}.htm">${news.title}</a></h4>
+                   <div class="title-info" style="padding: 2px 2px">
+					${news.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;&nbsp;
+				</div>
+                  <p>${news.content}</p>
                 </div>
               </li>
-            
+              <hr style="height:1px;border:none;border-top:1px dashed #B0C4DE;">
+            </#list>
             </ul>
 		</div>
 	</div>
-	<#assign paginationData> <@pagination.doPagination "news.htm"/> </#assign> ${paginationData}
+	<#assign paginationData>
+		<@pagination.doPagination "news.htm"/>
+	</#assign>
+	 ${paginationData}
 	<div style="padding-top: 30px; clear: both;">
 		<hr>
 	</div>

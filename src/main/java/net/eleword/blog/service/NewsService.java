@@ -32,9 +32,9 @@ public class NewsService {
 		return newsDao.select(id);
 	}
 	
-	public  Pagination<News> selectNewsWithPage(Pagination<News> page){
+	public  Pagination<News> selectNewsWithPage(Pagination<News> page,int status){
 		
-		return newsDao.selectNewsWithPage(page);
+		return newsDao.selectNewsWithPage(page,status);
 	}
 }
 

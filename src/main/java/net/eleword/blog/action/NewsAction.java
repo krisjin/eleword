@@ -47,7 +47,7 @@ public class NewsAction {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
 		page.getStartPage();
-		page = newsService.selectNewsWithPage(page);
+		page = newsService.selectNewsWithPage(page,3);
 
 		request.setAttribute("pa", page);
 		request.setAttribute("flag", "query");

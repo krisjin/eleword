@@ -13,20 +13,24 @@ import net.eleword.blog.entity.News;
 import net.eleword.blog.entity.User;
 import net.eleword.blog.util.ConstantEnum;
 import net.eleword.blog.util.DateUtils;
+import net.eleword.blog.util.HtmlUtil;
 import net.eleword.blog.util.Pagination;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mysql.jdbc.StringUtils;
+
 /**
  * TODO 此处填写 class 信息
+ * 
  * @author krisjin (mailto:krisjin86@163.com)
  */
 @Controller
 public class NewsFrontAction extends BaseAction {
-	
+
 	@RequestMapping(value = "/news.htm", method = RequestMethod.GET)
 	public String listArticles(HttpServletRequest request) {
 		Pagination<News> page = new Pagination<News>();
@@ -38,7 +42,15 @@ public class NewsFrontAction extends BaseAction {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
 		page.getStartPage();
-		page = newsService.selectNewsWithPage(page);
+		page = newsService.selectNewsWithPage(page,1);
+
+		List<News> newsList = page.getResultSet();
+
+		for (News news : newsList) {
+			news.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(news.getContent()), 250));
+		}
+
+		page.setResultSet(newsList);
 
 		List<Blog> blog = this.blogService.queryAllBlogConfig();
 		List<Article> recentArticle = articleService.selectRecnetArticle(10);
@@ -50,20 +62,48 @@ public class NewsFrontAction extends BaseAction {
 		if (user != null)
 			request.setAttribute("user", user);
 
-		
 		if (blog.size() > 0) {
 			request.setAttribute("blog", blog.get(0));
 		}
-		
+
 		request.setAttribute("active", "news");
 		request.setAttribute("folderList", folderList);
 		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);
-		request.setAttribute(ConstantEnum.pageTitle.toString(), "科技新闻——Eleword博客");
+		request.setAttribute(ConstantEnum.pageTitle.toString(), "科技新闻—Eleword博客");
 		request.setAttribute("pa", page);
 		return "news.htm";
 	}
 	
-}
+	@RequestMapping(value = "/news/{id}.htm", method = RequestMethod.GET)
+	public String getNews(@PathVariable("id") Long id,HttpServletRequest request){
+		News news = newsService.getNews(id);
+		
+		List<Blog> blog = this.blogService.queryAllBlogConfig();
+		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		List<Category> categories = categoryService.selectAll();
+		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
+		List<Folder> folderList = folderService.selectAllFolder();
+		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 
+		if (user != null)
+			request.setAttribute("user", user);
+
+		if (blog.size() > 0) {
+			request.setAttribute("blog", blog.get(0));
+		}
+
+		request.setAttribute("active", "news");
+		request.setAttribute("folderList", folderList);
+		request.setAttribute("recentArticle", recentArticle);
+		request.setAttribute("articleArchive", articleArchive);
+		request.setAttribute("categories", categories);
+		request.setAttribute(ConstantEnum.pageTitle.toString(), news.getTitle()+"—Eleword博客");
+		
+		
+		request.setAttribute("news", news);
+		return "viewNews.htm";
+	}
+
+}

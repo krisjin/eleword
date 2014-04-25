@@ -11,7 +11,7 @@ import net.eleword.blog.util.Pagination;
  */
 public interface NewsDao extends BaseDao<News> {
 	
-	Pagination<News> selectNewsWithPage(Pagination<News> page);
+	Pagination<News> selectNewsWithPage(Pagination<News> page ,int status);
 
 }
 

@@ -26,7 +26,7 @@
 <!-- 		<mapping class="net.eleword.blog.entity.Blog"/> -->
 <!-- 		<mapping class="net.eleword.blog.entity.Color"/> -->
 <!-- 			<mapping class="net.eleword.blog.entity.Folder"/> -->
-			<mapping class="net.eleword.blog.entity.News"/>
+			<mapping class="net.eleword.blog.entity.Media"/>
 	</session-factory>
 
 </hibernate-configuration>
