@@ -63,7 +63,7 @@ public class NewsAction {
 		request.setAttribute("flag", "query");
 		return "admin/addNews.htm";
 	}
-	@RequestMapping(value = "/admin/news/saves.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/news/save.htm", method = RequestMethod.POST)
 	public String save(@RequestParam(value = "title") String title,
 					   @RequestParam(value = "media") String media,
 					   @RequestParam(value = "url") String url,
@@ -83,8 +83,6 @@ public class NewsAction {
 		news.setUser("admin");
 		news.setAuthor(author);
 		news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
-		
-		
 		try {
 			ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
 		} catch (IOException e) {
@@ -107,7 +105,7 @@ public class NewsAction {
 		return "admin/addNews.htm";
 	}
 	
-	@RequestMapping(value = "/admin/news/updSave.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/news/us.htm", method = RequestMethod.POST)
 	public String updateSave(@RequestParam(value = "title") String title,
 					   @RequestParam(value = "media") String media,
 					   @RequestParam(value = "url") String url,
