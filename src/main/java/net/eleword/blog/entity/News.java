@@ -40,6 +40,17 @@ public class News extends IdEntity {
 
 	private String thumbnailsUrl;
 	
+	private String author;
+	
+	@Column(name="author")
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	@Column(name="title")
 	public String getTitle() {
 		return title;

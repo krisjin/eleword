@@ -9,12 +9,12 @@
 				<tr class="info">
 					<td>IP</td>
 					<td>URL</td>
-					<td>日期</td>
+					<td>访问日期</td>
 				</tr>
 				<#list wss as ws>
 				<tr>
 					<td>${ws.ip}</td>
-					<td><a href="${ws.url}">${ws.url}</a></td>
+					<td><a href="${ws.url}" target="_blank">${ws.url}</a></td>
 					<td>
 						${ws.date}
 					</td>

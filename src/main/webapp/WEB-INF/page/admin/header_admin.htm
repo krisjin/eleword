@@ -31,31 +31,10 @@
 </head>
 
 <body>
-	<div class="container-narrow" style="background-color: white;padding: 20px 20px 0px 20px ;border:  solid rgb(233,231,239) 1px ;">
-		<div class="masthead" >
-			<ul class="nav nav-pills pull-right">
-			<#if Session.USER_SESSION?exists>
-			
-			<#assign user=Session.USER_SESSION>
-				<div class="btn-group">
-					<a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i>${user.username} </a> <a
-						class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="${request.contextPath}/admin/logout.htm"><i class="icon-off"></i> 注销</a></li>
-					</ul>
-				</div>
-				</#if>
-			</ul>
-			<h3 class="muted">
-				<a href="${request.contextPath}/admin/index.htm">后台管理</a>
-			</h3>
-		</div>
-		<div class="navbar">
-			<div class="navbar-inner">
-				<div class="container">
-					<ul class="nav">
-<!-- 						<li ><a href="${request.contextPath}/admin/index">管理首页</a></li> -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+       		<ul class="nav">
 						<li id="postArticleId" onclick="showActive('postArticleId',this)"><a href="${request.contextPath}/admin/article/add.htm">发表文章</a></li>
 						<li><a href="${request.contextPath}/admin/articles.htm">文章管理</a></li>
 						<li><a href="${request.contextPath}/admin/categories.htm">分类管理</a></li>
@@ -77,10 +56,26 @@
 								<li><a href="${request.contextPath}/admin/avatar.htm">修改个人头像</a></li>
 							</ul>
 						</li>
-						
-						
-						
-					</ul>
-				</div>
-			</div>
-		</div>
+			</ul>
+			
+			<ul class="nav nav-pills pull-right">
+				<#if Session.USER_SESSION?exists>
+				
+				<#assign user=Session.USER_SESSION>
+					<div class="btn-group">
+						<a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i>${user.username} </a> <a
+							class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="${request.contextPath}/admin/logout.htm"><i class="icon-off"></i> 注销</a></li>
+						</ul>
+					</div>
+				</#if>
+			</ul>
+        </div>
+      </div>
+    </div>
+	<div class="container-narrow" style="background-color: white;border:  solid rgb(233,231,239) 1px ; margin-top: 60px;">
+		<div style="border-bottom: 3px solid red;"></div>
+		<div style="padding: 30px 20px 0px 20px ">
+		

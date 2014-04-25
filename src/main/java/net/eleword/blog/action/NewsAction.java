@@ -70,6 +70,7 @@ public class NewsAction {
 					   @RequestParam(value = "content") String content,
 					   @RequestParam(value = "status") int status,
 					   @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
+					   @RequestParam(value = "author") String author,
 					   HttpServletRequest request) {
 		
 		News news =new News();
@@ -80,6 +81,7 @@ public class NewsAction {
 		news.setStatus(status);
 		news.setPostDate(DateUtils.getCurrentDateTime());
 		news.setUser("admin");
+		news.setAuthor(author);
 		news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
 		
 		
@@ -114,6 +116,7 @@ public class NewsAction {
 					   @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
 					   @RequestParam(value = "id") Long id,
 					   @RequestParam(value = "thumbnailsUrl") String thumbnailsUrl,
+					   @RequestParam(value = "author") String author,
 					   HttpServletRequest request) {
 		
 		News news =new News();
@@ -124,6 +127,7 @@ public class NewsAction {
 		news.setMediaUrl(url);
 		news.setStatus(status);
 		news.setUser("admin");
+		news.setAuthor(author);
 		
 		if(thumbnails.getSize()==0){
 			news.setThumbnailsUrl(thumbnailsUrl);

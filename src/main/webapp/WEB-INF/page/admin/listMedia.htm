@@ -22,11 +22,8 @@ function deleteCategory(categoryId){
 </script>
 <div id="blog-container">
 	<div id="blog-category">
-		<div class="container-fluid">
 			<div class="row-fluid">
-				
 				<div class="span4">
-				
 				<#if flag=="query">
 					<div class="position-title">添加媒体</div>
 					<div id="msg_holder" style="color: red;"></div>
@@ -76,10 +73,10 @@ function deleteCategory(categoryId){
 							  <span>媒体状态</span>
 							  	&nbsp;
 								<label class="radio inline" style="width: 50px;">
-								 	<input   type="radio" name="status" id="optionsRadios1" value="1" checked>有效
+								 	<input   type="radio" name="status" id="optionsRadios1" value="1" <#if media.status==1>checked</#if>>有效
 								 </label>
 								<label class="radio inline" style="width: 50px;">
-								  <input type="radio" name="status" id="optionsRadios2" value="0">无效
+								  <input type="radio" name="status" id="optionsRadios2" value="0" <#if media.status==0>checked</#if>>无效
 								</label>
 							</div>
 							<br>
@@ -103,7 +100,7 @@ function deleteCategory(categoryId){
 							<#assign medias=pa.resultSet>
 							<#list medias as media>
 							<tr>
-								<td>${media.name}</td>
+								<td><a href="${media.url}" target="_blank">${media.name}</a></td>
 								<td><#if media.status==1>有效<#else>无效</#if></td>
 								<td>${media.createDate}</td>
 								<td><a href="${request.contextPath}/admin/media/${media.id}.htm">修改</a></td>
@@ -116,7 +113,6 @@ function deleteCategory(categoryId){
 					</#assign>
 					${paginationData}
 				</div>
-			</div>
 		</div>
 	</div>
 </div>

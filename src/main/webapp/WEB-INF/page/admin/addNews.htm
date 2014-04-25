@@ -53,27 +53,39 @@
 			<div class="row-fluid">
 			  <div class="span6">
 				  <div class="input-prepend">
+					<span class="add-on">作者</span>
+					<input class="span6" type="text" name="author" id="author" data-rule="required;author">
+				  </div>
+			  </div>
+			  <div class="span6">
+				  
+				   <div class="input-prepend">
 					<span class="add-on">来源</span>
 					<input class="span6" type="text" name="url" id="url" data-rule="required;url">
 				  </div>
 			  </div>
+				  
+			  </div>
+			<br>
+			
+			<div class="row-fluid">
 			  <div class="span6">
 				  <div class="input-prepend">
-					<span class="add-on">状态</span>
-					<label class="radio inline" style="margin-left: 10px;">
-						<input type="radio" name="status" id="optionsRadios1" value="1" checked>有效
-					</label>
-					<label class="radio inline">
-						<input type="radio" name="status" id="optionsRadios2" value="0">无效
-					</label>
+					<span class="add-on">缩略图</span>
+					<input class="span4" type="file" name="thumbnails" id="thumbnails" data-rule="required;thumbnails">
 				  </div>
 			  </div>
-			</div>
-			<br>
-			<div class="input-prepend">
-				<span class="add-on">缩略图</span>
-				<input class="span4" type="file" name="thumbnails" id="thumbnails" data-rule="required;thumbnails">
-			</div>
+			  <div class="span6">
+			  <div class="input-prepend">
+			  	 
+					<span class="add-on">状态</span>
+					<select name="status" class="span6">
+							<option vlaue="1" checked>有效</option>
+							<option value="0">无效</option>
+					</select>
+				  </div>
+			   </div>
+			   </div>
 			<br>
 			<div class="">
 				<span class="add-on" >内容</span>
@@ -108,37 +120,47 @@
 			  </div>
 			</div>
 			<br>
+			
+			<div class="row-fluid">
+				  <div class="span6">
+					  <div class="input-prepend">
+						<span class="add-on">作者</span>
+						<input class="span6" type="text" name="author"  value="${news.author}" id="author" data-rule="required;author">
+					  </div>
+				  </div>
+				  <div class="span6">
+					  
+					   <div class="input-prepend">
+						<span class="add-on">来源</span>
+						<input class="span6" type="text" name="url" id="url"  value="${news.mediaUrl}" data-rule="required;url">
+					  </div>
+				  </div>
+			  </div>
+			<br>
+			
 			<div class="row-fluid">
 			  <div class="span6">
 				  <div class="input-prepend">
-					<span class="add-on">来源</span>
-					<input class="span6" type="text" name="url" value="${news.mediaUrl}" id="url" data-rule="required;url">
+					<span class="add-on">缩略图</span>
+					<input class="span4" type="file" name="thumbnails" id="thumbnails">
+					<input type="hidden" value="${news.thumbnailsUrl}" name="thumbnailsUrl">
+					<br>
+					<#if news.thumbnailsUrl?exists>
+						<img  src="${request.contextPath}${news.thumbnailsUrl}">
+					</#if>
 				  </div>
 			  </div>
 			  <div class="span6">
-				  <div class="input-prepend">
+			  	  <div class="input-prepend">
 					<span class="add-on">状态</span>
-					<label class="radio inline" style="margin-left: 10px;">
-						<input type="radio" name="status" id="optionsRadios1" value="1" <#if news.status==1>checked</#if>>有效
-					</label>
-					<label class="radio inline">
-						<input type="radio" name="status" id="optionsRadios2" value="0" <#if news.status==0>checked</#if>>无效
-					</label>
+						<select name="status" class="span6">
+							<option vlaue="1" <#if news.status==1>checked</#if>>有效</option>
+							<option value="0" <#if news.status==1>checked</#if>>无效</option>
+						</select>
 				  </div>
-			  </div>
-			</div>
-			<br>
-			<div class="input-prepend">
-				<span class="add-on">缩略图</span>
-				<input class="span3" type="file" name="thumbnails"  id="thumbnails">
-				<input type="hidden" value="${news.thumbnailsUrl}" name="thumbnailsUrl">
-				<#if news.thumbnailsUrl?exists>
-					<img alt="" src="${request.contextPath}${news.thumbnailsUrl}">
-				</#if>
-				
-				
-				
-			</div>
+			   </div>
+			   </div>
+			
 			<br>
 			<div class="">
 				<span class="add-on" >内容</span>
