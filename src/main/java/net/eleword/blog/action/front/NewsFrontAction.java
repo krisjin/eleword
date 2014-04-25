@@ -49,6 +49,7 @@ public class NewsFrontAction extends BaseAction {
 		for (News news : newsList) {
 			news.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(news.getContent()), 250));
 		}
+		
 
 		page.setResultSet(newsList);
 

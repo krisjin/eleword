@@ -2,6 +2,7 @@ package net.eleword.blog.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,7 +123,6 @@ public class NewsAction {
 		news.setMedia(media);
 		news.setMediaUrl(url);
 		news.setStatus(status);
-		news.setPostDate(DateUtils.getCurrentDateTime());
 		news.setUser("admin");
 		
 		if(thumbnails.getSize()==0){

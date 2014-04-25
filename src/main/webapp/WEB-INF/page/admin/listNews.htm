@@ -46,13 +46,13 @@
 								<td>标题</td>
 								<td>来源</td>
 								<td>状态</td>
-								<td>创建日期</td>
+								<td>发布日期</td>
 								<td>操作</td>
 							</tr>
 							<#assign news=pa.resultSet>
 							<#list news as new>
 							<tr>
-								<td>${new.title}</td>
+								<td><a href="${request.contextPath}/news/${new.id}.htm" target="_blank">${new.title}</a></td>
 								<td>${new.media}</td>
 								<td><#if new.status==1>有效<#else>无效</#if></td>
 								<td>${new.postDate}</td>

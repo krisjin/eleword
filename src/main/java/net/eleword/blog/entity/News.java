@@ -67,7 +67,7 @@ public class News extends IdEntity {
 		this.user = user;
 	}
 	
-	@Column(name="post_date")
+	@Column(name="post_date", updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getPostDate() {
 		return postDate;

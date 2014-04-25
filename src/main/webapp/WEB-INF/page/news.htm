@@ -18,18 +18,20 @@
                    <div class="title-info" style="padding: 2px 2px">
 					${news.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;&nbsp;
 				</div>
-                  <p>${news.content}</p>
+                  <p style="color: #666666;">${news.content}</p>
                 </div>
               </li>
               <hr style="height:1px;border:none;border-top:1px dashed #B0C4DE;">
             </#list>
             </ul>
+            <#assign paginationData>
+				<@pagination.doPagination "news.htm"/>
+			</#assign>
+			 ${paginationData}
 		</div>
+		
 	</div>
-	<#assign paginationData>
-		<@pagination.doPagination "news.htm"/>
-	</#assign>
-	 ${paginationData}
+	
 	<div style="padding-top: 30px; clear: both;">
 		<hr>
 	</div>
