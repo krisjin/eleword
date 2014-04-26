@@ -20,5 +20,7 @@ public class ImageTest {
 		BufferedImage rescaled = resampleOp.filter(src, null);
 
 		ImageIO.write(rescaled, "JPG", new File("d:/uu.jpg"));
+
 	}
+
 }
