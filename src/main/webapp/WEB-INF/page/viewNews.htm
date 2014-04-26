@@ -7,7 +7,12 @@
 			<div class="page-header" style="text-align: left;">
 			  <h3>${news.title}</h3>
 			  <div class="title-info" style="padding: 2px 2px">
-					${news.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;|&nbsp; 
+					${news.postDate?string('yyyy-MM-dd HH:ss')} &nbsp;&nbsp; 
+					
+					<#if news.author?length gt 0>
+					作者: ${news.author}&nbsp;&nbsp; 
+					</#if>
+					
 					来源:<a href="${news.mediaUrl}" target="_blank">&nbsp;${news.media}&nbsp;</a>
 				</div>
 			</div>
