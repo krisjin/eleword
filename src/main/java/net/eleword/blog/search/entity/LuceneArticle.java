@@ -13,7 +13,7 @@ import net.eleword.blog.search.Searchable;
  * @date 2014-4-22下午1:50:32
  */
 
-public class Article implements Searchable {
+public class LuceneArticle  implements Searchable {
 
 	private long id;
 
@@ -21,10 +21,10 @@ public class Article implements Searchable {
 
 	private String content;
 
-	public Article() {
+	public LuceneArticle() {
 	}
 
-	public Article(long id, String title, String content) {
+	public LuceneArticle(long id, String title, String content) {
 		this.id = id;
 		this.title = title;
 		this.content = content;

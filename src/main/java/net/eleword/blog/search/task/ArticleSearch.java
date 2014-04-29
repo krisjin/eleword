@@ -3,7 +3,7 @@ package net.eleword.blog.search.task;
 import java.util.List;
 
 import net.eleword.blog.search.Search;
-import net.eleword.blog.search.entity.Article;
+import net.eleword.blog.search.entity.LuceneArticle;
 
 /**
  * 文章检索操作
@@ -11,9 +11,9 @@ import net.eleword.blog.search.entity.Article;
  * @date 2014-4-23下午5:18:48
  */
 
-public class ArticleSearch implements Search<Article> {
+public class ArticleSearch implements Search<LuceneArticle> {
 
-	public List<Article> searche(Article entity) {
+	public List<LuceneArticle> searche(LuceneArticle entity) {
 		return null;
 	}
 

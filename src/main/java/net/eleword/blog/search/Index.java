@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface Index<T> {
 
-	void create(List<T> entity);
+	void create(List<T> entity,String path);
 	
-	void update(List<T> entity);
+	void update(List<T> entity,String path);
 	
-	void delete(List<T> entity);
+	void delete(List<T> entity,String path);
 	
 }
 

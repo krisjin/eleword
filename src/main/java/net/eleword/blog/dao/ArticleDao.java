@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Article;
+import net.eleword.blog.search.entity.LuceneArticle;
 import net.eleword.blog.util.Pagination;
 
 /**
@@ -26,4 +27,5 @@ public interface ArticleDao extends BaseDao<Article> {
 	Pagination<Article> selectArticleByArchiveDate(Pagination<Article> page, String date);
 
 	List<Article> selectRecentArticle(int size);
+	
 }

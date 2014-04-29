@@ -5,6 +5,7 @@ import java.util.List;
 import net.eleword.blog.dao.ArticleDao;
 import net.eleword.blog.dao.common.HibernateDao;
 import net.eleword.blog.entity.Article;
+import net.eleword.blog.search.entity.LuceneArticle;
 import net.eleword.blog.util.Pagination;
 
 import org.springframework.stereotype.Repository;
@@ -69,5 +70,7 @@ public class ArticleDaoImpl extends HibernateDao<Article, Long> implements Artic
 		String hql = "from Article order by postDate desc";
 		return find(hql, 0, size, null);
 	}
+
+	
 
 }
