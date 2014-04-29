@@ -1,9 +1,12 @@
 package net.eleword.blog.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -13,7 +16,7 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpUtils {
 
-	private static  String API_URL = "http://ipapi.sinaapp.com/api.php?f=text&ip=";
+	private static String API_URL = "http://ipapi.sinaapp.com/api.php?f=text&ip=";
 
 	/**
 	 * 获取IP地址
@@ -62,26 +65,57 @@ public class HttpUtils {
 		return System.getProperty(ConstantEnum.ApplicationPath.toString());
 	}
 
-	public static String getAddressFromIP(String ip) throws ClientProtocolException, IOException {
+	public static String getAddressFromIP(String ip) {
 
 		CloseableHttpClient instance = null;
-
 		CloseableHttpResponse response = null;
-
 		instance = HttpClientBuilder.create().build();
-		response = instance.execute(new HttpGet(API_URL+ip));
-		
-		
-		
-		String result=EntityUtils.toString(response.getEntity());
-		
-		int index=result.lastIndexOf("归属地信息：");
-		if(index!=-1){
-			result=result.substring(index+6, result.length());
-		}else{
-			result="没找到此IP";
+		String result = "";
+
+		try {
+			response = instance.execute(new HttpGet(API_URL + ip));
+			result = EntityUtils.toString(response.getEntity());
+			int index = result.lastIndexOf("归属地信息：");
+			if (index != -1) {
+				result = result.substring(index + 6, result.length());
+			} else {
+				result = "没找到此IP";
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+
+		try {
+			closeClient(response);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
-	
+
+	private static void closeClient(CloseableHttpResponse response) throws IllegalStateException, IOException {
+
+		if (response == null) {
+			return;
+		}
+		try {
+			final HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				final InputStream instream = entity.getContent();
+				instream.close();
+			}
+		} finally {
+			try {
+				response.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

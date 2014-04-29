@@ -19,39 +19,43 @@
 	         http://www.springframework.org/schema/cache/spring-cache.xsd
 	         http://www.springframework.org/schema/task 
 	         http://www.springframework.org/schema/task/spring-task.xsd">
-	
-	 <!-- 要调用的工作类 -->
-        <bean id="indexArticleJob" class="net.eleword.blog.search.task.ArticleIndexTask">
-        	<property name="indexPath">e:/elewordIndex</property>
-        </bean>
-        
-        <!-- 定义调用对象和调用对象的方法 -->
-        <bean id="indexArticleTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-            <property name="targetObject">
-                <ref bean="indexArticleJob"/>
-            </property>
-            <property name="targetMethod">
-                <value>createIndex</value>
-            </property>
-        </bean>
-        
-        <!-- 定义触发时间 -->
-        <bean id="indexArticle" class="org.springframework.scheduling.quartz.CronTriggerBean">
-            <property name="jobDetail">
-                <ref bean="indexArticleTask"/>
-            </property>
-            <!-- cron表达式 -->
-            <property name="cronExpression">
-                <value>0 26 17 * * ?</value>
-            </property>
-        </bean>
-        
-        <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
-        <bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-            <property name="triggers">
-                <list>
-                    <ref bean="indexArticle"/>
-                </list>
-            </property>
-        </bean>
+
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="indexArticle" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 定义触发时间 -->
+	<bean id="indexArticle" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="indexArticleTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression" value="0 48 5 ? * *" />
+	</bean>
+
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="indexArticleTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="indexArticleJob" />
+		</property>
+		<property name="targetMethod">
+			<value>createIndex</value>
+		</property>
+	</bean>
+
+	<!-- 要调用的工作类 -->
+	<bean id="indexArticleJob" class="net.eleword.blog.search.task.ArticleIndexTask" >
+		<property name="indexPath" value="e:/elewordIndex" />
+	</bean>
+
+
+
+
+
+
 </beans>

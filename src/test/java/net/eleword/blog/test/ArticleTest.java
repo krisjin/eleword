@@ -56,15 +56,15 @@ public class ArticleTest {
 	public void search() throws IOException {
 		String[] q = { "title", "content" };
 
-		String filePath = "e:/eleword-index/Article";
+		String filePath = "e:/elewordIndex/LuceneArticle";
 		Directory dir = FSDirectory.open(new File(filePath));
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher search = new IndexSearcher(reader);
 
 		// Query query =SearchHelper.makeQuery("content", "网络", 0.3f);
 
-		Query query = SearchHelper.makeMultiQueryFiled(q, "网络", 1.0f);
-		TopDocs topDocs = search.search(query, 5);
+		Query query = SearchHelper.makeMultiQueryFiled(q, "linux", 1.0f);
+		TopDocs topDocs = search.search(query, 20);
 		ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 		System.out.println("共：" + topDocs.totalHits + "条结果");
 

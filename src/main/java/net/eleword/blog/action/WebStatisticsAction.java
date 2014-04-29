@@ -45,13 +45,7 @@ public class WebStatisticsAction {
 		List<WebStatistics> wsList= page.getResultSet();
 		
 		for(WebStatistics ws:wsList){
-			try {
 				ws.setAddress(HttpUtils.getAddressFromIP(ws.getIp()));
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		page.setResultSet(wsList);

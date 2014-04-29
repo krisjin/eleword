@@ -15,7 +15,11 @@
 				<#list wss as ws>
 				<tr>
 					<td>${ws.ip}</td>
-					<td>${ws.address}</td>
+					<td>
+					<#if ws.address?exits>
+					${ws.address}
+					</#if>
+					</td>
 					<td><a href="${ws.url}" target="_blank">${ws.url}</a></td>
 					<td>
 						${ws.date}

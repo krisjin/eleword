@@ -21,7 +21,7 @@
 	         http://www.springframework.org/schema/task/spring-task.xsd"
 	default-lazy-init="true">
 	
-<import resource="classpath:spring-task.xml" />
+<import resource="classpath:applicationContext-task.xml" />
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		<property name="ignoreResourceNotFound" value="true" />
@@ -32,21 +32,16 @@
 		</property>
 	</bean>
 	<context:annotation-config />
-
 	<context:component-scan base-package="net.eleword.blog" />
-	
 	<mvc:annotation-driven />
-
 	<mvc:default-servlet-handler />
-
+	
 	<mvc:resources mapping="/template/front/img/**" location="img/" />
 	<mvc:resources mapping="/template/front/css/**" location="css/" />
 	<mvc:resources mapping="/template/front/js/**" location="js/" />
 
 	<tx:annotation-driven />
-
 	<task:annotation-driven />
-
 	<cache:annotation-driven />
 
 	<bean class="net.eleword.blog.util.SpringContextHolder" lazy-init="false" />

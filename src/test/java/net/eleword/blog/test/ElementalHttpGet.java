@@ -30,6 +30,7 @@ public class ElementalHttpGet {
     @Before
     public final void before() {
         instance = HttpClientBuilder.create().build();
+        System.out.println("before");
     }
 
     @After
@@ -37,7 +38,7 @@ public class ElementalHttpGet {
         if (response == null) {
             return;
         }
-
+        System.out.println("after");
         try {
             final HttpEntity entity = response.getEntity();
             if (entity != null) {
