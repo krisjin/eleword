@@ -63,7 +63,7 @@ public class ArticleTest {
 
 		// Query query =SearchHelper.makeQuery("content", "网络", 0.3f);
 
-		Query query = SearchHelper.makeMultiQueryFiled(q, "顶顶", 1.0f);
+		Query query = SearchHelper.makeMultiQueryFiled(q, "顶顶", 0.8f);
 		TopDocs topDocs = search.search(query, 20);
 		ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 		System.out.println("共：" + topDocs.totalHits + "条结果");

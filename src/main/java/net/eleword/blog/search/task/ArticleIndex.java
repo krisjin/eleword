@@ -6,9 +6,6 @@ import java.util.List;
 import net.eleword.blog.search.Index;
 import net.eleword.blog.search.IndexHolder;
 import net.eleword.blog.search.entity.Articles;
-import net.eleword.blog.service.ArticleService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 文章索引操作
@@ -19,11 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ArticleIndex implements Index<Articles> {
 
-
 	public void create(List<Articles> entity, String indexPath) {
 		try {
-			IndexHolder index = IndexHolder.init(indexPath);
-			index.add(entity);
+			IndexHolder holder = IndexHolder.init(indexPath);
+			holder.add(entity);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,6 +27,13 @@ public class ArticleIndex implements Index<Articles> {
 	}
 
 	public void update(List<Articles> entity, String path) {
+
+		try {
+			IndexHolder holder = IndexHolder.init(path);
+			holder.update(entity);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

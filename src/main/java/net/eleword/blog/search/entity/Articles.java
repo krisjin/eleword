@@ -42,7 +42,7 @@ public class Articles  implements Searchable {
 
 	public List<String> storeFields() {
 
-		return Arrays.asList("id", "title");
+		return Arrays.asList("id", "title","content");
 	}
 
 	public List<String> indexFields() {

@@ -20,26 +20,31 @@
 	         http://www.springframework.org/schema/task 
 	         http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	<bean id="scheduler" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="indexArticle" />
+				<ref bean="createArticleIndex" />
+				<ref bean="updateArticleIndex" />
 			</list>
 		</property>
 	</bean>
-
-
-	<!-- 定义触发时间 -->
-	<bean id="indexArticle" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	
+	<bean id="createArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail">
-			<ref bean="indexArticleTask" />
+			<ref bean="createArticleIndexTask" />
 		</property>
-		<!-- cron表达式 -->
-		<property name="cronExpression" value="0 40 11 ? * *" />
+		<property name="cronExpression" value="0 40 16 ? * *" />
 	</bean>
+	
+	<bean id="updateArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="updateArticleIndexTask" />
+		</property>
+		<property name="cronExpression" value="0 37 16 ? * *" />
+	</bean>
+	
 
-	<!-- 定义调用对象和调用对象的方法 -->
-	<bean id="indexArticleTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<bean id="createArticleIndexTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
 			<ref bean="indexArticleJob" />
 		</property>
@@ -47,8 +52,16 @@
 			<value>createIndex</value>
 		</property>
 	</bean>
+	
+	<bean id="updateArticleIndexTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="indexArticleJob" />
+		</property>
+		<property name="targetMethod">
+			<value>updateIndex</value>
+		</property>
+	</bean>
 
-	<!-- 要调用的工作类 -->
 	<bean id="indexArticleJob" class="net.eleword.blog.search.task.ArticleIndexTask" >
 		<property name="indexPath" value="e:/elewordIndex" />
 	</bean>

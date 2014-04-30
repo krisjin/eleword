@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
-	<diskStore path="java.io.tmpdir"/>
-　　<defaultCache maxElementsInMemory="10000" eternal="false" overflowToDisk="false" 
-		timeToIdleSeconds="300" timeToLiveSeconds="300" diskPersistent="false"/>
-		
-	<cache name="net.eleword.blog.entity" 
-		maxElementsInMemory="10000" eternal="false" overflowToDisk="false" 
-		timeToIdleSeconds="300" timeToLiveSeconds="300" diskPersistent="false"/>
+	<diskStore path="java.io.tmpdir" />
+	<defaultCache maxElementsInMemory="10000" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="300" diskPersistent="false" />
+
+	<cache name="net.eleword.blog.entity" maxElementsInMemory="10000" eternal="false" overflowToDisk="false" timeToIdleSeconds="300" timeToLiveSeconds="300"
+		diskPersistent="false" />
 </ehcache>

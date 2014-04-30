@@ -1,0 +1,28 @@
+<#include "header.htm">
+<div id="blog-container">
+
+	<div id="blog-content">
+		<div class="input-append" style="">
+			<form action="search.htm" method="get">
+			<input class="span4" id="appendedInputButton" type="text" name="q">
+			<input class="btn" type="submit" value="GO">
+			</form>
+		</div>
+		
+		
+		<div>
+			<#list articles as art>
+				<a>${art.title}</a>
+				<br>
+				<p>${art.content}</p>
+			</#list>
+		
+		</div>
+		
+	</div>
+</div>
+
+<div style="padding-top: 30px; clear: both;">
+	<hr>
+</div>
+<#include "footer.htm">
