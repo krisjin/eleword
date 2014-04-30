@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.eleword.blog.search.Index;
 import net.eleword.blog.search.IndexHolder;
-import net.eleword.blog.search.entity.LuceneArticle;
+import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.service.ArticleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2014-4-22下午2:04:45
  */
 
-public class ArticleIndex implements Index<LuceneArticle> {
+public class ArticleIndex implements Index<Articles> {
 
 
-	public void create(List<LuceneArticle> entity, String indexPath) {
+	public void create(List<Articles> entity, String indexPath) {
 		try {
 			IndexHolder index = IndexHolder.init(indexPath);
 			index.add(entity);
@@ -30,11 +30,11 @@ public class ArticleIndex implements Index<LuceneArticle> {
 
 	}
 
-	public void update(List<LuceneArticle> entity, String path) {
+	public void update(List<Articles> entity, String path) {
 
 	}
 
-	public void delete(List<LuceneArticle> entity, String path) {
+	public void delete(List<Articles> entity, String path) {
 
 	}
 

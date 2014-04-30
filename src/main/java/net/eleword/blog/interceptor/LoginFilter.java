@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import net.eleword.blog.entity.User;
 import net.eleword.blog.util.ConstantEnum;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * TODO 此处填写 class 信息
@@ -24,7 +26,7 @@ import org.apache.log4j.Logger;
  */
 public class LoginFilter implements Filter {
 
-	protected final Logger logger = Logger.getLogger(this.getClass());
+	protected final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}

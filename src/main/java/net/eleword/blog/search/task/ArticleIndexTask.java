@@ -1,9 +1,12 @@
 package net.eleword.blog.search.task;
 
-import net.eleword.blog.search.entity.LuceneArticle;
+import net.eleword.blog.interceptor.LoginFilter;
+import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.service.ArticleSearchService;
 import net.eleword.blog.util.Pagination;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -14,23 +17,22 @@ import org.springframework.stereotype.Controller;
  * @date 2014-4-29下午4:22:24
  */
 public class ArticleIndexTask {
-
+	
+	protected final Logger logger = LoggerFactory.getLogger(ArticleIndexTask.class);
 	private String indexPath;
 
 	@Autowired
 	private ArticleSearchService articleSearchService;
 
 	private void createIndex() {
-		
-		System.out.println("start----------------------------------");
-
-		Pagination<LuceneArticle> tempPage = new Pagination<LuceneArticle>();
+		logger.info("start create article index......");
+		Pagination<Articles> tempPage = new Pagination<Articles>();
 		tempPage.setPageSize(100);
 		tempPage.setCurrentPage(1);
 		tempPage = articleSearchService.getAritlce(tempPage);
 
 		int totalPage = tempPage.getTotalPages();
-		Pagination<LuceneArticle> page = new Pagination<LuceneArticle>();
+		Pagination<Articles> page = new Pagination<Articles>();
 		page.setPageSize(100);
 
 		for (int i = 1; i <= totalPage; i++) {
@@ -40,9 +42,11 @@ public class ArticleIndexTask {
 			articleIndex.create(page.getResultSet(), indexPath);
 		}
 		
-		System.out.println("end----------------------------------");
+		logger.info("end create article index ......");
 	}
 
+	
+	
 	public String getIndexPath() {
 		return indexPath;
 	}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+	<property name="logPath" value="logs" />
+
+	<appender name="eleword" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logPath}/eleword.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>eleword.log.%d{yyyyMMdd}</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %-5level [%X{LogID}] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="LOGGER" level="INFO" additivity="false">
+		<appender-ref ref="eleword" />
+	</logger>
+
+	<logger name="jdbc.sqltiming" level="INFO" additivity="false">
+		<appender-ref ref="eleword" />
+	</logger>
+
+	<root level="info">
+		<appender-ref ref="eleword" />
+		<appender-ref ref="console" />
+	</root>
+</configuration>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Article;
-import net.eleword.blog.search.entity.LuceneArticle;
+import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.util.Pagination;
 
 /**

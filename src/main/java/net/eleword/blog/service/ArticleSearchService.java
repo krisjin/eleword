@@ -1,7 +1,7 @@
 package net.eleword.blog.service;
 
 import net.eleword.blog.dao.ArticleSearchDao;
-import net.eleword.blog.search.entity.LuceneArticle;
+import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.util.Pagination;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ArticleSearchService {
 	@Autowired
 	private ArticleSearchDao aritcleSearchDao;
 
-	public  Pagination<LuceneArticle>  getAritlce(Pagination<LuceneArticle> page) {
+	public  Pagination<Articles>  getAritlce(Pagination<Articles> page) {
 
 		 return aritcleSearchDao.selectArticleIndexWithPage(page);
 

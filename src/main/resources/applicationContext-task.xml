@@ -35,7 +35,7 @@
 			<ref bean="indexArticleTask" />
 		</property>
 		<!-- cron表达式 -->
-		<property name="cronExpression" value="0 48 5 ? * *" />
+		<property name="cronExpression" value="0 40 11 ? * *" />
 	</bean>
 
 	<!-- 定义调用对象和调用对象的方法 -->
