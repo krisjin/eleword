@@ -31,17 +31,9 @@
 	  <div class="span5">
 	  <div style="margin: 40px 0px 0px 0px;">
 		   <h3><a href="${request.contextPath}/index.htm">${blog.title}</a></h3>
-		   <p style="font-size: 14px;color: rgb(98,42,29); margin: 10px 0 0 60px;">${blog.description}</p>
+		   <p style="font-size: 14px;color: rgb(98,42,29); margin: 10px 0 0 0px;">${blog.description}</p>
 	    </div>
 	  </div>
-	    <div class="span4" style="float: right;">
-	    <div class="input-append" style="margin-top: 120px;">
-			<form action="search.htm" method="get">
-			<input class="span9" id="appendedInputButton" type="text" name="q">
-			<input class="btn" type="submit" value="GO">
-			</form>
-		</div>
-		 </div>
 </div>  	
   </div>
   <div class="navbar navbar-static-top" style="margin-bottom: 35px;">
@@ -52,7 +44,7 @@
 		       <#list folderList as folder>
 		      	<li <#if active?exists> <#if active=(folder.ename)>  class="active"</#if> </#if>><a href="${request.contextPath}/${folder.ename}.htm">${folder.name}</a></li>
 		      </#list>
-		      
+		      <li <#if active?exists><#if active="search">  class="active"</#if></#if>><a href="${request.contextPath}/go.htm">搜索</a></li>
    			 </ul>
   		 </div>
 	  </div>

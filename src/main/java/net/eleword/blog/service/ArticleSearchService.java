@@ -9,6 +9,7 @@ import net.eleword.blog.dao.ArticleSearchDao;
 import net.eleword.blog.search.SearchHelper;
 import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.util.Pagination;
+import net.eleword.blog.util.SpringContextHolder;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
@@ -39,7 +40,7 @@ public class ArticleSearchService {
 
 	}
 
-	public List<Articles> search(String keyword, int pageSize, int currentPage) throws IOException {
+	public List<Articles> search(String keyword, int pageSize, int currentPage,List result) throws IOException {
 		if (keyword.equals("") || keyword == null) {
 			return null;
 		}
@@ -47,8 +48,11 @@ public class ArticleSearchService {
 		List<Articles> list = new ArrayList<Articles>();
 
 		String[] q = { "title", "content" };
-
-		String filePath = "e:/elewordIndex/Articles";
+		String paths=SpringContextHolder.getApplicationContextPath();
+		
+		
+		
+		String filePath = getSearchPath();
 		Directory dir = FSDirectory.open(new File(filePath));
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher search = new IndexSearcher(reader);
@@ -56,7 +60,7 @@ public class ArticleSearchService {
 		Query query = SearchHelper.makeMultiQueryFiled(q, keyword, 1.0f);
 		TopDocs topDocs = search.search(query, 100);
 		ScoreDoc[] scoreDocs = topDocs.scoreDocs;
-
+		result.add(scoreDocs.length);
 		int start = pageSize * (currentPage - 1);
 		int end = Math.min(start + pageSize, scoreDocs.length);
 
@@ -70,5 +74,12 @@ public class ArticleSearchService {
 		return list;
 
 	}
-
+	
+	
+	public String getSearchPath(){
+		String path=SpringContextHolder.getApplicationContextPath();
+		File f=new File(path,"elewordIndex/Articles");
+		
+		return f.getAbsolutePath();
+	}
 }

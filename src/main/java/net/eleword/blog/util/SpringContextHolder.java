@@ -9,6 +9,9 @@ package net.eleword.blog.util;
  * @version V1.0
  */
 
+import java.io.File;
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -110,4 +113,16 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 			throw new IllegalStateException("applicaitonContext未注入,请在applicationContext.xml中定义SpringContextHolder");
 		}
 	}
+	
+	public static String getApplicationContextPath(){
+		String path="";
+		try {
+			path=getApplicationContext().getResource("").getFile().getAbsolutePath()+File.separator;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return path;
+	}
+	
 }

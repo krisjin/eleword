@@ -21,7 +21,7 @@
 	         http://www.springframework.org/schema/task/spring-task.xsd"
 	default-lazy-init="true">
 	
-<import resource="classpath:applicationContext-task.xml" />
+	<import resource="classpath:applicationContext-task.xml" />
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		<property name="ignoreResourceNotFound" value="true" />
@@ -31,6 +31,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	
 	<context:annotation-config />
 	<context:component-scan base-package="net.eleword.blog" />
 	<mvc:annotation-driven />

@@ -1,8 +1,11 @@
 package net.eleword.blog.search.task;
 
+import java.io.File;
+
 import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.service.ArticleSearchService;
 import net.eleword.blog.util.Pagination;
+import net.eleword.blog.util.SpringContextHolder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +27,15 @@ public class ArticleIndexTask {
 
 	private void createIndex() {
 		logger.info("start create article index......");
+		
+		String appPath = SpringContextHolder.getApplicationContextPath();
+		
+		File filePath=new File(appPath,indexPath);
+		
+		if(!filePath.exists()){
+			filePath.mkdirs();
+		}
+		indexPath=filePath.getAbsolutePath();
 		Pagination<Articles> tempPage = new Pagination<Articles>();
 		tempPage.setPageSize(100);
 		tempPage.setCurrentPage(1);
@@ -46,6 +58,14 @@ public class ArticleIndexTask {
 	private void updateIndex(){
 		
 		logger.info("start update article index......");
+		
+		String appPath = SpringContextHolder.getApplicationContextPath();
+		File filePath=new File(appPath,indexPath);
+		
+		if(!filePath.exists()){
+			filePath.mkdirs();
+		}
+		
 		Pagination<Articles> tempPage = new Pagination<Articles>();
 		tempPage.setPageSize(100);
 		tempPage.setCurrentPage(1);
