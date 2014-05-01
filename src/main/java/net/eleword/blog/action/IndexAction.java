@@ -65,14 +65,13 @@ public class IndexAction extends BaseAction {
 		
 		if(user!=null)
 		request.setAttribute("user", user);
-
 		request.setAttribute("active", "index");
 		request.setAttribute("folderList", folderList);
 		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);
 		request.setAttribute("pa", page);
-		request.setAttribute(ConstantEnum.pageTitle.toString(), "Eleword博客");
+		request.setAttribute(ConstantEnum.pageTitle.toString(),blog.get(0).getTitle());
 		return "index.htm";
 	}
 

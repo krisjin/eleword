@@ -23,7 +23,7 @@
 	<bean id="scheduler" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="createArticleIndex" />
+<!-- 				<ref bean="createArticleIndex" /> -->
 				<ref bean="updateArticleIndex" />
 			</list>
 		</property>
@@ -33,14 +33,14 @@
 		<property name="jobDetail">
 			<ref bean="createArticleIndexTask" />
 		</property>
-		<property name="cronExpression" value="0 30 5 ? * *" />
+		<property name="cronExpression" value="0 30 5 * * ? 2014" />
 	</bean>
 	
 	<bean id="updateArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail">
 			<ref bean="updateArticleIndexTask" />
 		</property>
-		<property name="cronExpression" value="0 37 16 ? * *" />
+		<property name="cronExpression" value="0 59 23 ? * *" />
 	</bean>
 	
 
