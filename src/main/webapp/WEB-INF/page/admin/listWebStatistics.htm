@@ -9,17 +9,11 @@
 				<tr class="info">
 					<td>来访IP</td>
 					<td>来访地址</td>
-					<td>访问地址</td>
 					<td>访问日期</td>
 				</tr>
 				<#list wss as ws>
 				<tr>
-					<td>${ws.ip}</td>
-					<td>
-					<#if ws.address?exits>
-					${ws.address}
-					</#if>
-					</td>
+					<td><a href="http://ipapi.sinaapp.com/api.php?f=text&ip=${ws.ip}" target="_blank">${ws.ip}</a></td>
 					<td><a href="${ws.url}" target="_blank">${ws.url}</a></td>
 					<td>
 						${ws.date}

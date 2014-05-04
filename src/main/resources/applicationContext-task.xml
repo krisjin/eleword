@@ -40,8 +40,8 @@
 		<property name="jobDetail">
 			<ref bean="updateArticleIndexTask" />
 		</property>
-		<property name="cronExpression" value="0 59 23 ? * *" />
-	</bean>
+		<property name="cronExpression" value="0 15 10 * * ? *" />
+	</bean>	
 	
 
 	<bean id="createArticleIndexTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

@@ -1,16 +1,13 @@
 package net.eleword.blog.action;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import net.eleword.blog.entity.WebStatistics;
 import net.eleword.blog.service.WebStatisticsService;
-import net.eleword.blog.util.HttpUtils;
 import net.eleword.blog.util.Pagination;
 
-import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,9 +41,9 @@ public class WebStatisticsAction {
 		
 		List<WebStatistics> wsList= page.getResultSet();
 		
-		for(WebStatistics ws:wsList){
-				ws.setAddress(HttpUtils.getAddressFromIP(ws.getIp()));
-		}
+//		for(WebStatistics ws:wsList){
+//				ws.setAddress(HttpUtils.getAddressFromIP(ws.getIp()));
+//		}
 		
 		page.setResultSet(wsList);
 		request.setAttribute("pa", page);

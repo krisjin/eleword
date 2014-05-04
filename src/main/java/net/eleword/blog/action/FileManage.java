@@ -22,7 +22,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class FileManage {
 	String relativelyPath = "/FileStore";
 
-	@RequestMapping(value = "/admin/files", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/files.htm", method = RequestMethod.GET)
 	public String list() {
 
 		return "admin/fileManage.htm";
@@ -54,6 +54,6 @@ public class FileManage {
 			}
 		}
 
-		return "redirect:/admin/fileManage.htm";
+		return "redirect:/admin/files.htm";
 	}
 }
