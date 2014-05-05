@@ -3,5 +3,11 @@ eleword
 
 eleword blog
 
-使用技术：
+Description：
        1.SpringMVC+Hibernate4.3+freemarker
+       
+
+Function:
+		file share ,tag  and tag category auto
+
+       

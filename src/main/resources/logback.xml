@@ -4,10 +4,10 @@
 	<property name="logPath" value="logs" />
 
 	<appender name="eleword" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logPath}/eleword.log</file>
+		<file>${logPath}/eleword-%d{yyyyMMdd}.log</file>
 		<append>true</append>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>eleword.log.%d{yyyyMMdd}</fileNamePattern>
+			<fileNamePattern>${logPath}/eleword-%d{yyyyMMdd}.log</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<encoder>
