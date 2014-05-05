@@ -33,14 +33,14 @@
 		<property name="jobDetail">
 			<ref bean="createArticleIndexTask" />
 		</property>
-		<property name="cronExpression" value="0 30 5 * * ? 2014" />
+		<property name="cronExpression" value="0 26 12 * * ? 2014" />
 	</bean>
 	
 	<bean id="updateArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail">
 			<ref bean="updateArticleIndexTask" />
 		</property>
-		<property name="cronExpression" value="0 15 10 * * ? *" />
+		<property name="cronExpression" value="0 41 12 * * ? *" />
 	</bean>	
 	
 
@@ -64,11 +64,7 @@
 
 	<bean id="indexArticleJob" class="net.eleword.blog.search.task.ArticleIndexTask" >
 		<property name="indexPath" value="elewordIndex" />
+		<property name="articles" value="Articles" />
+		
 	</bean>
-
-
-
-
-
-
 </beans>

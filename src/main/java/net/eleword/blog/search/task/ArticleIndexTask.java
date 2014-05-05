@@ -21,6 +21,7 @@ public class ArticleIndexTask {
 	
 	protected final Logger logger = LoggerFactory.getLogger(ArticleIndexTask.class);
 	private String indexPath;
+	private String articles;
 
 	@Autowired
 	private ArticleSearchService articleSearchService;
@@ -65,7 +66,7 @@ public class ArticleIndexTask {
 		if(!filePath.exists()){
 			filePath.mkdirs();
 		}
-		
+		indexPath=filePath.getAbsolutePath();
 		Pagination<Articles> tempPage = new Pagination<Articles>();
 		tempPage.setPageSize(100);
 		tempPage.setCurrentPage(1);
@@ -91,5 +92,15 @@ public class ArticleIndexTask {
 	public void setIndexPath(String indexPath) {
 		this.indexPath = indexPath;
 	}
+
+	public String getArticles() {
+		return articles;
+	}
+
+	public void setArticles(String articles) {
+		this.articles = articles;
+	}
+	
+	
 	
 }
