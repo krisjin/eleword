@@ -46,6 +46,9 @@ public class LoginAction extends BaseAction {
 			request.setAttribute("username", username);
 			return "admin/login.htm";
 		}
+		
+		
+		
 		session.setAttribute(ConstantEnum.USER_SESSION.toString(), user);
 		return "admin/main.htm";
 	}

@@ -20,7 +20,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  */
 @Controller
 public class FileManage {
-	String relativelyPath = "/FileStore";
+	String relativelyPath = "/docs";
 
 	@RequestMapping(value = "/admin/files.htm", method = RequestMethod.GET)
 	public String list() {
