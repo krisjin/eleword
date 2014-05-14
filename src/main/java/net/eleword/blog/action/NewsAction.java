@@ -2,7 +2,6 @@ package net.eleword.blog.action;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +30,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  */
 @Controller
 public class NewsAction {
-	
+
 	@Autowired
 	private NewsService newsService;
 	@Autowired
@@ -48,7 +47,7 @@ public class NewsAction {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
 		page.getStartPage();
-		page = newsService.selectNewsWithPage(page,3);
+		page = newsService.selectNewsWithPage(page, 3);
 
 		request.setAttribute("pa", page);
 		request.setAttribute("flag", "query");
@@ -63,17 +62,13 @@ public class NewsAction {
 		request.setAttribute("flag", "query");
 		return "admin/addNews.htm";
 	}
+
 	@RequestMapping(value = "/admin/news/save.htm", method = RequestMethod.POST)
-	public String save(@RequestParam(value = "title") String title,
-					   @RequestParam(value = "media") String media,
-					   @RequestParam(value = "url") String url,
-					   @RequestParam(value = "content") String content,
-					   @RequestParam(value = "status") int status,
-					   @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
-					   @RequestParam(value = "author") String author,
-					   HttpServletRequest request) {
-		
-		News news =new News();
+	public String save(@RequestParam(value = "title") String title, @RequestParam(value = "media") String media, @RequestParam(value = "url") String url,
+			@RequestParam(value = "content") String content, @RequestParam(value = "status") int status, @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
+			@RequestParam(value = "author") String author, HttpServletRequest request) {
+
+		News news = new News();
 		news.setContent(content);
 		news.setTitle(title);
 		news.setMedia(media);
@@ -91,12 +86,11 @@ public class NewsAction {
 		newsService.saveNews(news);
 		return "redirect:/admin/news.htm";
 	}
-	
-	
+
 	@RequestMapping(value = "/admin/news/{id}.htm", method = RequestMethod.GET)
-	public String update(@PathVariable("id") Long id,HttpServletRequest request){
-		
-		News news=newsService.getNews(id);
+	public String update(@PathVariable("id") Long id, HttpServletRequest request) {
+
+		News news = newsService.getNews(id);
 		List<Media> medias = mediaService.getAllMedia();
 
 		request.setAttribute("medias", medias);
@@ -104,20 +98,14 @@ public class NewsAction {
 		request.setAttribute("news", news);
 		return "admin/addNews.htm";
 	}
-	
+
 	@RequestMapping(value = "/admin/news/us.htm", method = RequestMethod.POST)
-	public String updateSave(@RequestParam(value = "title") String title,
-					   @RequestParam(value = "media") String media,
-					   @RequestParam(value = "url") String url,
-					   @RequestParam(value = "content") String content,
-					   @RequestParam(value = "status") int status,
-					   @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
-					   @RequestParam(value = "id") Long id,
-					   @RequestParam(value = "thumbnailsUrl") String thumbnailsUrl,
-					   @RequestParam(value = "author") String author,
-					   HttpServletRequest request) {
-		
-		News news =new News();
+	public String updateSave(@RequestParam(value = "title") String title, @RequestParam(value = "media") String media, @RequestParam(value = "url") String url,
+			@RequestParam(value = "content") String content, @RequestParam(value = "status") int status, @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
+			@RequestParam(value = "id") Long id, @RequestParam(value = "thumbnailsUrl") String thumbnailsUrl, @RequestParam(value = "author") String author,
+			HttpServletRequest request) {
+
+		News news = new News();
 		news.setId(id);
 		news.setContent(content);
 		news.setTitle(title);
@@ -126,10 +114,10 @@ public class NewsAction {
 		news.setStatus(status);
 		news.setUser("admin");
 		news.setAuthor(author);
-		
-		if(thumbnails.getSize()==0){
+
+		if (thumbnails.getSize() == 0) {
 			news.setThumbnailsUrl(thumbnailsUrl);
-		}else{
+		} else {
 			news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
 			try {
 				ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
@@ -137,36 +125,43 @@ public class NewsAction {
 				e.printStackTrace();
 			}
 		}
-		
-	
+
 		newsService.updateNews(news);
 		return "redirect:/admin/news.htm";
 	}
-	
-	
-	
-	
-	
+
 	@SuppressWarnings("deprecation")
-	private File getOutputFile(CommonsMultipartFile file,HttpServletRequest request){
-		
-		String path="/news/thumb/";
-		String filePath=request.getRealPath("/")+path;
-		File f =new File(filePath);
-		if(!f.exists()){
+	private File getOutputFile(CommonsMultipartFile file, HttpServletRequest request) {
+		String extension = "";
+		int startIndex = file.getOriginalFilename().lastIndexOf(".");
+		extension = file.getOriginalFilename().substring(startIndex, file.getOriginalFilename().length());
+		StringBuilder sb = new StringBuilder();
+		sb.append("/news/thumb/").append(DateUtils.getCurrentYear()).append(DateUtils.getCurrentMonth()).append(DateUtils.getCurrentDay());
+
+		String filePath = request.getRealPath("/") + sb.toString();
+		File f = new File(filePath);
+		if (!f.exists()) {
 			f.mkdirs();
 		}
-		return new File(f,file.getOriginalFilename());
+		sb.append(File.separator).append(System.currentTimeMillis()).append(extension);
+		return new File(filePath,System.currentTimeMillis()+extension);
 	}
-	
+
 	/**
 	 * 扩展用
+	 * 
 	 * @param fileName
 	 * @return
 	 */
-	private String getFilePath(String fileName){
-		String path="/news/thumb/";
-		return path+fileName;
+	private String getFilePath(String fileName) {
+		String extension = "";
+		int startIndex = fileName.lastIndexOf(".");
+		extension = fileName.substring(startIndex, fileName.length());
+		StringBuilder sb = new StringBuilder();
+		sb.append("/news/thumb/").append(DateUtils.getCurrentYear()).append(DateUtils.getCurrentMonth()).append(DateUtils.getCurrentDay());
+
+		sb.append(File.separator).append(System.currentTimeMillis()).append(extension);
+		return sb.toString();
 	}
 
 }

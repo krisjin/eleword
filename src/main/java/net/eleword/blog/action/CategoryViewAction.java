@@ -60,7 +60,7 @@ public class CategoryViewAction extends BaseAction {
 		page.setResultSet(arts);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Folder> folderLlist = folderService.selectAllFolder();
 		
 		if(user!=null)

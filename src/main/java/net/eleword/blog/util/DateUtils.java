@@ -3,6 +3,7 @@ package net.eleword.blog.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -84,6 +85,27 @@ public abstract class DateUtils {
 	public static Date getCurrentDateTime(){
 		Date d=new Date(System.currentTimeMillis());
 		return d;
+	}
+	
+	public static int getCurrentYear(){
+		Calendar calendar =Calendar.getInstance();
+		int year = calendar.get(Calendar.YEAR);
+		return year;
+	}
+	
+	public static int getCurrentMonth(){
+		Calendar calendar = Calendar.getInstance();
+		int month =calendar.get(Calendar.MONTH);
+		return month;
+	}
+	
+	public static int getCurrentDay(){
+		Calendar calendar = Calendar.getInstance();
+		return calendar.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getCurrentYear()+"-"+getCurrentMonth()+"-"+getCurrentDay());
 	}
 	
 }
