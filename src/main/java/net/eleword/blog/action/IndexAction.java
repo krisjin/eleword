@@ -40,7 +40,7 @@ public class IndexAction extends BaseAction {
 		}
 		page.getStartPage();
 		page = articleService.selectArticleWithPage(page);
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 
 		List<Category> categories = categoryService.selectAll();
 
@@ -97,7 +97,7 @@ public class IndexAction extends BaseAction {
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		List<Blog> blog = blogService.queryAllBlogConfig();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Folder> folderList = folderService.selectAllFolder();
 		
 		if(user!=null)
@@ -145,7 +145,7 @@ public class IndexAction extends BaseAction {
 		List<Category> categories = categoryService.selectAll();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Article> arts = page.getResultSet();
 		List<Folder> folderList = folderService.selectAllFolder();
 		for (Article art : arts) {

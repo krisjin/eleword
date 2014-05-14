@@ -7,19 +7,12 @@
 <%@ page import="org.json.simple.*" %>
 <%
 
-/**
- * KindEditor JSP
- * 
- * 本JSP程序是演示程序，建议不要直接在实际项目中使用。
- * 如果您确定直接使用本程序，使用之前请仔细确认相关安全设置。
- * 
- */
 String uploadPath="/upload/";
 //文件保存目录路径
 String savePath = pageContext.getServletContext().getRealPath("/") + uploadPath;
 
 //文件保存目录URL
-String saveUrl  = request.getContextPath() + "/"+uploadPath;
+String saveUrl  = request.getContextPath()+uploadPath;
 
 //定义允许上传的文件扩展名
 HashMap<String, String> extMap = new HashMap<String, String>();
