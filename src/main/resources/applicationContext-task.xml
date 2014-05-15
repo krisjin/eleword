@@ -40,7 +40,7 @@
 		<property name="jobDetail">
 			<ref bean="updateArticleIndexTask" />
 		</property>
-		<property name="cronExpression" value="0 41 12 * * ? *" />
+		<property name="cronExpression" value="0 59 23 * * ? *" />
 	</bean>	
 	
 

@@ -2,48 +2,39 @@
 <div id="blog-container">
 	<div id="blog-category">
 		<div class="position-title">博客配置</div>
-		<form class="form-horizontal" style="margin-top: 35px;" action="${request.contextPath}/admin/blog/config/save.htm" method="post">
+		<form class="" style="margin-top: 35px;" action="${request.contextPath}/admin/blog/config/save.htm" method="post">
 			<input name="id" value="${blog.id}" type="hidden">
-			<div class="control-group">
-				<label class="control-label">博客标题</label>
-				<div class="controls">
-					<input type="text" id="title" name="title" value="${blog.title}">
-				</div>
+			
+			<div class="input-prepend">
+				<label class="add-on">博客标题</label>
+				<input style="width: 400px;" type="text" id="title" name="title" value="${blog.title}">
 			</div>
-			<div class="control-group">
-				<label class="control-label">博客描述</label>
-				<div class="controls">
-					<textarea style="height: 70px;width:205px;" name="description">${blog.description}</textarea>
-				</div>
+			<div class="input-prepend">
+				<label class="add-on" style="height: 170px;">博客描述</label>
+				<textarea clas="span4" style="height: 170px;width:400px;" name="description">${blog.description}</textarea>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="inputPassword">博客背景色</label>
-				<div class="controls">
-					<select name="code">
+			<div class="input-prepend">
+				<label class="add-on" for="inputPassword">博客背景色</label>
+					<select name="code" style="width: 400px;">
 						<#list colors as color>
 							<option value="${color.code}" style="background-color: rgb(${color.code});border:solid 6px;" <#if (blog.background)==(color.code)>selected="selected"</#if>>
 							${color.name}
 							</option>
 						</#list>
 					</select>
-				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="inputPassword">Banner背景色</label>
-				<div class="controls">
-					<select name="banner_color">
+			<div class="input-prepend">
+				<label class="add-on" for="inputPassword">Banner背景色</label>
+					<select name="banner_color" style="width: 380px;">
 						<#list colors as color>
 							<option value="${color.code}" style="background-color: rgb(${color.code});border:solid 6px;" <#if (blog.banner_color)==(color.code)>selected="selected"</#if>>
 							${color.name}
 							</option>
 						</#list>
 					</select>
-				</div>
 			</div>
-			<div class="control-group">
-				<div class="controls">
+			<div class="">
 					<button type="submit" class="btn">提 &nbsp;交</button>
-				</div>
 			</div>
 		</form>
 	</div>

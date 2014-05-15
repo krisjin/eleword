@@ -31,34 +31,27 @@ function validateArticle(){
 	<div id="blog-addarticle">
 		<form class="form-inline" action="save.htm" method="post" onsubmit="return validateArticle()" >
 		<div class="position-title">添加文章</div>
-			<div class="" >
-				<label class="control-label">文章标题</label> 
-				<input type="text" id="title" name="title" class="input-xxlarge" data-rule="文章标题:required;title"> 
-				
+		<div class="input-prepend">
+			<label class="add-on">文章标题</label> 
+			<input type="text" id="title" name="title" style="width:300px;"  data-rule="文章标题:required;title"> 
+			<label class="add-on" style="margin-left: 128px;">选择分类</label>
+			<select name="categoryId" style="width:300px;"  data-rule="分类:required;categoryId">
+				<#list categories as category>
+					<option  value="${category.id}">${category.name}</option> 
+				</#list>
+			</select>
+		</div>
+		<div class="input-prepend">
+				<div class="row-fluid">
+				<div class="span1">
+				<label class="add-on" style="height: 393px;">文章内容</label>
+				</div>
+				<div class="span11">
+				<textarea name="content" id="content" style="width:800px;  height: 400px; visibility: false;float: left;" ></textarea>
+				</div>
 			</div>
-			<br>
 			<div class="">
-				
-				<div class="controls">
-				<label class="control-label">选择分类</label>
-					<select name="categoryId" class="input-xxlarge" data-rule="分类:required;categoryId">
-					<#list categories as category>
-						<option  value="${category.id}">${category.name}</option> 
-					</#list>
-				</select>
-				</div>
-			</div>
-			<br>
-			<div class="control-group">
-				<label class="control-label">文章内容</label>
-				<div class="controls">
-					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" ></textarea>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
 					<button type="submit" class="btn btn-success">发表文章</button>
-				</div>
 			</div>
 		</form>
 	</div>
@@ -68,11 +61,13 @@ function validateArticle(){
 		<div class="position-title">修改文章</div>
 		<input type="hidden" value="${article.id}" name="id">
 		<input type="hidden" value="${article.categoryId}" name="rawCategoryId">
-			<div class="">
-				<label class="control-label">文章标题</label> 
-				<input type="text" id="title" name="title" class="input-xxlarge"  value="${article.title}" required> 
-				<label class="control-label">选择分类</label> 
-				<select name="categoryId">
+		
+		
+			<div class="input-prepend">
+				<label class="add-on">文章标题</label> 
+				<input type="text" id="title" name="title" style="width: 300px;"  value="${article.title}" required> 
+				<label class="add-on" style="margin-left: 128px;">选择分类</label> 
+				<select name="categoryId" style="width: 300px;">
 					<#list categories as category>
 						<#if article.categoryId==category.id>
 						<option value="${category.id}" selected="selected">${category.name}</option> 
@@ -83,10 +78,13 @@ function validateArticle(){
 				</select>
 			</div>
 			<br>
-			<div class="control-group">
-				<label class="control-label">文章内容</label>
-				<div class="controls">
-					<textarea name="content" id="content" style="width: 970px; height: 400px; visibility: false;" data-rule="required;content">${article.content}</textarea>
+			<div class="input-prepend">
+				<div class="row-fluid">
+				<div class="span1">
+				<label class="add-on" style="height: 393px;">文章内容</label>
+				</div>
+				<div class="span11">
+				<textarea name="content" id="content" style="width:800px; height: 400px; visibility: false;" data-rule="required;content">${article.content}</textarea>
 				</div>
 			</div>
 			<div class="control-group">

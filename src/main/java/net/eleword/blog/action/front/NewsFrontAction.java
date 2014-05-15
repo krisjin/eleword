@@ -54,7 +54,7 @@ public class NewsFrontAction extends BaseAction {
 		page.setResultSet(newsList);
 
 		List<Blog> blog = this.blogService.queryAllBlogConfig();
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Category> categories = categoryService.selectAll();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		List<Folder> folderList = folderService.selectAllFolder();
@@ -82,7 +82,7 @@ public class NewsFrontAction extends BaseAction {
 		News news = newsService.getNews(id);
 		
 		List<Blog> blog = this.blogService.queryAllBlogConfig();
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
+		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Category> categories = categoryService.selectAll();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		List<Folder> folderList = folderService.selectAllFolder();
