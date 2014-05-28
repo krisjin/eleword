@@ -52,7 +52,15 @@
 							<#assign news=pa.resultSet>
 							<#list news as new>
 							<tr>
-								<td><a href="${request.contextPath}/news/${new.id}.htm" target="_blank">${new.title}</a></td>
+								<td><a href="${request.contextPath}/news/${new.id}.htm" target="_blank">
+								<#if new.title?length gt 50>
+								${new.title[0..50]}
+								<#else>
+								${new.title}
+								</#if>
+								
+								
+								</a></td>
 								<td>${new.media}</td>
 								<td><#if new.status==1>有效<#else>无效</#if></td>
 								<td>${new.postDate}</td>
