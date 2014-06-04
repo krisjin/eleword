@@ -7,7 +7,7 @@ body {
 /* Custom container */
 .container-narrow {
 	margin: 0 auto;
-	max-width: 84%;
+	width: 980px;
 }
 
 .container-narrow>hr {
