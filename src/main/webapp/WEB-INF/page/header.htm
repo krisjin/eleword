@@ -43,16 +43,16 @@
 	    </div>
 	  </div>
 	  
-	  <div class="span4">
+	  <div class="span3">
 	  	<div style="margin: 40px 0px 0px 0px;">
 		   
 	    </div>
 	  </div>
 	  <div class="span4">
 	  <form action="${request.contextPath}/go.htm" method="get">
-	  	<div class="input-append"  style="margin-top: 80px;margin-left: 10px;">
+	  	<div class="input-append"  style="margin-top: 65px;">
 		  <input class="" id="appendedInputButton" type="text" name="q">
-		  <button class="btn" type="submit">Go</button>
+		  <button class="btn" type="submit">搜索</button>
 		</div>
 	  </form>
 	  </div>
@@ -63,7 +63,6 @@
 		    <ul class="nav" style="font-size:14px;    font-weight:bold;  font-family: "Microsoft YaHei" ! important;height:80px;">
 		      <li  <#if active?exists><#if active="index">  class="active"</#if></#if>><a href="${request.contextPath}/index.htm">首页</a></li>
 		      <li  <#if active?exists><#if active="news">  class="active"</#if></#if>><a href="${request.contextPath}/news.htm">科技新闻</a></li>
-<!-- 		      <li <#if active?exists><#if active="search">  class="active"</#if></#if>><a href="${request.contextPath}/go.htm">搜索</a></li> -->
 		       <#list folderList as folder>
 		      	<li <#if active?exists> <#if active=(folder.ename)>  class="active"</#if> </#if>><a href="${request.contextPath}/${folder.ename}.htm">${folder.name}</a></li>
 		      </#list>

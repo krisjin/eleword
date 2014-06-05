@@ -1,25 +1,30 @@
 <div id="blog-sidebar" style="width: 100%;margin-top: 10px;">
-	<div class="">
 	<h4 class="slider-title">分类目录</h4>
-	<div>
+	<div style="font-size: 14px;">
 		<ul class="unstyled">
 		<#list categories as category>
-			<li style="padding-bottom: 4px;">
-			<a href="${request.contextPath}/category/${category.id}.htm" title="${category.name}">${category.name}</a>
-			<span class="muted">(${category.articleNumber})</span>
-		 	</li>
+<!-- 			<li style="line-height: 22px;"> -->
+<!-- 			<a href="${request.contextPath}/category/${category.id}.htm" title="${category.name}">${category.name}</a> -->
+<!-- 			<span class="muted">(${category.articleNumber})</span> -->
+<!-- 		 	</li> -->
+		 		
+		 		
+		 		<span class="btn" style="margin-bottom: 3px;margin:2 0px;padding:4px 0px 4px 2px;width: 100px;font-size: 13px;">
+		 		<a href="${request.contextPath}/category/${category.id}.htm" title="${category.name}">${category.name}</a>
+				(${category.articleNumber})
+		 		</span>
+		 		
+		 	
 	    </#list>
 	    </ul>
 	</div>
-	</div>
-<hr>
-	<div class="">
-		<h4 class="slider-title2">最新文章</h4>
+
+	<h4 class="slider-title2">最新文章</h4>
 		<div>
 			<ul class="unstyled" >
 			<#list recentArticle as ra>
-				<li style="padding-bottom: 4px;">
-					<a href="${request.contextPath}/article/${ra.id}.htm" title="${ra.title}">
+				<li style="line-height: 22px; border-bottom:1px dashed #BEBEBE;padding-bottom: 4px;padding-top: 4px;">
+					<a href="${request.contextPath}/article/${ra.id}.htm" title="${ra.title}" style="text-decoration: none;">
 					<#if ((ra.title?length)>13)>
 						${ra.title[0..13]}
 					<#else>
@@ -30,21 +35,16 @@
 			</#list>
 			</ul>
 		</div>
-	</div>
-	<hr>
 	
-	<div class="">
-		<h4 class="slider-title3">文章归档</h4>
+	<h4 class="slider-title3">文章归档</h4>
 		<div>
 			<ul class="unstyled" >
 			<#list articleArchive as aa>
-				<li style="padding-bottom: 4px;">
+				<li style="line-height: 22px;">
 					<a href="${request.contextPath}/articles/archive/${aa[0]}.htm" >${aa[0]}</a>
 					<span class="muted">(${aa[1]})</span>
 				</li>
 			</#list>
 			</ul>
-		</div>
-	
 	</div>
 </div>

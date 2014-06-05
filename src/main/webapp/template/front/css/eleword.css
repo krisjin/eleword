@@ -111,16 +111,22 @@ body {
 	color:#CD5C5C;
 	border-bottom: 3px solid #CD5C5C;
 	margin-bottom: 6px;
+	display: block;
+	padding-bottom: 3px;
 }
 .slider-title2{
 	color:#008B45;
 	border-bottom: 3px solid #008B45;
 	margin-bottom: 6px;
+	display: block;
+	padding-bottom: 3px;
 }
 .slider-title3{
 	color:#4682B4;
 	border-bottom: 3px solid #4682B4;
 	margin-bottom: 6px;
+	display: block;
+	padding-bottom: 3px;
 }
 
 .title-info a,visited{
