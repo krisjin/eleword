@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 博客配置维护
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 @Controller
 public class BlogConfigAction {

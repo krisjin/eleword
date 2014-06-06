@@ -12,7 +12,7 @@ import com.mortennobel.imagescaling.ResampleOp;
 
 /**
  * TODO 此处填写 class 信息
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 public class ThumbnailsUtils {
 	

@@ -10,7 +10,7 @@ import net.eleword.blog.search.entity.Articles;
 /**
  * 文章索引操作
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-4-22下午2:04:45
  */
 

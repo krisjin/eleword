@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 @Service
 public class ArticleSearchService {
@@ -50,8 +50,6 @@ public class ArticleSearchService {
 		String[] q = { "title", "content" };
 		String paths=SpringContextHolder.getApplicationContextPath();
 		
-		
-		
 		String filePath = getSearchPath();
 		Directory dir = FSDirectory.open(new File(filePath));
 		IndexReader reader = DirectoryReader.open(dir);
@@ -67,19 +65,15 @@ public class ArticleSearchService {
 		for (int i = start; i < end; i++) {
 			int docId = scoreDocs[i].doc;
 			Document doc = search.doc(docId);
-
 			list.add(new Articles(Long.valueOf(doc.get("id")), doc.get("title"), doc.get("content")));
 		}
-
 		return list;
 
 	}
 	
-	
 	public String getSearchPath(){
 		String path=SpringContextHolder.getApplicationContextPath();
 		File f=new File(path,"elewordIndex/Articles");
-		
 		return f.getAbsolutePath();
 	}
 }

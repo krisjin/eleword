@@ -23,7 +23,7 @@ import com.mysql.jdbc.StringUtils;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-2-2上午11:17:57
  */
 @Controller
@@ -61,6 +61,9 @@ public class CategoryViewAction extends BaseAction {
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		List<Article> recentArticle = articleService.selectRecnetArticle(20);
+		for(Article art:recentArticle){
+			art.setTitle(HtmlUtil.subStrByte(art.getTitle(), 33));
+		}
 		List<Folder> folderLlist = folderService.selectAllFolder();
 		
 		if(user!=null)

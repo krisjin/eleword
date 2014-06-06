@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-4-29下午4:22:24
  */
 public class ArticleIndexTask {

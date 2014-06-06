@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-1-28上午5:59:48
  */
 @Controller

@@ -6,7 +6,7 @@ import net.eleword.blog.entity.User;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-2-12下午1:40:38
  */
 

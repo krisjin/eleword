@@ -19,7 +19,7 @@ import com.mysql.jdbc.StringUtils;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-2-14上午7:18:22
  */
 @Controller

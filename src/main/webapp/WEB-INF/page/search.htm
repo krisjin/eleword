@@ -1,37 +1,38 @@
 <#include "header.htm">
-	<div id="search-content">
-		<div class="input-append" style="margin-left: auto;margin-right: auto;">
-			<form action="${request.contextPath}/search.htm" method="get">
+<div id="search-content">
+	<div class="input-append" style="margin-left: auto;margin-right: auto;">
+		<form action="${request.contextPath}/search.htm" method="get">
 			<input class="span6" id="appendedInputButton" type="text" name="q"   value="${q}">
-			<input class="btn" type="submit" value="GO">
-			</form>
-		</div>
-		<div>
-		<p class="muted"><#if result?exists>找多约${result}条结果</#if></p>
+			<input class="btn" type="submit" value="搜索">
+		</form>
+	</div>
+	<div>
+		<p class="muted"><#if result?exists>找到约${result}条结果</#if></p>
 		<#if articles?exists && articles?size gt 0>
 		<#list articles as art>
-				<span class="search-title"><a href="${request.contextPath}/article/${art.getId()}.htm" target="_blank">${art.title}</a></span>
+				<span class="search-title">
+				<a href="${request.contextPath}/article/${art.getId()}.htm" target="_blank">${art.title}</a>
+				</span>
 				<p>${art.content}</p>
+				<br>
 		</#list>
 		</#if>
-		
-		</div>
-		<div style="float: left;">
+	</div>
+	
+	<div style="float: left;">
 			<ul class="pager">
 			<#if page?exists>
 			  <li>
 			  	<#assign pn=page?number>
-			
-			 	 <#if pn gt 1>
+			 	 <#if pn  gt 1>
 			 	 	<#assign pre=(pn-1)>
 			 	 	<a href="${request.contextPath}/search.htm?page=${pre}&q=${q}">Previous</a>
 			 	 <#else>
 			 		<a>Previous</a>
 			 	 </#if>
 			  </li>
-			  
 			  <li>
-				  <#if pn gt 1>
+				  <#if pn lt totalPages>
 				  <#assign pre=(pn+1)>
 				  <a href="${request.contextPath}/search.htm?page=${pre}&q=${q}">Next</a>
 				  <#else>
@@ -40,8 +41,8 @@
 			  </li>
 			  </#if>
 			</ul>
-		</div>
 	</div>
+</div>
 
 <div style="padding-top: 30px; clear: both;">
 	<hr>

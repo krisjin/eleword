@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 @Repository("webStatisticsDao")
 public class WebStatisticsDaoImpl extends HibernateDao<WebStatistics, Long> implements WebStatisticsDao {

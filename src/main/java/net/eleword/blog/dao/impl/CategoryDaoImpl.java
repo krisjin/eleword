@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 /**
  * 文章分类数据访问层实现
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-1-27上午6:23:22
  */
 @Repository("categoryDao")

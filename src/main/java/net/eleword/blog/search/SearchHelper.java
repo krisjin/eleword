@@ -107,12 +107,13 @@ public class SearchHelper {
 		parser.setDefaultOperator(QueryParser.AND_OPERATOR);
 		try {
 			Query querySinger = parser.parse(q);
+			parser.setAnalyzeRangeTerms(true);
 			querySinger.setBoost(boost);
 			// System.out.println(querySinger.toString());
 			return querySinger;
 		} catch (Exception e) {
 			TermQuery queryTerm = new TermQuery(new Term(field, q));
-			queryTerm.setBoost(boost);
+//			queryTerm.setBoost(boost);
 			// System.out.println(queryTerm.toString());
 			return queryTerm;
 		}
@@ -124,10 +125,10 @@ public class SearchHelper {
 			return nullQuery;
 		QueryParser parser = new MultiFieldQueryParser(Version.LUCENE_40, field, analyzer);
 		parser.setDefaultOperator(QueryParser.AND_OPERATOR);
+		parser.setAnalyzeRangeTerms(true);
 		try {
 			Query querySinger = parser.parse(q);
 			querySinger.setBoost(boost);
-			System.out.println(querySinger.toString());
 			return querySinger;
 		} catch (Exception e) {
 			// TermQuery queryTerm = new TermQuery(new Term(field, keyword));

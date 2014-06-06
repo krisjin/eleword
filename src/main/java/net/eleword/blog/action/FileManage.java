@@ -15,7 +15,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-5-4下午4:06:00
  */
 @Controller

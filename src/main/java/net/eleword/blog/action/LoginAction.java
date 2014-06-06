@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-1-28上午6:04:50
  */
 @Controller

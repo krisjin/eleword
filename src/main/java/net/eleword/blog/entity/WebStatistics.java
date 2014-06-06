@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 @Entity
 @Table(name = "webstatistics")

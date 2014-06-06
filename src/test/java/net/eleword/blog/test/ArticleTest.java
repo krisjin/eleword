@@ -23,7 +23,7 @@ import org.junit.Test;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-4-23下午2:12:06
  */
 

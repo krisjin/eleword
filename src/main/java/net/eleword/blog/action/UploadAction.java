@@ -24,7 +24,7 @@ import com.mortennobel.imagescaling.ResampleOp;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-2-16上午8:52:51
  */
 @Controller("uploadAction")

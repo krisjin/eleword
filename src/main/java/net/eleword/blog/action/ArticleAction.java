@@ -22,7 +22,7 @@ import com.mysql.jdbc.StringUtils;
 /**
  * 文章维护
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-1-29上午6:28:53
  */
 @Controller

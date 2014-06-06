@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-4-24上午9:35:55
  */
 @Service

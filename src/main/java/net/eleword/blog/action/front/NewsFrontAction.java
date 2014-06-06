@@ -26,7 +26,7 @@ import com.mysql.jdbc.StringUtils;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 @Controller
 public class NewsFrontAction extends BaseAction {

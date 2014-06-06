@@ -143,7 +143,11 @@ body {
 .search-title{
 	font-size: 18px;
 }
+
+.search-title a:link{
+	color: #1a0dab;
+}
+
 .search-title a:visited{
-	
 	color: #609;
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * TODO 此处填写 class 信息
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date  2014-4-23下午5:10:33
  */
 

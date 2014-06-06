@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-1-27上午6:42:20
  */
 public abstract class HibernateDao<T, PK extends Serializable> extends BaseHibernateDao<T, PK> {

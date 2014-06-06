@@ -6,16 +6,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.eleword.blog.entity.Article;
 import net.eleword.blog.entity.Blog;
-import net.eleword.blog.entity.Category;
 import net.eleword.blog.entity.Folder;
 import net.eleword.blog.entity.User;
 import net.eleword.blog.search.SearchHelper;
 import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.service.ArticleSearchService;
 import net.eleword.blog.util.ConstantEnum;
-import net.eleword.blog.util.DateUtils;
 import net.eleword.blog.util.HtmlUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * TODO 此处填写 class 信息
- * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin
  * @date 2014-4-30下午3:21:26
  */
 
@@ -38,80 +33,46 @@ public class ArticleSearchAction extends BaseAction {
 	private ArticleSearchService aritcleSearchService;
 
 	@RequestMapping(value = "/search.htm", method = RequestMethod.GET)
-	public String search(HttpServletRequest request,
-						 @RequestParam(value = "q") String q,
-						 @RequestParam(value = "page",defaultValue="1") int page) {
-		
+	public String search(HttpServletRequest request, @RequestParam(value = "q") String q, @RequestParam(value = "page", defaultValue = "1") int page) {
+		int totalPages = 0;
 		List<Articles> articles = null;
-		List result=new ArrayList();
-		try {
-			articles = aritcleSearchService.search(q, 20, page,result);
-			
-			if(articles!=null && articles.size()>0){
-				
-				for(Articles art:articles){
-					String content=HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()), 300);
-					art.setContent(SearchHelper.highlight(content, q));
-					art.setTitle(SearchHelper.highlight(art.getTitle(), q));
+		List result = new ArrayList();
+		if (!q.equals("") || q != null) {
+			try {
+				articles = aritcleSearchService.search(q, 20, page, result);
+				if (articles != null && articles.size() > 0) {
+					for (Articles art : articles) {
+						String content = HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()), 240);
+						art.setContent(SearchHelper.highlight(content, q));
+						art.setTitle(SearchHelper.highlight(art.getTitle(), q));
+					}
+					int totalCount = (Integer) result.get(0);
+					totalPages = (int) (Math.ceil((double) totalCount / (double) 20));
 				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		List<Blog> blog = blogService.queryAllBlogConfig();
-		List<Category> categories = categoryService.selectAll();
-		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
 		List<Folder> folderList = folderService.selectAllFolder();
-		
+
 		if (blog.size() > 0) {
 			request.setAttribute("blog", blog.get(0));
 		}
-		if(user!=null)
+		if (user != null)
 			request.setAttribute("user", user);
-		
-		if(result.size()>0){
+
+		if (result.size() > 0) {
 			request.setAttribute("result", result.get(0));
 		}
-		request.setAttribute("active", "search");
+		request.setAttribute("totalPages", totalPages);
 		request.setAttribute("page", page);
 		request.setAttribute("q", q);
 		request.setAttribute("folderList", folderList);
-		request.setAttribute("recentArticle", recentArticle);
-		request.setAttribute("articleArchive", articleArchive);
-		request.setAttribute("categories", categories);
-		request.setAttribute(ConstantEnum.pageTitle.toString(), "搜索");
+		request.setAttribute(ConstantEnum.pageTitle.toString(), "Eleword全文搜索");
 		request.setAttribute("articles", articles);
 		return "search.htm";
 
 	}
-	
-	@RequestMapping(value = "/go.htm", method = RequestMethod.GET)
-	public String searchs(HttpServletRequest request){
-		List<Blog> blog = blogService.queryAllBlogConfig();
-		List<Category> categories = categoryService.selectAll();
-		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
-		User user = userService.selectUserByName(ConstantEnum.admin.toString());
-		List<Article> recentArticle = articleService.selectRecnetArticle(10);
-		List<Folder> folderList = folderService.selectAllFolder();
-		
-		if (blog.size() > 0) {
-			request.setAttribute("blog", blog.get(0));
-		}
-		if(user!=null)
-			request.setAttribute("user", user);
-		
-		
-		
-		request.setAttribute("q", "");
-		request.setAttribute("active", "search");
-		request.setAttribute("folderList", folderList);
-		request.setAttribute("recentArticle", recentArticle);
-		request.setAttribute("articleArchive", articleArchive);
-		request.setAttribute("categories", categories);
-		request.setAttribute(ConstantEnum.pageTitle.toString(), "搜索");
-		return "search.htm";
-	}
-	
 }

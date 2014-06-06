@@ -18,7 +18,7 @@ import net.eleword.blog.util.SpringContextHolder;
 
 /**
  * TODO 此处填写 class 信息
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 public class WebStatisticsFilter implements Filter{
 

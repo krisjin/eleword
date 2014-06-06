@@ -9,7 +9,7 @@ import net.eleword.blog.search.Searchable;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-4-22下午1:50:32
  */
 

@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-1-30上午10:01:54
  */
 

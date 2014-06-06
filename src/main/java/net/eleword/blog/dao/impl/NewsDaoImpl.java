@@ -10,7 +10,7 @@ import net.eleword.blog.util.Pagination;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  */
 @Repository("newsDao")
 public class NewsDaoImpl extends HibernateDao<News,Long> implements NewsDao {

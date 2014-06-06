@@ -9,7 +9,7 @@ import javax.persistence.Table;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-3-13上午10:28:10
  */
 

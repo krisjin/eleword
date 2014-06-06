@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-2-4上午7:05:46
  */
 public class LoginFilter implements Filter {

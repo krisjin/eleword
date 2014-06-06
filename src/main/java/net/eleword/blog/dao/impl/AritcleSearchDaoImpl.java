@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 /**
  * TODO 此处填写 class 信息
  * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin 
  * @date 2014-4-29下午5:00:49
  */
 @Repository("aritcleSearchDao")
