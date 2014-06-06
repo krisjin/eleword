@@ -6,9 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * TODO 此处填写 class 信息
- * 
- * @author krisjin (mailto:krisjin86@163.com)
+ * @author krisjin
  * @date 2014-2-1下午2:12:07
  */
 public class HtmlUtil {
@@ -192,12 +190,6 @@ public class HtmlUtil {
 		return retVal;
 	}
 
-	/**
-	 * Gets Multi Img Tag Attribute
-	 * 
-	 * @param input
-	 * @return
-	 */
 	public static List getMutiImgAtr(String input) {
 		Pattern p = Pattern.compile(REGXP_SRCATR_VALUE);
 		Matcher matcher = p.matcher(input);
@@ -213,7 +205,6 @@ public class HtmlUtil {
 
 	/**
 	 * 按字节截取字符串
-	 * 
 	 * @param content
 	 * @param length
 	 * @return
@@ -221,33 +212,16 @@ public class HtmlUtil {
 	public static String subStrByte(String content, int length) {
 		content = content.trim();
 		int strByteLength = 0;
-		if (null == content || "".equals(content) || content.length() == 0)
+		if (null == content || "".equals(content))
 			return "";
 		strByteLength = content.getBytes().length;
 		if (strByteLength < length)
 			return content;
 		for (int i = 0; i < length; i++) {
 			String tmp = content.substring(i, i + 1);
-			if (tmp.getBytes().length > 1)
-				length--;
+			if (tmp.getBytes().length > 2)
+				length=length-2;
 		}
-		return content.substring(0, length) + "...";
-	}
-
-	public static void main(String[] args) {
-
-		// String
-		// str="<span class='<p style=padding-right:0px;padding-left:0px;font-size:14px;padding-bottom:0px;margin:16px 0px 0px;padding-top:0px;'><img  src='/blog/uploadimage/2.jpg'/>fd的算法导数afdsfdsf</p><img  src='/blog/uploadimage/20120120/dfd.jpg'/>";
-		// String strs=HtmlRegexpUtil.filterHtml(str);
-		// String strs=HtmlRegexpUtil.filterStr("上a发d的abce", 5);
-		// System.out.println(strs);
-		// List img=HtmlRegexpUtil.getMutiImgAtr(str);
-
-		// for(Iterator iter=img.iterator();iter.hasNext();){
-		// String obj=(String)iter.next();
-		// System.out.println(obj);
-		//
-		// }
-
+		return content.substring(0, length);
 	}
 }

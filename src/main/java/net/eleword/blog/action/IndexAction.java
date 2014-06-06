@@ -41,6 +41,10 @@ public class IndexAction extends BaseAction {
 		page.getStartPage();
 		page = articleService.selectArticleWithPage(page);
 		List<Article> recentArticle = articleService.selectRecnetArticle(20);
+		for(Article art:recentArticle){
+			art.setTitle(HtmlUtil.subStrByte(art.getTitle(), 33));
+		}
+		
 
 		List<Category> categories = categoryService.selectAll();
 

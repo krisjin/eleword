@@ -65,6 +65,5 @@
 	<bean id="indexArticleJob" class="net.eleword.blog.search.task.ArticleIndexTask" >
 		<property name="indexPath" value="elewordIndex" />
 		<property name="articles" value="Articles" />
-		
 	</bean>
 </beans>
