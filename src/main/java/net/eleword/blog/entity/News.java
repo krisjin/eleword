@@ -28,6 +28,8 @@ public class News extends IdEntity {
 	private String user;
 
 	private Date postDate;
+	
+	private long folderId;
 
 	/**
 	 * 0:无效；1有效 Comment for <code>status</code>
@@ -123,5 +125,16 @@ public class News extends IdEntity {
 	public void setThumbnailsUrl(String thumbnailsUrl) {
 		this.thumbnailsUrl = thumbnailsUrl;
 	}
+	
+	@Column(name="folder_id" ,columnDefinition="bigint(20)  default 0 ")
+	public long getFolderId() {
+		return folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		this.folderId = folderId;
+	}
+	
+	
 
 }

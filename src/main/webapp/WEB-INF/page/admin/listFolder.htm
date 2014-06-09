@@ -6,101 +6,97 @@
 			uploadJson : '${request.contextPath}/template/editor/jsp/upload_json.jsp',
 			fileManagerJson : '${request.contextPath}/template/editor/jsp/file_manager_json.jsp',
 			allowFileManager : true,
-			items : [ 'source', 'code', 'justifyleft', 'justifycenter',
+			items : [ 'source','justifyleft', 'justifycenter',
 					'justifyright', 'insertorderedlist', 'insertunorderedlist',
 					'clearhtml', 'quickformat', 'formatblock', 'fontname',
 					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-					'italic', 'underline', 'lineheight', 'removeformat', '|',
-					'image', 'multiimage', 'insertfile', 'table', 'hr',
-					'emoticons', 'baidumap', 'link', 'unlink', 'fullscreen' ]
+					'italic', 'underline', 'lineheight',
+					'image', 'insertfile', 'table', 'hr',
+					 'baidumap', 'link', 'unlink', 'fullscreen' ]
 		});
 
 	});
 </script>
 
 <div id="blog-container">
+	<div class="row-fluid">
+		<div class="span7">
 		<#if flag="add">
-			<div class="position-title">添加目录</div>
-			<div class="well" style="margin-left: 0px;padding-left: 0px;" >
+			<div class="block-panel">
+			<div class="block-title">添加目录</div>
+			<div class="" style="margin-left: 0px;padding: 8px 0px 0px 3px; " >
 				<form class="form-horizontal" action="${request.contextPath}/admin/folder/post.htm" method="post">
-				 	<div class="control-group">
-					    <label class="control-label">目录名称</label>
-					    <div class="controls">
-					      <input type="text" class="input-xlarge" id="name" name="name" data-rule="目录名称:required;name">
-					    </div>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on">目录名称</span>
+					   <input type="text" class="input-xlarge" id="name" name="name" data-rule="目录名称:required;name">
 					</div>
-					<div class="control-group">
-					    <label class="control-label">英文名称</label>
-					    <div class="controls">
-					      <input type="text" class="input-xlarge" name="ename" id="ename" data-rule="英文名称:required;ename">
-					    </div>
+					<br>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on">英文名称</span>
+					  <input type="text" class="input-xlarge" name="ename" id="ename" data-rule="英文名称:required;ename">
 					</div>
-					<div class="control-group">
-					    <label class="control-label">上级目录</label>
-					    <div class="controls">
-					    	<select name="fatherId">
+					<br>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on">上级目录</span>
+					  <select name="fatherId" class="input-xlarge">
 					    		<option value="0">根目录</option>
-					    	</select>
-					    </div>
+					  </select>
 					</div>
-					<div class="control-group">
-					    <label class="control-label">目录内容</label>
-					    <div class="controls">
-					    	<textarea name="content" id="content" style="width:760px; height: 300px; visibility: false;" ></textarea>
-					    </div>
+					<br>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on" >目录内容</span>
+					  <textarea name="content" id="content" style="width:200px; height: 300px; visibility: false;" ></textarea>
 					</div>
-					<div class="control-group">
-					    <div class="controls">
-					    <button type="submit" class="btn btn-info">添 加</button>
-					    </div>
-					  </div>
+					
+					
+					<div>
+					    <button type="submit" class="btn btn-large btn-inverse">添加目录</button>
+					</div>
+					 
 				</form>
 			</div>
-			
+			</div>
 			<#else>
-			<div class="position-title">修改目录</div>
-			<div class="well" style="margin-left: 0px;padding-left: 0px;" >
+			<div class="block-panel">
+			<div class="block-title">修改目录</div>
+			<div class="" style="margin-left: 0px;padding: 8px 0px 0px 3px; " >
 				<form class="form-horizontal" action="${request.contextPath}/admin/folder/update.htm" method="post">
 					<input type="hidden" name="id" value="${folder.id}">
-				 	<div class="control-group">
-					    <label class="control-label">目录名称</label>
-					    <div class="controls">
-					      <input type="text" class="input-xlarge" id="name" name="name" value="${folder.name}" data-rule="目录名称:required;name">
-					    </div>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on">目录名称</span>
+					   <input type="text" class="input-xlarge" id="name" name="name" value="${folder.name}" data-rule="目录名称:required;name">
 					</div>
-					<div class="control-group">
-					    <label class="control-label">英文名称</label>
-					    <div class="controls">
-					      <input type="text" class="input-xlarge" name="ename" id="ename" value="${folder.ename}" data-rule="英文名称:required;ename">
-					    </div>
+					<br>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on">英文名称</span>
+					  <input type="text" class="input-xlarge" name="ename" id="ename"  value="${folder.ename}" data-rule="英文名称:required;ename">
 					</div>
-					<div class="control-group">
-					    <label class="control-label">上级目录</label>
-					    <div class="controls">
-					    	<select name="fatherId">
+					<br>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on">上级目录</span>
+					  <select name="fatherId" class="input-xlarge">
 					    		<option value="0">根目录</option>
-					    	</select>
-					    </div>
+					  </select>
 					</div>
-					<div class="control-group">
-					    <label class="control-label">目录内容</label>
-					    <div class="controls">
-					    	<textarea name="content" id="content" style="width:760px; height: 300px; visibility: false;" >${folder.content}</textarea>
-					    </div>
+					<br>
+					<div class="input-prepend" id="input-preend-sty">
+					  <span class="add-on" >目录内容</span>
+					  <textarea name="content" id="content" style="width:200px; height: 300px; visibility: false;" >${folder.content}</textarea>
 					</div>
-					<div class="control-group">
-					    <div class="controls">
-					    <button type="submit" class="btn btn-info">修改</button>
-					   <button type="button" class="btn btn-inverse" onclick="javascript:history.go(-1);">取 消</button>
-					    </div>
-					  </div>
+					
+					<div>
+					    <button type="submit" class="btn btn-large btn-inverse">更新目录</button>
+					     <a href="${request.contextPath}/admin/folders.htm" class="btn btn-large btn-warning">取消更新</a>
+					</div>
 				</form>
 			</div>
+			</div>
 			</#if>
-
-	<div id="blog-category">
-		<div class="position-title">目录列表</div>
-		<form action="" method="post" id="formdel">
+	</div>
+	
+	<div class="span5">
+	<div class="block-title">目录列表</div>
+		<form action="" method="post" id="formdel" style="margin-top: 8px;">
 			<table class="table table-bordered table-hover">
 				<tr class="info">
 					<td>顺序</td>
@@ -123,12 +119,14 @@
 					</td>
 					<td>
 						<a href="${request.contextPath}/admin/folder/${folder.id}.htm">编辑</a> |
-						<a href="#" onclick="return deleteFolder(${folder.id});">删除</a>
+						<a href="#" onclick="return deleteFolder(${folder.id});">删除</a> |
+						<a href="#" onclick="return deleteFolder(${folder.id});">添加文章</a>
 					</td>
 				</tr>
 				</#list>
 			</table>
 		</form>
+	</div>
 	</div>
 </div>
 <#include "footer_admin.htm">

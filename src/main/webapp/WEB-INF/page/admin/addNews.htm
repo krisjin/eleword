@@ -28,146 +28,214 @@
 <div id="blog-container">
 
 	<#if flag=="query">
-	<div class="position-title">新增新闻</div>
+	<div class="position-title">新增</div>
 	<div>
 		<form action="${request.contextPath}/admin/news/save.htm" method="post" enctype="multipart/form-data" >
 			<div class="row-fluid">
-			  <div class="span6">
+			  <div class="span4">
 				  <div class="input-prepend">
-					<span class="add-on">标题</span>
-					<input class="span6" type="text" name="title" id="title" data-rule="required;title">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">标题</span>
+					<input class="span9" type="text" name="title" id="title" data-rule="required;title">
 				  </div>
-			  </div>
-			  <div class="span6">
+				  <br>
 				  <div class="input-prepend">
-					<span class="add-on">媒体</span>
-					 <select name="media" class="span6">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">媒体</span>
+					 <select name="media" class="span9">
 					 	<#list medias as media>
 							<option value="${media.name}">${media.name}</option> 
 						</#list>
 					</select>
 				  </div>
-			  </div>
-			</div>
-			<br>
-			<div class="row-fluid">
-			  <div class="span6">
+				  <br>
 				  <div class="input-prepend">
-					<span class="add-on">作者</span>
-					<input class="span6" type="text" name="author" id="author" >
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">作者</span>
+					<input class="span9" type="text" name="author" id="author" >
 				  </div>
-			  </div>
-			  <div class="span6">
-				  
+				   <br>
 				   <div class="input-prepend">
-					<span class="add-on">来源</span>
-					<input class="span6" type="text" name="url" id="url" data-rule="required;url">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">来源</span>
+					<input class="span9" type="text" name="url" id="url" data-rule="required;url">
 				  </div>
-			  </div>
-				  
-			  </div>
-			<br>
-			
-			<div class="row-fluid">
-			  <div class="span6">
+				  <br>
 				  <div class="input-prepend">
-					<span class="add-on">图片</span>
-					<input class="span4" type="file" name="thumbnails" id="thumbnails" data-rule="required;thumbnails">
+						<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">目录</span>
+						<select name="folderId" class="span9">
+							<#list folders as folder>
+								<option value="${folder.id}">${folder.name}</option>
+							</#list>
+						</select>
 				  </div>
-			  </div>
-			  <div class="span6">
-			  <div class="input-prepend">
-			  	 
-					<span class="add-on">状态</span>
-					<select name="status" class="span6">
-							<option value="1" selected="selected">有效</option>
-							<option value="0">无效</option>
-					</select>
+				  <br>
+				   <div class="input-prepend">
+						<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">状态</span>
+						<select name="status" class="span9">
+								<option value="1" selected="selected">有效</option>
+								<option value="0">无效</option>
+						</select>
 				  </div>
-			   </div>
-			   </div>
-			<br>
-			<div class="">
-				<span class="add-on" >内容</span>
-				<textarea name="content" id="content"  style="height: 300px; visibility: false; width: 770px;"></textarea>
+				  <br>					  
+				  <div class="input-prepend">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">图片</span>
+					<input class="span9" type="file" name="thumbnails" id="thumbnails" data-rule="required;thumbnails">
+				  </div>
+				  <br>
+				  <input type="submit" value=" 保 存 " class="btn btn-large  btn-inverse">
 			</div>
-			<br>
-			<input type="submit" value="保 存" class="btn btn-large btn-success">
+			<div class="span8" style="">
+				<div class="input-prepend">
+				<span class="add-on" style="width: 760px;background-color: #F8F8FF;font-weight: bold;">内容</span>
+				<textarea name="content" id="content"  style="height: 300px; visibility: false;width: 770px;"></textarea>
+				</div>
+			</div>
+			
+			</div>
+			
 		</form>
 	</div>
 	<#else>
-	<div class="position-title">修改新闻</div>
+<!-- 	<div class="position-title">修改新闻</div> -->
+<!-- 	<div> -->
+<!-- 		<form action="${request.contextPath}/admin/news/us.htm" method="post" enctype="multipart/form-data" > -->
+<!-- 			<input type="hidden" value="${news.id}" name="id"> -->
+<!-- 			<div class="row-fluid"> -->
+<!-- 			  <div class="span6"> -->
+<!-- 				  <div class="input-prepend"> -->
+<!-- 					<span class="add-on">标题</span> -->
+<!-- 					<input class="span6" type="text" name="title" value="${news.title}" id="title" data-rule="required;title"> -->
+<!-- 				  </div> -->
+<!-- 			  </div> -->
+<!-- 			  <div class="span6"> -->
+<!-- 				  <div class="input-prepend"> -->
+<!-- 					<span class="add-on">媒体</span> -->
+<!-- 					 <select name="media" class="span6"> -->
+<!-- 					 	<#list medias as media> -->
+<!-- 							<option value="${media.name}" <#if (media.name)==(news.media)>selected="selected" </#if>>${media.name}</option>  -->
+<!-- 						</#list> -->
+<!-- 					</select> -->
+<!-- 				  </div> -->
+<!-- 			  </div> -->
+<!-- 			</div> -->
+<!-- 			<br> -->
+			
+<!-- 			<div class="row-fluid"> -->
+<!-- 				  <div class="span6"> -->
+<!-- 					  <div class="input-prepend"> -->
+<!-- 						<span class="add-on">作者</span> -->
+<!-- 						<input class="span6" type="text" name="author"  value="${news.author}" id="author" > -->
+<!-- 					  </div> -->
+<!-- 				  </div> -->
+<!-- 				  <div class="span6"> -->
+					  
+<!-- 					   <div class="input-prepend"> -->
+<!-- 						<span class="add-on">来源</span> -->
+<!-- 						<input class="span6" type="text" name="url" id="url"  value="${news.mediaUrl}" data-rule="required;url"> -->
+<!-- 					  </div> -->
+<!-- 				  </div> -->
+<!-- 			  </div> -->
+<!-- 			<br> -->
+			
+<!-- 			<div class="row-fluid"> -->
+<!-- 			  <div class="span6"> -->
+<!-- 				  <div class="input-prepend"> -->
+<!-- 					<span class="add-on">缩略图</span> -->
+<!-- 					<input class="span4" type="file" name="thumbnails" id="thumbnails"> -->
+<!-- 					<input type="hidden" value="${news.thumbnailsUrl}" name="thumbnailsUrl"> -->
+<!-- 					<br> -->
+<!-- 					<#if news.thumbnailsUrl?exists> -->
+<!-- 						<img  src="${request.contextPath}${news.thumbnailsUrl}"> -->
+<!-- 					</#if> -->
+<!-- 				  </div> -->
+<!-- 			  </div> -->
+<!-- 			  <div class="span6"> -->
+<!-- 			  	  <div class="input-prepend"> -->
+<!-- 					<span class="add-on">状态</span> -->
+<!-- 						<select name="status" class="span6"> -->
+<!-- 							<option value="1" <#if news.status==1>selected="selected"</#if>>有效</option> -->
+<!-- 							<option value="0" <#if news.status==0>selected="selected"</#if>>无效</option> -->
+<!-- 						</select> -->
+<!-- 				  </div> -->
+<!-- 			   </div> -->
+<!-- 			   </div> -->
+			
+<!-- 			<br> -->
+<!-- 			<div class=""> -->
+<!-- 				<span class="add-on" >内容</span> -->
+<!-- 				<textarea name="content" id="content"  style="height: 300px; visibility: false; width: 770px;">${news.content}</textarea> -->
+<!-- 			</div> -->
+
+<!-- 			<br> -->
+<!-- 			<input type="submit" value="保 存" class="btn btn-large btn-success"> -->
+<!-- 		</form> -->
+<!-- 	</div> -->
+	
+	
+	
+	<div class="position-title">修改</div>
 	<div>
 		<form action="${request.contextPath}/admin/news/us.htm" method="post" enctype="multipart/form-data" >
 			<input type="hidden" value="${news.id}" name="id">
 			<div class="row-fluid">
-			  <div class="span6">
+			  <div class="span4">
 				  <div class="input-prepend">
-					<span class="add-on">标题</span>
-					<input class="span6" type="text" name="title" value="${news.title}" id="title" data-rule="required;title">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">标题</span>
+					<input class="span9" type="text" name="title" value="${news.title}" id="title" data-rule="required;title">
 				  </div>
-			  </div>
-			  <div class="span6">
+				  <br>
 				  <div class="input-prepend">
-					<span class="add-on">媒体</span>
-					 <select name="media" class="span6">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">媒体</span>
+					 <select name="media" class="span9">
 					 	<#list medias as media>
 							<option value="${media.name}" <#if (media.name)==(news.media)>selected="selected" </#if>>${media.name}</option> 
 						</#list>
 					</select>
 				  </div>
-			  </div>
-			</div>
-			<br>
-			
-			<div class="row-fluid">
-				  <div class="span6">
-					  <div class="input-prepend">
-						<span class="add-on">作者</span>
-						<input class="span6" type="text" name="author"  value="${news.author}" id="author" >
-					  </div>
-				  </div>
-				  <div class="span6">
-					  
-					   <div class="input-prepend">
-						<span class="add-on">来源</span>
-						<input class="span6" type="text" name="url" id="url"  value="${news.mediaUrl}" data-rule="required;url">
-					  </div>
-				  </div>
-			  </div>
-			<br>
-			
-			<div class="row-fluid">
-			  <div class="span6">
+				  <br>
 				  <div class="input-prepend">
-					<span class="add-on">缩略图</span>
-					<input class="span4" type="file" name="thumbnails" id="thumbnails">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">作者</span>
+					<input class="span9" type="text" name="author"   value="${news.author}" id="author" >
+				  </div>
+				   <br>
+				   <div class="input-prepend">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">来源</span>
+					<input class="span9" type="text" name="url" id="url" value="${news.mediaUrl}" data-rule="required;url">
+				  </div>
+				  <br>
+				  <div class="input-prepend">
+						<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">目录</span>
+						<select name="folderId" class="span9">
+							<#list folders as folder>
+								<option value="${folder.id}" <#if news.folderId==folder.id>selected="selected"</#if>>${folder.name}</option>
+							</#list>
+						</select>
+				  </div>
+				  <br>
+				   <div class="input-prepend">
+						<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">状态</span>
+						<select name="status" class="span9">
+							<option value="1" <#if news.status==1>selected="selected"</#if>>有效</option>
+							<option value="0" <#if news.status==0>selected="selected"</#if>>无效</option>
+						</select>
+				  </div>
+				  <br>					  
+				  <div class="input-prepend">
+					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">图片</span>
+					<input class="span9" type="file" name="thumbnails" id="thumbnails">
 					<input type="hidden" value="${news.thumbnailsUrl}" name="thumbnailsUrl">
 					<br>
 					<#if news.thumbnailsUrl?exists>
 						<img  src="${request.contextPath}${news.thumbnailsUrl}">
 					</#if>
 				  </div>
-			  </div>
-			  <div class="span6">
-			  	  <div class="input-prepend">
-					<span class="add-on">状态</span>
-						<select name="status" class="span6">
-							<option value="1" <#if news.status==1>selected="selected"</#if>>有效</option>
-							<option value="0" <#if news.status==0>selected="selected"</#if>>无效</option>
-						</select>
-				  </div>
-			   </div>
-			   </div>
-			
-			<br>
-			<div class="">
-				<span class="add-on" >内容</span>
-				<textarea name="content" id="content"  style="height: 300px; visibility: false; width: 770px;">${news.content}</textarea>
+				  <br>
+				  <input type="submit" value=" 保 存 " class="btn btn-large  btn-inverse">
 			</div>
-
-			<br>
-			<input type="submit" value="保 存" class="btn btn-large btn-success">
+			<div class="span8" style="">
+				<div class="input-prepend">
+				<span class="add-on" style="width: 760px;background-color: #F8F8FF;font-weight: bold;">内容</span>
+				<textarea name="content" id="content"  style="height: 300px; visibility: false;width: 770px;"></textarea>
+				</div>
+			</div>
+			</div>
 		</form>
 	</div>
 	</#if>

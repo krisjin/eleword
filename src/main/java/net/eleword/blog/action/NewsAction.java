@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.eleword.blog.entity.Folder;
 import net.eleword.blog.entity.Media;
 import net.eleword.blog.entity.News;
 import net.eleword.blog.service.MediaService;
-import net.eleword.blog.service.NewsService;
 import net.eleword.blog.util.DateUtils;
 import net.eleword.blog.util.Pagination;
 import net.eleword.blog.util.ThumbnailsUtils;
@@ -24,17 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
- * TODO 此处填写 class 信息
- * 
  * @author krisjin 
  */
 @Controller
-public class NewsAction {
+public class NewsAction extends BaseAction{
 
 	@Autowired
-	private NewsService newsService;
-	@Autowired
 	private MediaService mediaService;
+	
 
 	@RequestMapping(value = "/admin/news.htm", method = RequestMethod.GET)
 	public String list(HttpServletRequest request) {
@@ -48,8 +45,10 @@ public class NewsAction {
 		}
 		page.getStartPage();
 		page = newsService.selectNewsWithPage(page, 3);
-
+		List<Folder> folderList = folderService.selectAllFolder();
+		
 		request.setAttribute("pa", page);
+		request.setAttribute("folders", folderList);
 		request.setAttribute("flag", "query");
 		return "admin/listNews.htm";
 	}
@@ -57,16 +56,22 @@ public class NewsAction {
 	@RequestMapping(value = "/admin/news/add.htm", method = RequestMethod.GET)
 	public String add(HttpServletRequest request) {
 		List<Media> medias = mediaService.getAllMedia();
-
+		List<Folder> folders = folderService.selectAllFolder();
+		request.setAttribute("folders", folders);
 		request.setAttribute("medias", medias);
 		request.setAttribute("flag", "query");
 		return "admin/addNews.htm";
 	}
 
 	@RequestMapping(value = "/admin/news/save.htm", method = RequestMethod.POST)
-	public String save(@RequestParam(value = "title") String title, @RequestParam(value = "media") String media, @RequestParam(value = "url") String url,
-			@RequestParam(value = "content") String content, @RequestParam(value = "status") int status, @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
-			@RequestParam(value = "author") String author, HttpServletRequest request) {
+	public String save(@RequestParam(value = "title") String title,
+					   @RequestParam(value = "media") String media, 
+					   @RequestParam(value = "url") String url,
+					   @RequestParam(value = "content") String content,
+					   @RequestParam(value = "status") int status,
+					   @RequestParam(value = "folderId",defaultValue="0") long folderId, 
+					   @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
+					   @RequestParam(value = "author") String author, HttpServletRequest request) {
 
 		News news = new News();
 		news.setContent(content);
@@ -78,6 +83,11 @@ public class NewsAction {
 		news.setUser("admin");
 		news.setAuthor(author);
 		news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
+		news.setFolderId(folderId);
+		
+		
+		
+		
 		try {
 			ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
 		} catch (IOException e) {
@@ -100,9 +110,16 @@ public class NewsAction {
 	}
 
 	@RequestMapping(value = "/admin/news/us.htm", method = RequestMethod.POST)
-	public String updateSave(@RequestParam(value = "title") String title, @RequestParam(value = "media") String media, @RequestParam(value = "url") String url,
-			@RequestParam(value = "content") String content, @RequestParam(value = "status") int status, @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
-			@RequestParam(value = "id") Long id, @RequestParam(value = "thumbnailsUrl") String thumbnailsUrl, @RequestParam(value = "author") String author,
+	public String updateSave(@RequestParam(value = "title") String title,
+							 @RequestParam(value = "media") String media,
+							 @RequestParam(value = "url") String url,
+							 @RequestParam(value = "content") String content,
+							 @RequestParam(value = "status") int status,
+							 @RequestParam(value = "folderId",defaultValue="0") long folderId, 
+							 @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
+							 @RequestParam(value = "id") Long id,
+							 @RequestParam(value = "thumbnailsUrl") String thumbnailsUrl,
+							 @RequestParam(value = "author") String author,
 			HttpServletRequest request) {
 
 		News news = new News();
@@ -114,6 +131,7 @@ public class NewsAction {
 		news.setStatus(status);
 		news.setUser("admin");
 		news.setAuthor(author);
+		news.setFolderId(folderId);
 
 		if (thumbnails.getSize() == 0) {
 			news.setThumbnailsUrl(thumbnailsUrl);
@@ -149,7 +167,6 @@ public class NewsAction {
 
 	/**
 	 * 扩展用
-	 * 
 	 * @param fileName
 	 * @return
 	 */

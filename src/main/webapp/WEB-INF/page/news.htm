@@ -10,7 +10,9 @@
 			 <#list newses as news>
               <li class="media" >
                 <a class="pull-left" href="${request.contextPath}/news/${news.id}.htm">
+                  <#if news.thumbnailsUrl?length gt 1>
                   <img class="media-object"   src="${request.contextPath}${news.thumbnailsUrl}">
+                  </#if>
                 </a>
                
                 <div class="media-body">
