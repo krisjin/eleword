@@ -29,7 +29,7 @@ public class News extends IdEntity {
 
 	private Date postDate;
 	
-	private long folderId;
+	private Long folderId;
 
 	/**
 	 * 0:无效；1有效 Comment for <code>status</code>
@@ -127,11 +127,11 @@ public class News extends IdEntity {
 	}
 	
 	@Column(name="folder_id" ,columnDefinition="bigint(20)  default 0 ")
-	public long getFolderId() {
+	public Long getFolderId() {
 		return folderId;
 	}
 
-	public void setFolderId(long folderId) {
+	public void setFolderId(Long folderId) {
 		this.folderId = folderId;
 	}
 	

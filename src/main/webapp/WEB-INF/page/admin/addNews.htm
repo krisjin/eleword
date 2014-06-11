@@ -24,15 +24,40 @@
 			return false;
 		}
 	}
+	
+	$('#frm1').validator({
+	    stopOnError: false, //关闭此开关，以便一次性显示所有消息
+	    msgMaker: false,    //不要自动生成消息
+	    invalid: function(form, errors){
+	        var html = '';
+	        $.map(errors, function(msg){
+	            html += '<p class="red">'+ msg +'</p>'
+	        });
+	        $('#msg_holder1').html(html);
+	    }
+	});
+	
+	$('#frm2').validator({
+	    stopOnError: false, //关闭此开关，以便一次性显示所有消息
+	    msgMaker: false,    //不要自动生成消息
+	    invalid: function(form, errors){
+	        var html = '';
+	        $.map(errors, function(msg){
+	            html += '<p class="red">'+ msg +'</p>'
+	        });
+	        $('#msg_holder').html(html);
+	    }
+	});
 </script>
 <div id="blog-container">
 
 	<#if flag=="query">
 	<div class="position-title">新增</div>
 	<div>
-		<form action="${request.contextPath}/admin/news/save.htm" method="post" enctype="multipart/form-data" >
-			<div class="row-fluid">
+		<form action="${request.contextPath}/admin/news/save.htm" method="post" enctype="multipart/form-data" id="frm1">
+			<div class="row">
 			  <div class="span4">
+			  <div id="msg_holder1"></div>
 				  <div class="input-prepend">
 					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">标题</span>
 					<input class="span9" type="text" name="title" id="title" data-rule="required;title">
@@ -81,7 +106,7 @@
 				  <br>
 				  <input type="submit" value=" 保 存 " class="btn btn-large  btn-inverse">
 			</div>
-			<div class="span8" style="">
+			<div class="span8" style="margin-left: 1px;">
 				<div class="input-prepend">
 				<span class="add-on" style="width: 760px;background-color: #F8F8FF;font-weight: bold;">内容</span>
 				<textarea name="content" id="content"  style="height: 300px; visibility: false;width: 770px;"></textarea>
@@ -93,97 +118,22 @@
 		</form>
 	</div>
 	<#else>
-<!-- 	<div class="position-title">修改新闻</div> -->
-<!-- 	<div> -->
-<!-- 		<form action="${request.contextPath}/admin/news/us.htm" method="post" enctype="multipart/form-data" > -->
-<!-- 			<input type="hidden" value="${news.id}" name="id"> -->
-<!-- 			<div class="row-fluid"> -->
-<!-- 			  <div class="span6"> -->
-<!-- 				  <div class="input-prepend"> -->
-<!-- 					<span class="add-on">标题</span> -->
-<!-- 					<input class="span6" type="text" name="title" value="${news.title}" id="title" data-rule="required;title"> -->
-<!-- 				  </div> -->
-<!-- 			  </div> -->
-<!-- 			  <div class="span6"> -->
-<!-- 				  <div class="input-prepend"> -->
-<!-- 					<span class="add-on">媒体</span> -->
-<!-- 					 <select name="media" class="span6"> -->
-<!-- 					 	<#list medias as media> -->
-<!-- 							<option value="${media.name}" <#if (media.name)==(news.media)>selected="selected" </#if>>${media.name}</option>  -->
-<!-- 						</#list> -->
-<!-- 					</select> -->
-<!-- 				  </div> -->
-<!-- 			  </div> -->
-<!-- 			</div> -->
-<!-- 			<br> -->
-			
-<!-- 			<div class="row-fluid"> -->
-<!-- 				  <div class="span6"> -->
-<!-- 					  <div class="input-prepend"> -->
-<!-- 						<span class="add-on">作者</span> -->
-<!-- 						<input class="span6" type="text" name="author"  value="${news.author}" id="author" > -->
-<!-- 					  </div> -->
-<!-- 				  </div> -->
-<!-- 				  <div class="span6"> -->
-					  
-<!-- 					   <div class="input-prepend"> -->
-<!-- 						<span class="add-on">来源</span> -->
-<!-- 						<input class="span6" type="text" name="url" id="url"  value="${news.mediaUrl}" data-rule="required;url"> -->
-<!-- 					  </div> -->
-<!-- 				  </div> -->
-<!-- 			  </div> -->
-<!-- 			<br> -->
-			
-<!-- 			<div class="row-fluid"> -->
-<!-- 			  <div class="span6"> -->
-<!-- 				  <div class="input-prepend"> -->
-<!-- 					<span class="add-on">缩略图</span> -->
-<!-- 					<input class="span4" type="file" name="thumbnails" id="thumbnails"> -->
-<!-- 					<input type="hidden" value="${news.thumbnailsUrl}" name="thumbnailsUrl"> -->
-<!-- 					<br> -->
-<!-- 					<#if news.thumbnailsUrl?exists> -->
-<!-- 						<img  src="${request.contextPath}${news.thumbnailsUrl}"> -->
-<!-- 					</#if> -->
-<!-- 				  </div> -->
-<!-- 			  </div> -->
-<!-- 			  <div class="span6"> -->
-<!-- 			  	  <div class="input-prepend"> -->
-<!-- 					<span class="add-on">状态</span> -->
-<!-- 						<select name="status" class="span6"> -->
-<!-- 							<option value="1" <#if news.status==1>selected="selected"</#if>>有效</option> -->
-<!-- 							<option value="0" <#if news.status==0>selected="selected"</#if>>无效</option> -->
-<!-- 						</select> -->
-<!-- 				  </div> -->
-<!-- 			   </div> -->
-<!-- 			   </div> -->
-			
-<!-- 			<br> -->
-<!-- 			<div class=""> -->
-<!-- 				<span class="add-on" >内容</span> -->
-<!-- 				<textarea name="content" id="content"  style="height: 300px; visibility: false; width: 770px;">${news.content}</textarea> -->
-<!-- 			</div> -->
-
-<!-- 			<br> -->
-<!-- 			<input type="submit" value="保 存" class="btn btn-large btn-success"> -->
-<!-- 		</form> -->
-<!-- 	</div> -->
-	
-	
-	
 	<div class="position-title">修改</div>
 	<div>
-		<form action="${request.contextPath}/admin/news/us.htm" method="post" enctype="multipart/form-data" >
+		<form action="${request.contextPath}/admin/news/us.htm" method="post" enctype="multipart/form-data" id="frm2">
 			<input type="hidden" value="${news.id}" name="id">
-			<div class="row-fluid">
+			<div class="row">
 			  <div class="span4">
+			  <div id="msg_holder2"></div>
 				  <div class="input-prepend">
-					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">标题</span>
-					<input class="span9" type="text" name="title" value="${news.title}" id="title" data-rule="required;title">
+					<span class="add-on" style="background-color:#F8F8FF; font-weight: bold;">标题</span>
+					<input class="span3" type="text" name="title" value="${news.title}"  data-rule="required;title">
+					
 				  </div>
 				  <br>
 				  <div class="input-prepend">
 					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">媒体</span>
-					 <select name="media" class="span9">
+					 <select name="media" class="span3">
 					 	<#list medias as media>
 							<option value="${media.name}" <#if (media.name)==(news.media)>selected="selected" </#if>>${media.name}</option> 
 						</#list>
@@ -192,17 +142,17 @@
 				  <br>
 				  <div class="input-prepend">
 					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">作者</span>
-					<input class="span9" type="text" name="author"   value="${news.author}" id="author" >
+					<input class="span3" type="text" name="author"   value="${news.author}" id="author" >
 				  </div>
 				   <br>
 				   <div class="input-prepend">
 					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">来源</span>
-					<input class="span9" type="text" name="url" id="url" value="${news.mediaUrl}" data-rule="required;url">
+					<input class="span3" type="text" name="url" id="url" value="${news.mediaUrl}" data-rule="required;url">
 				  </div>
 				  <br>
 				  <div class="input-prepend">
 						<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">目录</span>
-						<select name="folderId" class="span9">
+						<select name="folderId" class="span3">
 							<#list folders as folder>
 								<option value="${folder.id}" <#if news.folderId==folder.id>selected="selected"</#if>>${folder.name}</option>
 							</#list>
@@ -211,7 +161,7 @@
 				  <br>
 				   <div class="input-prepend">
 						<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">状态</span>
-						<select name="status" class="span9">
+						<select name="status" class="span3">
 							<option value="1" <#if news.status==1>selected="selected"</#if>>有效</option>
 							<option value="0" <#if news.status==0>selected="selected"</#if>>无效</option>
 						</select>
@@ -219,7 +169,7 @@
 				  <br>					  
 				  <div class="input-prepend">
 					<span class="add-on" style="background-color:  #F8F8FF;font-weight: bold;">图片</span>
-					<input class="span9" type="file" name="thumbnails" id="thumbnails">
+					<input class="span3" type="file" name="thumbnails" id="thumbnails">
 					<input type="hidden" value="${news.thumbnailsUrl}" name="thumbnailsUrl">
 					<br>
 					<#if news.thumbnailsUrl?exists>
@@ -229,17 +179,16 @@
 				  <br>
 				  <input type="submit" value=" 保 存 " class="btn btn-large  btn-inverse">
 			</div>
-			<div class="span8" style="">
+			<div class="span8">
 				<div class="input-prepend">
-				<span class="add-on" style="width: 760px;background-color: #F8F8FF;font-weight: bold;">内容</span>
-				<textarea name="content" id="content"  style="height: 300px; visibility: false;width: 770px;"></textarea>
+				<span class="add-on" style="background-color: #F8F8FF;font-weight: bold;width: 760px;">内容</span>
+				<textarea name="content" id="content"  style="height: 300px; visibility: false;width: 770px;">${news.content}</textarea>
 				</div>
 			</div>
 			</div>
 		</form>
 	</div>
 	</#if>
-
 </div>
 
 <#include "footer_admin.htm">

@@ -31,7 +31,6 @@ public class NewsAction extends BaseAction{
 
 	@Autowired
 	private MediaService mediaService;
-	
 
 	@RequestMapping(value = "/admin/news.htm", method = RequestMethod.GET)
 	public String list(HttpServletRequest request) {
@@ -84,10 +83,6 @@ public class NewsAction extends BaseAction{
 		news.setAuthor(author);
 		news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
 		news.setFolderId(folderId);
-		
-		
-		
-		
 		try {
 			ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
 		} catch (IOException e) {
@@ -99,10 +94,12 @@ public class NewsAction extends BaseAction{
 
 	@RequestMapping(value = "/admin/news/{id}.htm", method = RequestMethod.GET)
 	public String update(@PathVariable("id") Long id, HttpServletRequest request) {
-
 		News news = newsService.getNews(id);
 		List<Media> medias = mediaService.getAllMedia();
-
+		
+		List<Folder> folderList = folderService.selectAllFolder();
+		
+		request.setAttribute("folders", folderList);
 		request.setAttribute("medias", medias);
 		request.setAttribute("flag", "update");
 		request.setAttribute("news", news);
@@ -143,7 +140,6 @@ public class NewsAction extends BaseAction{
 				e.printStackTrace();
 			}
 		}
-
 		newsService.updateNews(news);
 		return "redirect:/admin/news.htm";
 	}
