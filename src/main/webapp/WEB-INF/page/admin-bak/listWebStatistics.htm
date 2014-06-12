@@ -1,0 +1,45 @@
+<#import "../macro/pagination.ftl" as pagination>
+<#include "header_admin.htm">
+<#assign wss=pa.resultSet>
+<div id="blog-container">
+	<div id="blog-category">
+		<div class="position-title">访问统计列表</div>
+		<form action="" method="post" id="formdel">
+			<table class="table table-bordered table-hover">
+				<tr class="info">
+					<td>来访IP</td>
+					<td>来访地址</td>
+					<td>访问日期</td>
+				</tr>
+				<#list wss as ws>
+				<tr>
+					<td><a href="http://ipapi.sinaapp.com/api.php?f=text&ip=${ws.ip}" target="_blank">${ws.ip}</a></td>
+					<td><a href="${ws.url}" target="_blank">${ws.url}</a></td>
+					<td>
+						${ws.date}
+					</td>
+				</tr>
+				</#list>
+			</table>
+		</form>
+	</div>
+</div>
+<#assign paginationData> 
+	<@pagination.doPagination "statistics.htm"/> 
+</#assign>
+${paginationData}
+<#include "footer_admin.htm">
+<script type="text/javascript">
+<!--
+function deleteArticle(id,categoryId){
+	var frm=document.getElementById("formdel")
+	var url="article/delete/"+id+"/"+categoryId+".htm";
+	
+	frm.action=url;
+	if(confirm('确实要删除此文章吗？')){
+		frm.submit();
+	}
+	return false;
+}
+//-->
+</script>

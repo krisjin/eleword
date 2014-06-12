@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<title>登录</title>
+
+<link href="${request.contextPath}/template/front/css/bootstrap.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${request.contextPath}/template/front/css/jquery.validator.css" rel="stylesheet">
+
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<style type="text/css">
+body {
+	padding-top: 120px;
+	padding-bottom: 40px;
+	background-color: #f5f5f5;
+	background: url("${request.contextPath}/template/front/img/bg.jpg");
+	background-repeat: repeat-x;
+	
+}
+
+.form-signin {
+	max-width: 500px;
+	padding: 19px 29px 29px;
+	margin: 0 auto 20px;
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.form-signin .form-signin-heading,.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin input[type="text"],.form-signin input[type="password"] {
+	font-size: 16px;
+	height: auto;
+	margin-bottom: 15px;
+	padding: 7px 9px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<form class="form-signin" action="${request.contextPath}/admin/signin.htm" method="post">
+			<h2 class="form-signin-heading" style="text-align: center; margin-top: 30px; margin-bottom: 10px;">登录</h2>
+			<div style="margin-left: 120px;">
+			<label>用户名</label>
+			<input type="text"  name="username" id="username" data-rule="用户名:required,username">
+			</div>
+			<div style="margin-left: 120px;"> 
+			<label>密码</label>
+			<input type="password"  name="password" id="password" data-rule="required">
+			</div>
+			<#if msg?exists>
+				<div>
+					<span style="color: red;">${msg}</span>
+				</div>
+			</#if>
+			<div style="margin-left: 120px;">			
+			<button class="btn btn-large btn-primary" type="submit">登&nbsp;录</button>
+			</div>
+		</form>
+	</div>
+	<div>
+		<div style="padding-top: 10px; clear: both;">
+			<hr>
+		</div>
+		<div class="footer">
+			<p>&copy; Eleword Blog 2014</p>
+		</div>
+	</div>
+	<script src="${request.contextPath}/template/front/js/jquery.js"></script>
+	<script src="${request.contextPath}/template/front/js/jquery.validator.js"></script>
+	<script src="${request.contextPath}/template/front/js/zh_CN.js"></script>
+</body>
+</html>
