@@ -27,11 +27,26 @@ function validateArticle(){
 </script>
 <div id="blog-container">
 
+ <ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+      <li>
+        <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li>
+           <a href="${request.contextPath}/admin/articles.htm">文章列表</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li><span class="btn-primary">添加新文章</span></li>
+</ul>
+
+
  <#if actionName=="add">
-	<div id="blog-addarticle">
+ 	<div class="block block-themed">
+ 	<div class="block-title" style="color: white;">
+ 		添加新文章
+ 	</div>
+ 
+	<div class="block-content">
 		<form class="form-inline" action="save.htm" method="post" onsubmit="return validateArticle()" >
-		<div class="position-title">添加文章</div>
-		<div class="input-prepend">
+		<div class="input-prepend" style="margin-bottom: 5px;">
 			<label class="add-on">文章标题</label> 
 			<input type="text" id="title" name="title" style="width:300px;"  data-rule="文章标题:required;title"> 
 			<label class="add-on" style="margin-left: 128px;">选择分类</label>
@@ -54,6 +69,7 @@ function validateArticle(){
 					<button type="submit" class="btn btn-success">发表文章</button>
 			</div>
 		</form>
+	</div>
 	</div>
 	<#else>
 	<div id="blog-addarticle">

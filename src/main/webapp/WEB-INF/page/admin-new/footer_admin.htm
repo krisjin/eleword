@@ -1,0 +1,179 @@
+
+<div style="padding-top: 30px; clear: both;">
+	<hr>
+</div>
+<div class="footer">
+	<p>&copy; Eleword Blog 2014</p>
+</div>
+</div>
+<script>
+            $(function() {
+                var dashChart = $('#dashboard-chart');
+                var dashMap = $('#dashboard-map');
+                var componentHeight = '300px';
+
+                // Initialize Slimscroll
+                $('.scrollable').slimScroll({
+                    height: componentHeight,
+                    color: '#333',
+                    size: '10px',
+                    alwaysVisible: true,
+                    railVisible: true,
+                    railColor: '#333',
+                    railOpacity: 0.1
+                });
+
+                // Initialize Timeline Slimscroll
+                $('.timeline-scrollable').slimScroll({
+                    height: '500px',
+                    color: '#333',
+                    size: '10px',
+                    alwaysVisible: true,
+                    railVisible: true,
+                    railColor: '#333',
+                    railOpacity: 0.1
+                });
+
+                /* Dashboard Timeline - Adding content demostration */
+                var timelineSpeed = 300;
+
+                setTimeout(function() {
+                    $('<li>' +
+                        '<i class="timeline-meta-cat glyphicon-circle_plus themed-background-ocean"></i>' +
+                        '<span class="timeline-meta-time">just now</span>' +
+                        '<span class="timeline-title">Twitter</span>' +
+                        '<span class="timeline-text">+1 Follower</span>' +
+                        '</li>').prependTo('.timeline').hide().slideDown(timelineSpeed);
+                }, 2000);
+
+                setTimeout(function() {
+                    $('<li class="clearfix">' +
+                        '<i class="timeline-meta-cat icon-comments themed-background-leaf"></i>' +
+                        '<span class="timeline-meta-time">just now</span>' +
+                        '<img src="img/template/avatar2.jpg" alt="Avatar" class="timeline-avatar">' +
+                        '<span class="timeline-title"><a href="page_ready_user_profile.html">Estelle</a> just commented on an <a href="page_ready_product.html">Product</a></span>' +
+                        '<span class="timeline-text">Yes, I like this product too!</span>' +
+                        '</li>').prependTo('.timeline').hide().slideDown(timelineSpeed);
+                }, 6000);
+
+                setTimeout(function() {
+                    $('<li class="clearfix">' +
+                        '<i class="timeline-meta-cat glyphicon-picture themed-background-wood"></i>' +
+                        '<span class="timeline-meta-time">just now</span>' +
+                        '<img src="img/template/avatar.jpg" alt="Avatar" class="timeline-avatar">' +
+                        '<span class="timeline-title"><a href="page_ready_user_profile.html">John Doe</a> just added 2 new photos</span>' +
+                        '<a href="img/placeholders/image_720x450_light.png" data-toggle="lightbox-image"><img src="img/placeholders/image_160x120_light.png" alt="image"></a> ' +
+                        '<a href="img/placeholders/image_720x450_light.png" data-toggle="lightbox-image"><img src="img/placeholders/image_160x120_light.png" alt="image"></a>' +
+                        '</li>').prependTo('.timeline').hide().slideDown(timelineSpeed);
+
+                    // Re Initialize Image Popup for new image content
+                    $('[data-toggle="lightbox-image"]').magnificPopup({type: 'image'});
+                }, 10000);
+
+                setTimeout(function() {
+                    $('<li>' +
+                        '<i class="timeline-meta-cat glyphicon-circle_plus themed-background-default"></i>' +
+                        '<span class="timeline-meta-time">just now</span>' +
+                        '<span class="timeline-title">Facebook page</span>' +
+                        '<span class="timeline-text">+1 Like</span>' +
+                        '</li>').prependTo('.timeline').hide().slideDown(timelineSpeed);
+                }, 14000);
+
+                setTimeout(function() {
+                    $('<li class="clearfix">' +
+                        '<i class="timeline-meta-cat glyphicon-brush themed-background-dawn"></i>' +
+                        '<span class="timeline-meta-time">just now</span>' +
+                        '<img src="img/template/pixelcave.png" alt="pixelcave" class="timeline-avatar">' +
+                        '<span class="timeline-title">Thank you!</span>' +
+                        '<span class="timeline-text">This was just a demonstration of how loading updates could happen! You can use all the available color themes as well as any icon for your category!</span>' +
+                        '</li>').prependTo('.timeline').hide().slideDown(timelineSpeed);
+
+                    // Remove loading spinner
+                    $('#dash-timeline-icon').removeClass('icon-spin').removeClass('icon-spinner').addClass('icon-ok');
+                }, 16000);
+
+                /* Dashboard Chart */
+                var dashData1 = [[0, 620], [1, 500], [2, 900], [3, 650], [4, 1250], [5, 850], [6, 1700]];
+                var dashData2 = [[0, 110], [1, 80], [2, 320], [3, 250], [4, 550], [5, 520], [6, 600]];
+
+                dashChart.css('height', componentHeight);
+
+                // Initialize Classic Chart
+                $.plot(dashChart, [
+                    {data: dashData1, lines: {show: true, fill: true, fillColor: {colors: [{opacity: 0.25}, {opacity: 0.25}]}}, points: {show: true}, label: 'New Users'},
+                    {data: dashData2, lines: {show: true, fill: true, fillColor: {colors: [{opacity: 0.1}, {opacity: 0.1}]}}, points: {show: true}, label: 'New Projects'}],
+                {
+                    legend: {
+                        position: 'nw',
+                        backgroundColor: null
+                    },
+                    colors: ['#a8db39', '#333'],
+                    grid: {
+                        borderWidth: 0,
+                        color: '#999999',
+                        labelMargin: 10,
+                        hoverable: true,
+                        clickable: true
+                    },
+                    yaxis: {
+                        ticks: 0,
+                        tickColor: '#fff'
+                    },
+                    xaxis: {
+                        tickSize: 1,
+                        tickColor: '#fff',
+                        ticks: [[0, 'MON'], [1, 'TUE'], [2, 'WED'], [3, 'THU'], [4, 'FRI'], [5, 'SAT'], [6, 'SUN']]
+                    }
+                }
+                );
+
+                // Creating and attaching a tooltip
+                var previousPoint = null;
+                dashChart.bind("plothover", function(event, pos, item) {
+
+                    $("#x").text(pos.x.toFixed(2));
+                    $("#y").text(pos.y.toFixed(2));
+
+                    if (item) {
+                        if (previousPoint !== item.dataIndex) {
+                            previousPoint = item.dataIndex;
+
+                            $("#tooltip").remove();
+                            var x = item.datapoint[0],
+                                y = item.datapoint[1];
+
+                            $('<div id="tooltip" class="chart-tooltip"><strong>' + y + '</strong></div>')
+                                .css({top: item.pageY - 30, left: item.pageX - 20})
+                                .appendTo("body")
+                                .show();
+                        }
+                    }
+                    else {
+                        $("#tooltip").remove();
+                        previousPoint = null;
+                    }
+                });
+
+                // Initialize general map when tab is shown
+                $('a[href="#dashboard-maps"]').on('shown', function() {
+                    dashMap.css('height', componentHeight).css('width', '100%');
+
+                    new GMaps({
+                        div: '#dashboard-map',
+                        lat: 0,
+                        lng: 0,
+                        zoom: 1
+                    });
+                });
+            });
+        </script>
+<script src="${request.contextPath}/template/front/js/vendor/jquery-1.9.1.min.js"></script>
+<script src="${request.contextPath}/template/front/js/vendor/bootstrap.min.js"></script>
+<!-- <script src="../template/front/js/eleword.js"></script> -->
+<!-- <script src="${request.contextPath}/template/front/js/oschina.js"></script> -->
+<script src="${request.contextPath}/template/front/js/jquery.validator.js"></script>
+<script src="${request.contextPath}/template/front/js/zh_CN.js"></script>
+<script src="${request.contextPath}/template/front/js/plugins.js"></script>
+<script src="${request.contextPath}/template/front/js/main.js"></script>
+</body>
+</html>
