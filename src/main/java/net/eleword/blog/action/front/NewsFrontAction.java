@@ -67,7 +67,7 @@ public class NewsFrontAction extends BaseAction {
 			request.setAttribute("blog", blog.get(0));
 		}
 
-		request.setAttribute("active", "news");
+		request.setAttribute("active", folderName);
 		request.setAttribute("folderList", folderList);
 		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
