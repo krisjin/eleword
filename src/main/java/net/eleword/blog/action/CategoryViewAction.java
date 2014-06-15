@@ -64,7 +64,7 @@ public class CategoryViewAction extends BaseAction {
 		for(Article art:recentArticle){
 			art.setTitle(HtmlUtil.subStrByte(art.getTitle(), 33));
 		}
-		List<Folder> folderLlist = folderService.selectAllFolder();
+		List<Folder> folderLlist = folderService.selectAllFolder(1);
 		
 		if(user!=null)
 			request.setAttribute("user", user);

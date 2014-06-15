@@ -63,7 +63,7 @@ public class IndexAction extends BaseAction {
 		}
 
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 		page.setResultSet(arts);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 		
@@ -105,7 +105,7 @@ public class IndexAction extends BaseAction {
 		for(Article art:recentArticle){
 			art.setTitle(HtmlUtil.subStrByte(art.getTitle(), 33));
 		}
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 		
 		if(user!=null)
 			request.setAttribute("user", user);
@@ -157,7 +157,7 @@ public class IndexAction extends BaseAction {
 			art.setTitle(HtmlUtil.subStrByte(art.getTitle(), 33));
 		}
 		List<Article> arts = page.getResultSet();
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 		for (Article art : arts) {
 			art.setContent(HtmlUtil.subStrByte(HtmlUtil.filterHtml(art.getContent()), 400));
 			for (Category category : categories) {

@@ -1,16 +1,27 @@
 <#import "../macro/pagination.ftl" as pagination>
 <#include "header_admin.htm">
 <#assign wss=pa.resultSet>
+
+<ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+      <li>
+        <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+       <li>
+          <span class="btn-primary">访问统计列表</span>
+          <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+</ul>
 <div id="blog-container">
 	<div id="blog-category">
-		<div class="position-title">访问统计列表</div>
 		<form action="" method="post" id="formdel">
 			<table class="table table-bordered table-hover">
+				<thead>
 				<tr class="info">
-					<td>来访IP</td>
-					<td>来访地址</td>
-					<td>访问日期</td>
+					<th>来访IP</th>
+					<th>来访地址</th>
+					<th>访问日期</th>
 				</tr>
+				</thead>
 				<#list wss as ws>
 				<tr>
 					<td><a href="http://ipapi.sinaapp.com/api.php?f=text&ip=${ws.ip}" target="_blank">${ws.ip}</a></td>

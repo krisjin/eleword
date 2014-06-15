@@ -19,8 +19,8 @@ public class FolderService {
 	@Autowired
 	private FolderDao folderDao;
 
-	public List<Folder> selectAllFolder() {
-		return folderDao.selectAllFolder();
+	public List<Folder> selectAllFolder(int status) {
+		return folderDao.selectAllFolder(status);
 	}
 
 	public void addFolder(Folder folder) {

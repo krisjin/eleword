@@ -23,7 +23,7 @@ public class MaintainFolderAction extends BaseAction {
 
 	@RequestMapping(value = "/admin/folders.htm", method = RequestMethod.GET)
 	public String listFolder(HttpServletRequest request) {
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(0);
 		request.setAttribute("folderList", folderList);
 		request.setAttribute("flag", "add");
 		return "admin/listFolder.htm";
@@ -34,13 +34,16 @@ public class MaintainFolderAction extends BaseAction {
 			@RequestParam(value = "fatherId", defaultValue = "0") long fatherId,
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "ename") String ename, 
+			@RequestParam(value = "status") int status,
+			@RequestParam(value = "sort") int sort,
 			@RequestParam(value = "content") String content) {
 		Folder folder = new Folder();
 		folder.setContent(content);
 		folder.setEname(ename);
 		folder.setFatherId(fatherId);
 		folder.setName(name);
-		folder.setStatus(1);
+		folder.setStatus(status);
+		folder.setSort(sort);
 		folder.setCreateTime(new Date());
 		folderService.addFolder(folder);
 		return "redirect:/admin/folders.htm";
@@ -50,7 +53,7 @@ public class MaintainFolderAction extends BaseAction {
 	public String update(HttpServletRequest request, @PathVariable("id") Long id) {
 
 		Folder folder = folderService.selectFolderById(id);
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(0);
 		request.setAttribute("flag", "update");
 		request.setAttribute("folder", folder);
 		request.setAttribute("folderList", folderList);
@@ -63,6 +66,8 @@ public class MaintainFolderAction extends BaseAction {
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "ename") String ename,
 			@RequestParam(value = "content") String content,
+			@RequestParam(value = "status") int status,
+			@RequestParam(value = "sort") int sort,
 			@RequestParam(value = "id") Long id) {
 
 		Folder folder = new Folder();
@@ -70,8 +75,9 @@ public class MaintainFolderAction extends BaseAction {
 		folder.setEname(ename);
 		folder.setFatherId(fatherId);
 		folder.setName(name);
-		folder.setStatus(1);
+		folder.setStatus(status);
 		folder.setUpdateTime(new Date());
+		folder.setSort(sort);
 		folder.setId(id);
 		folderService.update(folder);
 		return "redirect:/admin/folders.htm";

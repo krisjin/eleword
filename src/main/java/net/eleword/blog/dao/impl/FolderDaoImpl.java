@@ -34,8 +34,13 @@ public class FolderDaoImpl extends HibernateDao<Folder, Long> implements FolderD
 		return get(id);
 	}
 
-	public List<Folder> selectAllFolder() {
-		String hql = "from Folder where fatherId=0 and status=1";
+	public List<Folder> selectAllFolder(int status) {
+		String hql="";
+		if(status==1){
+		hql = "from Folder where fatherId=0 and status="+status +" order by sort asc";
+		}else{
+			hql = "from Folder where fatherId=0"+" order by sort asc";
+		}
 		return find(hql);
 	}
 

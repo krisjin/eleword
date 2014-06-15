@@ -44,7 +44,7 @@ public class NewsAction extends BaseAction{
 		}
 		page.getStartPage();
 		page = newsService.selectNewsWithPage(page, 3);
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 		
 		request.setAttribute("pa", page);
 		request.setAttribute("folders", folderList);
@@ -55,7 +55,7 @@ public class NewsAction extends BaseAction{
 	@RequestMapping(value = "/admin/news/add.htm", method = RequestMethod.GET)
 	public String add(HttpServletRequest request) {
 		List<Media> medias = mediaService.getAllMedia();
-		List<Folder> folders = folderService.selectAllFolder();
+		List<Folder> folders = folderService.selectAllFolder(1);
 		request.setAttribute("folders", folders);
 		request.setAttribute("medias", medias);
 		request.setAttribute("flag", "query");
@@ -97,7 +97,7 @@ public class NewsAction extends BaseAction{
 		News news = newsService.getNews(id);
 		List<Media> medias = mediaService.getAllMedia();
 		
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 		
 		request.setAttribute("folders", folderList);
 		request.setAttribute("medias", medias);

@@ -55,7 +55,7 @@ public class ArticleSearchAction extends BaseAction {
 		}
 		List<Blog> blog = blogService.queryAllBlogConfig();
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 
 		if (blog.size() > 0) {
 			request.setAttribute("blog", blog.get(0));

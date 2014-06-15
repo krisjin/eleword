@@ -1,18 +1,27 @@
 <#import "../macro/pagination-comment-admin.ftl" as pagination>
 <#include "header_admin.htm">
 <div id="blog-container">
+ <ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+      <li>
+        <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li>
+          <span class="btn-primary">评论列表</span>
+          <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+</ul>
 	<div id="blog-category">
-		<div class="position-title">评论列表</div>
 		<form action="" method="post" id="formcate">
 			<table class="table table-bordered table-hover">
+				<thead>
 				<tr class="info">
-					<td>文章</td>
-					<td>评论人</td>
-					<td>评论内容</td>
-					<td>时间</td>
-					<td>操作</td>
+					<th>文章</th>
+					<th>评论人</th>
+					<th>评论内容</th>
+					<th>时间</th>
+					<th>操作</th>
 				</tr>
-				
+				</thead>
 				<#if (pa.resultSet?size>0)>
 					<#assign comments=pa.resultSet>
 					<#list comments as comment>

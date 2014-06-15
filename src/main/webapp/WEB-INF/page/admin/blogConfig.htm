@@ -1,8 +1,21 @@
 <#include "header_admin.htm">
+<script type="text/javascript">
+
+$("#flat").spectrum({
+    flat: true,
+    showInput: true
+});
+$("#flatClearable").spectrum({
+    flat: true,
+    showInput: true,
+    allowEmpty:true
+});
+</script>
 <div id="blog-container">
-	<div id="blog-category">
-		<div class="position-title">博客配置</div>
-		<form class="" style="margin-top: 35px;" action="${request.contextPath}/admin/blog/config/save.htm" method="post">
+	<div class="block block-themed">
+		<div class="block-title">博客配置</div>
+		<div class="block-content">
+		<form   action="${request.contextPath}/admin/blog/config/save.htm" method="post">
 			<input name="id" value="${blog.id}" type="hidden">
 			
 			<div class="input-prepend">
@@ -14,7 +27,7 @@
 				<textarea clas="span4" style="height: 170px;width:400px;" name="description">${blog.description}</textarea>
 			</div>
 			<div class="input-prepend">
-				<label class="add-on" for="inputPassword">博客背景色</label>
+				<label class="add-on" for="inputPassword">博客背景</label>
 					<select name="code" style="width: 400px;">
 						<#list colors as color>
 							<option value="${color.code}" style="background-color: rgb(${color.code});border:solid 6px;" <#if (blog.background)==(color.code)>selected="selected"</#if>>
@@ -24,7 +37,7 @@
 					</select>
 			</div>
 			<div class="input-prepend">
-				<label class="add-on" for="inputPassword">Banner背景色</label>
+				<label class="add-on" for="inputPassword">Ban背景</label>
 					<select name="banner_color" style="width: 380px;">
 						<#list colors as color>
 							<option value="${color.code}" style="background-color: rgb(${color.code});border:solid 6px;" <#if (blog.banner_color)==(color.code)>selected="selected"</#if>>
@@ -33,10 +46,21 @@
 						</#list>
 					</select>
 			</div>
+			
+			
+			<div>
+			
+			<input type='text' id="flat" />
+<br/>
+<input type='text' id="flat" />
+			</div>
+			
+			
 			<div class="">
-					<button type="submit" class="btn">提 &nbsp;交</button>
+					<button type="submit" class="btn btn-large btn-primary">保 存</button>
 			</div>
 		</form>
+		</div>
 	</div>
 </div>
 <#include "footer_admin.htm">

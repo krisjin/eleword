@@ -36,19 +36,33 @@
 		return false;
 	}
 </script>
+ <ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+      <li>
+        <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li>
+          <span class="btn-primary">新闻列表</span>
+          <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      
+       <li>
+          <a href="${request.contextPath}/admin/news/add.htm">添加新闻</a>
+          <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+</ul>
 <div id="blog-container">
 	<div id="blog-category">
-		<div style="float: right;"><a href="${request.contextPath}/admin/news/add.htm" >新增</a></div>
-					<div class="position-title">新闻列表</div>
 					<form action="" method="post" id="formcate">
 						<table class="table table-bordered table-hover">
+						  <thead>
 							<tr class="info">
-								<td>标题</td>
-								<td>来源</td>
-								<td>状态</td>
-								<td>发布日期</td>
-								<td>操作</td>
+								<th>标题</th>
+								<th>来源</th>
+								<th>状态</th>
+								<th>发布日期</th>
+								<th>操作</th>
 							</tr>
+						  </thead>
 							<#assign news=pa.resultSet>
 							<#list news as new>
 							<tr>

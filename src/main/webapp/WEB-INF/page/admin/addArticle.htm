@@ -27,7 +27,10 @@ function validateArticle(){
 </script>
 <div id="blog-container">
 
- <ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+
+
+ <#if actionName=="add">
+  <ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
       <li>
         <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
       </li>
@@ -35,15 +38,12 @@ function validateArticle(){
            <a href="${request.contextPath}/admin/articles.htm">文章列表</a> <span class="divider"><i class="icon-angle-right"></i></span>
       </li>
       <li><span class="btn-primary">添加新文章</span></li>
-</ul>
-
-
- <#if actionName=="add">
- 	<div class="block block-themed">
+  </ul>
+ 
+ <div class="block block-themed">
  	<div class="block-title" style="color: white;">
  		添加新文章
  	</div>
- 
 	<div class="block-content">
 		<form class="form-inline" action="save.htm" method="post" onsubmit="return validateArticle()" >
 		<div class="input-prepend" style="margin-bottom: 5px;">
@@ -70,15 +70,26 @@ function validateArticle(){
 			</div>
 		</form>
 	</div>
-	</div>
-	<#else>
-	<div id="blog-addarticle">
+</div>
+<#else>
+	
+<div class="block block-themed">
+<ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+      <li>
+        <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li>
+           <a href="${request.contextPath}/admin/articles.htm">文章列表</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li><span class="btn-primary">修改文章</span></li>
+</ul>
+ 	<div class="block-title" style="color: white;">
+ 		修改文章
+ 	</div>
+	<div class="block-content">
 		<form class="form-inline" action="usave.htm" method="post">
-		<div class="position-title">修改文章</div>
 		<input type="hidden" value="${article.id}" name="id">
 		<input type="hidden" value="${article.categoryId}" name="rawCategoryId">
-		
-		
 			<div class="input-prepend">
 				<label class="add-on">文章标题</label> 
 				<input type="text" id="title" name="title" style="width: 300px;"  value="${article.title}" required> 
@@ -110,7 +121,8 @@ function validateArticle(){
 			</div>
 		</form>
 	</div>
-	</#if>
+
+</#if>
 </div>
 
 <#include "footer_admin.htm">

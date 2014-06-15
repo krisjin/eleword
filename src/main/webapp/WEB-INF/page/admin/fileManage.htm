@@ -1,28 +1,33 @@
 <#include "header_admin.htm">
-
+ <ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+      <li>
+        <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li>
+           <a href="${request.contextPath}/admin/articles.htm">文档列表</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li><span class="btn-primary">添加新文档</span></li>
+ </ul>
 <div id="blog-container">
 	<div id="blog-category">
-	<div style="float: right;"><a href="${request.contextPath}/admin/file/add.htm">新增文件</a></div>
 	   <div class="row-fluid">
-		
 		<div class="span12">
-		<div class="position-title">文件列表</div>
-		<form action="" method="post" id="formcate">
+		<form method="post" id="formcate">
 			<table class="table table-bordered table-hover">
+				<thead>
 				<tr class="info">
-					<td>文件名称</td>
-					<td>文件类型</td>
-					<td>文件大小</td>
-					<td>上传时间</td>
-					<td>标签</td>
-					<td>操作</td>
+					<th>文件名称</th>
+					<th>文件类型</th>
+					<th>文件大小</th>
+					<th>上传时间</th>
+					<th>标签</th>
+					<th>操作</th>
 				</tr>
+				</thead>
 			</table>
 		</form>
 		</div>
 	</div>
-	
 </div>
-
 <#include "footer_admin.htm">
 

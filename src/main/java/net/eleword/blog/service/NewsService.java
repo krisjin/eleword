@@ -36,5 +36,9 @@ public class NewsService {
 		
 		return newsDao.selectNewsWithPage(page,status);
 	}
+	
+	public Pagination<News> selectNewsWithPageByFolderId(Pagination<News> page,long folderId){
+		return newsDao.selectNewsWithPageByFolderId(page, folderId);
+	}
 }
 

@@ -1,33 +1,41 @@
 <#import "../macro/pagination.ftl" as pagination>
 <#include "header_admin.htm">
 <script type="text/javascript">
-
-
-
-function updateCancle(){
-	var frm=document.getElementById("updSave");
-	var url="category!list";
-	frm.action=url;
-	frm.submit();
-}
-function deleteCategory(categoryId){
-	var frm=document.getElementById("formcate");
-	var url="category/delete/"+categoryId+".htm";
-	frm.action=url;
-	if(confirm('确实要删除此分类吗？')){
+	function updateCancle(){
+		var frm=document.getElementById("updSave");
+		var url="category!list";
+		frm.action=url;
 		frm.submit();
 	}
-	return false;
-}
+	function deleteCategory(categoryId){
+		var frm=document.getElementById("formcate");
+		var url="category/delete/"+categoryId+".htm";
+		frm.action=url;
+		if(confirm('确实要删除此分类吗？')){
+			frm.submit();
+		}
+		return false;
+	}
 </script>
+ <ul class="breadcrumb affix-top" data-spy="affix" data-offset-top="250">
+      <li>
+        <a href="index.htm">首页</a> <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+      <li>
+          <span class="btn-primary">媒体列表</span>
+          <span class="divider"><i class="icon-angle-right"></i></span>
+      </li>
+</ul>
 <div id="blog-container">
 	<div id="blog-category">
 			<div class="row-fluid">
 				<div class="span4">
 				<#if flag=="query">
-					<div class="position-title">添加媒体</div>
-					<div id="msg_holder" style="color: red;"></div>
-					<div class="well">
+				<div id="msg_holder" style="color: red;"></div>
+					<div class="block block-themed">
+					<div class="block-title" style="color: white;">添加媒体</div>
+					
+					<div class="block-content">
 						<form  action="${request.contextPath}/admin/media/save.htm" method="post" id="media_add">
 							<div class="input-prepend">
 							  <span class="add-on">媒体名称</span>
@@ -53,10 +61,13 @@ function deleteCategory(categoryId){
 							<input type="submit" value="保 存" class="btn btn-large btn-success" >
 						 </form>
 				     </div>
+				     </div>
 				    <#else>
-				    <div class="position-title">修改媒体</div>
-					<div id="msg_holder" style="color: red;"></div>
-					<div class="well">
+				    <div id="msg_holder" style="color: red;"></div>
+				    <div class="block block-themed">
+				    <div class="block-title" style="color: white;">修改媒体</div>
+					
+					<div class="block-content">
 						<form  action="${request.contextPath}/admin/media/updSave.htm" method="post" id="media_add">
 							<input type="hidden" name="id" value="${media.id}">
 							<div class="input-prepend">
@@ -80,23 +91,25 @@ function deleteCategory(categoryId){
 								</label>
 							</div>
 							<br>
-							<input type="submit" value="保 存" class="btn btn-large btn-success" >
+							<input type="submit" value="修 改" class="btn btn-large btn-success" >
+							<input type="submit" value="取 消" class="btn btn-large btn-primary" >
 						 </form>
 				      </div>
-				    
+				    </div>
 				    </#if>
 				     
 				</div>
 				<div class="span8">
-					<div class="position-title">媒体列表</div>
 					<form action="" method="post" id="formcate">
 						<table class="table table-bordered table-hover">
+						   <thead>
 							<tr class="info">
-								<td>媒体名称</td>
-								<td>状态</td>
-								<td>创建日期</td>
-								<td>操作</td>
+								<th>媒体名称</th>
+								<th>状态</th>
+								<th>创建日期</th>
+								<th>操作</th>
 							</tr>
+						   </thead>
 							<#assign medias=pa.resultSet>
 							<#list medias as media>
 							<tr>

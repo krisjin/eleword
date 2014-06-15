@@ -47,4 +47,10 @@ public class NewsDaoImpl extends HibernateDao<News,Long> implements NewsDao {
 		return findPage(page, hql);
 	}
 
+	public Pagination<News> selectNewsWithPageByFolderId(Pagination<News> page, long folderId) {
+		String hql = "from News n  where n.status=1 and n.folderId="+folderId+" order by n.postDate desc";
+		
+		return findPage(page,hql);
+	}
+
 }

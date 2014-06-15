@@ -12,7 +12,7 @@ import net.eleword.blog.entity.Folder;
  */
 public interface FolderDao extends BaseDao<Folder> {
 
-	List<Folder> selectAllFolder();
+	List<Folder> selectAllFolder(int status);
 
 	Folder selectFolderByName(String name);
 }

@@ -25,24 +25,24 @@ import com.mysql.jdbc.StringUtils;
 
 /**
  * TODO 此处填写 class 信息
- * 
  * @author krisjin 
  */
 @Controller
 public class NewsFrontAction extends BaseAction {
 
-	@RequestMapping(value = "/news.htm", method = RequestMethod.GET)
-	public String listArticles(HttpServletRequest request) {
+	@RequestMapping(value = "/channel/{folderName}.htm", method = RequestMethod.GET)
+	public String listArticles(@PathVariable("folderName") String folderName,HttpServletRequest request) {
 		Pagination<News> page = new Pagination<News>();
 		String pageCount = request.getParameter("page");
-
+			
+		Folder folder =  folderService.selectFolderByName(folderName);
 		if (StringUtils.isNullOrEmpty(pageCount)) {
 			page.setCurrentPage(1);
 		} else {
 			page.setCurrentPage(Integer.valueOf(pageCount));
 		}
 		page.getStartPage();
-		page = newsService.selectNewsWithPage(page,1);
+		page = newsService.selectNewsWithPageByFolderId(page, folder.getId());
 
 		List<News> newsList = page.getResultSet();
 
@@ -57,7 +57,7 @@ public class NewsFrontAction extends BaseAction {
 		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Category> categories = categoryService.selectAll();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 
 		if (user != null)
@@ -85,7 +85,7 @@ public class NewsFrontAction extends BaseAction {
 		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Category> categories = categoryService.selectAll();
 		List articleArchive = DateUtils.handleArticleArchiveDate(articleService.queryArticleArchive());
-		List<Folder> folderList = folderService.selectAllFolder();
+		List<Folder> folderList = folderService.selectAllFolder(1);
 		User user = userService.selectUserByName(ConstantEnum.admin.toString());
 
 		if (user != null)
