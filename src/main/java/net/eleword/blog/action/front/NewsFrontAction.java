@@ -52,7 +52,7 @@ public class NewsFrontAction extends BaseAction {
 		
 
 		page.setResultSet(newsList);
-
+		
 		List<Blog> blog = this.blogService.queryAllBlogConfig();
 		List<Article> recentArticle = articleService.selectRecnetArticle(20);
 		List<Category> categories = categoryService.selectAll();
@@ -72,13 +72,13 @@ public class NewsFrontAction extends BaseAction {
 		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
 		request.setAttribute("categories", categories);
-		request.setAttribute(ConstantEnum.pageTitle.toString(), "科技新闻—Eleword博客");
+		request.setAttribute(ConstantEnum.pageTitle.toString(), folder.getName()+"—Eleword博客");
 		request.setAttribute("pa", page);
 		return "news.htm";
 	}
 	
-	@RequestMapping(value = "/news/{id}.htm", method = RequestMethod.GET)
-	public String getNews(@PathVariable("id") Long id,HttpServletRequest request){
+	@RequestMapping(value = "/channel/{name}/{id}.htm", method = RequestMethod.GET)
+	public String getNews(@PathVariable("id") Long id,@PathVariable("name") String name,HttpServletRequest request){
 		News news = newsService.getNews(id);
 		
 		List<Blog> blog = this.blogService.queryAllBlogConfig();
@@ -95,7 +95,7 @@ public class NewsFrontAction extends BaseAction {
 			request.setAttribute("blog", blog.get(0));
 		}
 
-		request.setAttribute("active", "news");
+		request.setAttribute("active", name);
 		request.setAttribute("folderList", folderList);
 		request.setAttribute("recentArticle", recentArticle);
 		request.setAttribute("articleArchive", articleArchive);
