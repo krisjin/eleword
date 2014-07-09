@@ -131,6 +131,7 @@ public class NewsAction extends BaseAction{
 		news.setFolderId(folderId);
 
 		if (thumbnails.getSize() == 0) {
+			if(StringUtils.isNotEmpty(thumbnailsUrl)||StringUtils.isNotBlank(thumbnailsUrl))
 			news.setThumbnailsUrl(thumbnailsUrl);
 		} else {
 			news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));

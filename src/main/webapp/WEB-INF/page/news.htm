@@ -9,9 +9,9 @@
 			<ul class="media-list">
 			 <#list newses as news>
               <li class="media" >
-                <a class="pull-left" href="${request.contextPath}/news/${news.id}.htm">
+                <a class="pull-left" href="${request.contextPath}/channel/${active}/${news.id}.htm">
                   <#if news.thumbnailsUrl?length gt 1>
-                  <img class="media-object"   src="${request.contextPath}${news.thumbnailsUrl}">
+                  <img class="media-object"   src="${request.contextPath}${news.thumbnailsUrl}" width="220" height="150">
                   </#if>
                 </a>
                
