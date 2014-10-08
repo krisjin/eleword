@@ -13,14 +13,14 @@ public class DBUtil {
 			String url = "jdbc:mysql://localhost:3306/eleword";
 			String driver = "com.mysql.jdbc.Driver";
 			String username = "root";
-			String password = "javafan";
+			String password = "";
 			if (url.equals("jdbc:mysql://localhost:3306/eleword")) {
 				Class.forName(driver).newInstance();
-				Connection conn = (Connection) DriverManager.getConnection(url, username, password);
+				Connection conn = (Connection) DriverManager.getConnection(url+"?useUnicode=true&characterEncoding=utf-8", username, password);
 				ScriptRunner runner = new ScriptRunner(conn, false, false);
 				runner.setErrorLogWriter(null);
 				runner.setLogWriter(null);
-				runner.runScript(Resources.getResourceAsReader("eleword2014616.sql"));
+				runner.runScript(Resources.getResourceAsReader("eleword-20140930.sql"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
