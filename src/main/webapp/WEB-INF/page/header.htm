@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<!-- <link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
-<title>${pageTitle}</title>
+<meta name="description" content="技术博客,NoSQL,科技,IT,云计算,大数据,Hbase,Hadoop,Memcached,分布式系统,Redis,MongoDB,Spark,聚合博客,技术博客,科技咨询,IT科技咨询,互联网技术,互联网人物">
+<meta name="keywords" content="技术博客,NoSQL,科技,IT,大数据,云计算,Hbase,Hadoop,Memcached,分布式系统,Redis,MongoDB,Spark,聚合博客,技术博客,科技咨询,IT科技咨询,互联网技术,互联网人物">
+<title>${pageTitle}技术博客</title>
 
 <link href="${request.contextPath}/template/front/css/bootstrap.css" rel="stylesheet">
 
@@ -30,28 +30,22 @@
 </head>
 <body>
 <!-- <div style="width:1260px;margin: 0 auto;"> -->
-<div class="container-narrow" style="background-color: white;margin-bottom: 10px;" >
+<div class="container-narrow" style="background-color: white;margin-bottom: 3px;" >
  <div class="boborder">
   <div class="masthead" style="height: 170px;background-color:rgb(${blog.banner_color});">
   	<div class="row-fluid">
-	  <div class="span2">
-	  <img style="margin-top: 10px;margin-left: 11px;" class="img-circle"" src="${request.contextPath}/user/avatar/${user.avatar}">
-	  </div>
-	  <div class="span3">
-	  	<div style="margin: 40px 0px 0px 0px;">
-		   <h3><a href="${request.contextPath}/index.htm">${blog.title}</a></h3>
-		   <p style="font-size: 14px;color: rgb(98,42,29); margin: 10px 0 0 0px;">${blog.description}</p>
-	    </div>
-	  </div>
-	  
-	  <div class="span3">
-	  	<div style="margin: 40px 0px 0px 0px;">
-		   
+<!-- 	  <div class="span2"> -->
+<!-- 	  <img style="margin-top: 10px;margin-left: 11px;" class="img-circle"" src="${request.contextPath}/user/avatar/${user.avatar}"> -->
+<!-- 	  </div> -->
+	  <div class="span8">
+	  	<div style="margin: 40px 0px 0px 10px;">
+		   <h1><a href="${request.contextPath}/index.htm">${blog.title}</a></h1>
+		   <p style="font-size: 16px;color: rgb(98,42,29); margin: 10px 0 0 0px;">${blog.description}</p>
 	    </div>
 	  </div>
 	  <div class="span4">
 	  <form action="${request.contextPath}/search.htm" method="get">
-	  	<div class="input-append"  style="margin-top: 65px;">
+	  	<div class="input-append"  style="margin-top: 88px;margin-left: 35px;">
 		  <input class="" id="appendedInputButton" type="text" name="q">
 		  <button class="btn" type="submit">搜索</button>
 		</div>
@@ -61,7 +55,7 @@
   </div>
   <div class="navbar" style="margin-bottom: 35px;">
  		 <div class="navbar-inner">
-		    <ul class="nav" style="font-size:16px;font-weight:bold;  font-family: "Microsoft YaHei" ! important;height:80px;">
+		    <ul class="nav" style="font-size:14px;font-weight:bold;  font-family: "Microsoft YaHei" ! important;height:80px;">
 		      <li  <#if active?exists><#if active="index">  class="active"</#if></#if>><a href="${request.contextPath}/index.htm">首页</a></li>
 <!-- 		      <li  <#if active?exists><#if active="news">  class="active"</#if></#if>><a href="${request.contextPath}/news.htm">科技新闻</a></li> -->
 		       <#list folderList as folder>
