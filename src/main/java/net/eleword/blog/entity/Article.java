@@ -127,7 +127,8 @@ public class Article extends IdEntity implements Serializable {
 		this.status = status;
 	}
 
-	@Column
+	@Transient
+	//@Column
 	public int getViews() {
 		return views;
 	}
