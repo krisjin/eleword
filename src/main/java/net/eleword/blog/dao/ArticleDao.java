@@ -1,11 +1,10 @@
 package net.eleword.blog.dao;
 
-import java.util.List;
-
 import net.eleword.blog.dao.common.BaseDao;
 import net.eleword.blog.entity.Article;
-import net.eleword.blog.search.entity.Articles;
 import net.eleword.blog.util.Pagination;
+
+import java.util.List;
 
 /**
  * TODO 此处填写 class 信息
