@@ -159,11 +159,11 @@
 			<version>2.5</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.wltea.ik-analyzer</groupId>
-			<artifactId>ik_analyzer</artifactId>
-			<version>5.0.0-RELEASE</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.wltea.ik-analyzer</groupId>-->
+			<!--<artifactId>ik_analyzer</artifactId>-->
+			<!--<version>5.0.0-RELEASE</version>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
