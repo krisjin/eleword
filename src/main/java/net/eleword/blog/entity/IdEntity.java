@@ -7,8 +7,6 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**
- * TODO 此处填写 class 信息
- *
  * @author krisjin
  * @date 2014-1-26上午11:18:34
  */

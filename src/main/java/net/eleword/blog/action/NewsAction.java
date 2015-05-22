@@ -1,11 +1,5 @@
 package net.eleword.blog.action;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import net.eleword.blog.entity.Folder;
 import net.eleword.blog.entity.Media;
 import net.eleword.blog.entity.News;
@@ -13,7 +7,6 @@ import net.eleword.blog.service.MediaService;
 import net.eleword.blog.util.DateUtils;
 import net.eleword.blog.util.Pagination;
 import net.eleword.blog.util.ThumbnailsUtils;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,159 +16,165 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 /**
- * @author krisjin 
+ * @author krisjin
  */
 @Controller
-public class NewsAction extends BaseAction{
+public class NewsAction extends BaseAction {
 
-	@Autowired
-	private MediaService mediaService;
+    @Autowired
+    private MediaService mediaService;
 
-	@RequestMapping(value = "/admin/news.htm", method = RequestMethod.GET)
-	public String list(HttpServletRequest request) {
-		Pagination<News> page = new Pagination<News>();
-		String pageCount = request.getParameter("page");
+    @RequestMapping(value = "/admin/news.htm", method = RequestMethod.GET)
+    public String list(HttpServletRequest request) {
+        Pagination<News> page = new Pagination<News>();
+        String pageCount = request.getParameter("page");
 
-		if (StringUtils.isEmpty(pageCount) || pageCount == null) {
-			page.setCurrentPage(1);
-		} else {
-			page.setCurrentPage(Integer.valueOf(pageCount));
-		}
-		page.getStartPage();
-		page = newsService.selectNewsWithPage(page, 3);
-		List<Folder> folderList = folderService.selectAllFolder(1);
-		
-		request.setAttribute("pa", page);
-		request.setAttribute("folders", folderList);
-		request.setAttribute("flag", "query");
-		return "admin/listNews.htm";
-	}
+        if (StringUtils.isEmpty(pageCount) || pageCount == null) {
+            page.setCurrentPage(1);
+        } else {
+            page.setCurrentPage(Integer.valueOf(pageCount));
+        }
+        page.getStartPage();
+        page = newsService.selectNewsWithPage(page, 3);
+        List<Folder> folderList = folderService.selectAllFolder(1);
 
-	@RequestMapping(value = "/admin/news/add.htm", method = RequestMethod.GET)
-	public String add(HttpServletRequest request) {
-		List<Media> medias = mediaService.getAllMedia();
-		List<Folder> folders = folderService.selectAllFolder(1);
-		request.setAttribute("folders", folders);
-		request.setAttribute("medias", medias);
-		request.setAttribute("flag", "query");
-		return "admin/addNews.htm";
-	}
+        request.setAttribute("pa", page);
+        request.setAttribute("folders", folderList);
+        request.setAttribute("flag", "query");
+        return "admin/listNews.htm";
+    }
 
-	@RequestMapping(value = "/admin/news/save.htm", method = RequestMethod.POST)
-	public String save(@RequestParam(value = "title") String title,
-					   @RequestParam(value = "media") String media, 
-					   @RequestParam(value = "url") String url,
-					   @RequestParam(value = "content") String content,
-					   @RequestParam(value = "status") int status,
-					   @RequestParam(value = "folderId",defaultValue="0") long folderId, 
-					   @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
-					   @RequestParam(value = "author") String author, HttpServletRequest request) {
+    @RequestMapping(value = "/admin/news/add.htm", method = RequestMethod.GET)
+    public String add(HttpServletRequest request) {
+        List<Media> medias = mediaService.getAllMedia();
+        List<Folder> folders = folderService.selectAllFolder(1);
+        request.setAttribute("folders", folders);
+        request.setAttribute("medias", medias);
+        request.setAttribute("flag", "query");
+        return "admin/addNews.htm";
+    }
 
-		News news = new News();
-		news.setContent(content);
-		news.setTitle(title);
-		news.setMedia(media);
-		news.setMediaUrl(url);
-		news.setStatus(status);
-		news.setPostDate(DateUtils.getCurrentDateTime());
-		news.setUser("admin");
-		news.setAuthor(author);
-		news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
-		news.setFolderId(folderId);
-		try {
-			ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		newsService.saveNews(news);
-		return "redirect:/admin/news.htm";
-	}
+    @RequestMapping(value = "/admin/news/save.htm", method = RequestMethod.POST)
+    public String save(@RequestParam(value = "title") String title,
+                       @RequestParam(value = "media") String media,
+                       @RequestParam(value = "url") String url,
+                       @RequestParam(value = "content") String content,
+                       @RequestParam(value = "status") int status,
+                       @RequestParam(value = "folderId", defaultValue = "0") long folderId,
+                       @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
+                       @RequestParam(value = "author") String author, HttpServletRequest request) {
 
-	@RequestMapping(value = "/admin/news/{id}.htm", method = RequestMethod.GET)
-	public String update(@PathVariable("id") Long id, HttpServletRequest request) {
-		News news = newsService.getNews(id);
-		List<Media> medias = mediaService.getAllMedia();
-		
-		List<Folder> folderList = folderService.selectAllFolder(1);
-		
-		request.setAttribute("folders", folderList);
-		request.setAttribute("medias", medias);
-		request.setAttribute("flag", "update");
-		request.setAttribute("news", news);
-		return "admin/addNews.htm";
-	}
+        News news = new News();
+        news.setContent(content);
+        news.setTitle(title);
+        news.setMedia(media);
+        news.setMediaUrl(url);
+        news.setStatus(status);
+        news.setPostDate(DateUtils.getCurrentDateTime());
+        news.setUser("admin");
+        news.setAuthor(author);
+        news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
+        news.setFolderId(folderId);
+        try {
+            ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        newsService.saveNews(news);
+        return "redirect:/admin/news.htm";
+    }
 
-	@RequestMapping(value = "/admin/news/us.htm", method = RequestMethod.POST)
-	public String updateSave(@RequestParam(value = "title") String title,
-							 @RequestParam(value = "media") String media,
-							 @RequestParam(value = "url") String url,
-							 @RequestParam(value = "content") String content,
-							 @RequestParam(value = "status") int status,
-							 @RequestParam(value = "folderId",defaultValue="0") long folderId, 
-							 @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
-							 @RequestParam(value = "id") Long id,
-							 @RequestParam(value = "thumbnailsUrl") String thumbnailsUrl,
-							 @RequestParam(value = "author") String author,
-			HttpServletRequest request) {
+    @RequestMapping(value = "/admin/news/{id}.htm", method = RequestMethod.GET)
+    public String update(@PathVariable("id") Long id, HttpServletRequest request) {
+        News news = newsService.getNews(id);
+        List<Media> medias = mediaService.getAllMedia();
 
-		News news = new News();
-		news.setId(id);
-		news.setContent(content);
-		news.setTitle(title);
-		news.setMedia(media);
-		news.setMediaUrl(url);
-		news.setStatus(status);
-		news.setUser("admin");
-		news.setAuthor(author);
-		news.setFolderId(folderId);
+        List<Folder> folderList = folderService.selectAllFolder(1);
 
-		if (thumbnails.getSize() == 0) {
-			if(StringUtils.isNotEmpty(thumbnailsUrl)||StringUtils.isNotBlank(thumbnailsUrl))
-			news.setThumbnailsUrl(thumbnailsUrl);
-		} else {
-			news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
-			try {
-				ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		newsService.updateNews(news);
-		return "redirect:/admin/news.htm";
-	}
+        request.setAttribute("folders", folderList);
+        request.setAttribute("medias", medias);
+        request.setAttribute("flag", "update");
+        request.setAttribute("news", news);
+        return "admin/addNews.htm";
+    }
 
-	@SuppressWarnings("deprecation")
-	private File getOutputFile(CommonsMultipartFile file, HttpServletRequest request) {
-		String extension = "";
-		int startIndex = file.getOriginalFilename().lastIndexOf(".");
-		extension = file.getOriginalFilename().substring(startIndex, file.getOriginalFilename().length());
-		StringBuilder sb = new StringBuilder();
-		sb.append("/news/thumb/").append(DateUtils.getCurrentYear()).append(DateUtils.getCurrentMonth()).append(DateUtils.getCurrentDay());
+    @RequestMapping(value = "/admin/news/us.htm", method = RequestMethod.POST)
+    public String updateSave(@RequestParam(value = "title") String title,
+                             @RequestParam(value = "media") String media,
+                             @RequestParam(value = "url") String url,
+                             @RequestParam(value = "content") String content,
+                             @RequestParam(value = "status") int status,
+                             @RequestParam(value = "folderId", defaultValue = "0") long folderId,
+                             @RequestParam(value = "thumbnails") CommonsMultipartFile thumbnails,
+                             @RequestParam(value = "id") Long id,
+                             @RequestParam(value = "thumbnailsUrl") String thumbnailsUrl,
+                             @RequestParam(value = "author") String author,
+                             HttpServletRequest request) {
 
-		String filePath = request.getRealPath("/") + sb.toString();
-		File f = new File(filePath);
-		if (!f.exists()) {
-			f.mkdirs();
-		}
-		sb.append(File.separator).append(System.currentTimeMillis()).append(extension);
-		return new File(filePath,System.currentTimeMillis()+extension);
-	}
+        News news = new News();
+        news.setId(id);
+        news.setContent(content);
+        news.setTitle(title);
+        news.setMedia(media);
+        news.setMediaUrl(url);
+        news.setStatus(status);
+        news.setUser("admin");
+        news.setAuthor(author);
+        news.setFolderId(folderId);
 
-	/**
-	 * 扩展用
-	 * @param fileName
-	 * @return
-	 */
-	private String getFilePath(String fileName) {
-		String extension = "";
-		int startIndex = fileName.lastIndexOf(".");
-		extension = fileName.substring(startIndex, fileName.length());
-		StringBuilder sb = new StringBuilder();
-		sb.append("/news/thumb/").append(DateUtils.getCurrentYear()).append(DateUtils.getCurrentMonth()).append(DateUtils.getCurrentDay());
+        if (thumbnails.getSize() == 0) {
+            if (StringUtils.isNotEmpty(thumbnailsUrl) || StringUtils.isNotBlank(thumbnailsUrl))
+                news.setThumbnailsUrl(thumbnailsUrl);
+        } else {
+            news.setThumbnailsUrl(getFilePath(thumbnails.getOriginalFilename()));
+            try {
+                ThumbnailsUtils.generateThumbnails(thumbnails.getInputStream(), getOutputFile(thumbnails, request), 220, 150);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        newsService.updateNews(news);
+        return "redirect:/admin/news.htm";
+    }
 
-		sb.append(File.separator).append(System.currentTimeMillis()).append(extension);
-		return sb.toString();
-	}
+    @SuppressWarnings("deprecation")
+    private File getOutputFile(CommonsMultipartFile file, HttpServletRequest request) {
+        String extension = "";
+        int startIndex = file.getOriginalFilename().lastIndexOf(".");
+        extension = file.getOriginalFilename().substring(startIndex, file.getOriginalFilename().length());
+        StringBuilder sb = new StringBuilder();
+        sb.append("/news/thumb/").append(DateUtils.getCurrentYear()).append(DateUtils.getCurrentMonth()).append(DateUtils.getCurrentDay());
+
+        String filePath = request.getRealPath("/") + sb.toString();
+        File f = new File(filePath);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+        sb.append(File.separator).append(System.currentTimeMillis()).append(extension);
+        return new File(filePath, System.currentTimeMillis() + extension);
+    }
+
+    /**
+     * 扩展用
+     *
+     * @param fileName
+     * @return
+     */
+    private String getFilePath(String fileName) {
+        String extension = "";
+        int startIndex = fileName.lastIndexOf(".");
+        extension = fileName.substring(startIndex, fileName.length());
+        StringBuilder sb = new StringBuilder();
+        sb.append("/news/thumb/").append(DateUtils.getCurrentYear()).append(DateUtils.getCurrentMonth()).append(DateUtils.getCurrentDay());
+
+        sb.append(File.separator).append(System.currentTimeMillis()).append(extension);
+        return sb.toString();
+    }
 
 }

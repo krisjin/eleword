@@ -8,23 +8,23 @@ import java.util.List;
 
 /**
  * TODO 此处填写 class 信息
- * 
- * @author krisjin 
+ *
+ * @author krisjin
  * @date 2014-1-26下午1:32:19
  */
 
 public interface ArticleDao extends BaseDao<Article> {
 
-	List<Article> selectAll();
+    List<Article> selectAll();
 
-	Pagination<Article> selectArticleWithPage(Pagination<Article> page);
+    Pagination<Article> selectArticleWithPage(Pagination<Article> page);
 
-	Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page, long categoryId);
+    Pagination<Article> selectArticleWithPageByCategoryId(Pagination<Article> page, long categoryId);
 
-	List selectArticleArchive();
+    List selectArticleArchive();
 
-	Pagination<Article> selectArticleByArchiveDate(Pagination<Article> page, String date);
+    Pagination<Article> selectArticleByArchiveDate(Pagination<Article> page, String date);
 
-	List<Article> selectRecentArticle(int size);
-	
+    List<Article> selectRecentArticle(int size);
+
 }

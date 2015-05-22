@@ -6,11 +6,12 @@ import net.eleword.blog.util.Pagination;
 
 /**
  * TODO 此处填写 class 信息
- * @author krisjin 
+ *
+ * @author krisjin
  */
 public interface WebStatisticsDao extends BaseDao<WebStatistics> {
-	
-	Pagination<WebStatistics> selectWebStatisticsWithPage(Pagination<WebStatistics> page);
-	
+
+    Pagination<WebStatistics> selectWebStatisticsWithPage(Pagination<WebStatistics> page);
+
 }
 

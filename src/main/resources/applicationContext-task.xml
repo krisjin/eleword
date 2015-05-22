@@ -1,69 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	         http://www.springframework.org/schema/beans/spring-beans.xsd
-	         http://www.springframework.org/schema/lang
-	         http://www.springframework.org/schema/lang/spring-lang.xsd      
-	         http://www.springframework.org/schema/tx   
-	         http://www.springframework.org/schema/tx/spring-tx.xsd    
-	         http://www.springframework.org/schema/aop     
-	         http://www.springframework.org/schema/aop/spring-aop.xsd    
-	         http://www.springframework.org/schema/mvc     
-	         http://www.springframework.org/schema/mvc/spring-mvc.xsd   
-	         http://www.springframework.org/schema/context     
-	         http://www.springframework.org/schema/context/spring-context.xsd
-	         http://www.springframework.org/schema/cache
-	         http://www.springframework.org/schema/cache/spring-cache.xsd
-	         http://www.springframework.org/schema/task 
-	         http://www.springframework.org/schema/task/spring-task.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="scheduler" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list>
-				<ref bean="createArticleIndex" />
-				<ref bean="updateArticleIndex" />
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="createArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="createArticleIndexTask" />
-		</property>
-		<property name="cronExpression" value="0 22 13 * * ? 2014" />
-	</bean>
-	
-	<bean id="updateArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail">
-			<ref bean="updateArticleIndexTask" />
-		</property>
-		<property name="cronExpression" value="0 10 * * * ? *" />
-	</bean>	
-	
+    <bean id="scheduler" lazy-init="false" autowire="no"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="createArticleIndex"/>
+                <ref bean="updateArticleIndex"/>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="createArticleIndexTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject">
-			<ref bean="indexArticleJob" />
-		</property>
-		<property name="targetMethod">
-			<value>createIndex</value>
-		</property>
-	</bean>
-	
-	<bean id="updateArticleIndexTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject">
-			<ref bean="indexArticleJob" />
-		</property>
-		<property name="targetMethod">
-			<value>updateIndex</value>
-		</property>
-	</bean>
+    <bean id="createArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="createArticleIndexTask"/>
+        </property>
+        <property name="cronExpression" value="0 22 13 * * ? 2014"/>
+    </bean>
 
-	<bean id="indexArticleJob" class="net.eleword.blog.search.task.ArticleIndexTask" >
-		<property name="indexPath" value="elewordIndex" />
-		<property name="articles" value="Articles" />
-	</bean>
+    <bean id="updateArticleIndex" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="updateArticleIndexTask"/>
+        </property>
+        <property name="cronExpression" value="0 10 * * * ? *"/>
+    </bean>
+
+
+    <bean id="createArticleIndexTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="indexArticleJob"/>
+        </property>
+        <property name="targetMethod">
+            <value>createIndex</value>
+        </property>
+    </bean>
+
+    <bean id="updateArticleIndexTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="indexArticleJob"/>
+        </property>
+        <property name="targetMethod">
+            <value>updateIndex</value>
+        </property>
+    </bean>
+
+    <bean id="indexArticleJob" class="net.eleword.blog.search.task.ArticleIndexTask">
+        <property name="indexPath" value="elewordIndex"/>
+        <property name="articles" value="Articles"/>
+    </bean>
 </beans>

@@ -1,17 +1,12 @@
 package net.eleword.blog.entity;
 
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * TODO 此处填写 class 信息
- * 
- * @author krisjin 
+ *
+ * @author krisjin
  * @date 2014-4-21下午1:49:22
  */
 
@@ -19,122 +14,121 @@ import javax.persistence.TemporalType;
 @Table(name = "news")
 public class News extends IdEntity {
 
-	private static final long serialVersionUID = 3996647811663640302L;
+    private static final long serialVersionUID = 3996647811663640302L;
 
-	private String title;
+    private String title;
 
-	private String content;
+    private String content;
 
-	private String user;
+    private String user;
 
-	private Date postDate;
-	
-	private Long folderId;
+    private Date postDate;
 
-	/**
-	 * 0:无效；1有效 Comment for <code>status</code>
-	 */
-	private int status;
+    private Long folderId;
 
-	private String media;
+    /**
+     * 0:无效；1有效 Comment for <code>status</code>
+     */
+    private int status;
 
-	private String mediaUrl;
+    private String media;
 
-	private String thumbnailsUrl;
-	
-	private String author;
-	
-	@Column(name="author")
-	public String getAuthor() {
-		return author;
-	}
+    private String mediaUrl;
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    private String thumbnailsUrl;
 
-	@Column(name="title")
-	public String getTitle() {
-		return title;
-	}
+    private String author;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	@Column(name="content")
-	public String getContent() {
-		return content;
-	}
+    @Column(name = "author")
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
-	@Column(name="user")
-	public String getUser() {
-		return user;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public void setUser(String user) {
-		this.user = user;
-	}
-	
-	@Column(name="post_date", updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getPostDate() {
-		return postDate;
-	}
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
 
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
-	}
-	
-	@Column(name="status")
-	public int getStatus() {
-		return status;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	
-	@Column(name="media")
-	public String getMedia() {
-		return media;
-	}
+    @Column(name = "content")
+    public String getContent() {
+        return content;
+    }
 
-	public void setMedia(String media) {
-		this.media = media;
-	}
-	
-	@Column(name="media_url")
-	public String getMediaUrl() {
-		return mediaUrl;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setMediaUrl(String mediaUrl) {
-		this.mediaUrl = mediaUrl;
-	}
-	
-	@Column(name="thumbnails_url")
-	public String getThumbnailsUrl() {
-		return thumbnailsUrl;
-	}
+    @Column(name = "user")
+    public String getUser() {
+        return user;
+    }
 
-	public void setThumbnailsUrl(String thumbnailsUrl) {
-		this.thumbnailsUrl = thumbnailsUrl;
-	}
-	
-	@Column(name="folder_id" ,columnDefinition="bigint(20)  default 0 ")
-	public Long getFolderId() {
-		return folderId;
-	}
+    public void setUser(String user) {
+        this.user = user;
+    }
 
-	public void setFolderId(Long folderId) {
-		this.folderId = folderId;
-	}
-	
-	
+    @Column(name = "post_date", updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
+
+    @Column(name = "status")
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Column(name = "media")
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
+    }
+
+    @Column(name = "media_url")
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
+    public void setMediaUrl(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
+    }
+
+    @Column(name = "thumbnails_url")
+    public String getThumbnailsUrl() {
+        return thumbnailsUrl;
+    }
+
+    public void setThumbnailsUrl(String thumbnailsUrl) {
+        this.thumbnailsUrl = thumbnailsUrl;
+    }
+
+    @Column(name = "folder_id", columnDefinition = "bigint(20)  default 0 ")
+    public Long getFolderId() {
+        return folderId;
+    }
+
+    public void setFolderId(Long folderId) {
+        this.folderId = folderId;
+    }
+
 
 }

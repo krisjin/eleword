@@ -1,35 +1,26 @@
 package net.eleword.blog.util;
 
-import java.io.IOException;
-import java.util.Properties;
-
-import org.apache.commons.lang.StringUtils;
-import org.aspectj.apache.bcel.classfile.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
+ * @author shenmiao@staff.hexun.com
  * @ClassName: ConfigurationUtils
  * @Description: 配置文件读取工具类
- * @author shenmiao@staff.hexun.com
  * @date 2012-10-15 下午04:55:16
- * 
  */
 public class ConfigurationUtils implements ApplicationContextAware {
-	
 
 
-	private static Logger logger = LoggerFactory.getLogger(ConfigurationUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(ConfigurationUtils.class);
 
 
-	public void setApplicationContext(ApplicationContext arg0)
-			throws BeansException {
-		
+    public void setApplicationContext(ApplicationContext arg0)
+            throws BeansException {
+
 //		try {
 //			Properties  properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource("hxt.properties"));
 //			
@@ -48,7 +39,7 @@ public class ConfigurationUtils implements ApplicationContextAware {
 //		} catch (IOException e) {
 //			logger.error("Init ConfigurationUtils Error...",e);
 //		}
-		
-		
-	}
+
+
+    }
 }

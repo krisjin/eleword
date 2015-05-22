@@ -1,122 +1,121 @@
 package net.eleword.blog.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * TODO 此处填写 class 信息
- * 
- * @author krisjin 
+ *
+ * @author krisjin
  */
 @Entity
 @Table(name = "file")
 public class File extends IdEntity implements Serializable {
 
-	private static final long serialVersionUID = 221258502106073606L;
+    private static final long serialVersionUID = 221258502106073606L;
 
-	private String name;
-	private String summary;
-	private long size;
-	private Date postDate;
-	private int downloadCount;
-	private int views;
-	private String filePath;
-	private String thumbnails;
-	private String tag;
-	private int reader;
-	private String fileType;
-	
-	@Column(name="name")
-	public String getName() {
-		return name;
-	}
+    private String name;
+    private String summary;
+    private long size;
+    private Date postDate;
+    private int downloadCount;
+    private int views;
+    private String filePath;
+    private String thumbnails;
+    private String tag;
+    private int reader;
+    private String fileType;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
 
-	public String getSummary() {
-		return summary;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
+    public String getSummary() {
+        return summary;
+    }
 
-	public long getSize() {
-		return size;
-	}
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
 
-	public void setSize(long size) {
-		this.size = size;
-	}
+    public long getSize() {
+        return size;
+    }
 
-	public Date getPostDate() {
-		return postDate;
-	}
+    public void setSize(long size) {
+        this.size = size;
+    }
 
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
-	}
+    public Date getPostDate() {
+        return postDate;
+    }
 
-	public int getDownloadCount() {
-		return downloadCount;
-	}
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
 
-	public void setDownloadCount(int downloadCount) {
-		this.downloadCount = downloadCount;
-	}
+    public int getDownloadCount() {
+        return downloadCount;
+    }
 
-	public int getViews() {
-		return views;
-	}
+    public void setDownloadCount(int downloadCount) {
+        this.downloadCount = downloadCount;
+    }
 
-	public void setViews(int views) {
-		this.views = views;
-	}
+    public int getViews() {
+        return views;
+    }
 
-	public String getFilePath() {
-		return filePath;
-	}
+    public void setViews(int views) {
+        this.views = views;
+    }
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
+    public String getFilePath() {
+        return filePath;
+    }
 
-	public String getThumbnails() {
-		return thumbnails;
-	}
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
-	public void setThumbnails(String thumbnails) {
-		this.thumbnails = thumbnails;
-	}
+    public String getThumbnails() {
+        return thumbnails;
+    }
 
-	public String getTag() {
-		return tag;
-	}
+    public void setThumbnails(String thumbnails) {
+        this.thumbnails = thumbnails;
+    }
 
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
+    public String getTag() {
+        return tag;
+    }
 
-	public int getReader() {
-		return reader;
-	}
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
-	public void setReader(int reader) {
-		this.reader = reader;
-	}
+    public int getReader() {
+        return reader;
+    }
 
-	public String getFileType() {
-		return fileType;
-	}
+    public void setReader(int reader) {
+        this.reader = reader;
+    }
 
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
-	}
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
 
 }

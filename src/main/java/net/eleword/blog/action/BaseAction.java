@@ -1,47 +1,39 @@
 package net.eleword.blog.action;
 
-import net.eleword.blog.service.ArticleService;
-import net.eleword.blog.service.BlogService;
-import net.eleword.blog.service.CategoryService;
-import net.eleword.blog.service.ColorService;
-import net.eleword.blog.service.CommentService;
-import net.eleword.blog.service.FolderService;
-import net.eleword.blog.service.NewsService;
-import net.eleword.blog.service.UserService;
-
+import net.eleword.blog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * TODO 此处填写 class 信息
- * 
- * @author krisjin 
+ *
+ * @author krisjin
  * @date 2014-2-17上午9:20:44
  */
 
 public class BaseAction {
 
-	@Autowired
-	public NewsService newsService;
-	
-	@Autowired
-	public ArticleService articleService;
+    @Autowired
+    public NewsService newsService;
 
-	@Autowired
-	public CategoryService categoryService;
+    @Autowired
+    public ArticleService articleService;
 
-	@Autowired
-	public CommentService commentService;
+    @Autowired
+    public CategoryService categoryService;
 
-	@Autowired
-	public UserService userService;
+    @Autowired
+    public CommentService commentService;
 
-	@Autowired
-	public BlogService blogService;
+    @Autowired
+    public UserService userService;
 
-	@Autowired
-	public FolderService folderService;
-	
-	@Autowired
-	public ColorService colorService;
+    @Autowired
+    public BlogService blogService;
+
+    @Autowired
+    public FolderService folderService;
+
+    @Autowired
+    public ColorService colorService;
 
 }

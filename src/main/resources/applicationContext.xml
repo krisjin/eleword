@@ -8,9 +8,7 @@
        xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd
-
-
-	         http://www.springframework.org/schema/tx   
+	         http://www.springframework.org/schema/tx
 	         http://www.springframework.org/schema/tx/spring-tx.xsd    
 	         http://www.springframework.org/schema/aop     
 	         http://www.springframework.org/schema/aop/spring-aop.xsd    
@@ -24,7 +22,7 @@
 	         http://www.springframework.org/schema/task/spring-task.xsd"
        default-lazy-init="true">
 
-    <import resource="classpath:applicationContext-task.xml"/>
+    <!--<import resource="classpath:applicationContext-task.xml"/>-->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         <property name="ignoreResourceNotFound" value="true"/>
@@ -41,9 +39,9 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 
-    <mvc:resources mapping="/template/front/img/**" location="img/"/>
-    <mvc:resources mapping="/template/front/css/**" location="css/"/>
-    <mvc:resources mapping="/template/front/js/**" location="js/"/>
+    <!--<mvc:resources mapping="/template/front/img/**" location="img/"/>-->
+    <!--<mvc:resources mapping="/template/front/css/**" location="css/"/>-->
+    <!--<mvc:resources mapping="/template/front/js/**" location="js/"/>-->
 
     <tx:annotation-driven/>
     <task:annotation-driven/>

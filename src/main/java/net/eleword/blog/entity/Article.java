@@ -1,161 +1,155 @@
 package net.eleword.blog.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 /**
  * TODO 此处填写 class 信息
- * 
- * @author krisjin 
+ *
+ * @author krisjin
  * @date 2014-1-26上午11:13:03
  */
 @Entity
 @Table(name = "article")
 public class Article extends IdEntity implements Serializable {
-	
-	private static final long serialVersionUID = -2795641924523901764L;
 
-	private String title;
+    private static final long serialVersionUID = -2795641924523901764L;
 
-	private String content;
+    private String title;
 
-	private String keywords;
+    private String content;
 
-	private Date postDate;
+    private String keywords;
 
-	private Date modifyDate;
+    private Date postDate;
 
-	private String author;
+    private Date modifyDate;
 
-	private int status;
+    private String author;
 
-	private int views;
+    private int status;
 
-	private long categoryId;
+    private int views;
 
-	private String categoryName;
+    private long categoryId;
 
-	private List<Comment> comments;
+    private String categoryName;
 
-	private int commentCount;
+    private List<Comment> comments;
 
-	@Transient
-	public List<Comment> getComments() {
-		return comments;
-	}
+    private int commentCount;
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+    @Transient
+    public List<Comment> getComments() {
+        return comments;
+    }
 
-	@Column(name = "title", nullable = false)
-	public String getTitle() {
-		return title;
-	}
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
-	@Column(name = "content", nullable = false)
-	public String getContent() {
-		return content;
-	}
+    @Column(name = "title", nullable = false)
+    public String getTitle() {
+        return title;
+    }
 
-	@Column(name = "keywords")
-	public String getKeywords() {
-		return keywords;
-	}
+    @Column(name = "content", nullable = false)
+    public String getContent() {
+        return content;
+    }
 
-	@Column(name = "post_date", updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getPostDate() {
-		return postDate;
-	}
+    @Column(name = "keywords")
+    public String getKeywords() {
+        return keywords;
+    }
 
-	@Column(name = "modify_date")
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date getModifyDate() {
-		return modifyDate;
-	}
+    @Column(name = "post_date", updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getPostDate() {
+        return postDate;
+    }
 
-	@Column(name = "status")
-	public int getStatus() {
-		return status;
-	}
+    @Column(name = "modify_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getModifyDate() {
+        return modifyDate;
+    }
 
-	@Column(name = "author", nullable = false)
-	public String getAuthor() {
-		return author;
-	}
+    @Column(name = "status")
+    public int getStatus() {
+        return status;
+    }
 
-	@Column(name = "category_id")
-	public long getCategoryId() {
-		return categoryId;
-	}
+    @Column(name = "author", nullable = false)
+    public String getAuthor() {
+        return author;
+    }
 
-	@Transient
-	public String getCategoryName() {
-		return categoryName;
-	}
+    @Column(name = "category_id")
+    public long getCategoryId() {
+        return categoryId;
+    }
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
+    @Transient
+    public String getCategoryName() {
+        return categoryName;
+    }
 
-	public void setCategoryId(long categoryId) {
-		this.categoryId = categoryId;
-	}
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
+    }
 
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	@Transient
-	//@Column
-	public int getViews() {
-		return views;
-	}
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
-	public void setViews(int views) {
-		this.views = views;
-	}
+    @Transient
+    //@Column
+    public int getViews() {
+        return views;
+    }
 
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
+    public void setViews(int views) {
+        this.views = views;
+    }
 
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
-	}
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
 
-	@Transient
-	public int getCommentCount() {
-		return commentCount;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setCommentCount(int commentCount) {
-		this.commentCount = commentCount;
-	}
+    @Transient
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
 
 }

@@ -7,11 +7,13 @@ import net.eleword.blog.util.Pagination;
 
 /**
  * TODO 此处填写 class 信息
- * @author krisjin 
+ *
+ * @author krisjin
  */
 public interface NewsDao extends BaseDao<News> {
-	
-	Pagination<News> selectNewsWithPage(Pagination<News> page ,int status);
-	Pagination<News> selectNewsWithPageByFolderId(Pagination<News> page ,long folderId);
+
+    Pagination<News> selectNewsWithPage(Pagination<News> page, int status);
+
+    Pagination<News> selectNewsWithPageByFolderId(Pagination<News> page, long folderId);
 }
 
