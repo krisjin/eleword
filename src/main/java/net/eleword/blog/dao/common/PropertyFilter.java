@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author shenmiao@staff.hexun.com
- * @ClassName: PropertyFilter
  * @Description: 与具体ORM实现无关的属性过滤条件封装类, 主要记录页面中简单的搜索过滤条件.
  * @date 2010-11-10 下午02:15:38
  */

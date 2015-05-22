@@ -94,18 +94,6 @@
             <version>1.1.1</version>
         </dependency>
 
-        <!-- <dependency> -->
-        <!-- <groupId>log4j</groupId> -->
-        <!-- <artifactId>log4j</artifactId> -->
-        <!-- <version>1.2.6</version> -->
-        <!-- </dependency> -->
-
-        <!-- <dependency> -->
-        <!-- <groupId>org.slf4j</groupId> -->
-        <!-- <artifactId>slf4j-log4j12</artifactId> -->
-        <!-- <version>1.6.1</version> -->
-        <!-- </dependency> -->
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -171,24 +159,6 @@
             <artifactId>httpclient</artifactId>
             <version>4.3</version>
         </dependency>
-
-        <!-- Struts2 -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.apache.struts</groupId> -->
-        <!-- <artifactId>struts2-core</artifactId> -->
-        <!-- <version>2.3.15.1</version> -->
-        <!-- <exclusions> -->
-        <!-- <exclusion> -->
-        <!-- <groupId>com.sun</groupId> -->
-        <!-- <artifactId>tools</artifactId> -->
-        <!-- </exclusion> -->
-        <!-- </exclusions> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.apache.struts</groupId> -->
-        <!-- <artifactId>struts2-spring-plugin</artifactId> -->
-        <!-- <version>2.3.15</version> -->
-        <!-- </dependency> -->
 
         <!-- mysql -->
         <dependency>
@@ -264,32 +234,6 @@
             <artifactId>lucene-suggest</artifactId>
             <version>4.0.0</version>
         </dependency>
-        <!-- spring security -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.security</groupId> -->
-        <!-- <artifactId>spring-security-core</artifactId> -->
-        <!-- <version>3.1.4.RELEASE</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.security</groupId> -->
-        <!-- <artifactId>spring-security-acl</artifactId> -->
-        <!-- <version>3.1.4.RELEASE</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.security</groupId> -->
-        <!-- <artifactId>spring-security-config</artifactId> -->
-        <!-- <version>3.1.4.RELEASE</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.security</groupId> -->
-        <!-- <artifactId>spring-security-taglibs</artifactId> -->
-        <!-- <version>3.1.4.RELEASE</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>org.springframework.security</groupId> -->
-        <!-- <artifactId>spring-security-web</artifactId> -->
-        <!-- <version>3.1.4.RELEASE</version> -->
-        <!-- </dependency> -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -323,7 +267,7 @@
                     </webApp>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8083</port>
+                            <port>8888</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
