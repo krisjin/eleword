@@ -1,9 +1,3 @@
-/src/main/webapp/upload
-/src/main/webapp/FileStore
-/src/main/webapp/user
-/src/main/webapp/news
-
-
 # maven ignore
 target/
 *.jar
