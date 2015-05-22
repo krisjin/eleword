@@ -62,9 +62,10 @@
         </property>
     </bean>
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="defaultEncoding" value="utf-8"/>
         <property name="maxUploadSize" value="10485760000"/>
         <property name="maxInMemorySize" value="40960"/>
+        <property name="resolveLazily" value="true"/>
+        <property name="defaultEncoding" value="utf-8"/>
     </bean>
     <!-- FreeMarker的配置 -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -90,12 +91,11 @@
 
     <!-- 配置 FreeMarker视图解析器 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
         <property name="cache" value="false"/>
         <property name="prefix" value="/WEB-INF/page/"/>
         <property name="suffix" value=""/>
-        <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
-        <property name="contentType" value="text/html;charset=utf-8"/>
+
         <property name="exposeRequestAttributes" value="true"/>
         <property name="exposeSessionAttributes" value="true"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
@@ -104,7 +104,6 @@
 
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <!-- Connection Info -->
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
